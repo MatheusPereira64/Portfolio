@@ -106,6 +106,29 @@ section{
     align-items: center;
     justify-content: space-between;
 }
+
+/* Ensure services content is visible */
+.services {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.services .serv-content {
+    display: flex !important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.services .serv-content .card {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
 section .title{
     position: relative;
     text-align: center;
@@ -341,20 +364,26 @@ section .title::after{
 .about .title::after{
     content: "Quem eu sou ?";
 }
+.about .about-content{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
 .about .about-content .left{
-    width: 45%;
-    margin-right: 30px;
+    width: 40%;
+    flex-shrink: 0;
 }
 .about .about-content .left img{
     height: 400px;
-    width: 400px;
+    width: 100%;
     object-fit: cover;
     border-radius: 6px;
-    margin-bottom: 20px;
 }
 .about .about-content .right{
     width: 55%;
-    margin-left: 30px;
+    flex-grow: 1;
 }
 .about .about-content .right .text{
     font-size: 25px;
@@ -388,11 +417,28 @@ section .title::after{
     box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
 }
 
+/* Universal reset for services section */
+#services {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#services * {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 /* services section styling */
 .services, .teams{
     color:#fff;
     background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
     position: relative;
+    min-height: 500px;
+    padding: 100px 0;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 .services::before{
     content: '';
@@ -419,9 +465,13 @@ section .title::after{
     color: #ffd700;
 }
 .services .serv-content .card{
-    width: calc(33% - 20px);
+    width: calc(33.333% - 20px);
+    flex: 0 1 calc(33.333% - 20px);
     background: rgba(255, 255, 255, 0.1);
+    /* Fallback for browsers that don't support backdrop-filter */
+    background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     text-align: center;
     border-radius: 15px;
     padding: 40px 25px;
@@ -430,6 +480,10 @@ section .title::after{
     border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 300px;
 }
 .services .serv-content .card::before{
     content: '';
@@ -451,6 +505,9 @@ section .title::after{
 }
 .services .serv-content .card .box{
     transition: all 0.3s ease;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 .services .serv-content .card:hover .box{
     transform: scale(1.05);
@@ -460,6 +517,9 @@ section .title::after{
     color: #ffd700;
     transition: all 0.3s ease;
     margin-bottom: 15px;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 .services .serv-content .card:hover i{
     color: #fff;
@@ -470,14 +530,23 @@ section .title::after{
     font-weight: 600;
     margin: 10px 0 7px 0;
     color: #fff;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 .services .serv-content .card h3{
     color: #fff;
     font-weight: 600;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 .services .serv-content .card p{
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* skills section styling */
@@ -585,16 +654,16 @@ section .title::after{
     width: 95%;
 }
 .skills-content .right .react::before{
-    width: 85%;
+    width: 95%;
 }
 .skills-content .right .nodejs::before{
     width: 75%;
 }
 .skills-content .right .javascript::before{
-    width: 90%;
+    width: 95%;
 }
 .skills-content .right .python::before{
-    width: 70%;
+    width: 85%;
 }
 .skills-content .right .git::before{
     width: 85%;
@@ -641,6 +710,9 @@ section .title::after{
     text-align: center;
     overflow: hidden;
     transition: all 0.3s ease;
+    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 .teams .carousel .card:hover{
     background: crimson;
@@ -705,6 +777,17 @@ section .title::after{
     font-weight: 600;
     margin-bottom: 10px;
 }
+
+.contact .right .form-instruction {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    padding: 15px;
+    background: rgba(220, 20, 60, 0.05);
+    border-left: 4px solid #dc143c;
+    border-radius: 5px;
+}
 .contact .contact-content .left p{
     text-align: justify;
 }
@@ -759,7 +842,22 @@ section .title::after{
 }
 .contact .right form .field input:focus,
 .contact .right form .textarea textarea:focus{
-    border-color: #b3b3b3;
+    border-color: #dc143c;
+    box-shadow: 0 0 10px rgba(220, 20, 60, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Form validation styles */
+.contact .right form .field input.error,
+.contact .right form .textarea textarea.error {
+    border-color: #e74c3c;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.3);
+}
+
+.contact .right form .field input.success,
+.contact .right form .textarea textarea.success {
+    border-color: #27ae60;
+    box-shadow: 0 0 10px rgba(39, 174, 96, 0.3);
 }
 .contact .right form .textarea textarea{
   padding-top: 10px;
@@ -882,6 +980,31 @@ footer::before {
     transform: translateY(-3px);
 }
 
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.contact-item i {
+    font-size: 16px;
+    color: #dc143c;
+    width: 20px;
+    text-align: center;
+}
+
+.contact-item span {
+    color: #ccc;
+}
+
 .socials {
     display: flex;
     gap: 15px;
@@ -942,9 +1065,15 @@ footer::before {
 
 /* responsive media query start */
 @media (max-width: 1104px) {
+    .about .about-content .left{
+        width: 45%;
+    }
     .about .about-content .left img{
         height: 350px;
-        width: 350px;
+        width: 100%;
+    }
+    .about .about-content .right{
+        width: 50%;
     }
 }
 
@@ -996,19 +1125,27 @@ footer::before {
     .max-width{
         max-width: 930px;
     }
-    .about .about-content .column{
-        width: 100%;
+    .about .about-content{
+        flex-direction: column;
+        gap: 30px;
     }
     .about .about-content .left{
+        width: 100%;
         display: flex;
         justify-content: center;
-        margin: 0 auto 60px;
+        margin: 0 auto 30px;
+    }
+    .about .about-content .left img{
+        height: 300px;
+        width: 300px;
     }
     .about .about-content .right{
-        flex: 100%;
+        width: 100%;
+        text-align: center;
     }
     .services .serv-content .card{
-        width: calc(50% - 10px);
+        width: calc(50% - 15px);
+        flex: 0 1 calc(50% - 15px);
         margin-bottom: 20px;
     }
     .skills .skills-content .column,
@@ -1033,6 +1170,8 @@ footer::before {
     }
     .services .serv-content .card{
         width: 100%;
+        flex: 1 1 100%;
+        margin-bottom: 20px;
     }
 }
 
@@ -1065,4 +1204,31 @@ footer::before {
         font-size: 23px;
         line-height: 38px;
     }
+}
+
+/* Force visibility for services section - EMERGENCY FIX */
+.services {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.services .serv-content {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+}
+
+.services .serv-content .card {
+    display: block !important;
+    flex: 1 1 calc(33.333% - 20px) !important;
+    min-width: 280px !important;
+    max-width: calc(33.333% - 20px) !important;
+    margin: 0 !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 2px solid #ffd700 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }

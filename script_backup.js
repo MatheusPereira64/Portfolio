@@ -62,30 +62,28 @@ $(document).ready(function(){
     });
 
     // owl carousel script with enhanced settings
-    setTimeout(function() {
-        $('.carousel').owlCarousel({
-            margin: 20,
-            loop: true,
-            autoplay: true,
-            autoplayTimeOut: 3000,
-            autoplayHoverPause: true,
-            smartSpeed: 800,
-            responsive: {
-                0:{
-                    items: 1,
-                    nav: false
-                },
-                600:{
-                    items: 2,
-                    nav: false
-                },
-                1000:{
-                    items: 3,
-                    nav: false
-                }
+    $('.carousel').owlCarousel({
+        margin: 20,
+        loop: true,
+        autoplay: true,
+        autoplayTimeOut: 3000,
+        autoplayHoverPause: true,
+        smartSpeed: 800,
+        responsive: {
+            0:{
+                items: 1,
+                nav: false
+            },
+            600:{
+                items: 2,
+                nav: false
+            },
+            1000:{
+                items: 3,
+                nav: false
             }
-        });
-    }, 500);
+        }
+    });
 
     // Enhanced skills animation with easing
     function animateSkillBars() {
