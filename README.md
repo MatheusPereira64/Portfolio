@@ -8,7 +8,7 @@
 
 🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO FUNCIONANDO <<<](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)**
 
-### 🎯 **Navegação Rápida:**
+### 🎯 **Navegação Rápida**
 
 - 🏠 **[Início](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#home)** - Apresentação com animação
 - 👨‍💻 **[Sobre Mim](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#about)** - CV completo e formação
@@ -42,7 +42,7 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 
 [![Portfólio Online](https://img.shields.io/badge/🚀_PORTFÓLIO_ONLINE-CLIQUE_AQUI-dc143c?style=for-the-badge&logo=rocket&logoColor=white)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 
-### 🎯 **TESTE CADA SEÇÃO:**
+### 🎯 **TESTE CADA SEÇÃO**
 
 [![Home](https://img.shields.io/badge/🏠_HOME-Animação_de_Texto-dc143c?style=flat-square&logo=home)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#home)
 [![Sobre](https://img.shields.io/badge/👨‍💻_SOBRE-CV_Completo-b91c3c?style=flat-square&logo=user)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#about)
@@ -52,13 +52,13 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 [![Projetos](https://img.shields.io/badge/🚀_PROJETOS-Carousel_3D-b91c3c?style=flat-square&logo=code)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#teams)
 [![Contato](https://img.shields.io/badge/📞_CONTATO-Formulário_Real-8b0000?style=flat-square&logo=mail)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#contact)
 
-### 🌍 **FUNCIONALIDADES ESPECIAIS:**
+### 🌍 **FUNCIONALIDADES ESPECIAIS**
 
 [![Português](https://img.shields.io/badge/🇧🇷_PORTUGUÊS-Idioma_BR-green?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 [![English](https://img.shields.io/badge/🇺🇸_ENGLISH-EN_Language-blue?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 [![Mobile](https://img.shields.io/badge/📱_MOBILE-Responsivo-orange?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 
-### 💡 **Como Testar:**
+### 💡 **Como Testar**
 
 1. **Clique nos badges acima** para navegar diretamente às seções
 2. **Teste a responsividade** redimensionando a janela
