@@ -1,17 +1,15 @@
 # 🚀 Portfólio de Matheus Pereira
 
-<div align="center">
-
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Acesse_Agora-dc143c?style=for-the-badge&logo=github)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
-[![GitHub](https://img.shields.io/badge/📂_Código_Fonte-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/MatheusPereira64/Portfolio)
 
-</div>
+[![GitHub](https://img.shields.io/badge/📂_Código_Fonte-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/MatheusPereira64/Portfolio)
 
 ## 🌐 **PRÉVIA INTERATIVA**
 
 🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO FUNCIONANDO <<<](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)**
 
 ### 🎯 **Navegação Rápida:**
+
 - 🏠 **[Início](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#home)** - Apresentação com animação
 - 👨‍💻 **[Sobre Mim](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#about)** - CV completo e formação
 - 🛠️ **[Serviços](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#services)** - Cards interativos
@@ -20,6 +18,7 @@
 - 📞 **[Contato](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html#contact)** - Formulário funcional
 
 ### 🌍 **Teste as Funcionalidades:**
+
 - **🇧🇷/🇺🇸 Troca de Idioma**: Português ↔ Inglês
 - **📱 Responsividade**: Redimensione a janela
 - **✨ Animações**: Hover nos elementos
@@ -39,9 +38,8 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 
 ## 🎮 **DEMONSTRAÇÃO INTERATIVA**
 
-<div align="center">
-
 ### 🌐 **ACESSE O PORTFÓLIO ONLINE**
+
 [![Portfólio Online](https://img.shields.io/badge/🚀_PORTFÓLIO_ONLINE-CLIQUE_AQUI-dc143c?style=for-the-badge&logo=rocket&logoColor=white)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 
 ### 🎯 **TESTE CADA SEÇÃO:**
@@ -60,9 +58,8 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 [![English](https://img.shields.io/badge/🇺🇸_ENGLISH-EN_Language-blue?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 [![Mobile](https://img.shields.io/badge/📱_MOBILE-Responsivo-orange?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)
 
-</div>
-
 ### 💡 **Como Testar:**
+
 1. **Clique nos badges acima** para navegar diretamente às seções
 2. **Teste a responsividade** redimensionando a janela
 3. **Troque o idioma** usando o seletor no menu
@@ -90,9 +87,8 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 
 ## 🌐 Visualizar Online
 
-<div align="center">
-
 ### 🎯 **LINK PRINCIPAL**
+
 🔗 **[PRÉVIA NO GITHUB (HTMLPREVIEW)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/WebDesignPortfolio/index.html)**
 
 ### 🧪 **TESTES INTERATIVOS**
@@ -112,8 +108,6 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 - **📱 Teste Mobile**: Acesse pelo celular ou redimensione a tela
 - **✨ Animações**: Faça scroll para ver as transições
 - **🎨 Efeitos Hover**: Passe o mouse sobre os elementos
-
-</div>
 
 ## 📧 Contato
 
