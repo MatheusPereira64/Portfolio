@@ -2,14 +2,14 @@
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Acesse_Agora-dc143c?style=for-the-badge&logo=github)](https://matheuspereira64.github.io/Portfolio/)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Acesse_Agora-dc143c?style=for-the-badge&logo=github)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)
 [![GitHub](https://img.shields.io/badge/📂_Código_Fonte-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/MatheusPereira64/Portfolio)
 
 </div>
 
 ## 🌐 **PRÉVIA INTERATIVA**
 
-🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO FUNCIONANDO <<<](https://matheuspereira64.github.io/Portfolio/)**
+🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO FUNCIONANDO <<<](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)**
 
 ### 🎯 **Navegação Rápida:**
 - 🏠 **[Início](https://matheuspereira64.github.io/Portfolio/#home)** - Apresentação com animação
@@ -42,23 +42,23 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 <div align="center">
 
 ### 🌐 **ACESSE O PORTFÓLIO ONLINE**
-[![Portfólio Online](https://img.shields.io/badge/🚀_PORTFÓLIO_ONLINE-CLIQUE_AQUI-dc143c?style=for-the-badge&logo=rocket&logoColor=white)](https://matheuspereira64.github.io/Portfolio/)
+[![Portfólio Online](https://img.shields.io/badge/🚀_PORTFÓLIO_ONLINE-CLIQUE_AQUI-dc143c?style=for-the-badge&logo=rocket&logoColor=white)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)
 
 ### 🎯 **TESTE CADA SEÇÃO:**
 
-[![Home](https://img.shields.io/badge/🏠_HOME-Animação_de_Texto-dc143c?style=flat-square&logo=home)](https://matheuspereira64.github.io/Portfolio/#home)
-[![Sobre](https://img.shields.io/badge/👨‍💻_SOBRE-CV_Completo-b91c3c?style=flat-square&logo=user)](https://matheuspereira64.github.io/Portfolio/#about)
-[![Serviços](https://img.shields.io/badge/🛠️_SERVIÇOS-Cards_Interativos-8b0000?style=flat-square&logo=tools)](https://matheuspereira64.github.io/Portfolio/#services)
+[![Home](https://img.shields.io/badge/🏠_HOME-Animação_de_Texto-dc143c?style=flat-square&logo=home)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#home)
+[![Sobre](https://img.shields.io/badge/👨‍💻_SOBRE-CV_Completo-b91c3c?style=flat-square&logo=user)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#about)
+[![Serviços](https://img.shields.io/badge/🛠️_SERVIÇOS-Cards_Interativos-8b0000?style=flat-square&logo=tools)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#services)
 
-[![Skills](https://img.shields.io/badge/📊_SKILLS-Barras_Animadas-dc143c?style=flat-square&logo=chart-bar)](https://matheuspereira64.github.io/Portfolio/#skills)
-[![Projetos](https://img.shields.io/badge/🚀_PROJETOS-Carousel_3D-b91c3c?style=flat-square&logo=code)](https://matheuspereira64.github.io/Portfolio/#teams)
-[![Contato](https://img.shields.io/badge/📞_CONTATO-Formulário_Real-8b0000?style=flat-square&logo=mail)](https://matheuspereira64.github.io/Portfolio/#contact)
+[![Skills](https://img.shields.io/badge/📊_SKILLS-Barras_Animadas-dc143c?style=flat-square&logo=chart-bar)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#skills)
+[![Projetos](https://img.shields.io/badge/🚀_PROJETOS-Carousel_3D-b91c3c?style=flat-square&logo=code)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#teams)
+[![Contato](https://img.shields.io/badge/📞_CONTATO-Formulário_Real-8b0000?style=flat-square&logo=mail)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#contact)
 
 ### 🌍 **FUNCIONALIDADES ESPECIAIS:**
 
-[![Português](https://img.shields.io/badge/🇧🇷_PORTUGUÊS-Idioma_BR-green?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
-[![English](https://img.shields.io/badge/🇺🇸_ENGLISH-EN_Language-blue?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
-[![Mobile](https://img.shields.io/badge/📱_MOBILE-Responsivo-orange?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
+[![Português](https://img.shields.io/badge/🇧🇷_PORTUGUÊS-Idioma_BR-green?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)
+[![English](https://img.shields.io/badge/🇺🇸_ENGLISH-EN_Language-blue?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)
+[![Mobile](https://img.shields.io/badge/📱_MOBILE-Responsivo-orange?style=flat-square)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)
 
 </div>
 
@@ -93,18 +93,18 @@ Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
 <div align="center">
 
 ### 🎯 **LINK PRINCIPAL**
-🔗 **[MATHEUSPEREIRA64.GITHUB.IO/PORTFOLIO](https://matheuspereira64.github.io/Portfolio/)**
+🔗 **[PRÉVIA NO GITHUB (HTMLPREVIEW)](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html)**
 
 ### 🧪 **TESTES INTERATIVOS**
 
 | Funcionalidade | Link Direto | Descrição |
 |----------------|-------------|-----------|
-| 🏠 **Home** | [Testar Agora](https://matheuspereira64.github.io/Portfolio/#home) | Animação de texto com Typed.js |
-| 👨‍💻 **Sobre** | [Ver CV](https://matheuspereira64.github.io/Portfolio/#about) | Informações profissionais completas |
-| 🛠️ **Serviços** | [Cards Interativos](https://matheuspereira64.github.io/Portfolio/#services) | Efeitos glassmorphism e hover |
-| 📊 **Skills** | [Barras Animadas](https://matheuspereira64.github.io/Portfolio/#skills) | Progressão visual das habilidades |
-| 🚀 **Projetos** | [Carousel 3D](https://matheuspereira64.github.io/Portfolio/#teams) | Navegação interativa de projetos |
-| 📞 **Contato** | [Formulário Real](https://matheuspereira64.github.io/Portfolio/#contact) | Sistema de envio funcional |
+| 🏠 **Home** | [Testar Agora](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#home) | Animação de texto com Typed.js |
+| 👨‍💻 **Sobre** | [Ver CV](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#about) | Informações profissionais completas |
+| 🛠️ **Serviços** | [Cards Interativos](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#services) | Efeitos glassmorphism e hover |
+| 📊 **Skills** | [Barras Animadas](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#skills) | Progressão visual das habilidades |
+| 🚀 **Projetos** | [Carousel 3D](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#teams) | Navegação interativa de projetos |
+| 📞 **Contato** | [Formulário Real](https://htmlpreview.github.io/?https://github.com/MatheusPereira64/Portfolio/blob/main/Portfolio/index.html#contact) | Sistema de envio funcional |
 
 ### 🌍 **RECURSOS ESPECIAIS**
 
