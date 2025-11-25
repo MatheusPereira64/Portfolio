@@ -39,27 +39,36 @@ $(document).ready(function(){
     });
 
     // typing text animation script with improved settings
-    var typed = new Typed(".typing", {
-        strings: ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        backDelay: 1000,
-        startDelay: 500,
-        loop: true,
-        showCursor: true,
-        cursorChar: '|'
-    });
-
-    var typed2 = new Typed(".typing-2", {
-        strings: ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        backDelay: 1000,
-        startDelay: 1000,
-        loop: true,
-        showCursor: true,
-        cursorChar: '|'
-    });
+    // Wait for DOM to be fully ready before initializing Typed.js
+    var typed, typed2;
+    
+    setTimeout(function() {
+        if (document.querySelector('.typing')) {
+            typed = new Typed(".typing", {
+                strings: ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"],
+                typeSpeed: 100,
+                backSpeed: 60,
+                backDelay: 1000,
+                startDelay: 500,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+        }
+        
+        if (document.querySelector('.typing-2')) {
+            typed2 = new Typed(".typing-2", {
+                strings: ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"],
+                typeSpeed: 100,
+                backSpeed: 60,
+                backDelay: 1000,
+                startDelay: 1000,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+        }
+    }, 100);
 
     // owl carousel script with enhanced settings
     setTimeout(function() {
@@ -86,6 +95,30 @@ $(document).ready(function(){
             }
         });
     }, 500);
+    
+    // Animate cards on scroll (for services and other sections)
+    function animateCardsOnScroll() {
+        $('.card').each(function() {
+            var elementTop = $(this).offset().top;
+            var elementBottom = elementTop + $(this).outerHeight();
+            var viewportTop = $(window).scrollTop();
+            var viewportBottom = viewportTop + $(window).height();
+            
+            if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                if (!$(this).hasClass('animate')) {
+                    $(this).addClass('animate');
+                }
+            }
+        });
+    }
+    
+    // Run card animations on scroll
+    $(window).scroll(animateCardsOnScroll);
+    
+    // Run card animations on page load
+    setTimeout(function() {
+        animateCardsOnScroll();
+    }, 300);
 
     // Enhanced skills animation with easing
     function animateSkillBars() {
@@ -146,8 +179,27 @@ $(document).ready(function(){
 
     // Run animation on scroll
     $(window).scroll(animateOnScroll);
-    // Run animation on page load
-    animateOnScroll();
+    
+    // Run animation on page load with delay to ensure DOM is ready
+    setTimeout(function() {
+        animateOnScroll();
+    }, 300);
+    
+    // Also trigger animation when page loads directly on skills section
+    if (window.location.hash === '#skills') {
+        setTimeout(function() {
+            animateOnScroll();
+        }, 500);
+    }
+    
+    // Trigger animation on hash change (when navigating to skills section)
+    $(window).on('hashchange', function() {
+        if (window.location.hash === '#skills') {
+            setTimeout(function() {
+                animateOnScroll();
+            }, 300);
+        }
+    });
 
     // Add particle effect to home section
     function createParticle() {
@@ -327,9 +379,15 @@ Enviado através do portfolio: https://matheuspereira.dev`;
         // Create mailto link with proper encoding
         const mailtoLink = `mailto:matheuspereira6464@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`;
         
-        // Try to open email client
+        // Try to open email client using multiple methods for better compatibility
         try {
-            window.open(mailtoLink, '_self');
+            // Method 1: Create a temporary link and click it (most reliable)
+            const tempLink = document.createElement('a');
+            tempLink.href = mailtoLink;
+            tempLink.style.display = 'none';
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
             
             // Reset form after successful submission
             setTimeout(() => {
@@ -348,12 +406,23 @@ Enviado através do portfolio: https://matheuspereira.dev`;
             }, 1000);
             
         } catch (error) {
-            // Fallback message if mailto fails
-            const currentLang = $('#language-select').val();
-            const fallbackMsg = currentLang === 'en' ? 
-                'Unable to open email client automatically. Please send an email to: matheuspereira6464@gmail.com' : 
-                'Não foi possível abrir o cliente de email automaticamente. Por favor, envie um email para: matheuspereira6464@gmail.com';
-            alert(fallbackMsg);
+            // Fallback: Try window.location.href
+            try {
+                window.location.href = mailtoLink;
+                
+                // Reset form
+                setTimeout(() => {
+                    this.reset();
+                    $('.field input, .textarea textarea').removeClass('error success');
+                }, 500);
+            } catch (error2) {
+                // Final fallback message
+                const currentLang = $('#language-select').val();
+                const fallbackMsg = currentLang === 'en' ? 
+                    'Unable to open email client automatically. Please send an email to: matheuspereira6464@gmail.com' : 
+                    'Não foi possível abrir o cliente de email automaticamente. Por favor, envie um email para: matheuspereira6464@gmail.com';
+                alert(fallbackMsg);
+            }
         }
     });
 
@@ -393,4 +462,43 @@ Enviado através do portfolio: https://matheuspereira.dev`;
     if (savedLanguage !== 'pt') {
         languageSelect.dispatchEvent(new Event('change'));
     }
+    
+    // Ensure animations work when page loads directly on a section
+    function initializeAnimationsOnLoad() {
+        // Check if we're on a specific section
+        const hash = window.location.hash;
+        
+        if (hash) {
+            // Scroll to the section first
+            setTimeout(function() {
+                const targetElement = $(hash);
+                if (targetElement.length) {
+                    $('html, body').animate({
+                        scrollTop: targetElement.offset().top - 100
+                    }, 500, function() {
+                        // After scrolling, trigger animations
+                        animateOnScroll();
+                        animateCardsOnScroll();
+                    });
+                }
+            }, 100);
+        } else {
+            // If no hash, just trigger animations normally
+            setTimeout(function() {
+                animateOnScroll();
+                animateCardsOnScroll();
+            }, 300);
+        }
+    }
+    
+    // Initialize animations on page load
+    initializeAnimationsOnLoad();
+    
+    // Also trigger on window load to ensure all resources are loaded
+    $(window).on('load', function() {
+        setTimeout(function() {
+            animateOnScroll();
+            animateCardsOnScroll();
+        }, 200);
+    });
 });
