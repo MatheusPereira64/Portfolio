@@ -1,4 +1,4 @@
-# 🚀 Portfólio de Matheus Pereira
+# 🚀 Portfólio de Matheus Pereira - React
 
 <div align="center">
 
@@ -11,15 +11,15 @@
 
 🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO FUNCIONANDO <<<](https://matheuspereira64.github.io/Portfolio/)**
 
-> 💡 **Nota**: O portfólio está hospedado no GitHub Pages com todas as animações e funcionalidades JavaScript funcionando perfeitamente!
+> 💡 **Nota**: O portfólio está hospedado no GitHub Pages com todas as animações e funcionalidades React funcionando perfeitamente!
 
 ### 🎯 **Navegação Rápida:**
-- 🏠 **[Início](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#home)** - Apresentação com animação
-- 👨‍💻 **[Sobre Mim](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#about)** - CV completo e formação
-- 🛠️ **[Serviços](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#services)** - Cards interativos
-- 📊 **[Habilidades](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#skills)** - Barras animadas
-- 🚀 **[Projetos](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#teams)** - Carousel de projetos
-- 📞 **[Contato](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#contact)** - Formulário funcional
+- 🏠 **[Início](https://matheuspereira64.github.io/Portfolio/#home)** - Apresentação com animação
+- 👨‍💻 **[Sobre Mim](https://matheuspereira64.github.io/Portfolio/#about)** - CV completo e formação
+- 🛠️ **[Serviços](https://matheuspereira64.github.io/Portfolio/#services)** - Cards interativos
+- 📊 **[Habilidades](https://matheuspereira64.github.io/Portfolio/#skills)** - Barras animadas
+- 🚀 **[Projetos](https://matheuspereira64.github.io/Portfolio/#teams)** - Carousel de projetos
+- 📞 **[Contato](https://matheuspereira64.github.io/Portfolio/#contact)** - Formulário funcional
 
 ### 🌍 **Teste as Funcionalidades:**
 - **🇧🇷/🇺🇸 Troca de Idioma**: Português ↔ Inglês
@@ -29,101 +29,122 @@
 
 ---
 
-Um portfólio moderno e responsivo desenvolvido com HTML5, CSS3 e JavaScript.
+## 🛠️ **Tecnologias Utilizadas**
 
-## 🌟 Características
+- **React 18** - Biblioteca JavaScript para construção de interfaces
+- **Vite** - Build tool moderna e rápida
+- **CSS3** - Estilização com animações e gradientes
+- **Typed.js** - Animação de texto digitando
+- **Font Awesome** - Ícones
+- **React Hooks** - Gerenciamento de estado e efeitos
+
+## 📦 **Instalação e Execução**
+
+### Pré-requisitos
+- Node.js (versão 16 ou superior)
+- npm ou yarn
+
+### Passos para instalação
+
+1. **Clone o repositório**
+```bash
+git clone https://github.com/MatheusPereira64/Portfolio.git
+cd Portfolio
+```
+
+2. **Instale as dependências**
+```bash
+npm install
+```
+
+3. **Execute o projeto em modo desenvolvimento**
+```bash
+npm run dev
+```
+
+4. **Build para produção**
+```bash
+npm run build
+```
+
+5. **Preview do build**
+```bash
+npm run preview
+```
+
+6. **Deploy para GitHub Pages**
+```bash
+npm run deploy
+```
+
+## 📁 **Estrutura do Projeto**
+
+```
+Portfolio/
+├── src/
+│   ├── components/          # Componentes React
+│   │   ├── Navbar.jsx
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Services.jsx
+│   │   ├── Skills.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Footer.jsx
+│   │   └── ScrollToTop.jsx
+│   ├── context/             # Context API
+│   │   └── LanguageContext.jsx
+│   ├── App.jsx              # Componente principal
+│   ├── App.css
+│   ├── main.jsx             # Entry point
+│   └── index.css            # Estilos globais
+├── public/                  # Arquivos estáticos
+├── index.html               # HTML principal
+├── vite.config.js           # Configuração do Vite
+├── package.json             # Dependências
+└── README.md
+```
+
+## 🌟 **Características**
 
 - **🎨 Design Moderno**: Interface limpa com efeitos glassmorphism e gradientes
 - **📱 Responsivo**: Adaptável a todos os dispositivos (desktop, tablet, mobile)
-- **🌐 Multilíngue**: Suporte para Português e Inglês
+- **🌐 Multilíngue**: Suporte para Português e Inglês com Context API
 - **✨ Animações Suaves**: Transições e efeitos hover elegantes
 - **📧 Formulário de Contato**: Sistema de contato via mailto
+- **⚡ Performance**: Build otimizado com Vite
+- **🔧 Componentização**: Código organizado em componentes reutilizáveis
 
-## 🎮 **DEMONSTRAÇÃO INTERATIVA**
+## 📱 **Seções**
 
-<div align="center">
-
-### 🌐 **ACESSE O PORTFÓLIO ONLINE**
-[![Portfólio Online](https://img.shields.io/badge/🚀_PORTFÓLIO_ONLINE-CLIQUE_AQUI-dc143c?style=for-the-badge&logo=rocket&logoColor=white)](https://matheuspereira64.github.io/Portfolio/)
-
-### 🎯 **TESTE CADA SEÇÃO:**
-
-[![Home](https://img.shields.io/badge/🏠_HOME-Animação_de_Texto-dc143c?style=flat-square&logo=home)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#home)
-[![Sobre](https://img.shields.io/badge/👨‍💻_SOBRE-CV_Completo-b91c3c?style=flat-square&logo=user)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#about)
-[![Serviços](https://img.shields.io/badge/🛠️_SERVIÇOS-Cards_Interativos-8b0000?style=flat-square&logo=tools)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#services)
-
-[![Skills](https://img.shields.io/badge/📊_SKILLS-Barras_Animadas-dc143c?style=flat-square&logo=chart-bar)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#skills)
-[![Projetos](https://img.shields.io/badge/🚀_PROJETOS-Carousel_3D-b91c3c?style=flat-square&logo=code)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#teams)
-[![Contato](https://img.shields.io/badge/📞_CONTATO-Formulário_Real-8b0000?style=flat-square&logo=mail)](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#contact)
-
-### 🌍 **FUNCIONALIDADES ESPECIAIS:**
-
-[![Português](https://img.shields.io/badge/🇧🇷_PORTUGUÊS-Idioma_BR-green?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
-[![English](https://img.shields.io/badge/🇺🇸_ENGLISH-EN_Language-blue?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
-[![Mobile](https://img.shields.io/badge/📱_MOBILE-Responsivo-orange?style=flat-square)](https://matheuspereira64.github.io/Portfolio/)
-
-</div>
-
-### 💡 **Como Testar:**
-1. **Clique nos badges acima** para navegar diretamente às seções
-2. **Teste a responsividade** redimensionando a janela
-3. **Troque o idioma** usando o seletor no menu
-4. **Preencha o formulário** de contato para testar
-5. **Explore os efeitos hover** em todos os elementos
-
-## 🛠️ Tecnologias Utilizadas
-
-- HTML5
-- CSS3 (Flexbox, Grid, Animations)
-- JavaScript (ES6+)
-- jQuery
-- Owl Carousel
-- Font Awesome
-- Typed.js
-
-## 📱 Seções
-
-1. **Home**: Apresentação inicial com animação de texto
+1. **Home**: Apresentação inicial com animação de texto (Typed.js)
 2. **Sobre Mim**: Informações pessoais e formação acadêmica
 3. **Meus Serviços**: Cards com os serviços oferecidos
-4. **Habilidades**: Barras de progresso das tecnologias
+4. **Habilidades**: Barras de progresso animadas das tecnologias
 5. **Projetos**: Carousel com projetos desenvolvidos
 6. **Contato**: Formulário e informações de contato
 
-## 🌐 Visualizar Online
+## 🚀 **Deploy no GitHub Pages**
 
-<div align="center">
+O projeto está configurado para deploy automático no GitHub Pages:
 
-### 🎯 **LINK PRINCIPAL**
-🔗 **[MATHEUSPEREIRA64.GITHUB.IO/PORTFOLIO](https://matheuspereira64.github.io/Portfolio/)**
+1. O build é gerado na pasta `dist/`
+2. O script `npm run deploy` usa `gh-pages` para fazer o deploy
+3. O site fica disponível em: `https://matheuspereira64.github.io/Portfolio/`
 
-### 🧪 **TESTES INTERATIVOS**
+### Configuração do Vite
 
-| Funcionalidade | Link Direto | Descrição |
-|----------------|-------------|-----------|
-| 🏠 **Home** | [Testar Agora](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#home) | Animação de texto com Typed.js |
-| 👨‍💻 **Sobre** | [Ver CV](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#about) | Informações profissionais completas |
-| 🛠️ **Serviços** | [Cards Interativos](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#services) | Efeitos glassmorphism e hover |
-| 📊 **Skills** | [Barras Animadas](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#skills) | Progressão visual das habilidades |
-| 🚀 **Projetos** | [Carousel 3D](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#teams) | Navegação interativa de projetos |
-| 📞 **Contato** | [Formulário Real](https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/#contact) | Sistema de envio funcional |
+O arquivo `vite.config.js` está configurado com:
+- `base: '/Portfolio/'` - Caminho base para GitHub Pages
+- Build otimizado para produção
 
-### 🌍 **RECURSOS ESPECIAIS**
-
-- **🔄 Troca de Idioma**: Clique no seletor PT/EN no menu
-- **📱 Teste Mobile**: Acesse pelo celular ou redimensione a tela
-- **✨ Animações**: Faça scroll para ver as transições
-- **🎨 Efeitos Hover**: Passe o mouse sobre os elementos
-
-</div>
-
-## 📧 Contato
+## 📧 **Contato**
 
 - **Email**: matheuspereira6464@gmail.com
 - **LinkedIn**: [Matheus Pereira](https://www.linkedin.com/in/matheus-pereira-836033243/)
 - **Telefone**: +55 (92) 99213-8870
 
-## 📄 Licença
+## 📄 **Licença**
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 

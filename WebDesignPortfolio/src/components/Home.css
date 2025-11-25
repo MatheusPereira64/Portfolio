@@ -1,0 +1,101 @@
+.home {
+  display: flex;
+  background: linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(185, 28, 60, 0.9) 100%), 
+              url(https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3) no-repeat center;
+  height: 100vh;
+  color: #fff;
+  min-height: 500px;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Ubuntu', sans-serif;
+  align-items: center;
+}
+
+.home .max-width {
+  width: 100%;
+  display: flex;
+}
+
+.home .home-content .text-1 {
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.home .home-content .text-2 {
+  font-size: 75px;
+  font-weight: 700;
+  margin-left: -3px;
+  background: linear-gradient(45deg, #fff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home .home-content .text-3 {
+  font-size: 40px;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+.home .home-content .text-3 span {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.home .home-content a {
+  display: inline-block;
+  background: linear-gradient(135deg, #dc143c 0%, #b91c3c 100%);
+  color: #fff;
+  font-size: 20px;
+  padding: 12px 36px;
+  margin-top: 20px;
+  font-weight: 500;
+  border-radius: 30px;
+  border: 2px solid #000;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.home .home-content a:hover {
+  background: transparent;
+  border: 2px solid #000;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 947px) {
+  .home .home-content .text-2 {
+    font-size: 70px;
+  }
+  .home .home-content .text-3 {
+    font-size: 35px;
+  }
+  .home .home-content a {
+    font-size: 23px;
+    padding: 10px 30px;
+  }
+}
+
+@media (max-width: 690px) {
+  .home .home-content .text-2 {
+    font-size: 60px;
+  }
+  .home .home-content .text-3 {
+    font-size: 32px;
+  }
+  .home .home-content a {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .home .home-content .text-2 {
+    font-size: 50px;
+  }
+  .home .home-content .text-3 {
+    font-size: 27px;
+  }
+}
+

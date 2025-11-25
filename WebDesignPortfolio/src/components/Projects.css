@@ -1,0 +1,123 @@
+.teams {
+  color: #fff;
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  position: relative;
+  min-height: 500px;
+  padding: 100px 0;
+}
+
+.teams .title::before {
+  background: #fff;
+}
+
+.teams .title {
+  color: #fff;
+}
+
+.teams .title::after {
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  content: "Meus sites referência";
+  color: #ffd700;
+}
+
+.teams .carousel {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.teams .carousel .card {
+  background: #222;
+  border-radius: 6px;
+  padding: 25px 35px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  width: calc(33.333% - 20px);
+  min-width: 280px;
+}
+
+.teams .carousel .card:hover {
+  background: crimson;
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.teams .carousel .card .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.teams .carousel .card:hover .box {
+  transform: scale(1.05);
+}
+
+.teams .carousel .card .text {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 10px 0 7px 0;
+  color: #fff;
+}
+
+.teams .carousel .card p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.teams .carousel .card img {
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid crimson;
+  transition: all 0.3s ease;
+}
+
+.teams .carousel .card:hover img {
+  border-color: #fff;
+}
+
+.carousel-dots {
+  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.carousel-dots .dot {
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.carousel-dots .dot.active {
+  width: 35px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.carousel-dots .dot:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 947px) {
+  .teams .carousel .card {
+    width: calc(50% - 15px);
+  }
+}
+
+@media (max-width: 690px) {
+  .teams .carousel .card {
+    width: 100%;
+  }
+}
+

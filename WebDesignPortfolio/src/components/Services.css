@@ -1,0 +1,132 @@
+.services {
+  color: #fff;
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  position: relative;
+  min-height: 500px;
+  padding: 100px 0;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+}
+
+.services::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.1;
+}
+
+.services .title::before {
+  background: #fff;
+}
+
+.services .title {
+  color: #fff;
+}
+
+.services .title::after {
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  content: "O que eu ofereço";
+  color: #ffd700;
+}
+
+.services .serv-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.services .serv-content .card {
+  width: calc(33.333% - 20px);
+  flex: 0 1 calc(33.333% - 20px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  border-radius: 15px;
+  padding: 40px 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.services .serv-content .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: 0.5s;
+}
+
+.services .serv-content .card:hover::before {
+  left: 100%;
+}
+
+.services .serv-content .card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.services .serv-content .card .box {
+  transition: all 0.3s ease;
+}
+
+.services .serv-content .card:hover .box {
+  transform: scale(1.05);
+}
+
+.services .serv-content .card i {
+  font-size: 50px;
+  color: #ffd700;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.services .serv-content .card:hover i {
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.services .serv-content .card h3 {
+  color: #fff;
+  font-weight: 600;
+  font-size: 25px;
+  margin: 10px 0 7px 0;
+}
+
+.services .serv-content .card p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+@media (max-width: 947px) {
+  .services .serv-content .card {
+    width: calc(50% - 15px);
+    flex: 0 1 calc(50% - 15px);
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 690px) {
+  .services .serv-content .card {
+    width: 100%;
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
+}
+
