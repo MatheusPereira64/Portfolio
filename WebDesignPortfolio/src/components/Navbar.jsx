@@ -1,12 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Navbar.css'
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
   const { language, setLanguage, translations } = useLanguage()
   const t = translations[language]
+  const langRef = useRef(null)
+
+  const languages = [
+    { code: 'pt', flag: '🇧🇷', name: 'PT' },
+    { code: 'en', flag: '🇺🇸', name: 'EN' },
+    { code: 'es', flag: '🇪🇸', name: 'ES' }
+  ]
+
+  const currentLang = languages.find(lang => lang.code === language) || languages[0]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -14,6 +24,16 @@ const Navbar = () => {
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (langRef.current && !langRef.current.contains(event.target)) {
+        setIsLangOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   const handleMenuClick = () => {
@@ -27,6 +47,11 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: 'smooth' })
       setIsMenuOpen(false)
     }
+  }
+
+  const handleLangSelect = (langCode) => {
+    setLanguage(langCode)
+    setIsLangOpen(false)
   }
 
   return (
@@ -44,14 +69,30 @@ const Navbar = () => {
           <li><a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>{t.nav.skills}</a></li>
           <li><a href="#teams" onClick={(e) => scrollToSection(e, 'teams')}>{t.nav.projects}</a></li>
           <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>{t.nav.contact}</a></li>
-          <li className="language-selector">
-            <select 
-              value={language} 
-              onChange={(e) => setLanguage(e.target.value)}
+          <li className="language-selector" ref={langRef}>
+            <div 
+              className="language-button"
+              onClick={() => setIsLangOpen(!isLangOpen)}
             >
-              <option value="pt">🇧🇷 PT</option>
-              <option value="en">🇺🇸 EN</option>
-            </select>
+              <span className="lang-flag">{currentLang.flag}</span>
+              <span className="lang-code">{currentLang.name}</span>
+              <i className={`fas fa-chevron-${isLangOpen ? 'up' : 'down'}`}></i>
+            </div>
+            {isLangOpen && (
+              <div className="language-dropdown">
+                {languages.map((lang) => (
+                  <div
+                    key={lang.code}
+                    className={`language-option ${language === lang.code ? 'active' : ''}`}
+                    onClick={() => handleLangSelect(lang.code)}
+                  >
+                    <span className="lang-flag">{lang.flag}</span>
+                    <span className="lang-code">{lang.name}</span>
+                    {language === lang.code && <i className="fas fa-check"></i>}
+                  </div>
+                ))}
+              </div>
+            )}
           </li>
         </ul>
         <div className="menu-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>

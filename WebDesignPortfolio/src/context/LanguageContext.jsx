@@ -131,6 +131,62 @@ export const LanguageProvider = ({ children }) => {
         subjectPlaceholder: 'Subject',
         messagePlaceholder: 'Message...'
       }
+    },
+    es: {
+      nav: {
+        home: 'Inicio',
+        about: 'Sobre mí',
+        services: 'Servicios',
+        skills: 'Habilidades',
+        projects: 'Proyectos',
+        contact: 'Contacto'
+      },
+      home: {
+        greeting: 'Hola, mi nombre es',
+        name: 'Matheus Pereira',
+        subtitle: 'Y soy:',
+        button: 'Sobre mí'
+      },
+      about: {
+        title: 'Sobre mí',
+        subtitle: '¿Quién soy?',
+        text: 'Soy Matheus y soy',
+        description: 'Desarrollador Full Stack con formación en Análisis y Desarrollo de Sistemas. Tengo experiencia en desarrollo web enfocado en JavaScript, React y Node.js. Apasionado por la tecnología y la innovación, busco constantemente mejorar mis habilidades y contribuir a proyectos que marquen la diferencia. Actualmente estudiando en ITEGAM y desarrollando proyectos personales para expandir mi portafolio.',
+        button: 'Mis servicios'
+      },
+      services: {
+        title: 'Mis servicios',
+        subtitle: 'Lo que ofrezco'
+      },
+      skills: {
+        title: 'Mis talentos',
+        subtitle: 'Lo que sé',
+        text: 'Mis competencias y experiencia profesional',
+        description: 'Estudiante de Análisis y Desarrollo de Sistemas en ITEGAM, con enfoque en desarrollo web full stack. Tengo experiencia práctica en JavaScript, React.js, Node.js y Python. Participé en proyectos académicos y personales que me permitieron desarrollar habilidades sólidas en programación, resolución de problemas y trabajo en equipo.',
+        education: '🎓 Formación',
+        button: 'Ponerse en contacto'
+      },
+      projects: {
+        title: 'Mis Proyectos',
+        subtitle: 'Mis sitios de referencia'
+      },
+      contact: {
+        title: 'Ponerse en contacto',
+        subtitle: 'Ponerse en contacto',
+        text: 'Ponerse en contacto',
+        description: 'Siempre estoy abierto a nuevos desafíos y oportunidades. Si tienes un proyecto en mente o te gustaría discutir cómo puedo contribuir a tu equipo, no dudes en ponerte en contacto.',
+        formTitle: 'Enviar un mensaje',
+        formInstruction: 'Complete el formulario a continuación y haga clic en enviar. Su cliente de correo electrónico predeterminado se abrirá con el mensaje completado.',
+        name: 'Nombre',
+        email: 'Correo electrónico',
+        subject: 'Asunto',
+        message: 'Mensaje...',
+        send: 'Enviar mensaje',
+        namePlaceholder: 'Nombre',
+        emailPlaceholder: 'Correo electrónico',
+        subjectPlaceholder: 'Asunto',
+        messagePlaceholder: 'Mensaje...'
+      }
     }
   }
 

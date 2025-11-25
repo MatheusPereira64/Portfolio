@@ -1,4 +1,16 @@
+.contact {
+  font-family: 'Poppins', sans-serif;
+}
+
 .contact .title::after {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  font-size: 20px;
+  color: #dc143c;
+  padding: 0 5px;
+  background: #fff;
+  transform: translateX(-50%);
   content: "Entre em contato";
 }
 
@@ -6,8 +18,24 @@
   content: "Get in touch";
 }
 
+.contact[data-lang="es"] .title::after {
+  content: "Ponerse en contacto";
+}
+
+.contact .contact-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+}
+
 .contact .contact-content .column {
-  width: calc(50% - 30px);
+  width: calc(50% - 15px);
+  flex: 0 1 calc(50% - 15px);
+  min-width: 300px;
+  box-sizing: border-box;
 }
 
 .contact .contact-content .text {
@@ -149,8 +177,14 @@
 }
 
 @media (max-width: 947px) {
+  .contact .contact-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
   .contact .contact-content .column {
     width: 100%;
+    flex: 1 1 100%;
     margin-bottom: 35px;
   }
 }

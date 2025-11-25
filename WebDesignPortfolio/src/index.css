@@ -106,6 +106,17 @@ section .title::before {
   border-radius: 3px;
 }
 
+section .title::after {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  font-size: 20px;
+  color: #dc143c;
+  padding: 0 5px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
 /* Card animations */
 .card {
   opacity: 0;

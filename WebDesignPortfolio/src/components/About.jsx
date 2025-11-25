@@ -10,9 +10,14 @@ const About = () => {
   const typedInstance = useRef(null)
 
   useEffect(() => {
-    const strings = language === 'pt' 
-      ? ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"]
-      : ["Web Designer", "Programmer", "Game Developer", "Software Developer"]
+    let strings
+    if (language === 'pt') {
+      strings = ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"]
+    } else if (language === 'es') {
+      strings = ["Desarrollador Fullstack", "Desarrollador Web", "Desarrollador de Software", "Desarrollador Frontend"]
+    } else {
+      strings = ["Web Designer", "Programmer", "Game Developer", "Software Developer"]
+    }
 
     if (typedRef.current) {
       if (typedInstance.current) {

@@ -15,21 +15,35 @@
 }
 
 .teams .title::after {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  font-size: 20px;
   background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
   content: "Meus sites referência";
   color: #ffd700;
+  padding: 0 5px;
+  transform: translateX(-50%);
 }
 
 .teams[data-lang="en"] .title::after {
   content: "My reference sites";
 }
 
+.teams[data-lang="es"] .title::after {
+  content: "Mis sitios de referencia";
+}
+
 .teams .carousel {
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-wrap: nowrap;
   margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
 }
 
 .teams .carousel .card {
@@ -39,8 +53,14 @@
   text-align: center;
   overflow: hidden;
   transition: all 0.3s ease;
-  width: calc(33.333% - 20px);
+  flex: 0 0 calc(33.333% - 14px);
   min-width: 280px;
+  max-width: calc(33.333% - 14px);
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .teams .carousel .card:hover {
@@ -85,43 +105,60 @@
   border-color: #fff;
 }
 
-.carousel-dots {
+.carousel-dots,
+.owl-dots {
   text-align: center;
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 }
 
-.carousel-dots .dot {
+.carousel-dots .dot,
+.owl-dot {
   height: 13px;
   width: 13px;
+  margin: 0 5px;
+  outline: none !important;
   border-radius: 50%;
-  border: 2px solid #fff;
+  border: 2px solid crimson !important;
   cursor: pointer;
   transition: all 0.3s ease;
   background: transparent;
 }
 
-.carousel-dots .dot.active {
+.carousel-dots .dot.active,
+.owl-dot.active {
   width: 35px;
   border-radius: 14px;
-  background: #fff;
 }
 
-.carousel-dots .dot:hover {
-  background: rgba(255, 255, 255, 0.5);
+.carousel-dots .dot.active,
+.carousel-dots .dot:hover,
+.owl-dot.active,
+.owl-dot:hover {
+  background: crimson !important;
 }
 
 @media (max-width: 947px) {
+  .teams .carousel {
+    flex-wrap: wrap;
+  }
   .teams .carousel .card {
-    width: calc(50% - 15px);
+    flex: 0 0 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+    min-width: 250px;
   }
 }
 
 @media (max-width: 690px) {
+  .teams .carousel {
+    flex-wrap: wrap;
+  }
   .teams .carousel .card {
-    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    min-width: 100%;
   }
 }
 

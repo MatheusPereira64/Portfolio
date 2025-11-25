@@ -7,6 +7,7 @@ const Skills = () => {
   const t = translations[language]
   const [isVisible, setIsVisible] = useState(false)
   const skillsRef = useRef(null)
+  const contentRef = useRef(null)
 
   const skills = [
     { name: 'JavaScript', percentage: 95, class: 'javascript' },
@@ -32,6 +33,9 @@ const Skills = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true)
+            if (contentRef.current) {
+              contentRef.current.classList.add('visible')
+            }
           }
         })
       },
@@ -71,7 +75,7 @@ const Skills = () => {
     <section className="skills" id="skills" ref={skillsRef} data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.skills.title}</h2>
-        <div className="skills-content">
+        <div className="skills-content" ref={contentRef}>
           <div className="column left">
             <div className="text">{t.skills.text}</div>
             <p>{t.skills.description}</p>
@@ -98,15 +102,7 @@ const Skills = () => {
                   <span>{skill.name}</span>
                   <span>{skill.percentage}%</span>
                 </div>
-                <div className="line">
-                  <div 
-                    className={`line-fill ${skill.class}`}
-                    style={{ 
-                      width: isVisible ? `${skill.percentage}%` : '0%',
-                      transition: `width 2s ease-in-out ${index * 0.1}s`
-                    }}
-                  ></div>
-                </div>
+                <div className={`line ${skill.class}`}></div>
               </div>
             ))}
           </div>

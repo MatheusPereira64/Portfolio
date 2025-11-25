@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Projects.css'
 
@@ -6,8 +6,10 @@ const Projects = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [itemsToShow, setItemsToShow] = useState(3)
+  const carouselRef = useRef(null)
 
-  const projects = [
+  const projects = useMemo(() => [
     {
       image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80',
       title: language === 'pt' ? 'Aplicação Web Responsiva' : 'Responsive Web Application',
@@ -38,7 +40,23 @@ const Projects = () => {
       title: language === 'pt' ? 'Análise de Dados' : 'Data Analysis',
       description: language === 'pt' ? 'Python & AI' : 'Python & AI'
     }
-  ]
+  ], [language])
+
+  useEffect(() => {
+    const updateItemsToShow = () => {
+      if (window.innerWidth >= 1000) {
+        setItemsToShow(3)
+      } else if (window.innerWidth >= 600) {
+        setItemsToShow(2)
+      } else {
+        setItemsToShow(1)
+      }
+    }
+
+    updateItemsToShow()
+    window.addEventListener('resize', updateItemsToShow)
+    return () => window.removeEventListener('resize', updateItemsToShow)
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,32 +67,39 @@ const Projects = () => {
 
   const getVisibleProjects = () => {
     const visible = []
-    for (let i = 0; i < 3; i++) {
-      visible.push(projects[(currentIndex + i) % projects.length])
+    for (let i = 0; i < itemsToShow; i++) {
+      const projectIndex = (currentIndex + i) % projects.length
+      visible.push({ ...projects[projectIndex], index: projectIndex })
     }
     return visible
   }
+
+  const visibleProjects = getVisibleProjects()
 
   return (
     <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.projects.title}</h2>
-        <div className="carousel">
-          {getVisibleProjects().map((project, index) => (
-            <div key={index} className="card">
-              <div className="box">
-                <img src={project.image} alt={project.title} />
-                <div className="text">{project.title}</div>
-                <p>{project.description}</p>
+        <div className="carousel owl-carousel" ref={carouselRef}>
+          {visibleProjects.length > 0 ? (
+            visibleProjects.map((project, index) => (
+              <div key={`project-${project.index}-${index}`} className="card">
+                <div className="box">
+                  <img src={project.image} alt={project.title} onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} />
+                  <div className="text">{project.title}</div>
+                  <p>{project.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div>Carregando projetos...</div>
+          )}
         </div>
-        <div className="carousel-dots">
+        <div className="carousel-dots owl-dots">
           {projects.map((_, index) => (
             <span
               key={index}
-              className={`dot ${index === currentIndex ? 'active' : ''}`}
+              className={`owl-dot ${index === currentIndex ? 'active' : ''}`}
               onClick={() => setCurrentIndex(index)}
             ></span>
           ))}
