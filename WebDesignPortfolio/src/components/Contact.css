@@ -2,6 +2,10 @@
   content: "Entre em contato";
 }
 
+.contact[data-lang="en"] .title::after {
+  content: "Get in touch";
+}
+
 .contact .contact-content .column {
   width: calc(50% - 30px);
 }

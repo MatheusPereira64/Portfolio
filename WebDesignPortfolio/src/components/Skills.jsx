@@ -68,7 +68,7 @@ const Skills = () => {
   ]
 
   return (
-    <section className="skills" id="skills" ref={skillsRef}>
+    <section className="skills" id="skills" ref={skillsRef} data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.skills.title}</h2>
         <div className="skills-content">

@@ -2,6 +2,10 @@
   content: "O que eu sei";
 }
 
+.skills[data-lang="en"] .title::after {
+  content: "What I know";
+}
+
 .skills .skills-content .column {
   width: calc(50% - 30px);
 }

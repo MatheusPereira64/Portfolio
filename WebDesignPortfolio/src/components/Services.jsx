@@ -1,9 +1,12 @@
+import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Services.css'
 
 const Services = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
+  const servicesRef = useRef(null)
+  const [animatedCards, setAnimatedCards] = useState(new Set())
 
   const services = [
     {
@@ -29,13 +32,43 @@ const Services = () => {
     }
   ]
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index'))
+            setAnimatedCards((prev) => new Set([...prev, index]))
+          }
+        })
+      },
+      { threshold: 0.1 }
+    )
+
+    if (servicesRef.current) {
+      const cards = servicesRef.current.querySelectorAll('.card')
+      cards.forEach((card) => observer.observe(card))
+    }
+
+    return () => {
+      if (servicesRef.current) {
+        const cards = servicesRef.current.querySelectorAll('.card')
+        cards.forEach((card) => observer.unobserve(card))
+      }
+    }
+  }, [])
+
   return (
-    <section className="services" id="services">
+    <section className="services" id="services" data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.services.title}</h2>
-        <div className="serv-content">
+        <div className="serv-content" ref={servicesRef}>
           {services.map((service, index) => (
-            <div key={index} className="card">
+            <div 
+              key={index} 
+              className={`card ${animatedCards.has(index) ? 'animate' : ''}`}
+              data-index={index}
+            >
               <div className="box">
                 <i className={service.icon}></i>
               </div>

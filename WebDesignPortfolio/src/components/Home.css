@@ -9,6 +9,8 @@
   background-attachment: fixed;
   font-family: 'Ubuntu', sans-serif;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .home .max-width {

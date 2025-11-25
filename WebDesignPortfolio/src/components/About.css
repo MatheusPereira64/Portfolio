@@ -2,6 +2,10 @@
   content: "Quem eu sou ?";
 }
 
+.about[data-lang="en"] .title::after {
+  content: "Who am I?";
+}
+
 .about .about-content {
   display: flex;
   flex-wrap: wrap;

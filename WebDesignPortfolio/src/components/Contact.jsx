@@ -95,7 +95,7 @@ Enviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
   }
 
   return (
-    <section className="contact" id="contact">
+    <section className="contact" id="contact" data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.contact.title}</h2>
         <div className="contact-content">

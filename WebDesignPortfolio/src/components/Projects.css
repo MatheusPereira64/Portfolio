@@ -20,6 +20,10 @@
   color: #ffd700;
 }
 
+.teams[data-lang="en"] .title::after {
+  content: "My reference sites";
+}
+
 .teams .carousel {
   display: flex;
   gap: 20px;

@@ -56,7 +56,7 @@ const Projects = () => {
   }
 
   return (
-    <section className="teams" id="teams">
+    <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.projects.title}</h2>
         <div className="carousel">

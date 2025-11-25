@@ -8,13 +8,17 @@ const Home = () => {
   const t = translations[language]
   const typedRef = useRef(null)
   const typedInstance = useRef(null)
+  const homeRef = useRef(null)
 
   useEffect(() => {
     const strings = language === 'pt' 
       ? ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"]
       : ["Web Designer", "Programmer", "Game Developer", "Software Developer"]
 
-    if (typedRef.current && !typedInstance.current) {
+    if (typedRef.current) {
+      if (typedInstance.current) {
+        typedInstance.current.destroy()
+      }
       typedInstance.current = new Typed(typedRef.current, {
         strings: strings,
         typeSpeed: 100,
@@ -35,6 +39,35 @@ const Home = () => {
     }
   }, [language])
 
+  // Particle effect
+  useEffect(() => {
+    const createParticle = () => {
+      if (!homeRef.current) return
+      
+      const particle = document.createElement('div')
+      particle.className = 'particle'
+      homeRef.current.appendChild(particle)
+      
+      const size = Math.random() * 5 + 2
+      const startX = Math.random() * window.innerWidth
+      const duration = Math.random() * 3000 + 2000
+      
+      particle.style.left = startX + 'px'
+      particle.style.width = size + 'px'
+      particle.style.height = size + 'px'
+      particle.style.animationDuration = duration + 'ms'
+      
+      setTimeout(() => {
+        if (particle.parentNode) {
+          particle.remove()
+        }
+      }, duration)
+    }
+
+    const interval = setInterval(createParticle, 300)
+    return () => clearInterval(interval)
+  }, [])
+
   const scrollToSection = (e, sectionId) => {
     e.preventDefault()
     const element = document.getElementById(sectionId)
@@ -44,7 +77,7 @@ const Home = () => {
   }
 
   return (
-    <section className="home" id="home">
+    <section className="home" id="home" ref={homeRef}>
       <div className="max-width">
         <div className="home-content">
           <div className="text-1">{t.home.greeting}</div>

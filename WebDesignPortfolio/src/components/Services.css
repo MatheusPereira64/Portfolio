@@ -34,6 +34,10 @@
   color: #ffd700;
 }
 
+.services[data-lang="en"] .title::after {
+  content: "What I offer";
+}
+
 .services .serv-content {
   display: flex;
   flex-wrap: wrap;
@@ -58,6 +62,13 @@
   position: relative;
   overflow: hidden;
   min-height: 300px;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.services .serv-content .card.animate {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .services .serv-content .card::before {

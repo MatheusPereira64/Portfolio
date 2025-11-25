@@ -14,7 +14,10 @@ const About = () => {
       ? ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"]
       : ["Web Designer", "Programmer", "Game Developer", "Software Developer"]
 
-    if (typedRef.current && !typedInstance.current) {
+    if (typedRef.current) {
+      if (typedInstance.current) {
+        typedInstance.current.destroy()
+      }
       typedInstance.current = new Typed(typedRef.current, {
         strings: strings,
         typeSpeed: 100,
@@ -44,7 +47,7 @@ const About = () => {
   }
 
   return (
-    <section className="about" id="about">
+    <section className="about" id="about" data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.about.title}</h2>
         <div className="about-content">
