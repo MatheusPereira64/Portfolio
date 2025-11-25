@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { useTheme } from '../context/ThemeContext'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -7,6 +8,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
   const { language, setLanguage, translations } = useLanguage()
+  const { theme, toggleTheme } = useTheme()
   const t = translations[language]
   const langRef = useRef(null)
 
@@ -65,10 +67,23 @@ const Navbar = () => {
         <ul className={`menu ${isMenuOpen ? 'active' : ''}`}>
           <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>{t.nav.home}</a></li>
           <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{t.nav.about}</a></li>
-          <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>{t.nav.services}</a></li>
-          <li><a href="#skills" onClick={(e) => scrollToSection(e, 'skills')}>{t.nav.skills}</a></li>
-          <li><a href="#teams" onClick={(e) => scrollToSection(e, 'teams')}>{t.nav.projects}</a></li>
-          <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>{t.nav.contact}</a></li>
+          <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} aria-label={t.nav.services}>{t.nav.services}</a></li>
+          <li><a href="#skills" onClick={(e) => scrollToSection(e, 'skills')} aria-label={t.nav.skills}>{t.nav.skills}</a></li>
+          <li><a href="#experience" onClick={(e) => scrollToSection(e, 'experience')} aria-label={t.nav.experience || 'Experiência'}>{(t.nav.experience || 'Experiência')}</a></li>
+          <li><a href="#teams" onClick={(e) => scrollToSection(e, 'teams')} aria-label={t.nav.projects}>{t.nav.projects}</a></li>
+          <li><a href="#stats" onClick={(e) => scrollToSection(e, 'stats')} aria-label={t.nav.stats || 'Estatísticas'}>{(t.nav.stats || 'Estatísticas')}</a></li>
+          <li><a href="#blog" onClick={(e) => scrollToSection(e, 'blog')} aria-label={t.nav.blog || 'Blog'}>{(t.nav.blog || 'Blog')}</a></li>
+          <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} aria-label={t.nav.contact}>{t.nav.contact}</a></li>
+          <li className="theme-toggle">
+            <button 
+              onClick={toggleTheme}
+              className="theme-button"
+              aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
+              title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
+            >
+              <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`}></i>
+            </button>
+          </li>
           <li className="language-selector" ref={langRef}>
             <div 
               className="language-button"

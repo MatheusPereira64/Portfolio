@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import emailjs from '@emailjs/browser'
 import './Contact.css'
 
 const Contact = () => {
@@ -12,6 +13,8 @@ const Contact = () => {
     message: ''
   })
   const [errors, setErrors] = useState({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -26,7 +29,7 @@ const Contact = () => {
     return emailRegex.test(email)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = {}
 
@@ -45,32 +48,35 @@ const Contact = () => {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
-      const errorMsg = language === 'en' 
-        ? 'Please fill in all fields correctly.' 
-        : 'Por favor, preencha todos os campos corretamente.'
-      alert(errorMsg)
+      setSubmitStatus('error')
       return
     }
 
-    const emailBody = `${formData.message}
+    setIsSubmitting(true)
+    setSubmitStatus(null)
 
----
-Informações do contato:
-Nome: ${formData.from_name}
-Email: ${formData.from_email}
-
-Enviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
-
-    const mailtoLink = `mailto:matheuspereira6464@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`
-    
     try {
-      const tempLink = document.createElement('a')
-      tempLink.href = mailtoLink
-      tempLink.style.display = 'none'
-      document.body.appendChild(tempLink)
-      tempLink.click()
-      document.body.removeChild(tempLink)
-      
+      // Configurar EmailJS (você precisará criar uma conta em emailjs.com e obter as credenciais)
+      // Por enquanto, vamos usar um fallback para mailto
+      const serviceId = 'YOUR_SERVICE_ID'
+      const templateId = 'YOUR_TEMPLATE_ID'
+      const publicKey = 'YOUR_PUBLIC_KEY'
+
+      // Se EmailJS estiver configurado, use-o
+      if (serviceId !== 'YOUR_SERVICE_ID') {
+        await emailjs.send(serviceId, templateId, {
+          from_name: formData.from_name,
+          from_email: formData.from_email,
+          subject: formData.subject,
+          message: formData.message,
+        }, publicKey)
+      } else {
+        // Fallback para mailto
+        const emailBody = `${formData.message}\n\n---\nInformações do contato:\nNome: ${formData.from_name}\nEmail: ${formData.from_email}\n\nEnviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
+        const mailtoLink = `mailto:matheuspereira6464@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`
+        window.location.href = mailtoLink
+      }
+
       setFormData({
         from_name: '',
         from_email: '',
@@ -78,20 +84,30 @@ Enviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
         message: ''
       })
       setErrors({})
-      
-      const successMsg = language === 'en' 
-        ? 'Your email client has been opened with the message filled in! If it didn\'t open automatically, please check if you have a default email client configured.' 
-        : 'Seu cliente de email foi aberto com a mensagem preenchida! Se não abriu automaticamente, verifique se você tem um cliente de email padrão configurado.'
+      setSubmitStatus('success')
       
       setTimeout(() => {
-        alert(successMsg)
-      }, 1000)
+        setSubmitStatus(null)
+      }, 5000)
     } catch (error) {
-      const fallbackMsg = language === 'en' 
-        ? 'Unable to open email client automatically. Please send an email to: matheuspereira6464@gmail.com' 
-        : 'Não foi possível abrir o cliente de email automaticamente. Por favor, envie um email para: matheuspereira6464@gmail.com'
-      alert(fallbackMsg)
+      setSubmitStatus('error')
+      console.error('Error sending email:', error)
+    } finally {
+      setIsSubmitting(false)
     }
+  }
+
+  const handleDownloadCV = () => {
+    // Link para o CV (você precisará adicionar o arquivo PDF na pasta public)
+    const cvLinks = {
+      pt: '/cv-matheus-pereira-pt.pdf',
+      en: '/cv-matheus-pereira-en.pdf',
+      es: '/cv-matheus-pereira-es.pdf'
+    }
+    const link = document.createElement('a')
+    link.href = cvLinks[language] || cvLinks.pt
+    link.download = `CV-Matheus-Pereira-${language.toUpperCase()}.pdf`
+    link.click()
   }
 
   return (
@@ -102,6 +118,14 @@ Enviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
           <div className="column left">
             <div className="text">{t.contact.text}</div>
             <p>{t.contact.description}</p>
+            <button 
+              className="cv-download-btn"
+              onClick={handleDownloadCV}
+              aria-label="Download CV"
+            >
+              <i className="fas fa-download"></i>
+              {language === 'pt' ? 'Baixar CV' : language === 'es' ? 'Descargar CV' : 'Download CV'}
+            </button>
             <div className="icons">
               <div className="row">
                 <i className="fas fa-user"></i>
@@ -191,8 +215,32 @@ Enviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
                   required
                 ></textarea>
               </div>
+              {submitStatus === 'success' && (
+                <div className="form-message success">
+                  <i className="fas fa-check-circle"></i>
+                  {language === 'pt' 
+                    ? 'Mensagem enviada com sucesso!' 
+                    : language === 'es'
+                    ? '¡Mensaje enviado con éxito!'
+                    : 'Message sent successfully!'}
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="form-message error">
+                  <i className="fas fa-exclamation-circle"></i>
+                  {language === 'pt'
+                    ? 'Erro ao enviar mensagem. Tente novamente.'
+                    : language === 'es'
+                    ? 'Error al enviar mensaje. Inténtalo de nuevo.'
+                    : 'Error sending message. Please try again.'}
+                </div>
+              )}
               <div className="button">
-                <button type="submit">{t.contact.send}</button>
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting 
+                    ? (language === 'pt' ? 'Enviando...' : language === 'es' ? 'Enviando...' : 'Sending...')
+                    : t.contact.send}
+                </button>
               </div>
             </form>
           </div>

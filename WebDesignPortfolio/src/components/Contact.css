@@ -57,6 +57,33 @@
 
 .contact .contact-content .left p {
   text-align: justify;
+  margin-bottom: 20px;
+}
+
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
+}
+
+.cv-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
+}
+
+.cv-download-btn i {
+  font-size: 18px;
 }
 
 .contact .contact-content .left .icons {
@@ -168,12 +195,50 @@
   letter-spacing: 1px;
 }
 
-.right form .button button:hover {
+.right form .button button:hover:not(:disabled) {
   background: transparent;
   border: 2px solid #dc143c;
   color: #dc143c;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
+}
+
+.right form .button button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-message {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-message.success {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+.form-message.error {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
 }
 
 @media (max-width: 947px) {

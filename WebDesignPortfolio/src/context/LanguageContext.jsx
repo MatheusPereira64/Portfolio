@@ -26,7 +26,10 @@ export const LanguageProvider = ({ children }) => {
         about: 'Sobre mim',
         services: 'Serviços',
         skills: 'Habilidades',
+        experience: 'Experiência',
         projects: 'Projetos',
+        stats: 'Estatísticas',
+        blog: 'Blog',
         contact: 'Contato'
       },
       home: {
@@ -58,6 +61,19 @@ export const LanguageProvider = ({ children }) => {
         title: 'Meus Projetos',
         subtitle: 'Meus sites referência'
       },
+      experience: {
+        title: 'Experiência',
+        subtitle: 'Minha jornada'
+      },
+      stats: {
+        title: 'Estatísticas',
+        subtitle: 'Números que falam'
+      },
+      blog: {
+        title: 'Blog & Artigos',
+        subtitle: 'Últimos artigos',
+        readMore: 'Ler mais'
+      },
       contact: {
         title: 'Entre em contato',
         subtitle: 'Entre em contato',
@@ -82,7 +98,10 @@ export const LanguageProvider = ({ children }) => {
         about: 'About',
         services: 'Services',
         skills: 'Skills',
+        experience: 'Experience',
         projects: 'Projects',
+        stats: 'Statistics',
+        blog: 'Blog',
         contact: 'Contact'
       },
       home: {
@@ -114,6 +133,19 @@ export const LanguageProvider = ({ children }) => {
         title: 'My Projects',
         subtitle: 'My reference sites'
       },
+      experience: {
+        title: 'Experience',
+        subtitle: 'My journey'
+      },
+      stats: {
+        title: 'Statistics',
+        subtitle: 'Numbers that speak'
+      },
+      blog: {
+        title: 'Blog & Articles',
+        subtitle: 'Latest articles',
+        readMore: 'Read more'
+      },
       contact: {
         title: 'Get in touch',
         subtitle: 'Get in Touch',
@@ -138,7 +170,10 @@ export const LanguageProvider = ({ children }) => {
         about: 'Sobre mí',
         services: 'Servicios',
         skills: 'Habilidades',
+        experience: 'Experiencia',
         projects: 'Proyectos',
+        stats: 'Estadísticas',
+        blog: 'Blog',
         contact: 'Contacto'
       },
       home: {
@@ -169,6 +204,19 @@ export const LanguageProvider = ({ children }) => {
       projects: {
         title: 'Mis Proyectos',
         subtitle: 'Mis sitios de referencia'
+      },
+      experience: {
+        title: 'Experiencia',
+        subtitle: 'Mi trayectoria'
+      },
+      stats: {
+        title: 'Estadísticas',
+        subtitle: 'Números que hablan'
+      },
+      blog: {
+        title: 'Blog y Artículos',
+        subtitle: 'Últimos artículos',
+        readMore: 'Leer más'
       },
       contact: {
         title: 'Ponerse en contacto',

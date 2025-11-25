@@ -74,6 +74,45 @@
   box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
 }
 
+.theme-toggle {
+  margin-left: 20px;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 18px;
+}
+
+.navbar.sticky .theme-button {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.3);
+  color: #333;
+}
+
+[data-theme="dark"] .navbar.sticky .theme-button {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.theme-button:hover {
+  background: linear-gradient(135deg, #dc143c 0%, #b91c3c 100%);
+  border-color: transparent;
+  color: #fff;
+  transform: rotate(20deg) scale(1.1);
+}
+
 .language-selector {
   margin-left: 20px;
   position: relative;

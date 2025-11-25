@@ -1,0 +1,140 @@
+.stats {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+  opacity: 0.3;
+}
+
+.stats .title {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.stats .title::after {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  font-size: 20px;
+  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
+  content: "Números que falam";
+  color: #ffd700;
+  padding: 0 5px;
+  transform: translateX(-50%);
+}
+
+.stats[data-lang="en"] .title::after {
+  content: "Numbers that speak";
+}
+
+.stats[data-lang="es"] .title::after {
+  content: "Números que hablan";
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.stats-grid.animate .stat-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.stats-grid.animate .stat-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stats-grid.animate .stat-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.stats-grid.animate .stat-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.stats-grid.animate .stat-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.stat-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+  color: #ffd700;
+}
+
+.stat-value {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.stat-label {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .stat-card {
+    padding: 30px 20px;
+  }
+
+  .stat-value {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

@@ -85,7 +85,12 @@ const Projects = () => {
             visibleProjects.map((project, index) => (
               <div key={`project-${project.index}-${index}`} className="card">
                 <div className="box">
-                  <img src={project.image} alt={project.title} onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} />
+                  <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  loading="lazy"
+                  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+                />
                   <div className="text">{project.title}</div>
                   <p>{project.description}</p>
                 </div>
@@ -97,11 +102,13 @@ const Projects = () => {
         </div>
         <div className="carousel-dots owl-dots">
           {projects.map((_, index) => (
-            <span
+            <button
               key={index}
+              type="button"
               className={`owl-dot ${index === currentIndex ? 'active' : ''}`}
               onClick={() => setCurrentIndex(index)}
-            ></span>
+              aria-label={`Go to project ${index + 1}`}
+            ></button>
           ))}
         </div>
       </div>
