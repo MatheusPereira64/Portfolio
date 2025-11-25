@@ -49,7 +49,13 @@ O site estará disponível em: **`http://localhost:5173`** 🎉
 - **📱 Totalmente Responsivo**: Adaptável a todos os dispositivos
 - **✨ Animações Suaves**: Transições e efeitos hover elegantes
 - **🎨 Design Moderno**: Interface limpa com glassmorphism e gradientes
-- **📧 Formulário de Contato**: Sistema funcional via mailto
+- **🌙 Modo Escuro/Claro**: Toggle de tema com persistência
+- **🤖 Chatbot com IA**: Integração com Google Gemini API (gratuita)
+- **📧 Formulário de Contato**: Sistema funcional via EmailJS
+- **📊 Estatísticas Animadas**: Contadores e achievements
+- **📝 Seção de Blog**: Artigos e conteúdo
+- **💼 Timeline de Experiência**: Histórico profissional
+- **📥 Download de CV**: Botão para baixar currículo em PDF
 - **⚡ Performance Otimizada**: Build rápido com Vite
 
 ---
@@ -82,22 +88,31 @@ cd Portfolio
 npm install
 ```
 
-3. **Execute o projeto em modo desenvolvimento**
+3. **Configure a API Key do Google Gemini (Opcional - para chatbot com IA)**
+```bash
+# Copie o arquivo de exemplo
+cp WebDesignPortfolio/.env.example WebDesignPortfolio/.env
+
+# Edite o arquivo .env e adicione sua API Key
+# Obtenha uma chave gratuita em: https://makersuite.google.com/app/apikey
+```
+
+4. **Execute o projeto em modo desenvolvimento**
 ```bash
 npm run dev
 ```
 
-4. **Build para produção**
+5. **Build para produção**
 ```bash
 npm run build
 ```
 
-5. **Preview do build**
+6. **Preview do build**
 ```bash
 npm run preview
 ```
 
-6. **Deploy para GitHub Pages**
+7. **Deploy para GitHub Pages**
 ```bash
 npm run deploy
 ```
@@ -146,8 +161,12 @@ Portfolio/
 2. **Sobre Mim**: Informações pessoais e formação acadêmica
 3. **Meus Serviços**: Cards com os serviços oferecidos
 4. **Habilidades**: Barras de progresso animadas das tecnologias
-5. **Projetos**: Carousel com projetos desenvolvidos
-6. **Contato**: Formulário e informações de contato
+5. **Experiência**: Timeline interativa com histórico profissional
+6. **Projetos**: Carousel com projetos desenvolvidos
+7. **Estatísticas**: Contadores animados de achievements
+8. **Blog**: Seção de artigos e conteúdo
+9. **Contato**: Formulário funcional e informações de contato
+10. **Chatbot**: Assistente virtual com IA (Google Gemini) ou respostas pré-programadas
 
 ## 🚀 **Deploy no GitHub Pages**
 

@@ -1,7 +1,7 @@
 .chatbot-toggle {
   position: fixed;
   bottom: 30px;
-  right: 30px;
+  left: 30px;
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -30,7 +30,7 @@
 .chatbot-container {
   position: fixed;
   bottom: 100px;
-  right: 30px;
+  left: 30px;
   width: 350px;
   height: 500px;
   background: #fff;
@@ -170,17 +170,125 @@
   transform: scale(1.1);
 }
 
+.message-links {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background: rgba(220, 20, 60, 0.1);
+  color: #dc143c;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(220, 20, 60, 0.3);
+}
+
+.message-link:hover {
+  background: rgba(220, 20, 60, 0.2);
+  transform: translateX(5px);
+}
+
+.message.user .message-link {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.message-link-text {
+  display: block;
+  padding: 8px 12px;
+  background: rgba(220, 20, 60, 0.1);
+  color: #dc143c;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.message.user .message-link-text {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+}
+
+.quick-reply-btn {
+  padding: 8px 16px;
+  background: rgba(220, 20, 60, 0.1);
+  color: #dc143c;
+  border: 1px solid rgba(220, 20, 60, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.quick-reply-btn:hover {
+  background: rgba(220, 20, 60, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(220, 20, 60, 0.3);
+}
+
+[data-theme="dark"] .quick-reply-btn {
+  background: rgba(220, 20, 60, 0.2);
+  color: #ff6b6b;
+  border-color: rgba(220, 20, 60, 0.4);
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #dc143c;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 480px) {
   .chatbot-container {
     width: calc(100% - 40px);
-    right: 20px;
     left: 20px;
+    right: 20px;
     height: calc(100vh - 140px);
   }
 
   .chatbot-toggle {
     bottom: 20px;
-    right: 20px;
+    left: 20px;
   }
 }
 
