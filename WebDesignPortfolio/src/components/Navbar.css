@@ -16,6 +16,16 @@
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
 }
 
+[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .navbar.sticky {
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
 .navbar .max-width {
   display: flex;
   align-items: center;
@@ -31,6 +41,10 @@
 
 .navbar.sticky .logo a {
   color: #333;
+}
+
+[data-theme="dark"] .navbar.sticky .logo a {
+  color: #fff;
 }
 
 .navbar .logo a span {
@@ -65,6 +79,10 @@
 
 .navbar.sticky .menu li a {
   color: #333;
+}
+
+[data-theme="dark"] .navbar.sticky .menu li a {
+  color: #fff;
 }
 
 .navbar .menu li a:hover {
@@ -177,6 +195,11 @@
   animation: fadeInDown 0.3s ease;
 }
 
+[data-theme="dark"] .language-dropdown {
+  background: #2a2a2a;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -198,6 +221,11 @@
   color: #333;
   font-weight: 500;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .language-option {
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .language-option:last-child {
@@ -241,6 +269,10 @@
   color: #333;
 }
 
+[data-theme="dark"] .navbar.sticky .menu-btn {
+  color: #fff;
+}
+
 @media (max-width: 947px) {
   .menu-btn {
     display: block;
@@ -257,6 +289,10 @@
     text-align: center;
     padding-top: 80px;
     transition: all 0.3s ease;
+  }
+
+  [data-theme="dark"] .navbar .menu {
+    background: #1a1a1a;
   }
 
   .navbar .menu.active {
