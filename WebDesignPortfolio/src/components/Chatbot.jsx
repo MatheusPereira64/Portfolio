@@ -15,11 +15,26 @@ const Chatbot = () => {
   // Verificar se a API key está disponível ao montar o componente
   useEffect(() => {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY
-    console.log('🔍 Chatbot montado - API Key disponível:', apiKey ? 'Sim' : 'Não')
+    console.log('🔍 Chatbot montado - Verificando configuração da API')
+    console.log('📋 Variáveis de ambiente disponíveis:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')))
+    console.log('🔑 API Key disponível:', apiKey ? 'Sim' : 'Não')
+    
     if (apiKey) {
-      console.log('✅ Primeiros caracteres da API Key:', apiKey.substring(0, 15) + '...')
+      const trimmedKey = apiKey.trim()
+      if (trimmedKey === '' || trimmedKey === 'sua_chave_aqui') {
+        console.warn('⚠️ API Key está vazia ou contém valor padrão. Configure sua chave no arquivo .env')
+        console.warn('📝 Instruções: Crie/edite WebDesignPortfolio/.env e adicione: VITE_GEMINI_API_KEY=sua_chave_real')
+      } else {
+        console.log('✅ API Key configurada (primeiros 10 chars):', trimmedKey.substring(0, 10) + '...')
+        console.log('✅ Comprimento da chave:', trimmedKey.length, 'caracteres')
+      }
     } else {
       console.warn('⚠️ API Key não encontrada. O chatbot usará respostas pré-programadas.')
+      console.warn('📝 Para ativar a IA:')
+      console.warn('   1. Crie o arquivo WebDesignPortfolio/.env')
+      console.warn('   2. Adicione: VITE_GEMINI_API_KEY=sua_chave_aqui')
+      console.warn('   3. Obtenha uma chave gratuita em: https://makersuite.google.com/app/apikey')
+      console.warn('   4. Reinicie o servidor (npm run dev)')
     }
   }, [])
 
@@ -154,8 +169,27 @@ const Chatbot = () => {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ''
+      const trimmedKey = apiKey.trim()
+      const hasValidKey = trimmedKey && trimmedKey !== '' && trimmedKey !== 'sua_chave_aqui' && trimmedKey.startsWith('AIza')
+      
       const greeting = greetings[language][Math.floor(Math.random() * greetings[language].length)]
-      setMessages([{ type: 'bot', text: greeting }])
+      
+      // Adicionar aviso se a API key não estiver configurada
+      if (!hasValidKey) {
+        const warningMsg = language === 'pt' 
+          ? '⚠️ A API do Google Gemini não está configurada. O chatbot está usando respostas pré-programadas. Configure VITE_GEMINI_API_KEY no arquivo .env para ativar a IA.'
+          : language === 'es'
+          ? '⚠️ La API de Google Gemini no está configurada. El chatbot está usando respuestas preprogramadas. Configure VITE_GEMINI_API_KEY en el archivo .env para activar la IA.'
+          : '⚠️ Google Gemini API is not configured. The chatbot is using pre-programmed responses. Configure VITE_GEMINI_API_KEY in the .env file to enable AI.'
+        
+        setMessages([
+          { type: 'bot', text: greeting },
+          { type: 'bot', text: warningMsg }
+        ])
+      } else {
+        setMessages([{ type: 'bot', text: greeting }])
+      }
     }
   }, [isOpen, language])
 
@@ -163,138 +197,248 @@ const Chatbot = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Função para obter resposta da IA usando API REST direta
-  const getAIResponseDirectAPI = async (messageText, conversationHistory, apiKey, lang) => {
-    // Contexto sobre o portfólio
-    const context = lang === 'pt' 
-      ? `Você é um assistente virtual do portfólio de Matheus Pereira, um desenvolvedor Full Stack. 
-      Informações importantes:
-      - Nome: Matheus Pereira de Souza
-      - Email: matheuspereira6464@gmail.com
-      - Telefone: +55 (92) 99213-8870
-      - Localização: Manaus, Amazonas - Brasil
-      - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-      - GitHub: https://github.com/MatheusPereira64
-      - Habilidades: React, Node.js, JavaScript, Python, Full Stack Development
-      - Formação: Análise e Desenvolvimento de Sistemas no ITEGAM
-      
-      Seja amigável, profissional e responda de forma concisa. Quando perguntarem sobre contato, LinkedIn ou GitHub, forneça os links diretamente.`
-      : lang === 'es'
-      ? `Eres un asistente virtual del portafolio de Matheus Pereira, un desarrollador Full Stack.
-      Información importante:
-      - Nombre: Matheus Pereira de Souza
-      - Email: matheuspereira6464@gmail.com
-      - Teléfono: +55 (92) 99213-8870
-      - Ubicación: Manaus, Amazonas - Brasil
-      - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-      - GitHub: https://github.com/MatheusPereira64
-      - Habilidades: React, Node.js, JavaScript, Python, Desarrollo Full Stack
-      - Formación: Análisis y Desarrollo de Sistemas en ITEGAM
-      
-      Sé amigable, profesional y responde de forma concisa. Cuando pregunten sobre contacto, LinkedIn o GitHub, proporciona los enlaces directamente.`
-      : `You are a virtual assistant for Matheus Pereira's portfolio, a Full Stack Developer.
-      Important information:
-      - Name: Matheus Pereira de Souza
-      - Email: matheuspereira6464@gmail.com
-      - Phone: +55 (92) 99213-8870
-      - Location: Manaus, Amazonas - Brazil
-      - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-      - GitHub: https://github.com/MatheusPereira64
-      - Skills: React, Node.js, JavaScript, Python, Full Stack Development
-      - Education: Systems Analysis and Development at ITEGAM
-      
-      Be friendly, professional and respond concisely. When asked about contact, LinkedIn or GitHub, provide the links directly.`
-
-    const historyText = conversationHistory
-      .slice(-5)
-      .map(msg => `${msg.type === 'user' ? 'User' : 'Assistant'}: ${msg.text}`)
-      .join('\n')
-
-    const prompt = `${context}\n\nConversation history:\n${historyText}\n\nUser: ${messageText}\nAssistant:`
-
-    // Tentar diferentes endpoints e modelos
-    const endpoints = [
-      { url: `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`, model: 'gemini-pro (v1)' },
-      { url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, model: 'gemini-pro (v1beta)' },
-      { url: `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, model: 'gemini-1.5-flash (v1)' },
-      { url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, model: 'gemini-1.5-flash (v1beta)' }
-    ]
-
-    for (const endpoint of endpoints) {
-      try {
-        console.log(`🔄 Tentando endpoint: ${endpoint.model}`)
-        const response = await fetch(endpoint.url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: prompt
-              }]
-            }]
-          })
-        })
-
-        if (response.ok) {
-          const data = await response.json()
-          const text = data.candidates?.[0]?.content?.parts?.[0]?.text || ''
-          console.log(`✅ Resposta recebida via ${endpoint.model}`)
-          
-          // Extrair links
-          const links = []
-          const linkRegex = /(https?:\/\/[^\s]+)/g
-          const foundLinks = text.match(linkRegex)
-          if (foundLinks) {
-            foundLinks.forEach(link => {
-              if (link.includes('linkedin.com')) {
-                links.push({ label: '🔗 LinkedIn', url: link })
-              } else if (link.includes('github.com')) {
-                links.push({ label: '🔗 GitHub', url: link })
-              } else if (link.includes('mailto:')) {
-                links.push({ label: '📧 Email', url: link })
-              }
-            })
-          }
-          
-          return { text: text.trim(), links }
-        } else {
-          const errorData = await response.json().catch(() => ({}))
-          console.log(`❌ ${endpoint.model} falhou:`, response.status, errorData)
-        }
-      } catch (e) {
-        console.log(`❌ Erro ao tentar ${endpoint.model}:`, e.message)
-        continue
-      }
-    }
-    
-    return null
-  }
-
-  // Função para obter resposta da IA (Google Gemini) usando API REST direta
+  // Função para obter resposta da IA usando SDK do Google Generative AI
   const getAIResponse = async (messageText, conversationHistory) => {
     try {
       const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ''
+      const trimmedKey = GEMINI_API_KEY.trim()
       
-      console.log('🔑 API Key carregada:', GEMINI_API_KEY ? 'Sim (primeiros 10 chars: ' + GEMINI_API_KEY.substring(0, 10) + '...)' : 'Não')
+      console.log('🔑 Verificando API Key...')
+      console.log('   - Chave presente:', !!GEMINI_API_KEY)
+      console.log('   - Chave após trim:', trimmedKey ? `Sim (${trimmedKey.length} chars)` : 'Vazia')
       
-      if (!GEMINI_API_KEY || GEMINI_API_KEY.trim() === '') {
-        console.log('⚠️ API Key não encontrada ou vazia, usando fallback')
+      if (!GEMINI_API_KEY || trimmedKey === '' || trimmedKey === 'sua_chave_aqui') {
+        console.log('⚠️ API Key não encontrada, vazia ou contém valor padrão')
+        console.log('📝 Configure a chave no arquivo WebDesignPortfolio/.env e reinicie o servidor')
         return null
       }
+      
+      // Validar formato da API key (deve começar com "AIza")
+      if (!trimmedKey.startsWith('AIza')) {
+        console.error('⚠️ Formato de API Key inválido!')
+        console.error('   - A chave do Google Gemini deve começar com "AIza"')
+        console.error('   - Chave atual começa com:', trimmedKey.substring(0, 4))
+        console.error('   - Obtenha uma chave válida em: https://makersuite.google.com/app/apikey')
+        return null
+      }
+      
+      console.log('✅ API Key válida detectada (primeiros 10 chars):', trimmedKey.substring(0, 10) + '...')
+      console.log('   - Formato correto: Começa com "AIza"')
+      console.log('   - Comprimento:', trimmedKey.length, 'caracteres')
+      
+      // Tentar listar modelos disponíveis para debug
+      try {
+        const listUrl = `https://generativelanguage.googleapis.com/v1beta/models?key=${trimmedKey}`
+        const listResponse = await fetch(listUrl)
+        if (listResponse.ok) {
+          const listData = await listResponse.json()
+          const availableModels = listData.models?.map(m => m.name) || []
+          console.log('📋 Modelos disponíveis:', availableModels.slice(0, 5).join(', '), availableModels.length > 5 ? '...' : '')
+        }
+      } catch (e) {
+        console.log('   - Não foi possível listar modelos disponíveis (normal)')
+      }
 
-      // Usar API REST diretamente, tentando diferentes endpoints
-      return await getAIResponseDirectAPI(messageText, conversationHistory, GEMINI_API_KEY, language)
+      // Contexto sobre o portfólio
+      const context = language === 'pt' 
+        ? `Você é um assistente virtual do portfólio de Matheus Pereira, um desenvolvedor Full Stack. 
+        Informações importantes:
+        - Nome: Matheus Pereira de Souza
+        - Email: matheuspereira6464@gmail.com
+        - Telefone: +55 (92) 99213-8870
+        - Localização: Manaus, Amazonas - Brasil
+        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
+        - GitHub: https://github.com/MatheusPereira64
+        - Habilidades: React, Node.js, JavaScript, Python, Full Stack Development
+        - Formação: Análise e Desenvolvimento de Sistemas no ITEGAM
+        
+        Seja amigável, profissional e responda de forma concisa. Quando perguntarem sobre contato, LinkedIn ou GitHub, forneça os links diretamente.`
+        : language === 'es'
+        ? `Eres un asistente virtual del portafolio de Matheus Pereira, un desarrollador Full Stack.
+        Información importante:
+        - Nombre: Matheus Pereira de Souza
+        - Email: matheuspereira6464@gmail.com
+        - Teléfono: +55 (92) 99213-8870
+        - Ubicación: Manaus, Amazonas - Brasil
+        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
+        - GitHub: https://github.com/MatheusPereira64
+        - Habilidades: React, Node.js, JavaScript, Python, Desarrollo Full Stack
+        - Formación: Análisis y Desarrollo de Sistemas en ITEGAM
+        
+        Sé amigable, profesional y responde de forma concisa. Cuando pregunten sobre contacto, LinkedIn o GitHub, proporciona los enlaces directamente.`
+        : `You are a virtual assistant for Matheus Pereira's portfolio, a Full Stack Developer.
+        Important information:
+        - Name: Matheus Pereira de Souza
+        - Email: matheuspereira6464@gmail.com
+        - Phone: +55 (92) 99213-8870
+        - Location: Manaus, Amazonas - Brazil
+        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
+        - GitHub: https://github.com/MatheusPereira64
+        - Skills: React, Node.js, JavaScript, Python, Full Stack Development
+        - Education: Systems Analysis and Development at ITEGAM
+        
+        Be friendly, professional and respond concisely. When asked about contact, LinkedIn or GitHub, provide the links directly.`
+
+      // Construir histórico da conversa
+      const historyText = conversationHistory
+        .slice(-5)
+        .map(msg => `${msg.type === 'user' ? 'User' : 'Assistant'}: ${msg.text}`)
+        .join('\n')
+
+      const prompt = `${context}\n\nConversation history:\n${historyText}\n\nUser: ${messageText}\nAssistant:`
+
+      // Tentar usar o SDK primeiro, depois API REST como fallback
+      // O SDK gerencia melhor a versão da API automaticamente
+      const models = ['gemini-pro', 'gemini-1.5-flash', 'gemini-1.5-pro']
+      
+      // Primeiro, tentar com o SDK
+      for (const modelName of models) {
+        try {
+          console.log(`🔄 Tentando modelo via SDK: ${modelName}`)
+          console.log(`   - Prompt length: ${prompt.length} caracteres`)
+          
+          const genAI = new GoogleGenerativeAI(trimmedKey)
+          const model = genAI.getGenerativeModel({ model: modelName })
+          
+          console.log(`   - Modelo criado, gerando conteúdo...`)
+          const result = await model.generateContent(prompt)
+          console.log(`   - Resultado recebido, processando resposta...`)
+          
+          const response = await result.response
+          const text = response.text()
+          
+          console.log(`   - Texto extraído: ${text ? text.length + ' caracteres' : 'vazio'}`)
+          
+          if (text && text.trim()) {
+            console.log(`✅ Resposta recebida via SDK ${modelName} (${text.length} caracteres)`)
+            
+            // Extrair links
+            const links = []
+            const linkRegex = /(https?:\/\/[^\s]+)/g
+            const foundLinks = text.match(linkRegex)
+            if (foundLinks) {
+              foundLinks.forEach(link => {
+                if (link.includes('linkedin.com')) {
+                  links.push({ label: '🔗 LinkedIn', url: link })
+                } else if (link.includes('github.com')) {
+                  links.push({ label: '🔗 GitHub', url: link })
+                } else if (link.includes('mailto:')) {
+                  links.push({ label: '📧 Email', url: link })
+                }
+              })
+            }
+            
+            return { text: text.trim(), links }
+          }
+        } catch (sdkError) {
+          console.log(`⚠️ SDK falhou para ${modelName}:`, sdkError.message)
+          // Continuar tentando outros modelos
+          continue
+        }
+      }
+      
+      // Se o SDK falhou, tentar API REST diretamente
+      console.log('🔄 SDK não funcionou, tentando API REST diretamente...')
+      const endpoints = [
+        { 
+          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${trimmedKey}`, 
+          model: 'gemini-1.5-flash (v1beta REST)' 
+        },
+        { 
+          url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${trimmedKey}`, 
+          model: 'gemini-pro (v1beta REST)' 
+        },
+        { 
+          url: `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${trimmedKey}`, 
+          model: 'gemini-1.5-flash (v1 REST)' 
+        },
+        { 
+          url: `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${trimmedKey}`, 
+          model: 'gemini-pro (v1 REST)' 
+        }
+      ]
+      
+      for (const endpoint of endpoints) {
+        try {
+          console.log(`🔄 Tentando endpoint REST: ${endpoint.model}`)
+          
+          const response = await fetch(endpoint.url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              contents: [{
+                parts: [{
+                  text: prompt
+                }]
+              }]
+            })
+          })
+
+          console.log(`   - Status da resposta: ${response.status}`)
+
+          if (response.ok) {
+            const data = await response.json()
+            const text = data.candidates?.[0]?.content?.parts?.[0]?.text || ''
+            
+            if (text && text.trim()) {
+              console.log(`✅ Resposta recebida via ${endpoint.model} (${text.length} caracteres)`)
+              
+              // Extrair links
+              const links = []
+              const linkRegex = /(https?:\/\/[^\s]+)/g
+              const foundLinks = text.match(linkRegex)
+              if (foundLinks) {
+                foundLinks.forEach(link => {
+                  if (link.includes('linkedin.com')) {
+                    links.push({ label: '🔗 LinkedIn', url: link })
+                  } else if (link.includes('github.com')) {
+                    links.push({ label: '🔗 GitHub', url: link })
+                  } else if (link.includes('mailto:')) {
+                    links.push({ label: '📧 Email', url: link })
+                  }
+                })
+              }
+              
+              return { text: text.trim(), links }
+            }
+          } else {
+            const errorData = await response.json().catch(() => ({}))
+            console.log(`   - Erro ${response.status}:`, errorData.error?.message || 'Erro desconhecido')
+            
+            if (response.status === 401 || response.status === 403) {
+              console.error('⚠️ API Key inválida ou sem permissões')
+              throw new Error('API Key inválida')
+            }
+            
+            if (response.status === 429) {
+              console.error('⚠️ Limite de quota atingido')
+              throw new Error('Quota excedida')
+            }
+          }
+        } catch (fetchError) {
+          if (fetchError.message?.includes('inválida') || fetchError.message?.includes('excedida')) {
+            throw fetchError
+          }
+          continue
+        }
+      }
+      
+      console.warn('⚠️ Nenhum modelo funcionou, usando fallback')
+      return null
+      
     } catch (error) {
       console.error('❌ Erro ao chamar API Gemini:', error)
       console.error('Detalhes do erro:', error.message)
+      
       if (error.message?.includes('API_KEY') || error.message?.includes('API key')) {
         console.error('⚠️ Problema com a API Key. Verifique se está correta no arquivo .env')
       }
       if (error.message?.includes('quota') || error.message?.includes('limit')) {
         console.error('⚠️ Limite de quota atingido. Aguarde alguns minutos.')
       }
+      
       return null // Retorna null para usar fallback
     }
   }
@@ -329,17 +473,27 @@ const Chatbot = () => {
 
     try {
       console.log('📨 Processando mensagem:', messageText)
-      // Tentar obter resposta da IA primeiro
-      const aiResponse = await getAIResponse(messageText, [...messages, userMessage])
+      console.log('📊 Histórico de mensagens:', messages.length, 'mensagens')
       
-      if (aiResponse) {
-        console.log('✅ Usando resposta da IA')
+      // Tentar obter resposta da IA primeiro
+      console.log('🤖 Tentando obter resposta da IA...')
+      const aiResponse = await Promise.race([
+        getAIResponse(messageText, [...messages, userMessage]),
+        new Promise((resolve) => setTimeout(() => {
+          console.warn('⏱️ Timeout: A resposta da IA demorou mais de 15 segundos')
+          resolve(null)
+        }, 15000))
+      ])
+      
+      if (aiResponse && aiResponse.text) {
+        console.log('✅ Resposta da IA recebida:', aiResponse.text.substring(0, 100) + '...')
         // Usar resposta da IA
         const botResponse = { type: 'bot', text: aiResponse.text, links: aiResponse.links || [] }
         setMessages(prev => [...prev, botResponse])
         setIsLoading(false)
       } else {
-        console.log('⚠️ Usando fallback (respostas pré-programadas)')
+        console.log('⚠️ Resposta da IA não disponível, usando fallback')
+        console.log('   - aiResponse:', aiResponse)
         // Usar fallback (respostas pré-programadas)
         setTimeout(() => {
           const response = getFallbackResponse(messageText)
@@ -350,11 +504,16 @@ const Chatbot = () => {
       }
     } catch (error) {
       console.error('❌ Erro no processMessage:', error)
+      console.error('   - Tipo do erro:', error.constructor.name)
+      console.error('   - Mensagem:', error.message)
+      console.error('   - Stack:', error.stack)
       // Em caso de erro, usar fallback
-      const response = getFallbackResponse(messageText)
-      const botResponse = { type: 'bot', text: response.text, links: response.links || [] }
-      setMessages(prev => [...prev, botResponse])
-      setIsLoading(false)
+      setTimeout(() => {
+        const response = getFallbackResponse(messageText)
+        const botResponse = { type: 'bot', text: response.text, links: response.links || [] }
+        setMessages(prev => [...prev, botResponse])
+        setIsLoading(false)
+      }, 1000)
     }
   }
 
