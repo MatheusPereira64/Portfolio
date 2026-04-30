@@ -102,7 +102,7 @@ cp WebDesignPortfolio/.env.example WebDesignPortfolio/.env
 npm run dev
 ```
 
-5. **Build para produção**
+5. **Build para produção** (gera `docs/` para o GitHub Pages)
 ```bash
 npm run build
 ```
@@ -170,40 +170,33 @@ Portfolio/
 
 ## 🚀 **Deploy no GitHub Pages**
 
-O projeto React está configurado para deploy no GitHub Pages usando a branch `feat/react-refactor`:
+No repositório, o GitHub só permite publicar a partir da **raiz (`/`)** ou da pasta **`/docs`** — **não há opção `/dist`**.
 
-1. O build é gerado na pasta `dist/` dentro da branch `feat/react-refactor`
-2. O script `npm run deploy` usa `gh-pages` para fazer o deploy
-3. O site React fica disponível em: `https://matheuspereira64.github.io/Portfolio/`
+Fluxo recomendado:
 
-### ⚠️ **IMPORTANTE - Configuração do GitHub Pages:**
+1. Na máquina local: `npm install` e **`npm run build`** — gera os ficheiros estáticos em **`docs/`** (JavaScript compilado, não `.jsx`).
+2. Faça **commit e push** da pasta **`docs/`** para o branch que usar no Pages (por exemplo `main` ou `feat/react-refactor`).
+3. No GitHub: **Settings → Pages → Build and deployment → Branch**: escolha esse branch e **Folder: `/docs`**.
+4. O site correto fica em **`https://matheuspereira64.github.io/Portfolio/`** (raiz do site).
 
-Para garantir que a versão React seja exibida, você **DEVE** configurar o GitHub Pages para usar a branch `feat/react-refactor`:
+Alternativa sem commit de `docs/`: **`npm run deploy`** envia o build para o branch **`gh-pages`**; nas Pages, escolha branch **`gh-pages`** e pasta **`/ (root)`**.
 
-1. Vá para o repositório no GitHub: `https://github.com/MatheusPereira64/Portfolio`
-2. Clique em **Settings** (Configurações)
-3. No menu lateral, clique em **Pages**
-4. Em **Source** (Fonte), selecione:
-   - **Branch**: `feat/react-refactor`
-   - **Folder**: `/dist` (pasta dist dentro da branch)
-5. Clique em **Save** (Salvar)
-6. Aguarde alguns minutos para o GitHub Pages atualizar
+### ⚠️ **IMPORTANTE**
 
-**Após configurar, a versão React estará disponível em:** `https://matheuspereira64.github.io/Portfolio/`
-
-> 💡 **Dica**: Se você ainda ver a versão HTML antiga após configurar, limpe o cache do navegador (Ctrl+Shift+R ou Cmd+Shift+R) ou use o modo anônimo.
+1. **Não uses** como URL “oficial” `.../Portfolio/WebDesignPortfolio/` — isso é a pasta **fonte** no repo; o browser recebe `main.jsx` e aparece o erro de MIME type.
+2. Depois de mudar as Pages para **`/docs`**, faz um refresh forte (Ctrl+Shift+R).
 
 ### Erro `MIME type "text/jsx"` ou ícones / CDN bloqueados
 
-- **URL incorreta**: `https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/` aponta para os **arquivos-fonte** da pasta `WebDesignPortfolio/` no repositório. O GitHub Pages só envia esses ficheiros como estáticos; o navegador **não** executa JSX. A versão publicada deve ser o **`npm run build`**, servida a partir da pasta **`/dist`** (ou da branch gerada pelo `gh-pages`). Use **`https://matheuspereira64.github.io/Portfolio/`** (raiz do site), não o caminho da pasta do código.
-- **Tracking Prevention no CDN**: Font Awesome passou a ser incluído via pacote npm (`@fortawesome/fontawesome-free`), para não depender do Cloudflare/cdnjs no ambiente de produção.
+- **Pasta errada nas Pages**: Se a fonte for **root** (`/`), o GitHub serve o repositório inteiro e podes continuar a abrir caminhos com ficheiros `.jsx`. Com **Folder: `/docs`**, só o build compilado é servido na URL base do site.
+- **Tracking Prevention**: Font Awesome está no bundle (pacote npm), sem depender do cdnjs.
 
 ### Configuração do Vite
 
 O arquivo `vite.config.js` está configurado com:
 - `base: '/Portfolio/'` - Caminho base para GitHub Pages
 - `root: './WebDesignPortfolio'` - Diretório raiz do projeto React
-- `build.outDir: '../dist'` - Diretório de saída do build
+- `build.outDir: '../docs'` - Saída do build para a pasta **`docs/`** (compatível com GitHub Pages)
 - Build otimizado para produção
 
 ## 📧 **Contato**

@@ -7,7 +7,8 @@ export default defineConfig({
   base: '/Portfolio/',
   root: './WebDesignPortfolio',
   build: {
-    outDir: '../dist',
+    // Saída em `docs/` para GitHub Pages (fonte Branch → pasta /docs; não existe opção /dist na UI)
+    outDir: '../docs',
     assetsDir: 'assets',
     emptyOutDir: true,
   }

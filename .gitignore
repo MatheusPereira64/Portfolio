@@ -10,6 +10,7 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+# `docs/` é o build de produção para GitHub Pages (pasta /docs); mantém versionado após `npm run build`
 *.local
 
 # Editor directories and files
