@@ -170,26 +170,35 @@ Portfolio/
 
 ## 🚀 **Deploy no GitHub Pages**
 
-No repositório, o GitHub só permite publicar a partir da **raiz (`/`)** ou da pasta **`/docs`** — **não há opção `/dist`**.
+### Opção A — GitHub Actions (recomendado)
 
-Fluxo recomendado:
+O workflow `.github/workflows/deploy-pages.yml` faz **`npm ci`**, **`npm run build`** e publica o conteúdo de **`docs/`** automaticamente nos pushes para **`main`**, **`development`** ou **`feat/react-refactor`**.
 
-1. Na máquina local: `npm install` e **`npm run build`** — gera os ficheiros estáticos em **`docs/`** (JavaScript compilado, não `.jsx`).
-2. Faça **commit e push** da pasta **`docs/`** para o branch que usar no Pages (por exemplo `main` ou `feat/react-refactor`).
-3. No GitHub: **Settings → Pages → Build and deployment → Branch**: escolha esse branch e **Folder: `/docs`**.
-4. O site correto fica em **`https://matheuspereira64.github.io/Portfolio/`** (raiz do site).
+1. No GitHub: **Settings → Pages → Build and deployment → Source**, escolhe **GitHub Actions** (não uses “Deploy from a branch” ao mesmo tempo para evitar confusão).
+2. Faz push deste repositório; na aba **Actions** verifica que o workflow **Deploy GitHub Pages** concluiu com sucesso.
+3. Abre **`https://matheuspereira64.github.io/Portfolio/`** (sem subpath `WebDesignPortfolio`).
 
-Alternativa sem commit de `docs/`: **`npm run deploy`** envia o build para o branch **`gh-pages`**; nas Pages, escolha branch **`gh-pages`** e pasta **`/ (root)`**.
+### Opção B — Branch + pasta `/docs`
+
+No GitHub, ao publicar a partir de um branch, só existem **`/` (root)** ou **`/docs`** — não há **`/dist`**.
+
+1. Localmente: **`npm run build`** gera **`docs/`**.
+2. Commit e push da pasta **`docs/`**.
+3. **Settings → Pages**: Branch à tua escolha e **Folder: `/docs`**.
+
+### Opção C — Branch `gh-pages`
+
+**`npm run deploy`** envia o build para **`gh-pages`**; nas Pages escolhe esse branch e pasta **`/ (root)`**.
 
 ### ⚠️ **IMPORTANTE**
 
-1. **Não uses** como URL “oficial” `.../Portfolio/WebDesignPortfolio/` — isso é a pasta **fonte** no repo; o browser recebe `main.jsx` e aparece o erro de MIME type.
-2. Depois de mudar as Pages para **`/docs`**, faz um refresh forte (Ctrl+Shift+R).
+1. **Não abras** `WebDesignPortfolio/index.html` com **Live Server**, duplo clique nem **`file://`**. Esse HTML referencia **`main.jsx`**; só o Vite converte JSX. Para local: **`npm run dev`** ou, após build, **`npm run preview`** (abre por exemplo `http://localhost:4173/Portfolio/`).
+2. **URL do site**: **`https://matheuspereira64.github.io/Portfolio/`**. Caminhos para pastas fonte no repo podem devolver `.jsx` e o erro de MIME.
 
-### Erro `MIME type "text/jsx"` ou ícones / CDN bloqueados
+### Erro `MIME type "text/jsx"`
 
-- **Pasta errada nas Pages**: Se a fonte for **root** (`/`), o GitHub serve o repositório inteiro e podes continuar a abrir caminhos com ficheiros `.jsx`. Com **Folder: `/docs`**, só o build compilado é servido na URL base do site.
-- **Tracking Prevention**: Font Awesome está no bundle (pacote npm), sem depender do cdnjs.
+- **Desenvolvimento**: usa sempre **`npm run dev`** ou **`npm run preview`**, não Live Server na pasta `WebDesignPortfolio`.
+- **Produção**: garante Pages com **GitHub Actions** ou pasta **`/docs`** com build atualizado; faz **hard refresh** (Ctrl+Shift+R).
 
 ### Configuração do Vite
 
