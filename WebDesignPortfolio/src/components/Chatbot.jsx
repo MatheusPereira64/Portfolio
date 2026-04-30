@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import './Chatbot.css'
+import { SITE_PROFILE as PROFILE, CV_FILENAME } from '../constants/siteProfile'
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -12,31 +13,7 @@ const Chatbot = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
 
-  // Verificar se a API key está disponível ao montar o componente
-  useEffect(() => {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY
-    console.log('🔍 Chatbot montado - Verificando configuração da API')
-    console.log('📋 Variáveis de ambiente disponíveis:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')))
-    console.log('🔑 API Key disponível:', apiKey ? 'Sim' : 'Não')
-    
-    if (apiKey) {
-      const trimmedKey = apiKey.trim()
-      if (trimmedKey === '' || trimmedKey === 'sua_chave_aqui') {
-        console.warn('⚠️ API Key está vazia ou contém valor padrão. Configure sua chave no arquivo .env')
-        console.warn('📝 Instruções: Crie/edite WebDesignPortfolio/.env e adicione: VITE_GEMINI_API_KEY=sua_chave_real')
-      } else {
-        console.log('✅ API Key configurada (primeiros 10 chars):', trimmedKey.substring(0, 10) + '...')
-        console.log('✅ Comprimento da chave:', trimmedKey.length, 'caracteres')
-      }
-    } else {
-      console.warn('⚠️ API Key não encontrada. O chatbot usará respostas pré-programadas.')
-      console.warn('📝 Para ativar a IA:')
-      console.warn('   1. Crie o arquivo WebDesignPortfolio/.env')
-      console.warn('   2. Adicione: VITE_GEMINI_API_KEY=sua_chave_aqui')
-      console.warn('   3. Obtenha uma chave gratuita em: https://makersuite.google.com/app/apikey')
-      console.warn('   4. Reinicie o servidor (npm run dev)')
-    }
-  }, [])
+  const cvHref = `${import.meta.env.BASE_URL}curriculo/${encodeURIComponent(CV_FILENAME)}`
 
   const greetings = {
     pt: ['Olá! Como posso ajudar?', 'Oi! Em que posso ajudar?', 'Olá! Precisa de algo?'],
@@ -45,151 +22,199 @@ const Chatbot = () => {
   }
 
   const quickReplies = {
-    pt: ['Contato', 'LinkedIn', 'GitHub', 'Projetos', 'Habilidades'],
-    en: ['Contact', 'LinkedIn', 'GitHub', 'Projects', 'Skills'],
-    es: ['Contacto', 'LinkedIn', 'GitHub', 'Proyectos', 'Habilidades']
+    pt: ['Contato', 'Currículo', 'LinkedIn', 'GitHub', 'Projetos'],
+    en: ['Contact', 'Résumé', 'LinkedIn', 'GitHub', 'Projects'],
+    es: ['Contacto', 'CV', 'LinkedIn', 'GitHub', 'Proyectos']
   }
 
   const responses = {
     pt: {
-      'contato': {
-        text: 'Você pode entrar em contato através de:',
+      contato: {
+        text: `Aqui estão os dados para falar com ${PROFILE.shortName}:
+
+📧 Email: ${PROFILE.email}
+📱 Telefone/WhatsApp: ${PROFILE.phoneDisplayPt}`,
         links: [
-          { label: '📧 Email', url: 'mailto:matheuspereira6464@gmail.com' },
-          { label: '📱 Telefone', url: 'tel:+5592992138870' },
-          { label: '📍 Localização', text: 'Manaus, Amazonas - Brasil' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayPt}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github }
         ]
       },
-      'linkedin': {
-        text: 'Conecte-se comigo no LinkedIn:',
+      cv: {
+        text: 'Podes baixar o currículo em PDF pelo link abaixo ou pelo botão “Baixar CV” na secção Contacto.',
+        links: [{ label: '📄 Baixar CV (PDF)', url: cvHref }]
+      },
+      linkedin: {
+        text: 'Perfil profissional no LinkedIn:',
+        links: [{ label: '🔗 LinkedIn — Matheus Pereira', url: PROFILE.linkedin }]
+      },
+      github: {
+        text: 'Repositórios e projetos no GitHub:',
+        links: [{ label: '🔗 GitHub — MatheusPereira64', url: PROFILE.github }]
+      },
+      portfolio: {
+        text: 'Este site é o portfólio online:',
+        links: [{ label: '🌐 Ver portfólio', url: PROFILE.portfolioUrl }]
+      },
+      projetos: {
+        text: 'Os projetos estão na secção “Projetos” deste site — faz scroll até lá ou usa o menu.',
+        links: [{ label: '🌐 Abrir portfólio', url: '#teams' }]
+      },
+      habilidades: {
+        text: 'Stack principal: React, Node.js, JavaScript, Python e desenvolvimento Full Stack. Mais detalhes na secção “Habilidades”.',
+        links: [{ label: '🌐 Secção Habilidades', url: `${PROFILE.portfolioUrl}#skills` }]
+      },
+      sobre: {
+        text: `${PROFILE.fullName} — desenvolvedor Full Stack (ADS no ITEGAM). Mais na secção “Sobre mim”.`,
         links: [
-          { label: '🔗 LinkedIn', url: 'https://www.linkedin.com/in/matheus-pereira-836033243/' }
+          { label: '🌐 Sobre mim', url: `${PROFILE.portfolioUrl}#about` },
+          { label: `📧 ${PROFILE.email}`, plain: true }
         ]
       },
-      'github': {
-        text: 'Veja meus projetos no GitHub:',
+      default: {
+        text: `Sou ${PROFILE.fullName}.
+
+📧 ${PROFILE.email}
+📱 ${PROFILE.phoneDisplayPt}
+
+Posso também indicar LinkedIn, GitHub ou o currículo em PDF — usa um botão ou escreve “contato”, “currículo”, etc.`,
         links: [
-          { label: '🔗 GitHub', url: 'https://github.com/MatheusPereira64' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayPt}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github },
+          { label: '📄 Baixar CV', url: cvHref }
         ]
-      },
-      'projetos': {
-        text: 'Você pode ver meus projetos na seção "Projetos" do portfólio. Lá você encontrará exemplos do meu trabalho.',
-        links: []
-      },
-      'habilidades': {
-        text: 'Minhas principais habilidades incluem React, Node.js, JavaScript, Python e outras tecnologias modernas. Veja mais na seção "Habilidades".',
-        links: []
-      },
-      'sobre': {
-        text: 'Sou desenvolvedor Full Stack com formação em Análise e Desenvolvimento de Sistemas. Veja mais na seção "Sobre mim".',
-        links: []
-      },
-      'default': {
-        text: 'Desculpe, não entendi. Você pode escolher uma das opções abaixo ou perguntar sobre contato, projetos, habilidades ou sobre mim.',
-        links: []
       }
     },
     en: {
-      'contact': {
-        text: 'You can contact me through:',
+      contact: {
+        text: `Here is how to reach ${PROFILE.shortName}:
+
+📧 Email: ${PROFILE.email}
+📱 Phone/WhatsApp: ${PROFILE.phoneDisplayEn}`,
         links: [
-          { label: '📧 Email', url: 'mailto:matheuspereira6464@gmail.com' },
-          { label: '📱 Phone', url: 'tel:+5592992138870' },
-          { label: '📍 Location', text: 'Manaus, Amazonas - Brazil' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayEn}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github }
         ]
       },
-      'linkedin': {
-        text: 'Connect with me on LinkedIn:',
+      cv: {
+        text: 'You can download the résumé as PDF below, or use the “Download CV” button in the Contact section.',
+        links: [{ label: '📄 Download CV (PDF)', url: cvHref }]
+      },
+      linkedin: {
+        text: 'Professional profile on LinkedIn:',
+        links: [{ label: '🔗 LinkedIn — Matheus Pereira', url: PROFILE.linkedin }]
+      },
+      github: {
+        text: 'Repositories on GitHub:',
+        links: [{ label: '🔗 GitHub — MatheusPereira64', url: PROFILE.github }]
+      },
+      portfolio: {
+        text: 'Live portfolio:',
+        links: [{ label: '🌐 Open portfolio', url: PROFILE.portfolioUrl }]
+      },
+      projects: {
+        text: 'Projects are in the “Projects” section — scroll there or use the navigation.',
+        links: [{ label: '🌐 Projects on site', url: '#teams' }]
+      },
+      skills: {
+        text: 'Main stack: React, Node.js, JavaScript, Python, Full Stack. See the “Skills” section for more.',
+        links: [{ label: '🌐 Skills section', url: `${PROFILE.portfolioUrl}#skills` }]
+      },
+      about: {
+        text: `${PROFILE.fullName} — Full Stack developer (Systems Analysis & Development). More in “About me”.`,
         links: [
-          { label: '🔗 LinkedIn', url: 'https://www.linkedin.com/in/matheus-pereira-836033243/' }
+          { label: '🌐 About me', url: `${PROFILE.portfolioUrl}#about` },
+          { label: `📧 ${PROFILE.email}`, plain: true }
         ]
       },
-      'github': {
-        text: 'See my projects on GitHub:',
+      default: {
+        text: `I'm ${PROFILE.fullName}.
+
+📧 ${PROFILE.email}
+📱 ${PROFILE.phoneDisplayEn}
+
+You can also ask for LinkedIn, GitHub or my résumé — or use a quick reply.`,
         links: [
-          { label: '🔗 GitHub', url: 'https://github.com/MatheusPereira64' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayEn}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github },
+          { label: '📄 Download CV', url: cvHref }
         ]
-      },
-      'projects': {
-        text: 'You can see my projects in the "Projects" section of the portfolio. There you will find examples of my work.',
-        links: []
-      },
-      'skills': {
-        text: 'My main skills include React, Node.js, JavaScript, Python and other modern technologies. See more in the "Skills" section.',
-        links: []
-      },
-      'about': {
-        text: 'I am a Full Stack Developer with a degree in Systems Analysis and Development. See more in the "About me" section.',
-        links: []
-      },
-      'default': {
-        text: 'Sorry, I did not understand. You can choose one of the options below or ask about contact, projects, skills or about me.',
-        links: []
       }
     },
     es: {
-      'contacto': {
-        text: 'Puedes contactarme a través de:',
+      contacto: {
+        text: `Datos para contactar a ${PROFILE.shortName}:
+
+📧 Correo: ${PROFILE.email}
+📱 Teléfono/WhatsApp: ${PROFILE.phoneDisplayPt}`,
         links: [
-          { label: '📧 Correo', url: 'mailto:matheuspereira6464@gmail.com' },
-          { label: '📱 Teléfono', url: 'tel:+5592992138870' },
-          { label: '📍 Ubicación', text: 'Manaus, Amazonas - Brasil' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayPt}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github }
         ]
       },
-      'linkedin': {
-        text: 'Conéctate conmigo en LinkedIn:',
+      cv: {
+        text: 'Puedes descargar el currículum en PDF aquí o con el botón “Descargar CV” en Contacto.',
+        links: [{ label: '📄 Descargar CV (PDF)', url: cvHref }]
+      },
+      linkedin: {
+        text: 'Perfil en LinkedIn:',
+        links: [{ label: '🔗 LinkedIn — Matheus Pereira', url: PROFILE.linkedin }]
+      },
+      github: {
+        text: 'Proyectos en GitHub:',
+        links: [{ label: '🔗 GitHub — MatheusPereira64', url: PROFILE.github }]
+      },
+      portfolio: {
+        text: 'Portafolio en línea:',
+        links: [{ label: '🌐 Ver portafolio', url: PROFILE.portfolioUrl }]
+      },
+      proyectos: {
+        text: 'Los proyectos están en la sección “Proyectos” de esta página.',
+        links: [{ label: '🌐 Abrir portafolio', url: '#teams' }]
+      },
+      habilidades: {
+        text: 'Stack: React, Node.js, JavaScript, Python, Full Stack. Más en “Habilidades”.',
+        links: [{ label: '🌐 Sección Habilidades', url: `${PROFILE.portfolioUrl}#skills` }]
+      },
+      sobre: {
+        text: `${PROFILE.fullName} — desarrollador Full Stack. Más en “Sobre mí”.`,
         links: [
-          { label: '🔗 LinkedIn', url: 'https://www.linkedin.com/in/matheus-pereira-836033243/' }
+          { label: '🌐 Sobre mí', url: `${PROFILE.portfolioUrl}#about` },
+          { label: `📧 ${PROFILE.email}`, plain: true }
         ]
       },
-      'github': {
-        text: 'Ve mis proyectos en GitHub:',
+      default: {
+        text: `Soy ${PROFILE.fullName}.
+
+📧 ${PROFILE.email}
+📱 ${PROFILE.phoneDisplayPt}
+
+También puedo indicarte LinkedIn, GitHub o el CV en PDF.`,
         links: [
-          { label: '🔗 GitHub', url: 'https://github.com/MatheusPereira64' }
+          { label: `📧 ${PROFILE.email}`, plain: true },
+          { label: `📱 ${PROFILE.phoneDisplayPt}`, plain: true },
+          { label: '🔗 LinkedIn', url: PROFILE.linkedin },
+          { label: '🔗 GitHub', url: PROFILE.github },
+          { label: '📄 Descargar CV', url: cvHref }
         ]
-      },
-      'proyectos': {
-        text: 'Puedes ver mis proyectos en la sección "Proyectos" del portafolio. Allí encontrarás ejemplos de mi trabajo.',
-        links: []
-      },
-      'habilidades': {
-        text: 'Mis principales habilidades incluyen React, Node.js, JavaScript, Python y otras tecnologías modernas. Ver más en la sección "Habilidades".',
-        links: []
-      },
-      'sobre': {
-        text: 'Soy desarrollador Full Stack con formación en Análisis y Desarrollo de Sistemas. Ver más en la sección "Sobre mí".',
-        links: []
-      },
-      'default': {
-        text: 'Lo siento, no entendí. Puedes elegir una de las opciones a continuación o preguntar sobre contacto, proyectos, habilidades o sobre mí.',
-        links: []
       }
     }
   }
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ''
-      const trimmedKey = apiKey.trim()
-      const hasValidKey = trimmedKey && trimmedKey !== '' && trimmedKey !== 'sua_chave_aqui' && trimmedKey.startsWith('AIza')
-      
-      const greeting = greetings[language][Math.floor(Math.random() * greetings[language].length)]
-      
-      // Adicionar aviso se a API key não estiver configurada
-      if (!hasValidKey) {
-        const warningMsg = language === 'pt' 
-          ? '⚠️ A API do Google Gemini não está configurada. O chatbot está usando respostas pré-programadas. Configure VITE_GEMINI_API_KEY no arquivo .env para ativar a IA.'
-          : language === 'es'
-          ? '⚠️ La API de Google Gemini no está configurada. El chatbot está usando respuestas preprogramadas. Configure VITE_GEMINI_API_KEY en el archivo .env para activar la IA.'
-          : '⚠️ Google Gemini API is not configured. The chatbot is using pre-programmed responses. Configure VITE_GEMINI_API_KEY in the .env file to enable AI.'
-        
-        setMessages([
-          { type: 'bot', text: greeting },
-          { type: 'bot', text: warningMsg }
-        ])
-      } else {
-        setMessages([{ type: 'bot', text: greeting }])
-      }
+      const greeting =
+        greetings[language][Math.floor(Math.random() * greetings[language].length)]
+      setMessages([{ type: 'bot', text: greeting }])
     }
   }, [isOpen, language])
 
@@ -243,12 +268,11 @@ const Chatbot = () => {
       const context = language === 'pt' 
         ? `Você é um assistente virtual do portfólio de Matheus Pereira, um desenvolvedor Full Stack. 
         Informações importantes:
-        - Nome: Matheus Pereira de Souza
-        - Email: matheuspereira6464@gmail.com
-        - Telefone: +55 (92) 99213-8870
-        - Localização: Manaus, Amazonas - Brasil
-        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-        - GitHub: https://github.com/MatheusPereira64
+        - Nome: ${PROFILE.fullName}
+        - Email: ${PROFILE.email}
+        - Telefone (DDI): ${PROFILE.phoneDigits} (${PROFILE.phoneDisplayPt})
+        - LinkedIn: ${PROFILE.linkedin}
+        - GitHub: ${PROFILE.github}
         - Habilidades: React, Node.js, JavaScript, Python, Full Stack Development
         - Formação: Análise e Desenvolvimento de Sistemas no ITEGAM
         
@@ -256,24 +280,22 @@ const Chatbot = () => {
         : language === 'es'
         ? `Eres un asistente virtual del portafolio de Matheus Pereira, un desarrollador Full Stack.
         Información importante:
-        - Nombre: Matheus Pereira de Souza
-        - Email: matheuspereira6464@gmail.com
-        - Teléfono: +55 (92) 99213-8870
-        - Ubicación: Manaus, Amazonas - Brasil
-        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-        - GitHub: https://github.com/MatheusPereira64
+        - Nombre: ${PROFILE.fullName}
+        - Email: ${PROFILE.email}
+        - Teléfono (DDI): ${PROFILE.phoneDigits} (${PROFILE.phoneDisplayPt})
+        - LinkedIn: ${PROFILE.linkedin}
+        - GitHub: ${PROFILE.github}
         - Habilidades: React, Node.js, JavaScript, Python, Desarrollo Full Stack
         - Formación: Análisis y Desarrollo de Sistemas en ITEGAM
         
         Sé amigable, profesional y responde de forma concisa. Cuando pregunten sobre contacto, LinkedIn o GitHub, proporciona los enlaces directamente.`
         : `You are a virtual assistant for Matheus Pereira's portfolio, a Full Stack Developer.
         Important information:
-        - Name: Matheus Pereira de Souza
-        - Email: matheuspereira6464@gmail.com
-        - Phone: +55 (92) 99213-8870
-        - Location: Manaus, Amazonas - Brazil
-        - LinkedIn: https://www.linkedin.com/in/matheus-pereira-836033243/
-        - GitHub: https://github.com/MatheusPereira64
+        - Name: ${PROFILE.fullName}
+        - Email: ${PROFILE.email}
+        - Phone (country code): ${PROFILE.phoneDigits} (${PROFILE.phoneDisplayEn})
+        - LinkedIn: ${PROFILE.linkedin}
+        - GitHub: ${PROFILE.github}
         - Skills: React, Node.js, JavaScript, Python, Full Stack Development
         - Education: Systems Analysis and Development at ITEGAM
         
@@ -446,19 +468,68 @@ const Chatbot = () => {
   // Função de fallback (respostas pré-programadas)
   const getFallbackResponse = (messageText) => {
     const lowerInput = messageText.toLowerCase()
+    const ascii = lowerInput.normalize('NFD').replace(/\p{M}/gu, '')
     let responseKey = 'default'
 
-    if (lowerInput.includes('contato') || lowerInput.includes('contact') || lowerInput.includes('contacto') || lowerInput.includes('email') || lowerInput.includes('telefone') || lowerInput.includes('phone')) {
+    if (
+      lowerInput.includes('contato') ||
+      lowerInput.includes('contact') ||
+      lowerInput.includes('contacto') ||
+      lowerInput.includes('email') ||
+      lowerInput.includes('correo') ||
+      lowerInput.includes('telefone') ||
+      lowerInput.includes('phone') ||
+      lowerInput.includes('teléfono') ||
+      lowerInput.includes('telefono')
+    ) {
       responseKey = language === 'pt' ? 'contato' : language === 'es' ? 'contacto' : 'contact'
+    } else if (
+      lowerInput.includes('currículo') ||
+      lowerInput.includes('curriculo') ||
+      lowerInput.includes('curriculum') ||
+      ascii.includes('resume') ||
+      lowerInput.includes('résumé') ||
+      lowerInput.includes('cv') ||
+      lowerInput === 'cv'
+    ) {
+      responseKey = 'cv'
     } else if (lowerInput.includes('linkedin')) {
       responseKey = 'linkedin'
     } else if (lowerInput.includes('github') || lowerInput.includes('git')) {
       responseKey = 'github'
-    } else if (lowerInput.includes('projeto') || lowerInput.includes('project') || lowerInput.includes('proyecto') || lowerInput.includes('trabalho') || lowerInput.includes('work')) {
+    } else if (
+      lowerInput.includes('portfólio') ||
+      lowerInput.includes('portfolio') ||
+      lowerInput.includes('portafolio') ||
+      lowerInput.includes('website') ||
+      lowerInput.includes('página') ||
+      lowerInput.includes('pagina') ||
+      lowerInput.includes('site')
+    ) {
+      responseKey = 'portfolio'
+    } else if (
+      lowerInput.includes('projeto') ||
+      lowerInput.includes('project') ||
+      lowerInput.includes('proyecto') ||
+      lowerInput.includes('trabalho') ||
+      lowerInput.includes('work')
+    ) {
       responseKey = language === 'pt' ? 'projetos' : language === 'es' ? 'proyectos' : 'projects'
-    } else if (lowerInput.includes('habilidade') || lowerInput.includes('skill') || lowerInput.includes('tecnologia') || lowerInput.includes('technology') || lowerInput.includes('tecnología')) {
+    } else if (
+      lowerInput.includes('habilidade') ||
+      lowerInput.includes('skill') ||
+      lowerInput.includes('tecnologia') ||
+      lowerInput.includes('technology') ||
+      lowerInput.includes('tecnología') ||
+      lowerInput.includes('stack')
+    ) {
       responseKey = language === 'pt' ? 'habilidades' : language === 'es' ? 'habilidades' : 'skills'
-    } else if (lowerInput.includes('sobre') || lowerInput.includes('about') || lowerInput.includes('quem') || lowerInput.includes('who')) {
+    } else if (
+      lowerInput.includes('sobre') ||
+      lowerInput.includes('about') ||
+      lowerInput.includes('quem') ||
+      lowerInput.includes('who')
+    ) {
       responseKey = language === 'pt' ? 'sobre' : language === 'es' ? 'sobre' : 'about'
     }
 
@@ -552,11 +623,15 @@ const Chatbot = () => {
                   {msg.text}
                   {msg.links && msg.links.length > 0 && (
                     <div className="message-links">
-                      {msg.links.map((link, linkIndex) => (
-                        link.url ? (
-                          <a 
-                            key={linkIndex} 
-                            href={link.url} 
+                      {msg.links.map((link, linkIndex) =>
+                        link.plain ? (
+                          <span key={linkIndex} className="message-chip message-chip--static">
+                            {link.label}
+                          </span>
+                        ) : link.url ? (
+                          <a
+                            key={linkIndex}
+                            href={link.url}
                             target={link.url.startsWith('http') ? '_blank' : undefined}
                             rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
                             className="message-link"
@@ -564,9 +639,11 @@ const Chatbot = () => {
                             {link.label}
                           </a>
                         ) : (
-                          <span key={linkIndex} className="message-link-text">{link.label}: {link.text}</span>
+                          <span key={linkIndex} className="message-link-text">
+                            {link.text ? `${link.label}: ${link.text}` : link.label}
+                          </span>
                         )
-                      ))}
+                      )}
                     </div>
                   )}
                 </div>
@@ -583,7 +660,7 @@ const Chatbot = () => {
                 </div>
               </div>
             )}
-            {messages.length === 1 && messages[0].type === 'bot' && !isLoading && (
+            {!isLoading && messages.length > 0 && messages.every((m) => m.type === 'bot') && (
               <div className="quick-replies">
                 {quickReplies[language].map((reply, index) => (
                   <button

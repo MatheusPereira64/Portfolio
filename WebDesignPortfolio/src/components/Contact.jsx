@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import emailjs from '@emailjs/browser'
 import './Contact.css'
+import { CV_FILENAME } from '../constants/siteProfile'
 
 const Contact = () => {
   const { translations, language } = useLanguage()
@@ -98,16 +99,14 @@ const Contact = () => {
   }
 
   const handleDownloadCV = () => {
-    // Link para o CV (você precisará adicionar o arquivo PDF na pasta public)
-    const cvLinks = {
-      pt: '/cv-matheus-pereira-pt.pdf',
-      en: '/cv-matheus-pereira-en.pdf',
-      es: '/cv-matheus-pereira-es.pdf'
-    }
+    const url = `${import.meta.env.BASE_URL}curriculo/${encodeURIComponent(CV_FILENAME)}`
     const link = document.createElement('a')
-    link.href = cvLinks[language] || cvLinks.pt
-    link.download = `CV-Matheus-Pereira-${language.toUpperCase()}.pdf`
+    link.href = url
+    link.download = CV_FILENAME
+    link.rel = 'noopener noreferrer'
+    document.body.appendChild(link)
     link.click()
+    document.body.removeChild(link)
   }
 
   return (
