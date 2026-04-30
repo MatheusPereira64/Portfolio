@@ -10,12 +10,13 @@
     "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "@google/generative-ai": "^0.21.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typed.js": "^2.0.16",
-    "@emailjs/browser": "^3.11.0",
     "react-intersection-observer": "^9.5.3",
-    "@google/generative-ai": "^0.21.0"
+    "typed.js": "^2.0.16"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
@@ -25,4 +26,3 @@
     "vite": "^5.0.8"
   }
 }
-

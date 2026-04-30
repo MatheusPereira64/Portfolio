@@ -193,6 +193,11 @@ Para garantir que a versão React seja exibida, você **DEVE** configurar o GitH
 
 > 💡 **Dica**: Se você ainda ver a versão HTML antiga após configurar, limpe o cache do navegador (Ctrl+Shift+R ou Cmd+Shift+R) ou use o modo anônimo.
 
+### Erro `MIME type "text/jsx"` ou ícones / CDN bloqueados
+
+- **URL incorreta**: `https://matheuspereira64.github.io/Portfolio/WebDesignPortfolio/` aponta para os **arquivos-fonte** da pasta `WebDesignPortfolio/` no repositório. O GitHub Pages só envia esses ficheiros como estáticos; o navegador **não** executa JSX. A versão publicada deve ser o **`npm run build`**, servida a partir da pasta **`/dist`** (ou da branch gerada pelo `gh-pages`). Use **`https://matheuspereira64.github.io/Portfolio/`** (raiz do site), não o caminho da pasta do código.
+- **Tracking Prevention no CDN**: Font Awesome passou a ser incluído via pacote npm (`@fortawesome/fontawesome-free`), para não depender do Cloudflare/cdnjs no ambiente de produção.
+
 ### Configuração do Vite
 
 O arquivo `vite.config.js` está configurado com:
