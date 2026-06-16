@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
+import { SITE_PROFILE } from '../constants/siteProfile'
 import './Navbar.css'
 
 const Navbar = () => {
@@ -60,7 +61,7 @@ const Navbar = () => {
     <nav className={`navbar ${isSticky ? 'sticky' : ''}`}>
       <div className="max-width">
         <div className="logo">
-          <a href="https://www.linkedin.com/in/matheus-pereira-836033243/" target="_blank" rel="noopener noreferrer">
+          <a href={SITE_PROFILE.linkedin} target="_blank" rel="noopener noreferrer">
             <span>Portfolio</span>
           </a>
         </div>

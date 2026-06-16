@@ -12,6 +12,9 @@ dist
 dist-ssr
 # `docs/` é o build de produção para GitHub Pages (pasta /docs); mantém versionado após `npm run build`
 *.local
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*

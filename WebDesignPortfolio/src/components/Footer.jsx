@@ -1,4 +1,5 @@
 import { useLanguage } from '../context/LanguageContext'
+import { SITE_PROFILE } from '../constants/siteProfile'
 import './Footer.css'
 
 const Footer = () => {
@@ -77,7 +78,7 @@ const Footer = () => {
           <div className="footer-section">
             <h3>{language === 'pt' ? 'Conecte-se' : 'Connect'}</h3>
             <div className="socials">
-              <a href="https://www.linkedin.com/in/matheus-pereira-836033243/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href={SITE_PROFILE.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i className="fab fa-linkedin"></i>
               </a>
               <a href="https://github.com/MatheusPereira64" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

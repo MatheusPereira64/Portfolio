@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import emailjs from '@emailjs/browser'
 import './Contact.css'
-import { CV_FILENAME } from '../constants/siteProfile'
+import { CV_FILENAME, SITE_PROFILE } from '../constants/siteProfile'
+import { isEmailJsConfigured, sendContactEmail } from '../utils/sendContactEmail'
 
 const Contact = () => {
   const { translations, language } = useLanguage()
@@ -57,26 +57,7 @@ const Contact = () => {
     setSubmitStatus(null)
 
     try {
-      // Configurar EmailJS (você precisará criar uma conta em emailjs.com e obter as credenciais)
-      // Por enquanto, vamos usar um fallback para mailto
-      const serviceId = 'YOUR_SERVICE_ID'
-      const templateId = 'YOUR_TEMPLATE_ID'
-      const publicKey = 'YOUR_PUBLIC_KEY'
-
-      // Se EmailJS estiver configurado, use-o
-      if (serviceId !== 'YOUR_SERVICE_ID') {
-        await emailjs.send(serviceId, templateId, {
-          from_name: formData.from_name,
-          from_email: formData.from_email,
-          subject: formData.subject,
-          message: formData.message,
-        }, publicKey)
-      } else {
-        // Fallback para mailto
-        const emailBody = `${formData.message}\n\n---\nInformações do contato:\nNome: ${formData.from_name}\nEmail: ${formData.from_email}\n\nEnviado através do portfolio: https://matheuspereira64.github.io/Portfolio/`
-        const mailtoLink = `mailto:matheuspereira6464@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(emailBody)}`
-        window.location.href = mailtoLink
-      }
+      const { method } = await sendContactEmail(formData)
 
       setFormData({
         from_name: '',
@@ -85,7 +66,7 @@ const Contact = () => {
         message: ''
       })
       setErrors({})
-      setSubmitStatus('success')
+      setSubmitStatus(method === 'emailjs' ? 'success' : 'mailto')
       
       setTimeout(() => {
         setSubmitStatus(null)
@@ -151,21 +132,29 @@ const Contact = () => {
                 <i className="fas fa-envelope"></i>
                 <div className="info">
                   <div className="head">Email</div>
-                  <div className="sub-title">matheuspereira6464@gmail.com</div>
+                  <div className="sub-title">{SITE_PROFILE.email}</div>
                 </div>
               </div>
               <div className="row">
                 <i className="fab fa-linkedin"></i>
                 <div className="info">
                   <div className="head">LinkedIn</div>
-                  <div className="sub-title">https://www.linkedin.com/in/matheus-pereira-836033243</div>
+                  <div className="sub-title">{SITE_PROFILE.linkedin.replace(/^https:\/\//, '')}</div>
                 </div>
               </div>
             </div>
           </div>
           <div className="column right">
             <div className="text">{t.contact.formTitle}</div>
-            <p className="form-instruction">{t.contact.formInstruction}</p>
+            <p className="form-instruction">
+              {isEmailJsConfigured()
+                ? (language === 'pt'
+                  ? 'Preencha o formulário abaixo. A mensagem será enviada diretamente para o meu email.'
+                  : language === 'es'
+                  ? 'Completa el formulario. El mensaje se enviará directamente a mi correo.'
+                  : 'Fill in the form below. Your message will be sent directly to my email.')
+                : t.contact.formInstruction}
+            </p>
             <form onSubmit={handleSubmit}>
               <div className="fields">
                 <div className="field name">
@@ -222,6 +211,16 @@ const Contact = () => {
                     : language === 'es'
                     ? '¡Mensaje enviado con éxito!'
                     : 'Message sent successfully!'}
+                </div>
+              )}
+              {submitStatus === 'mailto' && (
+                <div className="form-message success">
+                  <i className="fas fa-check-circle"></i>
+                  {language === 'pt'
+                    ? 'O seu cliente de email foi aberto. Confirme o envio para concluir.'
+                    : language === 'es'
+                    ? 'Se abrió tu cliente de correo. Confirma el envío para completar.'
+                    : 'Your email client was opened. Confirm sending to complete.'}
                 </div>
               )}
               {submitStatus === 'error' && (

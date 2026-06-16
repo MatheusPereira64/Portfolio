@@ -12,11 +12,13 @@ export const useLanguage = () => {
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('selectedLanguage') || 'pt'
+    return localStorage.getItem('selectedLanguage') || 'en'
   })
 
   useEffect(() => {
     localStorage.setItem('selectedLanguage', language)
+    const htmlLang = language === 'pt' ? 'pt-BR' : language
+    document.documentElement.lang = htmlLang
   }, [language])
 
   const translations = {

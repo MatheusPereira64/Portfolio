@@ -88,14 +88,21 @@ cd Portfolio
 npm install
 ```
 
-3. **Configure a API Key do Google Gemini (Opcional - para chatbot com IA)**
-```bash
-# Copie o arquivo de exemplo
-cp WebDesignPortfolio/.env.example WebDesignPortfolio/.env
+3. **Configure variáveis de ambiente** (copie `WebDesignPortfolio/.env.example` → `WebDesignPortfolio/.env`)
 
-# Edite o arquivo .env e adicione sua API Key
-# Obtenha uma chave gratuita em: https://makersuite.google.com/app/apikey
+**Chatbot com IA (opcional):** `VITE_GEMINI_API_KEY` — [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+**Formulário de contacto → `matheuspereira6464@gmail.com` (recomendado):** [EmailJS](https://www.emailjs.com/) — crie Service + Template com campos `from_name`, `from_email`, `reply_to`, `subject`, `message` e destinatário **To** = seu Gmail. Preencha no `.env`:
+
+```env
+VITE_EMAILJS_SERVICE_ID=...
+VITE_EMAILJS_TEMPLATE_ID=...
+VITE_EMAILJS_PUBLIC_KEY=...
 ```
+
+Sem EmailJS, o formulário abre o **mailto** no browser do visitante (menos fiável).
+
+Para **GitHub Pages via Actions**, adicione os mesmos nomes em **Settings → Secrets and variables → Actions**.
 
 4. **Execute o projeto em modo desenvolvimento**
 ```bash
@@ -151,7 +158,7 @@ Portfolio/
 - **📱 Responsivo**: Adaptável a todos os dispositivos (desktop, tablet, mobile)
 - **🌐 Multilíngue**: Suporte para Português, Inglês e Espanhol com Context API
 - **✨ Animações Suaves**: Transições e efeitos hover elegantes
-- **📧 Formulário de Contato**: Sistema de contato via mailto
+- **📧 Formulário de Contato**: Envio via EmailJS para o email do portfólio (fallback mailto)
 - **⚡ Performance**: Build otimizado com Vite
 - **🔧 Componentização**: Código organizado em componentes reutilizáveis
 
@@ -211,7 +218,7 @@ O arquivo `vite.config.js` está configurado com:
 ## 📧 **Contato**
 
 - **Email**: matheuspereira6464@gmail.com
-- **LinkedIn**: [Matheus Pereira](https://www.linkedin.com/in/matheus-pereira-836033243/)
+- **LinkedIn**: [Matheus Pereira](https://www.linkedin.com/in/matheus-pereira64/)
 - **Telefone**: +55 (92) 99213-8870
 
 ## 📄 **Licença**

@@ -9,9 +9,9 @@ export const SITE_PROFILE = {
   phoneDisplayEn: '+55 (92) 99213-8870',
   /** valor para href tel: */
   phoneTel: '+5592992138870',
-  linkedin: 'https://www.linkedin.com/in/matheus-pereira-836033243/',
+  linkedin: 'https://www.linkedin.com/in/matheus-pereira64/',
   github: 'https://github.com/MatheusPereira64',
   portfolioUrl: 'https://matheuspereira64.github.io/Portfolio/',
 }
 
-export const CV_FILENAME = 'Currículo Matheus Pereira - Janeiro 2026.pdf'
+export const CV_FILENAME = 'CV - Matheus Pereira - 2026 - English.pdf'
