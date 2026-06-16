@@ -6,7 +6,6 @@
   font-family: 'Ubuntu', sans-serif;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
   background: rgba(0, 0, 0, 0.25);
-  isolation: isolate;
 }
 
 .navbar::before {
@@ -299,12 +298,15 @@
 }
 
 @media (max-width: 947px) {
+  .navbar {
+    z-index: 10002;
+  }
+
   .menu-desktop {
     display: none !important;
   }
 
   .navbar.menu-open {
-    z-index: 10002;
     background: rgba(17, 17, 17, 0.98);
   }
 
@@ -321,10 +323,18 @@
     color: #fff !important;
   }
 
-  .navbar.menu-open .menu-btn {
-    z-index: 10003;
-    color: #fff !important;
+  .navbar .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    z-index: 10003;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .navbar.menu-open .menu-btn {
+    color: #fff !important;
   }
 
   .menu-backdrop {
@@ -348,31 +358,18 @@
     pointer-events: auto;
   }
 
-  .menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 10001;
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .menu-mobile {
+  .menu-mobile.active {
     display: flex;
     position: fixed;
     inset: 0 auto 0 auto;
     width: min(320px, 88vw);
     max-width: 88vw;
-    height: 100vh;
     height: 100dvh;
     right: 0;
     top: 0;
     background: #111;
     text-align: center;
     padding: 88px 20px 32px;
-    transition: transform 0.3s ease, visibility 0.3s ease;
-    transform: translateX(100%);
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
@@ -380,21 +377,19 @@
     overflow-y: auto;
     z-index: 9999;
     gap: 0;
-    visibility: hidden;
-    pointer-events: none;
     box-shadow: -8px 0 30px rgba(0, 0, 0, 0.35);
     list-style: none;
     margin: 0;
+    animation: menu-slide-in 0.3s ease;
   }
 
-  [data-theme="dark"] .menu-mobile {
+  @keyframes menu-slide-in {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+
+  [data-theme="dark"] .menu-mobile.active {
     background: #1a1a1a;
-  }
-
-  .menu-mobile.active {
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
   }
 
   .menu-mobile li {
@@ -429,6 +424,7 @@
     background: rgba(255, 255, 255, 0.12);
     border-color: rgba(255, 255, 255, 0.35);
     color: #fff;
+    backdrop-filter: none;
   }
 
   .menu-mobile .language-dropdown {

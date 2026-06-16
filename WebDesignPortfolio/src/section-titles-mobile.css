@@ -1,8 +1,8 @@
 /**
- * Subtítulos das secções (title::after) — layout mobile.
- * Importado por último para sobrepor posicionamento absoluto dos componentes.
+ * Subtítulos das secções (title::after) — layout mobile/tablet.
+ * Importado por último; breakpoint alinhado ao menu mobile (947px).
  */
-@media (max-width: 768px) {
+@media (max-width: 947px) {
   section .title {
     display: flex;
     flex-direction: column;
@@ -33,13 +33,13 @@
   .stats .title::after,
   section .title::after {
     order: 3;
-    position: relative;
-    left: auto;
-    bottom: auto;
-    transform: none;
+    position: relative !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
     margin-top: 0;
     max-width: min(100%, calc(100vw - 48px));
-    width: max-content;
+    width: auto;
     white-space: normal;
     text-align: center;
     line-height: 1.4;

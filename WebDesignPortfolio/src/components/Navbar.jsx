@@ -163,7 +163,7 @@ const Navbar = () => {
         onClick={closeMenu}
       />
       <ul
-        className={`menu menu-mobile ${isMenuOpen ? 'active' : ''}`}
+        className={`menu-mobile${isMenuOpen ? ' active' : ''}`}
         aria-hidden={!isMenuOpen}
       >
         {menuItems}

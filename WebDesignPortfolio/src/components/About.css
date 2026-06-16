@@ -1,13 +1,9 @@
 .about .title::after {
   content: "Quem eu sou ?";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
   font-size: 20px;
   color: #dc143c;
   padding: 0 5px;
   background: #fff;
-  transform: translateX(-50%);
 }
 
 .about[data-lang="en"] .title::after {
