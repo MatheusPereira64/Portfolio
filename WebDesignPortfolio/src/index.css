@@ -10,6 +10,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -19,6 +20,7 @@ body {
   background: #fff;
   color: #333;
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 body.theme-transition * {
@@ -141,6 +143,12 @@ section .title::after {
   padding: 0 5px;
   background: #fff;
   transform: translateX(-50%);
+  display: inline-block;
+  max-width: calc(100% - 16px);
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
 
 /* Card animations */
@@ -176,6 +184,19 @@ section .title::after {
 @media (max-width: 690px) {
   .max-width {
     padding: 0 23px;
+  }
+
+  section {
+    padding: 70px 0;
+  }
+
+  section .title {
+    font-size: 30px;
+    margin-bottom: 56px;
+  }
+
+  section .title::before {
+    width: 120px;
   }
 }
 

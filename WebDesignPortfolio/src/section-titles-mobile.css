@@ -1,0 +1,75 @@
+/**
+ * Subtítulos das secções (title::after) — layout mobile.
+ * Importado por último para sobrepor posicionamento absoluto dos componentes.
+ */
+@media (max-width: 768px) {
+  section .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 0;
+    margin-bottom: 56px;
+  }
+
+  section .title::before {
+    order: 2;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+
+  .about .title::after,
+  .contact .title::after,
+  .skills .title::after,
+  .experience .title::after,
+  .blog .title::after,
+  .services .title::after,
+  .teams .title::after,
+  .stats .title::after,
+  section .title::after {
+    order: 3;
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin-top: 0;
+    max-width: min(100%, calc(100vw - 48px));
+    width: max-content;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+    padding: 4px 12px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  section .title {
+    font-size: 26px;
+    margin-bottom: 48px;
+  }
+
+  section .title::before {
+    width: 100px;
+    margin-top: 12px;
+  }
+
+  .about .title::after,
+  .contact .title::after,
+  .skills .title::after,
+  .experience .title::after,
+  .blog .title::after,
+  .services .title::after,
+  .teams .title::after,
+  .stats .title::after,
+  section .title::after {
+    font-size: 13px;
+    padding: 4px 10px;
+    max-width: calc(100vw - 32px);
+  }
+}

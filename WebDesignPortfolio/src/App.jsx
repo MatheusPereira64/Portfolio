@@ -15,6 +15,7 @@ import Chatbot from './components/Chatbot'
 import { LanguageProvider } from './context/LanguageContext'
 import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
+import './section-titles-mobile.css'
 
 function App() {
   return (

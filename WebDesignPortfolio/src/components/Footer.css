@@ -151,3 +151,33 @@ footer::before {
   margin: 0;
 }
 
+@media (max-width: 690px) {
+  footer {
+    padding: 40px 0 20px;
+  }
+
+  .footer-content {
+    gap: 28px;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-menu li a:hover {
+    transform: none;
+  }
+
+  .tech-icons {
+    justify-content: center;
+  }
+
+  .socials {
+    justify-content: center;
+  }
+
+  .contact-info {
+    align-items: center;
+  }
+}
+

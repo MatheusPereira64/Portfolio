@@ -36,8 +36,14 @@
   background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
   content: "O que eu ofereço";
   color: #ffd700;
-  padding: 0 5px;
+  padding: 0 8px;
   transform: translateX(-50%);
+  display: inline-block;
+  max-width: calc(100% - 16px);
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
 
 .services[data-lang="en"] .title::after {

@@ -4,25 +4,38 @@
   z-index: 999;
   padding: 20px 0;
   font-family: 'Ubuntu', sans-serif;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+  background: rgba(0, 0, 0, 0.25);
+  isolation: isolate;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: none;
 }
 
 .navbar.sticky {
   padding: 15px 0;
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
 }
 
+.navbar.sticky::before {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
 [data-theme="dark"] .navbar {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="dark"] .navbar.sticky {
   background: rgba(26, 26, 26, 0.95);
-  backdrop-filter: blur(20px);
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
 }
 
@@ -263,6 +276,14 @@
   font-size: 23px;
   cursor: pointer;
   display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  line-height: 1;
+}
+
+.menu-backdrop {
+  display: none;
 }
 
 .navbar.sticky .menu-btn {
@@ -273,43 +294,144 @@
   color: #fff;
 }
 
+.menu-mobile {
+  display: none;
+}
+
 @media (max-width: 947px) {
-  .menu-btn {
-    display: block;
-    z-index: 999;
+  .menu-desktop {
+    display: none !important;
   }
 
-  .navbar .menu {
+  .navbar.menu-open {
+    z-index: 10002;
+    background: rgba(17, 17, 17, 0.98);
+  }
+
+  .navbar.menu-open::before {
+    display: none;
+  }
+
+  [data-theme="dark"] .navbar.menu-open {
+    background: rgba(26, 26, 26, 0.98);
+  }
+
+  .navbar.menu-open .logo a,
+  .navbar.menu-open .logo a span {
+    color: #fff !important;
+  }
+
+  .navbar.menu-open .menu-btn {
+    z-index: 10003;
+    color: #fff !important;
+    position: relative;
+  }
+
+  .menu-backdrop {
+    display: block;
     position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10001;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .menu-mobile {
+    display: flex;
+    position: fixed;
+    inset: 0 auto 0 auto;
+    width: min(320px, 88vw);
+    max-width: 88vw;
     height: 100vh;
-    width: 100%;
-    left: -100%;
+    height: 100dvh;
+    right: 0;
     top: 0;
     background: #111;
     text-align: center;
-    padding-top: 80px;
-    transition: all 0.3s ease;
+    padding: 88px 20px 32px;
+    transition: transform 0.3s ease, visibility 0.3s ease;
+    transform: translateX(100%);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 9999;
+    gap: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.35);
+    list-style: none;
+    margin: 0;
   }
 
-  [data-theme="dark"] .navbar .menu {
+  [data-theme="dark"] .menu-mobile {
     background: #1a1a1a;
   }
 
-  .navbar .menu.active {
-    left: 0;
+  .menu-mobile.active {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
   }
 
-  .navbar .menu li {
+  .menu-mobile li {
     display: block;
+    width: 100%;
+    max-width: none;
+    list-style: none;
   }
 
-  .navbar .menu li a {
-    display: inline-block;
-    margin: 20px 0;
-    font-size: 25px;
+  .menu-mobile li a {
+    display: block;
+    width: 100%;
+    margin: 4px 0;
+    margin-left: 0;
+    padding: 12px 16px;
+    font-size: 18px;
+    box-sizing: border-box;
+    color: #fff !important;
   }
 
-  .language-dropdown {
+  .menu-mobile .theme-toggle,
+  .menu-mobile .language-selector {
+    margin-left: 0;
+    margin-top: 12px;
+    width: 100%;
+    max-width: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-mobile .theme-button {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+  }
+
+  .menu-mobile .language-dropdown {
     right: auto;
     left: 50%;
     transform: translateX(-50%);

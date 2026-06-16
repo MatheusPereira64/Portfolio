@@ -149,10 +149,16 @@
 
 @media (max-width: 500px) {
   .home .home-content .text-2 {
-    font-size: 50px;
+    font-size: clamp(28px, 11vw, 50px);
+    word-break: break-word;
   }
   .home .home-content .text-3 {
-    font-size: 27px;
+    font-size: clamp(20px, 6.5vw, 27px);
+  }
+
+  .home-profile-ring {
+    width: 180px;
+    height: 180px;
   }
 }
 

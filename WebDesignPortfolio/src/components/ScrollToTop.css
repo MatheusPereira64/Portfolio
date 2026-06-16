@@ -31,12 +31,16 @@
 
 @media (max-width: 500px) {
   .scroll-up-btn {
-    right: 15px;
-    bottom: 15px;
-    height: 38px;
-    width: 35px;
-    font-size: 23px;
-    line-height: 38px;
+    right: max(15px, env(safe-area-inset-right, 0px));
+    bottom: max(15px, env(safe-area-inset-bottom, 0px));
+    height: 42px;
+    width: 42px;
+    font-size: 20px;
+    line-height: 42px;
+  }
+
+  .scroll-up-btn.show {
+    bottom: max(20px, env(safe-area-inset-bottom, 0px));
   }
 }
 

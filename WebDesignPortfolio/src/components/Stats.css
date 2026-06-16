@@ -3,7 +3,7 @@
   background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
   color: #fff;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .stats::before {
@@ -31,8 +31,14 @@
   background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
   content: "Números que falam";
   color: #ffd700;
-  padding: 0 5px;
+  padding: 0 8px;
   transform: translateX(-50%);
+  display: inline-block;
+  max-width: calc(100% - 16px);
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+  box-sizing: border-box;
 }
 
 .stats[data-lang="en"] .title::after {
@@ -120,15 +126,26 @@
 @media (max-width: 768px) {
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
+    margin-top: 40px;
   }
 
   .stat-card {
-    padding: 30px 20px;
+    padding: 24px 16px;
   }
 
   .stat-value {
-    font-size: 36px;
+    font-size: 32px;
+  }
+
+  .stat-label {
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .stat-icon {
+    font-size: 40px;
+    margin-bottom: 14px;
   }
 }
 
