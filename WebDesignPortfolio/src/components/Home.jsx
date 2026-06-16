@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { profileImageUrl, SITE_PROFILE } from '../constants/siteProfile'
 import Typed from 'typed.js'
 import './Home.css'
 
@@ -84,13 +85,25 @@ const Home = () => {
   return (
     <section className="home" id="home" ref={homeRef}>
       <div className="max-width">
-        <div className="home-content">
-          <div className="text-1">{t.home.greeting}</div>
-          <div className="text-2">{t.home.name}</div>
-          <div className="text-3">
-            {t.home.subtitle} <span className="typing" ref={typedRef}></span>
+        <div className="home-inner">
+          <div className="home-content">
+            <div className="text-1">{t.home.greeting}</div>
+            <div className="text-2">{t.home.name}</div>
+            <div className="text-3">
+              {t.home.subtitle} <span className="typing" ref={typedRef}></span>
+            </div>
+            <a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{t.home.button}</a>
           </div>
-          <a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{t.home.button}</a>
+          <div className="home-profile">
+            <div className="home-profile-ring">
+              <img
+                src={profileImageUrl()}
+                alt={SITE_PROFILE.fullName}
+                width={280}
+                height={280}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { profileImageUrl, SITE_PROFILE } from '../constants/siteProfile'
 import Typed from 'typed.js'
 import './About.css'
 
@@ -57,11 +58,15 @@ const About = () => {
         <h2 className="title">{t.about.title}</h2>
         <div className="about-content">
           <div className="column left">
-            <img 
-              src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-              alt="Programming" 
-              loading="lazy"
-            />
+            <div className="profile-photo-frame">
+              <img
+                src={profileImageUrl()}
+                alt={SITE_PROFILE.fullName}
+                loading="lazy"
+                width={400}
+                height={400}
+              />
+            </div>
           </div>
           <div className="column right">
             <div className="text">{t.about.text} <span className="typing-2" ref={typedRef}></span></div>

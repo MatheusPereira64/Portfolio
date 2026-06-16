@@ -15,3 +15,10 @@ export const SITE_PROFILE = {
 }
 
 export const CV_FILENAME = 'CV - Matheus Pereira - 2026 - English.pdf'
+
+/** Foto de perfil profissional (public/images/) */
+export const PROFILE_IMAGE = 'images/matheus-profile.png'
+
+export function profileImageUrl() {
+  return `${import.meta.env.BASE_URL}${PROFILE_IMAGE}`
+}

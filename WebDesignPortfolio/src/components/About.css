@@ -35,11 +35,30 @@
   flex-shrink: 0;
 }
 
+.about .profile-photo-frame {
+  position: relative;
+  padding: 6px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+  box-shadow: 0 20px 45px rgba(220, 20, 60, 0.25);
+}
+
+.about .profile-photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
 .about .about-content .left img {
+  display: block;
   height: 400px;
   width: 100%;
   object-fit: cover;
-  border-radius: 6px;
+  object-position: center 12%;
+  border-radius: 10px;
 }
 
 .about .about-content .right {
@@ -110,7 +129,7 @@
   }
   .about .about-content .left img {
     height: 300px;
-    width: 300px;
+    width: 280px;
   }
   .about .about-content .right {
     width: 100%;
