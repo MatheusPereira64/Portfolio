@@ -35,7 +35,7 @@ const Stats = () => {
       icon: 'fa-calendar-alt',
       value: counters.experience,
       suffix: '+',
-      label: language === 'pt' ? 'Anos de Experiência' : language === 'es' ? 'Años de Experiencia' : 'Years Experience'
+      label: language === 'pt' ? 'Anos de Experiência' : language === 'es' ? 'Años de Experiencia' : 'Years of Experience'
     },
     {
       icon: 'fa-users',
@@ -47,7 +47,7 @@ const Stats = () => {
 
   useEffect(() => {
     if (inView) {
-      const targets = { projects: 20, code: 50, experience: 2, clients: 10 }
+      const targets = { projects: 20, code: 50, experience: 6, clients: 10 }
       const duration = 2000
       const steps = 60
       const stepDuration = duration / steps
