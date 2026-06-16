@@ -34,6 +34,12 @@ body.theme-transition * {
   color: #fff;
 }
 
+[data-theme="dark"] .about .about-content .right p,
+[data-theme="dark"] .skills .skills-content .left p,
+[data-theme="dark"] .contact .contact-content .left p {
+  color: #ccc;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 12px;

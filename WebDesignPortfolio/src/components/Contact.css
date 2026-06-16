@@ -113,6 +113,19 @@
   color: #333;
 }
 
+[data-theme="dark"] .contact .title::after {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] .contact .contact-content .info .sub-title {
+  color: #ccc;
+}
+
+[data-theme="dark"] .contact .right .form-instruction {
+  color: #e8e8e8;
+  background: rgba(220, 20, 60, 0.2);
+}
+
 .contact .right form .fields {
   display: flex;
 }

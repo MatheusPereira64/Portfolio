@@ -18,6 +18,10 @@
   content: "¿Quién soy?";
 }
 
+[data-theme="dark"] .about .title::after {
+  background: #1a1a1a;
+}
+
 .about .about-content {
   display: flex;
   flex-wrap: wrap;

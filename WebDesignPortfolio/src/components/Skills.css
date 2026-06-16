@@ -99,6 +99,22 @@
   color: #333;
 }
 
+[data-theme="dark"] .skills .title::after {
+  background: #1a1a1a;
+}
+
+[data-theme="dark"] .education-item {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .education-info p {
+  color: #ccc;
+}
+
+[data-theme="dark"] .education-info strong {
+  color: #fff;
+}
+
 .skills .skills-content .right .bars {
   margin-bottom: 15px;
 }
