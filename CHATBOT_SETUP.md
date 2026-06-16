@@ -21,7 +21,7 @@ O chatbot do portfólio pode funcionar de duas formas:
    - Copie a chave gerada
 
 2. **Configurar no projeto:**
-   - Crie um arquivo `.env` na pasta `WebDesignPortfolio/`
+   - Crie um arquivo `.env` na **raiz do repositório** (ao lado de `package.json`)
    - Adicione a linha:
    ```
    VITE_GEMINI_API_KEY=sua_chave_aqui

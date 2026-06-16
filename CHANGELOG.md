@@ -1,6 +1,14 @@
 # Changelog
 
-## Correções Realizadas
+## 2026-06 — Estrutura achatada (padrão Vite)
+
+- **Antes:** código em `WebDesignPortfolio/` com `vite.config.js` apontando `root` para subpasta
+- **Depois:** `src/`, `public/` e `index.html` na **raiz** do repositório
+- Removidos ficheiros legado HTML (`script.js`, `style.css`, redirect na raiz)
+- `vite.config.js`: `build.outDir: 'docs'` — deploy só via **`docs/`**, não `dist/`
+- Repositório pai `C-digo-Portofolio` deixou de referenciar este projeto como submódulo
+
+## Correções anteriores
 
 ### 1. Erro de Dependência Corrigido
 - **Problema**: `react-typed@1.2.0` requer React 16, mas o projeto usa React 18

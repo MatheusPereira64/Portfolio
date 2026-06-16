@@ -5,12 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/Portfolio/',
-  root: './WebDesignPortfolio',
   build: {
-    // Saída em `docs/` para GitHub Pages (fonte Branch → pasta /docs; não existe opção /dist na UI)
-    outDir: '../docs',
+    outDir: 'docs',
     assetsDir: 'assets',
     emptyOutDir: true,
-  }
+  },
 })
-

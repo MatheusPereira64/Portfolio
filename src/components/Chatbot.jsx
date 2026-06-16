@@ -234,7 +234,7 @@ También puedo indicarte LinkedIn, GitHub o el CV en PDF.`,
       
       if (!GEMINI_API_KEY || trimmedKey === '' || trimmedKey === 'sua_chave_aqui') {
         console.log('⚠️ API Key não encontrada, vazia ou contém valor padrão')
-        console.log('📝 Configure a chave no arquivo WebDesignPortfolio/.env e reinicie o servidor')
+        console.log('📝 Configure a chave no arquivo .env na raiz do projeto e reinicie o servidor')
         return null
       }
       

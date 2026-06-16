@@ -2,58 +2,59 @@
 
 ## Deploy no GitHub Pages
 
-### Passo a passo:
+O build de produção vai para a pasta **`docs/`** (não `dist/`). O GitHub Pages publica a partir de **`docs/`** via branch ou GitHub Actions.
+
+### Passo a passo
 
 1. **Instale as dependências** (se ainda não fez):
+
 ```bash
 npm install
 ```
 
-2. **Faça o build do projeto**:
+2. **Configure variáveis de ambiente** (copie `.env.example` → `.env` na raiz do repo).
+
+3. **Faça o build**:
+
 ```bash
 npm run build
 ```
 
-3. **Faça o deploy**:
+Isso gera/atualiza **`docs/`** com os ficheiros estáticos do site.
+
+4. **Commit e push** da pasta `docs/` (e do código-fonte) para o branch configurado nas Pages (`development`, `main`, etc.).
+
+### Opção A — GitHub Actions (recomendado)
+
+O workflow `.github/workflows/deploy-pages.yml` executa `npm ci`, `npm run build` e publica **`docs/`** automaticamente.
+
+### Opção B — Branch + pasta `/docs`
+
+1. **Settings → Pages** → Branch à sua escolha, **Folder: `/docs`**.
+
+### Opção C — Branch `gh-pages`
+
 ```bash
 npm run deploy
 ```
 
-Isso irá:
-- Criar um build otimizado na pasta `dist/`
-- Fazer commit e push para a branch `gh-pages`
-- O site estará disponível em: `https://matheuspereira64.github.io/Portfolio/`
+Envia o conteúdo de **`docs/`** para a branch `gh-pages`.
 
-### Configuração do GitHub Pages
+**Site:** `https://matheuspereira64.github.io/Portfolio/`
 
-No repositório do GitHub:
-1. Vá em **Settings** > **Pages**
-2. Certifique-se de que a branch `gh-pages` está selecionada
-3. O site será publicado automaticamente
-
-### Atualizações
-
-Sempre que fizer alterações:
-1. Commit suas mudanças
-2. Execute `npm run deploy`
-3. Aguarde alguns minutos para o GitHub Pages atualizar
-
-## Desenvolvimento Local
-
-Para rodar localmente:
+## Desenvolvimento local
 
 ```bash
 npm run dev
 ```
 
-O site estará disponível em `http://localhost:5173`
+Disponível em `http://localhost:5173`
 
-## Build Local
-
-Para testar o build localmente:
+## Preview do build
 
 ```bash
 npm run build
 npm run preview
 ```
 
+Abre por exemplo `http://localhost:4173/Portfolio/`

@@ -88,7 +88,7 @@ cd Portfolio
 npm install
 ```
 
-3. **Configure variáveis de ambiente** (copie `WebDesignPortfolio/.env.example` → `WebDesignPortfolio/.env`)
+3. **Configure variáveis de ambiente** (copie `.env.example` → `.env` na raiz do repositório)
 
 **Chatbot com IA (opcional):** `VITE_GEMINI_API_KEY` — [Google AI Studio](https://aistudio.google.com/app/apikey)
 
@@ -124,33 +124,27 @@ npm run preview
 npm run deploy
 ```
 
-## 📁 **Estrutura do Projeto**
+## 📁 **Estrutura do Repositório**
+
+Este repositório **é** o projeto — a raiz no GitHub corresponde à pasta `Portfolio/` no seu PC.
 
 ```
-Portfolio/
-├── src/
-│   ├── components/          # Componentes React
-│   │   ├── Navbar.jsx
-│   │   ├── Home.jsx
-│   │   ├── About.jsx
-│   │   ├── Services.jsx
-│   │   ├── Skills.jsx
-│   │   ├── Projects.jsx
-│   │   ├── Contact.jsx
-│   │   ├── Footer.jsx
-│   │   └── ScrollToTop.jsx
-│   ├── context/             # Context API
-│   │   └── LanguageContext.jsx
-│   ├── App.jsx              # Componente principal
-│   ├── App.css
-│   ├── main.jsx             # Entry point
-│   └── index.css            # Estilos globais
-├── public/                  # Arquivos estáticos
-├── index.html               # HTML principal
-├── vite.config.js           # Configuração do Vite
-├── package.json             # Dependências
+Portfolio/                    ← raiz do Git (padrão Vite)
+├── src/                      ← código React
+│   ├── components/
+│   ├── context/
+│   ├── constants/
+│   └── utils/
+├── public/                   ← imagens, CV, assets estáticos
+├── docs/                     ← build de produção (GitHub Pages)
+├── .github/workflows/
+├── index.html
+├── vite.config.js
+├── package.json
 └── README.md
 ```
+
+> **Deploy:** `npm run build` gera **`docs/`**. A pasta `dist/` fica no `.gitignore` e não é usada para publicação.
 
 ## 🌟 **Características**
 
@@ -183,7 +177,7 @@ O workflow `.github/workflows/deploy-pages.yml` faz **`npm ci`**, **`npm run bui
 
 1. No GitHub: **Settings → Pages → Build and deployment → Source**, escolhe **GitHub Actions** (não uses “Deploy from a branch” ao mesmo tempo para evitar confusão).
 2. Faz push deste repositório; na aba **Actions** verifica que o workflow **Deploy GitHub Pages** concluiu com sucesso.
-3. Abre **`https://matheuspereira64.github.io/Portfolio/`** (sem subpath `WebDesignPortfolio`).
+3. Abre **`https://matheuspereira64.github.io/Portfolio/`**.
 
 ### Opção B — Branch + pasta `/docs`
 
@@ -199,20 +193,19 @@ No GitHub, ao publicar a partir de um branch, só existem **`/` (root)** ou **`/
 
 ### ⚠️ **IMPORTANTE**
 
-1. **Não abras** `WebDesignPortfolio/index.html` com **Live Server**, duplo clique nem **`file://`**. Esse HTML referencia **`main.jsx`**; só o Vite converte JSX. Para local: **`npm run dev`** ou, após build, **`npm run preview`** (abre por exemplo `http://localhost:4173/Portfolio/`).
+1. **Não abras** `index.html` com **Live Server**, duplo clique nem **`file://`**. Esse HTML referencia **`main.jsx`**; só o Vite converte JSX. Para local: **`npm run dev`** ou, após build, **`npm run preview`** (abre por exemplo `http://localhost:4173/Portfolio/`).
 2. **URL do site**: **`https://matheuspereira64.github.io/Portfolio/`**. Caminhos para pastas fonte no repo podem devolver `.jsx` e o erro de MIME.
 
 ### Erro `MIME type "text/jsx"`
 
-- **Desenvolvimento**: usa sempre **`npm run dev`** ou **`npm run preview`**, não Live Server na pasta `WebDesignPortfolio`.
+- **Desenvolvimento**: usa sempre **`npm run dev`** ou **`npm run preview`**, não Live Server na raiz do projeto.
 - **Produção**: garante Pages com **GitHub Actions** ou pasta **`/docs`** com build atualizado; faz **hard refresh** (Ctrl+Shift+R).
 
 ### Configuração do Vite
 
 O arquivo `vite.config.js` está configurado com:
-- `base: '/Portfolio/'` - Caminho base para GitHub Pages
-- `root: './WebDesignPortfolio'` - Diretório raiz do projeto React
-- `build.outDir: '../docs'` - Saída do build para a pasta **`docs/`** (compatível com GitHub Pages)
+- `base: '/Portfolio/'` — caminho base para GitHub Pages
+- `build.outDir: 'docs'` — saída do build na pasta **`docs/`**
 - Build otimizado para produção
 
 ## 📧 **Contato**
