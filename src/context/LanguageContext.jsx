@@ -74,7 +74,10 @@ export const LanguageProvider = ({ children }) => {
       blog: {
         title: 'Blog & Artigos',
         subtitle: 'Últimos artigos',
-        readMore: 'Ler mais'
+        readMore: 'Ler mais',
+        viewOnLinkedIn: 'Ver no LinkedIn',
+        viewAllOnLinkedIn: 'Ver publicações no LinkedIn',
+        emptyMessage: 'Minhas publicações e artigos estão no LinkedIn. Clique abaixo para acompanhar.',
       },
       contact: {
         title: 'Entre em contato',
@@ -146,7 +149,10 @@ export const LanguageProvider = ({ children }) => {
       blog: {
         title: 'Blog & Articles',
         subtitle: 'Latest articles',
-        readMore: 'Read more'
+        readMore: 'Read more',
+        viewOnLinkedIn: 'View on LinkedIn',
+        viewAllOnLinkedIn: 'View posts on LinkedIn',
+        emptyMessage: 'My posts and articles are on LinkedIn. Click below to follow along.',
       },
       contact: {
         title: 'Get in touch',
@@ -218,7 +224,10 @@ export const LanguageProvider = ({ children }) => {
       blog: {
         title: 'Blog y Artículos',
         subtitle: 'Últimos artículos',
-        readMore: 'Leer más'
+        readMore: 'Leer más',
+        viewOnLinkedIn: 'Ver en LinkedIn',
+        viewAllOnLinkedIn: 'Ver publicaciones en LinkedIn',
+        emptyMessage: 'Mis publicaciones y artículos están en LinkedIn. Haz clic abajo para seguir.',
       },
       contact: {
         title: 'Ponerse en contacto',

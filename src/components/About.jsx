@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { profileImageUrl, SITE_PROFILE } from '../constants/siteProfile'
+import { TYPED_ROLES } from '../constants/typedRoles'
 import Typed from 'typed.js'
 import './About.css'
 
@@ -11,14 +12,7 @@ const About = () => {
   const typedInstance = useRef(null)
 
   useEffect(() => {
-    let strings
-    if (language === 'pt') {
-      strings = ["Desenvolvedor Fullstack", "Web Developer", "Software Developer", "Frontend Developer"]
-    } else if (language === 'es') {
-      strings = ["Desarrollador Fullstack", "Desarrollador Web", "Desarrollador de Software", "Desarrollador Frontend"]
-    } else {
-      strings = ["Web Designer", "Programmer", "Game Developer", "Software Developer"]
-    }
+    const strings = TYPED_ROLES[language] || TYPED_ROLES.en
 
     if (typedRef.current) {
       if (typedInstance.current) {
