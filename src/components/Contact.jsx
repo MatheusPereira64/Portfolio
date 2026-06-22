@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 import { CV_FILENAME, SITE_PROFILE } from '../constants/siteProfile'
@@ -16,6 +16,22 @@ const Contact = () => {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+
+  useEffect(() => {
+    const onPrefill = (e) => {
+      const { subject = '', message = '' } = e.detail || {}
+      setFormData((prev) => ({
+        ...prev,
+        ...(subject && { subject }),
+        ...(message && { message }),
+      }))
+      setTimeout(() => {
+        document.querySelector('#contact input[name="subject"]')?.focus()
+      }, 400)
+    }
+    window.addEventListener('portfolio:prefill-contact', onPrefill)
+    return () => window.removeEventListener('portfolio:prefill-contact', onPrefill)
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target

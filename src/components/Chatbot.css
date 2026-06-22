@@ -63,16 +63,46 @@
 .chatbot-header {
   background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
   color: #fff;
-  padding: 20px;
+  padding: 16px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+}
+
+.chatbot-header__identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.chatbot-header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  flex-shrink: 0;
 }
 
 .chatbot-header h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+  line-height: 1.2;
+}
+
+.chatbot-header__subtitle {
+  display: block;
+  font-size: 12px;
+  opacity: 0.9;
+  font-weight: 400;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 }
 
 .chatbot-header button {
@@ -250,6 +280,14 @@
 
 .message-link:hover {
   background: rgba(220, 20, 60, 0.2);
+}
+
+.message-link--action {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .message.user .message-link {
