@@ -1,4 +1,4 @@
-import { SITE_PROFILE, CV_FILENAME } from '../constants/siteProfile'
+import { SITE_PROFILE, getCvHref } from '../constants/siteProfile'
 
 export const ASSISTANT_PERSONA = {
   name: { pt: 'Assistente do Portfólio', en: 'Portfolio Assistant', es: 'Asistente del Portafolio' },
@@ -395,10 +395,6 @@ export function getKnowledge(language) {
   return knowledge[language] || knowledge.en
 }
 
-export function getCvHref() {
-  return `${import.meta.env.BASE_URL}curriculo/${encodeURIComponent(CV_FILENAME)}`
-}
-
 export function getWhatsAppUrl() {
   return `https://wa.me/${SITE_PROFILE.phoneDigits}`
 }
@@ -433,7 +429,8 @@ Phone: ${SITE_PROFILE.phoneDisplayEn} (${SITE_PROFILE.phoneDigits})
 LinkedIn: ${SITE_PROFILE.linkedin}
 GitHub: ${SITE_PROFILE.github}
 Portfolio: ${SITE_PROFILE.portfolioUrl}
-CV PDF: ${getCvHref()}
+CV PDF (English): ${getCvHref('en')}
+CV PDF (Portuguese): ${getCvHref('pt')}
 
 Professional summary:
 ${k.professionalSummary}

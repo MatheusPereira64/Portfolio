@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
-import { CV_FILENAME, SITE_PROFILE } from '../constants/siteProfile'
+import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
 import { isEmailJsConfigured, sendContactEmail } from '../utils/sendContactEmail'
 
 const Contact = () => {
@@ -95,16 +95,12 @@ const Contact = () => {
     }
   }
 
-  const handleDownloadCV = () => {
-    const url = `${import.meta.env.BASE_URL}curriculo/${encodeURIComponent(CV_FILENAME)}`
-    const link = document.createElement('a')
-    link.href = url
-    link.download = CV_FILENAME
-    link.rel = 'noopener noreferrer'
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  const cvLabels = {
+    pt: { heading: 'Baixar currículo', en: 'English', pt: 'Português' },
+    en: { heading: 'Download résumé', en: 'English', pt: 'Portuguese' },
+    es: { heading: 'Descargar currículum', en: 'English', pt: 'Portugués' },
   }
+  const cv = cvLabels[language] || cvLabels.en
 
   return (
     <section className="contact" id="contact" data-lang={language}>
@@ -114,14 +110,29 @@ const Contact = () => {
           <div className="column left">
             <div className="text">{t.contact.text}</div>
             <p>{t.contact.description}</p>
-            <button 
-              className="cv-download-btn"
-              onClick={handleDownloadCV}
-              aria-label="Download CV"
-            >
-              <i className="fas fa-download"></i>
-              {language === 'pt' ? 'Baixar CV' : language === 'es' ? 'Descargar CV' : 'Download CV'}
-            </button>
+            <div className="cv-download-group">
+              <p className="cv-download-label">{cv.heading}</p>
+              <div className="cv-download-actions">
+                <button
+                  type="button"
+                  className="cv-download-btn"
+                  onClick={() => triggerCvDownload('en')}
+                  aria-label={`${cv.heading} — ${cv.en}`}
+                >
+                  <i className="fas fa-download"></i>
+                  {cv.en}
+                </button>
+                <button
+                  type="button"
+                  className="cv-download-btn"
+                  onClick={() => triggerCvDownload('pt')}
+                  aria-label={`${cv.heading} — ${cv.pt}`}
+                >
+                  <i className="fas fa-download"></i>
+                  {cv.pt}
+                </button>
+              </div>
+            </div>
             <div className="icons">
               <div className="row">
                 <i className="fas fa-user"></i>

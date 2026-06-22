@@ -1,7 +1,6 @@
-import { SITE_PROFILE } from '../constants/siteProfile'
+import { SITE_PROFILE, getCvHref } from '../constants/siteProfile'
 import {
   getKnowledge,
-  getCvHref,
   getWhatsAppUrl,
   SKILLS,
 } from '../data/assistantKnowledge'
@@ -58,6 +57,26 @@ function L(language, key) {
   return (labels[language] || labels.en)[key]
 }
 
+function cvDownloadLinks(language) {
+  return [
+    {
+      type: 'link',
+      label: language === 'pt' ? '📄 CV English' : language === 'es' ? '📄 CV en English' : '📄 CV in English',
+      url: getCvHref('en'),
+    },
+    {
+      type: 'link',
+      label:
+        language === 'pt'
+          ? '📄 CV Português'
+          : language === 'es'
+            ? '📄 CV en Portugués'
+            : '📄 CV in Portuguese',
+      url: getCvHref('pt'),
+    },
+  ]
+}
+
 function contactLinks(language) {
   const phone =
     language === 'en' ? SITE_PROFILE.phoneDisplayEn : SITE_PROFILE.phoneDisplayPt
@@ -101,12 +120,21 @@ const builders = {
   cv: (language) => ({
     text:
       language === 'pt'
-        ? 'Currículo em PDF (inglês, 2026):'
+        ? 'Escolha o currículo em PDF (2026):'
         : language === 'es'
-          ? 'Currículum en PDF (inglés, 2026):'
-          : 'Résumé PDF (English, 2026):',
+          ? 'Elige el currículum en PDF (2026):'
+          : 'Choose a résumé PDF (2026):',
     links: [
-      { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
+      {
+        type: 'link',
+        label: language === 'pt' ? '📄 CV em English' : '📄 CV in English',
+        url: getCvHref('en'),
+      },
+      {
+        type: 'link',
+        label: language === 'pt' ? '📄 CV em Português' : language === 'es' ? '📄 CV en Portugués' : '📄 CV in Portuguese',
+        url: getCvHref('pt'),
+      },
       { type: 'scroll', label: `📍 ${L(language, 'goContact')}`, section: 'contact' },
     ],
     suggestedReplies: ['LinkedIn', 'GitHub', 'WhatsApp'],
@@ -249,7 +277,7 @@ const builders = {
       text: `${SITE_PROFILE.fullName}\n\n${k.professionalSummary}\n\n${k.availability.status}\n📍 ${k.availability.location}`,
       links: [
         { type: 'scroll', label: `👤 ${L(language, 'goAbout')}`, section: 'about' },
-        { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
+        ...cvDownloadLinks(language),
         { type: 'scroll', label: `📍 ${L(language, 'goContact')}`, section: 'contact' },
       ],
       suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
@@ -297,7 +325,7 @@ const builders = {
       text,
       links: [
         { type: 'scroll', label: `📊 ${L(language, 'goSkills')}`, section: 'skills' },
-        { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
+        ...cvDownloadLinks(language),
       ],
       suggestedReplies:
         language === 'pt'
@@ -347,7 +375,7 @@ const builders = {
                 ? 'Oportunidad profesional'
                 : 'Job opportunity',
         },
-        { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
+        ...cvDownloadLinks(language),
       ],
       suggestedReplies:
         language === 'pt'
@@ -420,7 +448,7 @@ const builders = {
     return {
       text: `${k.careerGoals}\n\n${k.faq.remoteWork}`,
       links: [
-        { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
+        ...cvDownloadLinks(language),
         {
           type: 'contact',
           label: `✉️ ${L(language, 'sendMessage')}`,
@@ -481,9 +509,7 @@ const builders = {
           : language === 'es'
             ? `${SITE_PROFILE.fullName}\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n\n${k.availability.status}\n\nUsa los botones o pregunta sobre experiencia, proyectos o contacto.`
             : `${SITE_PROFILE.fullName}\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n\n${k.availability.status}\n\nUse the quick buttons or ask about experience, projects, education, or availability.`,
-      links: contactLinks(language).concat([
-        { type: 'link', label: `📄 ${L(language, 'downloadCv')}`, url: getCvHref() },
-      ]),
+      links: contactLinks(language).concat(cvDownloadLinks(language)),
       suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
     }
   },
