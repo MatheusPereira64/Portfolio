@@ -89,18 +89,20 @@ const knowledge = {
         technologies: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Express', 'Git'],
       },
       {
-        period: '2023 — 2024',
-        title: 'Estudante de Análise e Desenvolvimento de Sistemas',
-        company: 'ITEGAM',
-        summary: 'Projetos académicos, metodologias ágeis, estruturas de dados e engenharia de software.',
-        technologies: ['JavaScript', 'Python', 'Java', 'SQL', 'HTML/CSS'],
+        period: '2023',
+        title: 'Engenheiro de Software',
+        company: 'VIA CERTA',
+        summary:
+          'Sistemas internos de gestão logística e administrativa, SQL Server, suporte a aplicações e otimização de processos.',
+        technologies: ['SQL Server', 'SQL', 'Windows Server', 'Database Management', 'Troubleshooting'],
       },
       {
         period: '2022 — 2023',
-        title: 'Desenvolvedor Frontend Júnior',
-        company: 'Projetos Académicos',
-        summary: 'Interfaces responsivas com HTML5, CSS3, JavaScript e React.',
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Git'],
+        title: 'Engenharia da Computação — Desenvolvimento de Software',
+        company: 'FAMETRO · Samsung Ocean',
+        summary:
+          'Projetos académicos e programas Samsung Ocean em React.js, JavaScript, Unity e Python durante a graduação em Engenharia da Computação.',
+        technologies: ['JavaScript', 'React', 'Python', 'HTML/CSS', 'Unity', 'Git'],
       },
     ],
     education: [
@@ -208,18 +210,20 @@ const knowledge = {
         technologies: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Express', 'Git'],
       },
       {
-        period: '2023 — 2024',
-        title: 'Systems Analysis and Development Student',
-        company: 'ITEGAM',
-        summary: 'Academic projects, agile methods, data structures, and software engineering.',
-        technologies: ['JavaScript', 'Python', 'Java', 'SQL', 'HTML/CSS'],
+        period: '2023',
+        title: 'Software Engineer',
+        company: 'VIA CERTA',
+        summary:
+          'Internal logistics and business management systems, SQL Server, application support, and process optimization.',
+        technologies: ['SQL Server', 'SQL', 'Windows Server', 'Database Management', 'Troubleshooting'],
       },
       {
         period: '2022 — 2023',
-        title: 'Junior Frontend Developer',
-        company: 'Academic Projects',
-        summary: 'Responsive interfaces with HTML5, CSS3, JavaScript, and React.',
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Git'],
+        title: 'Computer Engineering — Software Development',
+        company: 'FAMETRO · Samsung Ocean',
+        summary:
+          'Academic software projects and Samsung Ocean programs in React.js, JavaScript, Unity, and Python during the Computer Engineering degree.',
+        technologies: ['JavaScript', 'React', 'Python', 'HTML/CSS', 'Unity', 'Git'],
       },
     ],
     education: [
@@ -328,18 +332,20 @@ const knowledge = {
         technologies: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Express', 'Git'],
       },
       {
-        period: '2023 — 2024',
-        title: 'Estudiante de Análisis y Desarrollo de Sistemas',
-        company: 'ITEGAM',
-        summary: 'Proyectos académicos, metodologías ágiles, estructuras de datos e ingeniería de software.',
-        technologies: ['JavaScript', 'Python', 'Java', 'SQL', 'HTML/CSS'],
+        period: '2023',
+        title: 'Ingeniero de Software',
+        company: 'VIA CERTA',
+        summary:
+          'Sistemas internos de gestión logística y administrativa, SQL Server, soporte a aplicaciones y optimización de procesos.',
+        technologies: ['SQL Server', 'SQL', 'Windows Server', 'Database Management', 'Troubleshooting'],
       },
       {
         period: '2022 — 2023',
-        title: 'Desarrollador Frontend Junior',
-        company: 'Proyectos Académicos',
-        summary: 'Interfaces responsivas con HTML5, CSS3, JavaScript y React.',
-        technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Git'],
+        title: 'Ingeniería de Computación — Desarrollo de Software',
+        company: 'FAMETRO · Samsung Ocean',
+        summary:
+          'Proyectos académicos y programas Samsung Ocean en React.js, JavaScript, Unity y Python durante la carrera de Ingeniería de Computación.',
+        technologies: ['JavaScript', 'React', 'Python', 'HTML/CSS', 'Unity', 'Git'],
       },
     ],
     education: [

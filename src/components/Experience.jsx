@@ -24,26 +24,26 @@ const Experience = () => {
       technologies: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Express', 'Git']
     },
     {
-      year: '2023 - 2024',
-      title: language === 'pt' ? 'Estudante de Análise e Desenvolvimento de Sistemas' : language === 'es' ? 'Estudiante de Análisis y Desarrollo de Sistemas' : 'Systems Analysis and Development Student',
-      company: 'ITEGAM',
+      year: language === 'pt' ? 'Jan 2023 - Jun 2023' : language === 'es' ? 'Ene 2023 - Jun 2023' : 'Jan 2023 - Jun 2023',
+      title: language === 'pt' ? 'Engenheiro de Software' : language === 'es' ? 'Ingeniero de Software' : 'Software Engineer',
+      company: 'VIA CERTA',
       description: language === 'pt'
-        ? 'Formação em desenvolvimento de software com foco em tecnologias web e mobile. Participação em projetos acadêmicos, desenvolvimento de sistemas e aprendizado de metodologias ágeis. Estudos em estrutura de dados, algoritmos e engenharia de software.'
+        ? 'Desenvolvimento e manutenção de sistemas internos de gestão logística e administrativa. Atuação com bancos de dados SQL, suporte a aplicações, validação de dados e melhoria contínua de sistemas corporativos em colaboração com equipes multidisciplinares.'
         : language === 'es'
-        ? 'Formación en desarrollo de software con enfoque en tecnologías web y móviles. Participación en proyectos académicos, desarrollo de sistemas y aprendizaje de metodologías ágiles. Estudios en estructura de datos, algoritmos e ingeniería de software.'
-        : 'Software development training focusing on web and mobile technologies. Participation in academic projects, system development and learning agile methodologies. Studies in data structures, algorithms and software engineering.',
-      technologies: ['JavaScript', 'Python', 'Java', 'SQL', 'HTML/CSS', 'C++']
+        ? 'Desarrollo y mantenimiento de sistemas internos de gestión logística y administrativa. Trabajo con bases de datos SQL, soporte a aplicaciones, validación de datos y mejora continua de sistemas corporativos junto a equipos multidisciplinarios.'
+        : 'Developed and maintained internal logistics and business management systems. Worked with SQL databases, application support, data validation, and process optimization while collaborating with cross-functional teams to improve operational reliability.',
+      technologies: ['SQL Server', 'SQL', 'Windows Server', 'Database Management', 'Troubleshooting', 'Git']
     },
     {
       year: '2022 - 2023',
-      title: language === 'pt' ? 'Desenvolvedor Frontend Júnior' : language === 'es' ? 'Desarrollador Frontend Junior' : 'Junior Frontend Developer',
-      company: language === 'pt' ? 'Projetos Acadêmicos' : language === 'es' ? 'Proyectos Académicos' : 'Academic Projects',
+      title: language === 'pt' ? 'Engenharia da Computação — Desenvolvimento de Software' : language === 'es' ? 'Ingeniería de Computación — Desarrollo de Software' : 'Computer Engineering — Software Development',
+      company: 'FAMETRO · Samsung Ocean',
       description: language === 'pt'
-        ? 'Desenvolvimento de interfaces web responsivas e interativas. Trabalho com HTML5, CSS3 e JavaScript vanilla. Criação de layouts modernos e experiência do usuário otimizada. Aprendizado de frameworks modernos como React.'
+        ? 'Formação em engenharia de software com projetos acadêmicos em desenvolvimento web e aplicações interativas. Participação em programas Samsung Ocean (React.js, JavaScript, Unity e Python), consolidando bases em front-end, lógica de programação e boas práticas de engenharia.'
         : language === 'es'
-        ? 'Desarrollo de interfaces web responsivas e interactivas. Trabajo con HTML5, CSS3 y JavaScript vanilla. Creación de layouts modernos y experiencia de usuario optimizada. Aprendizaje de frameworks modernos como React.'
-        : 'Development of responsive and interactive web interfaces. Working with HTML5, CSS3 and vanilla JavaScript. Creation of modern layouts and optimized user experience. Learning modern frameworks like React.',
-      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'Git']
+        ? 'Formación en ingeniería de software con proyectos académicos en desarrollo web y aplicaciones interactivas. Participación en programas Samsung Ocean (React.js, JavaScript, Unity y Python), consolidando bases en front-end, lógica de programación y buenas prácticas de ingeniería.'
+        : 'Computer Engineering training with academic software projects and interactive web applications. Completed Samsung Ocean programs in React.js, JavaScript, Unity, and Python, building strong foundations in front-end development and software engineering practices.',
+      technologies: ['JavaScript', 'React', 'Python', 'HTML/CSS', 'Unity', 'Git']
     }
   ]
 
