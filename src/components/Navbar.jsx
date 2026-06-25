@@ -64,6 +64,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme()
   const t = translations[language]
   const langRef = useRef(null)
+  const menuBtnRef = useRef(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
@@ -126,12 +127,18 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsMenuOpen(false)
     setIsLangOpen(false)
+    requestAnimationFrame(() => {
+      menuBtnRef.current?.focus()
+    })
   }
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault()
     const element = document.getElementById(sectionId)
     if (element) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
       element.scrollIntoView({ behavior: 'smooth' })
       closeMenu()
     }
@@ -180,7 +187,8 @@ const Navbar = () => {
       />
       <ul
         className={`menu-mobile${isMenuOpen ? ' active' : ''}`}
-        aria-hidden={!isMenuOpen}
+        aria-hidden={isMenuOpen ? undefined : true}
+        inert={isMenuOpen ? undefined : ''}
       >
         {navLinks}
         <li className="theme-toggle">{themeToggleButton}</li>
@@ -217,6 +225,7 @@ const Navbar = () => {
           {isMobile && (
             <button
               type="button"
+              ref={menuBtnRef}
               className="menu-btn"
               aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={isMenuOpen}
