@@ -88,13 +88,13 @@ export const LanguageProvider = ({ children }) => {
         formInstruction: 'Preencha o formulário abaixo e clique em enviar. Seu cliente de email padrão será aberto com a mensagem preenchida.',
         name: 'Nome',
         email: 'Email',
-        subject: 'Assunto / Subject',
-        message: 'Mensagem / Message...',
+        subject: 'Assunto',
+        message: 'Mensagem...',
         send: 'Enviar mensagem',
-        namePlaceholder: 'Nome / Name',
+        namePlaceholder: 'Nome',
         emailPlaceholder: 'Email',
-        subjectPlaceholder: 'Assunto / Subject',
-        messagePlaceholder: 'Mensagem / Message...'
+        subjectPlaceholder: 'Assunto',
+        messagePlaceholder: 'Mensagem...'
       }
     },
     en: {
