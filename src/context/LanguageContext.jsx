@@ -61,7 +61,7 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'Meus Projetos',
-        subtitle: 'Meus sites referência'
+        subtitle: 'Projetos em destaque'
       },
       experience: {
         title: 'Experiência',
@@ -136,7 +136,7 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'My Projects',
-        subtitle: 'My reference sites'
+        subtitle: 'Featured projects'
       },
       experience: {
         title: 'Experience',
@@ -211,7 +211,7 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'Mis Proyectos',
-        subtitle: 'Mis sitios de referencia'
+        subtitle: 'Proyectos destacados'
       },
       experience: {
         title: 'Experiencia',

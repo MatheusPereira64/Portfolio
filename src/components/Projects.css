@@ -17,17 +17,17 @@
 .teams .title::after {
   font-size: 20px;
   background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
-  content: "Meus sites referência";
+  content: "Projetos em destaque";
   color: #ffd700;
   padding: 0 8px;
 }
 
 .teams[data-lang="en"] .title::after {
-  content: "My reference sites";
+  content: "Featured projects";
 }
 
 .teams[data-lang="es"] .title::after {
-  content: "Mis sitios de referencia";
+  content: "Proyectos destacados";
 }
 
 .teams .carousel {
@@ -45,7 +45,7 @@
 .teams .carousel .card {
   background: #222;
   border-radius: 6px;
-  padding: 25px 35px;
+  padding: 25px 22px;
   text-align: center;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -57,6 +57,7 @@
   opacity: 1;
   margin: 0;
   box-sizing: border-box;
+  align-self: stretch;
 }
 
 .teams .carousel .card:hover {
@@ -78,14 +79,40 @@
 }
 
 .teams .carousel .card .text {
-  font-size: 25px;
-  font-weight: 500;
-  margin: 10px 0 7px 0;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 12px 0 10px;
   color: #fff;
+  line-height: 1.35;
 }
 
-.teams .carousel .card p {
-  color: rgba(255, 255, 255, 0.8);
+.teams .carousel .card p,
+.teams .carousel .card .project-description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+  margin: 0;
+}
+
+.project-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0;
+}
+
+.project-tech-tag {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #ffd700;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
 }
 
 .teams .carousel .card img {

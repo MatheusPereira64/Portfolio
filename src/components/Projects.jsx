@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { PROJECTS, getLocalizedField } from '../data/projects'
 import './Projects.css'
 
 const Projects = () => {
@@ -9,45 +10,22 @@ const Projects = () => {
   const [itemsToShow, setItemsToShow] = useState(3)
   const carouselRef = useRef(null)
 
-  const projects = useMemo(() => [
-    {
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80',
-      title: language === 'pt' ? 'Aplicação Web Responsiva' : 'Responsive Web Application',
-      description: language === 'pt' ? 'Frontend moderno' : 'Modern Frontend'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      title: language === 'pt' ? 'Sistema de Gestão' : 'Management System',
-      description: language === 'pt' ? 'Backend robusto' : 'Robust Backend'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      title: language === 'pt' ? 'Jogo Interativo 2D' : 'Interactive 2D Game',
-      description: language === 'pt' ? 'Game Engine' : 'Game Engine'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      title: language === 'pt' ? 'Aplicativo Mobile' : 'Mobile Application',
-      description: language === 'pt' ? 'Cross-platform' : 'Cross-platform'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      title: language === 'pt' ? 'API RESTful' : 'RESTful API',
-      description: language === 'pt' ? 'Microserviços' : 'Microservices'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=834&q=80',
-      title: language === 'pt' ? 'Análise de Dados' : 'Data Analysis',
-      description: language === 'pt' ? 'Python & AI' : 'Python & AI'
-    }
-  ], [language])
+  const projects = useMemo(
+    () =>
+      PROJECTS.map((project) => ({
+        ...project,
+        title: getLocalizedField(project.title, language),
+        description: getLocalizedField(project.description, language),
+      })),
+    [language]
+  )
 
   useEffect(() => {
     const updateItemsToShow = () => {
       if (window.innerWidth >= 1000) {
-        setItemsToShow(3)
+        setItemsToShow(Math.min(3, projects.length))
       } else if (window.innerWidth >= 600) {
-        setItemsToShow(2)
+        setItemsToShow(Math.min(2, projects.length))
       } else {
         setItemsToShow(1)
       }
@@ -56,14 +34,21 @@ const Projects = () => {
     updateItemsToShow()
     window.addEventListener('resize', updateItemsToShow)
     return () => window.removeEventListener('resize', updateItemsToShow)
-  }, [])
+  }, [projects.length])
 
   useEffect(() => {
+    if (projects.length <= 1) return undefined
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % projects.length)
-    }, 3000)
+    }, 5000)
+
     return () => clearInterval(interval)
   }, [projects.length])
+
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [language])
 
   const getVisibleProjects = () => {
     const visible = []
@@ -81,40 +66,46 @@ const Projects = () => {
       <div className="max-width">
         <h2 className="title">{t.projects.title}</h2>
         <div className="carousel owl-carousel" ref={carouselRef}>
-          {visibleProjects.length > 0 ? (
-            visibleProjects.map((project, index) => (
-              <div key={`project-${project.index}-${index}`} className="card">
-                <div className="box">
-                  <img 
-                  src={project.image} 
-                  alt={project.title} 
+          {visibleProjects.map((project, index) => (
+            <article key={`project-${project.id}-${index}`} className="card">
+              <div className="box">
+                <img
+                  src={project.image}
+                  alt={project.title}
                   loading="lazy"
-                  onError={(e) => { e.target.src = 'https://via.placeholder.com/150'; }} 
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/150/8b0000/ffffff?text=4.0'
+                  }}
                 />
-                  <div className="text">{project.title}</div>
-                  <p>{project.description}</p>
-                </div>
+                <h3 className="text">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <ul className="project-tech-list" aria-label={t.projects?.technologies || 'Tecnologias'}>
+                  {project.technologies.map((tech) => (
+                    <li key={tech} className="project-tech-tag">
+                      {tech}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))
-          ) : (
-            <div>Carregando projetos...</div>
-          )}
-        </div>
-        <div className="carousel-dots owl-dots">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              type="button"
-              className={`owl-dot ${index === currentIndex ? 'active' : ''}`}
-              onClick={() => setCurrentIndex(index)}
-              aria-label={`Go to project ${index + 1}`}
-            ></button>
+            </article>
           ))}
         </div>
+        {projects.length > 1 && (
+          <div className="carousel-dots owl-dots">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`owl-dot ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`${t.projects?.goToProject || 'Ir para o projeto'} ${index + 1}`}
+              ></button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
 }
 
 export default Projects
-
