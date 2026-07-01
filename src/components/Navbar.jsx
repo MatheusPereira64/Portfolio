@@ -3,9 +3,55 @@ import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
 import { SITE_PROFILE } from '../constants/siteProfile'
+import FlagIcon from './FlagIcon'
 import './Navbar.css'
 
-const MOBILE_BREAKPOINT = 947
+const MOBILE_BREAKPOINT = 1400
+
+const LANGUAGES = [
+  { code: 'pt', country: 'br', name: 'PT' },
+  { code: 'en', country: 'us', name: 'EN' },
+  { code: 'es', country: 'es', name: 'ES' },
+]
+
+const LanguageSelector = ({ isOpen, onToggle, onSelect, language }) => {
+  const currentLang = LANGUAGES.find((lang) => lang.code === language) || LANGUAGES[0]
+
+  return (
+    <div className="language-selector">
+      <button
+        type="button"
+        className="language-button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-label={`Language: ${currentLang.name}`}
+      >
+        <FlagIcon country={currentLang.country} />
+        <span className="lang-code">{currentLang.name}</span>
+        <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} aria-hidden="true"></i>
+      </button>
+      {isOpen && (
+        <div className="language-dropdown" role="listbox">
+          {LANGUAGES.map((lang) => (
+            <button
+              key={lang.code}
+              type="button"
+              className={`language-option ${language === lang.code ? 'active' : ''}`}
+              onClick={() => onSelect(lang.code)}
+              role="option"
+              aria-selected={language === lang.code}
+            >
+              <FlagIcon country={lang.country} />
+              <span className="lang-code">{lang.name}</span>
+              {language === lang.code && <i className="fas fa-check" aria-hidden="true"></i>}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false)
@@ -18,14 +64,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme()
   const t = translations[language]
   const langRef = useRef(null)
-
-  const languages = [
-    { code: 'pt', flag: '🇧🇷', name: 'PT' },
-    { code: 'en', flag: '🇺🇸', name: 'EN' },
-    { code: 'es', flag: '🇪🇸', name: 'ES' }
-  ]
-
-  const currentLang = languages.find(lang => lang.code === language) || languages[0]
+  const menuBtnRef = useRef(null)
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
@@ -79,26 +118,40 @@ const Navbar = () => {
     }
   }, [isMobile])
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsLangOpen(false)
+    }
+  }, [isMenuOpen])
+
   const closeMenu = () => {
     setIsMenuOpen(false)
     setIsLangOpen(false)
+    requestAnimationFrame(() => {
+      menuBtnRef.current?.focus()
+    })
   }
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault()
     const element = document.getElementById(sectionId)
     if (element) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur()
+      }
       element.scrollIntoView({ behavior: 'smooth' })
       closeMenu()
     }
   }
+
+  const handleLangToggle = () => setIsLangOpen((open) => !open)
 
   const handleLangSelect = (langCode) => {
     setLanguage(langCode)
     setIsLangOpen(false)
   }
 
-  const menuItems = (
+  const navLinks = (
     <>
       <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>{t.nav.home}</a></li>
       <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{t.nav.about}</a></li>
@@ -109,49 +162,19 @@ const Navbar = () => {
       <li><a href="#stats" onClick={(e) => scrollToSection(e, 'stats')} aria-label={t.nav.stats || 'Estatísticas'}>{t.nav.stats || 'Estatísticas'}</a></li>
       <li><a href="#blog" onClick={(e) => scrollToSection(e, 'blog')} aria-label={t.nav.blog || 'Blog'}>{t.nav.blog || 'Blog'}</a></li>
       <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} aria-label={t.nav.contact}>{t.nav.contact}</a></li>
-      <li className="theme-toggle">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="theme-button"
-          aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
-          title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
-        >
-          <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`}></i>
-        </button>
-      </li>
-      <li className="language-selector" ref={langRef}>
-        <div
-          className="language-button"
-          onClick={() => setIsLangOpen(!isLangOpen)}
-          onKeyDown={(e) => e.key === 'Enter' && setIsLangOpen(!isLangOpen)}
-          role="button"
-          tabIndex={0}
-        >
-          <span className="lang-flag">{currentLang.flag}</span>
-          <span className="lang-code">{currentLang.name}</span>
-          <i className={`fas fa-chevron-${isLangOpen ? 'up' : 'down'}`}></i>
-        </div>
-        {isLangOpen && (
-          <div className="language-dropdown">
-            {languages.map((lang) => (
-              <div
-                key={lang.code}
-                className={`language-option ${language === lang.code ? 'active' : ''}`}
-                onClick={() => handleLangSelect(lang.code)}
-                onKeyDown={(e) => e.key === 'Enter' && handleLangSelect(lang.code)}
-                role="button"
-                tabIndex={0}
-              >
-                <span className="lang-flag">{lang.flag}</span>
-                <span className="lang-code">{lang.name}</span>
-                {language === lang.code && <i className="fas fa-check"></i>}
-              </div>
-            ))}
-          </div>
-        )}
-      </li>
     </>
+  )
+
+  const themeToggleButton = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className="theme-button"
+      aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
+      title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
+    >
+      <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`}></i>
+    </button>
   )
 
   const mobileMenuPortal = isMobile && createPortal(
@@ -164,9 +187,11 @@ const Navbar = () => {
       />
       <ul
         className={`menu-mobile${isMenuOpen ? ' active' : ''}`}
-        aria-hidden={!isMenuOpen}
+        aria-hidden={isMenuOpen ? undefined : true}
+        inert={isMenuOpen ? undefined : ''}
       >
-        {menuItems}
+        {navLinks}
+        <li className="theme-toggle">{themeToggleButton}</li>
       </ul>
     </>,
     document.body
@@ -180,20 +205,36 @@ const Navbar = () => {
             <span>Portfolio</span>
           </a>
         </div>
+
         {!isMobile && (
           <ul className="menu menu-desktop">
-            {menuItems}
+            {navLinks}
           </ul>
         )}
-        <button
-          type="button"
-          className="menu-btn"
-          aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-          aria-expanded={isMenuOpen}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-        </button>
+
+        <div className="navbar-actions" ref={langRef}>
+          {!isMobile && (
+            <div className="theme-toggle">{themeToggleButton}</div>
+          )}
+          <LanguageSelector
+            isOpen={isLangOpen}
+            onToggle={handleLangToggle}
+            onSelect={handleLangSelect}
+            language={language}
+          />
+          {isMobile && (
+            <button
+              type="button"
+              ref={menuBtnRef}
+              className="menu-btn"
+              aria-label={isMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+            </button>
+          )}
+        </div>
       </div>
       {mobileMenuPortal}
     </nav>

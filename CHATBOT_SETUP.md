@@ -1,48 +1,32 @@
-# 🤖 Configuração do Chatbot com IA
+# 🤖 Configuração do Chatbot
 
-O chatbot do portfólio pode funcionar de duas formas:
+## Modos de funcionamento
 
-## 1. Modo Padrão (Sem IA)
-- Usa respostas pré-programadas
-- Funciona imediatamente sem configuração
-- Responde sobre: Contato, LinkedIn, GitHub, Projetos, Habilidades
+### Respostas instantâneas (sempre activas)
+- Contacto, CV, LinkedIn, GitHub, WhatsApp, projetos, experiência, formação, idiomas, disponibilidade
+- Navegação dentro do site (scroll para secções)
+- Formulário de contacto com assunto pré-preenchido
 
-## 2. Modo com IA (Google Gemini)
-- Respostas inteligentes e contextuais
-- Gratuito até 60 requisições por minuto
-- Requer configuração de API Key
+### Modo IA (Google Gemini)
+- Perguntas abertas (ex.: “What React projects have you built?”)
+- Limite: **10 mensagens IA por sessão** (sessionStorage)
+- Fallback automático se a IA falhar ou não estiver configurada
 
-### Como Configurar:
+## Configuração local
 
-1. **Obter API Key gratuita:**
-   - Acesse: https://makersuite.google.com/app/apikey
-   - Faça login com sua conta Google
-   - Clique em "Create API Key"
-   - Copie a chave gerada
+1. Copie `.env.example` → `.env`
+2. Adicione `VITE_GEMINI_API_KEY` ([Google AI Studio](https://aistudio.google.com/app/apikey))
+3. `npm run dev`
 
-2. **Configurar no projeto:**
-   - Crie um arquivo `.env` na **raiz do repositório** (ao lado de `package.json`)
-   - Adicione a linha:
-   ```
-   VITE_GEMINI_API_KEY=sua_chave_aqui
-   ```
-   - Substitua `sua_chave_aqui` pela chave que você copiou
+## Produção — proxy recomendado
 
-3. **Reinicie o servidor de desenvolvimento:**
-   ```bash
-   npm run dev
-   ```
+A chave no frontend (`VITE_*`) fica visível no bundle. Para produção:
 
-### ⚠️ Importante:
+1. Deploy do exemplo em `api/gemini-proxy.example.mjs` (Cloudflare Worker, Vercel Function, etc.)
+2. Defina o secret `GEMINI_API_KEY` no servidor
+3. No `.env` / GitHub Secrets: `VITE_GEMINI_PROXY_URL=https://seu-proxy...`
+4. Remova ou deixe vazio `VITE_GEMINI_API_KEY` no build de produção
 
-- **Para produção**: A API key será exposta no código frontend. Para maior segurança, considere criar um backend proxy.
-- **Limites gratuitos**: Google Gemini oferece 60 requisições por minuto no tier gratuito.
-- **Fallback automático**: Se a API falhar ou não estiver configurada, o chatbot usa respostas pré-programadas.
+## Base de conhecimento
 
-### Alternativas Gratuitas:
-
-Se preferir outras opções de IA gratuita:
-- **Hugging Face Inference API**: Modelos gratuitos
-- **Cohere**: Tier gratuito disponível
-- **OpenAI API**: Créditos gratuitos limitados
-
+Edite `src/data/assistantKnowledge.js` — experiência, formação, projetos e skills usados pelo assistente e pela IA.

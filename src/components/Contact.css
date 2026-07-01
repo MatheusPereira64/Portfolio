@@ -56,6 +56,23 @@
   margin-bottom: 20px;
 }
 
+.cv-download-group {
+  margin-bottom: 30px;
+}
+
+.cv-download-label {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 12px;
+  color: inherit;
+}
+
+.cv-download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .cv-download-btn {
   display: inline-flex;
   align-items: center;
@@ -69,7 +86,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 30px;
   box-shadow: 0 5px 15px rgba(220, 20, 60, 0.3);
 }
 
