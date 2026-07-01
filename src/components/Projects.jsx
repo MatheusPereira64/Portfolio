@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { PROJECTS, getLocalizedField } from '../data/projects'
+import { PROJECTS, getLocalizedField, getProjectCertificateHref } from '../data/projects'
 import './Projects.css'
 
 const Projects = () => {
@@ -86,6 +86,18 @@ const Projects = () => {
                     </li>
                   ))}
                 </ul>
+                {project.certificate && (
+                  <a
+                    href={getProjectCertificateHref(project.certificate)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-certificate-link"
+                    aria-label={`${t.projects?.viewCertificate || 'Ver certificado'} — ${project.title}`}
+                  >
+                    <i className="fas fa-award" aria-hidden="true"></i>
+                    {t.projects?.viewCertificate || 'Ver certificado CRPC-INPI'}
+                  </a>
+                )}
               </div>
             </article>
           ))}

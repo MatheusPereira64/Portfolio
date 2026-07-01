@@ -23,6 +23,7 @@ export const PROJECTS = [
       'Data Analytics',
       'Industry 4.0',
     ],
+    certificate: 'certificado-crpc-inpi-01.pdf',
   },
   {
     id: 2,
@@ -46,6 +47,7 @@ export const PROJECTS = [
       'Data Analytics',
       'Industry 4.0',
     ],
+    certificate: 'certificado-crpc-inpi-02.pdf',
   },
   {
     id: 3,
@@ -69,8 +71,14 @@ export const PROJECTS = [
       'Data Visualization',
       'Industry 4.0',
     ],
+    certificate: 'certificado-crpc-inpi-03.pdf',
   },
 ]
+
+export function getProjectCertificateHref(filename) {
+  if (!filename) return null
+  return `${import.meta.env.BASE_URL}certificados/${encodeURIComponent(filename)}`
+}
 
 export function getLocalizedField(field, language) {
   if (!field) return ''

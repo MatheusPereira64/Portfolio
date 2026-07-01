@@ -61,7 +61,10 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'Meus Projetos',
-        subtitle: 'Projetos em destaque'
+        subtitle: 'Projetos em destaque',
+        viewCertificate: 'Ver certificado CRPC-INPI',
+        technologies: 'Tecnologias',
+        goToProject: 'Ir para o projeto',
       },
       experience: {
         title: 'Experiência',
@@ -136,7 +139,10 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'My Projects',
-        subtitle: 'Featured projects'
+        subtitle: 'Featured projects',
+        viewCertificate: 'View CRPC-INPI certificate',
+        technologies: 'Technologies',
+        goToProject: 'Go to project',
       },
       experience: {
         title: 'Experience',
@@ -211,7 +217,10 @@ export const LanguageProvider = ({ children }) => {
       },
       projects: {
         title: 'Mis Proyectos',
-        subtitle: 'Proyectos destacados'
+        subtitle: 'Proyectos destacados',
+        viewCertificate: 'Ver certificado CRPC-INPI',
+        technologies: 'Tecnologías',
+        goToProject: 'Ir al proyecto',
       },
       experience: {
         title: 'Experiencia',
