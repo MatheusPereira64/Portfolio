@@ -73,15 +73,15 @@ const knowledge = {
     },
     experience: [
       {
-        period: '2024 — Atual',
-        title: 'Software Engineer & Project Manager',
-        company: 'Projetos de Pesquisa ITEGAM',
+        period: '2025 — 2026',
+        title: 'Desenvolvedor Full Stack',
+        company: 'ITEGAM',
         summary:
-          'Desenvolvimento de soluções Industry 4.0, sistemas inteligentes de monitoramento, aplicações com IA, dashboards industriais e projetos de transformação digital.',
-        technologies: ['React', 'TypeScript', 'JavaScript', 'PHP', 'SQL', 'REST APIs', 'AI', 'Industry 4.0'],
+          'Atuação em projetos de PD&I para Indústria 4.0: aplicações web, APIs, monitoramento e gestão de processos industriais. Frontend e backend, integrações com equipamentos e IoT, dados em tempo real, dashboards e indicadores (OEE, FPY, produtividade e qualidade). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis e Docker.',
+        technologies: ['React', 'Vue.js', 'TypeScript', 'Node.js', 'Python', 'Java', 'PostgreSQL', 'Redis', 'Docker'],
       },
       {
-        period: '2024 — Atual',
+        period: '2024',
         title: 'Desenvolvedor Full Stack',
         company: 'Projetos Pessoais e Freelancer',
         summary:
@@ -195,15 +195,15 @@ const knowledge = {
     },
     experience: [
       {
-        period: '2024 — Present',
-        title: 'Software Engineer & Project Manager',
-        company: 'ITEGAM Research Projects',
+        period: '2025 — 2026',
+        title: 'Full Stack Developer',
+        company: 'ITEGAM',
         summary:
-          'Development of Industry 4.0 solutions, intelligent monitoring systems, AI-powered applications, industrial dashboards, and digital transformation projects.',
-        technologies: ['React', 'TypeScript', 'JavaScript', 'PHP', 'SQL', 'REST APIs', 'AI', 'Industry 4.0'],
+          'R&D projects for Industry 4.0: web apps, APIs, and industrial process monitoring. Frontend and backend work, equipment and IoT integrations, real-time data, dashboards and KPIs (OEE, FPY, productivity and quality). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis and Docker.',
+        technologies: ['React', 'Vue.js', 'TypeScript', 'Node.js', 'Python', 'Java', 'PostgreSQL', 'Redis', 'Docker'],
       },
       {
-        period: '2024 — Present',
+        period: '2024',
         title: 'Full Stack Developer',
         company: 'Personal Projects & Freelancer',
         summary: 'Web apps with React, Node.js, REST APIs, and integrations (EmailJS, GitHub Pages).',
@@ -316,15 +316,15 @@ const knowledge = {
     },
     experience: [
       {
-        period: '2024 — Actual',
-        title: 'Software Engineer & Project Manager',
-        company: 'Proyectos de Investigación ITEGAM',
+        period: '2025 — 2026',
+        title: 'Desarrollador Full Stack',
+        company: 'ITEGAM',
         summary:
-          'Desarrollo de soluciones Industry 4.0, sistemas de monitoreo inteligente, aplicaciones con IA, dashboards industriales y proyectos de transformación digital.',
-        technologies: ['React', 'TypeScript', 'JavaScript', 'PHP', 'SQL', 'REST APIs', 'AI', 'Industry 4.0'],
+          'Proyectos de I+D para Industria 4.0: aplicaciones web, APIs y monitoreo de procesos industriales. Frontend y backend, integraciones con equipos e IoT, datos en tiempo real, dashboards e indicadores (OEE, FPY, productividad y calidad). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis y Docker.',
+        technologies: ['React', 'Vue.js', 'TypeScript', 'Node.js', 'Python', 'Java', 'PostgreSQL', 'Redis', 'Docker'],
       },
       {
-        period: '2024 — Actual',
+        period: '2024',
         title: 'Desarrollador Full Stack',
         company: 'Proyectos Personales y Freelancer',
         summary:

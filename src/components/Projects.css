@@ -116,6 +116,9 @@
 }
 
 .project-tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
@@ -123,6 +126,13 @@
   font-size: 11px;
   font-weight: 600;
   padding: 5px 11px;
+}
+
+.project-tech-tag .skill-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1;
 }
 
 .project-certificate-link {

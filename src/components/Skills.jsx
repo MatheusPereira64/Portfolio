@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import SkillIcon from './SkillIcon'
 import './Skills.css'
 
 const Skills = () => {
@@ -99,7 +100,10 @@ const Skills = () => {
             {skills.map((skill, index) => (
               <div key={skill.name} className="bars">
                 <div className="info">
-                  <span>{skill.name}</span>
+                  <span className="skill-name">
+                    <SkillIcon name={skill.name} />
+                    {skill.name}
+                  </span>
                   <span>{skill.percentage}%</span>
                 </div>
                 <div

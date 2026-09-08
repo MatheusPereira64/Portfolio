@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { PROJECTS, getLocalizedField, getProjectCertificateHref } from '../data/projects'
+import SkillIcon from './SkillIcon'
 import './Projects.css'
 
 const Projects = () => {
@@ -82,6 +83,7 @@ const Projects = () => {
                 <ul className="project-tech-list" aria-label={t.projects?.technologies || 'Tecnologias'}>
                   {project.technologies.map((tech) => (
                     <li key={tech} className="project-tech-tag">
+                      <SkillIcon name={tech} />
                       {tech}
                     </li>
                   ))}

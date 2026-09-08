@@ -127,6 +127,20 @@
   font-size: 18px;
 }
 
+.skills .skill-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skills .skill-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 20px;
+  line-height: 1;
+}
+
 .skills .skills-content .right .line {
   height: 5px;
   width: 100%;
