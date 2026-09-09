@@ -96,6 +96,46 @@
   border-radius: 10px;
 }
 
+.project-modal-github {
+  margin-top: 8px;
+}
+
+.project-modal-github-list {
+  display: grid;
+  gap: 12px;
+}
+
+.project-modal-github-link {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.project-modal-github-link img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  background: #111;
+}
+
+.project-modal-github-link span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px 12px;
+  font-weight: 600;
+  color: #ffd700;
+}
+
+.project-modal-github-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .project-modal-cert {
   display: inline-flex;
   align-items: center;

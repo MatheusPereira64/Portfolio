@@ -75,6 +75,8 @@ export const LanguageProvider = ({ children }) => {
         results: 'Resultados',
         screenshots: 'Prévia',
         certifications: 'Certificações',
+        viewOnGithub: 'Ver no GitHub',
+        githubReposTitle: 'Repositórios no GitHub',
       },
       experience: {
         title: 'Experiência',
@@ -164,6 +166,8 @@ export const LanguageProvider = ({ children }) => {
         results: 'Results',
         screenshots: 'Preview',
         certifications: 'Certifications',
+        viewOnGithub: 'View on GitHub',
+        githubReposTitle: 'GitHub repositories',
       },
       experience: {
         title: 'Experience',
@@ -253,6 +257,8 @@ export const LanguageProvider = ({ children }) => {
         results: 'Resultados',
         screenshots: 'Vista previa',
         certifications: 'Certificaciones',
+        viewOnGithub: 'Ver en GitHub',
+        githubReposTitle: 'Repositorios en GitHub',
       },
       experience: {
         title: 'Experiencia',

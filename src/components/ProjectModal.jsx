@@ -1,8 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { getLocalizedField, getProjectCertificateHref } from '../data/projects'
+import { getLocalizedField, getProjectCertificateHref, getProjectGithubRepos } from '../data/projects'
 import SkillIcon from './SkillIcon'
-import GitHubRepos from './GitHubRepos'
 import './ProjectModal.css'
 
 const ProjectModal = ({ project, onClose }) => {
@@ -30,6 +29,7 @@ const ProjectModal = ({ project, onClose }) => {
 
   const title = getLocalizedField(project.title, language)
   const certificateHref = getProjectCertificateHref(project.certificate)
+  const githubRepos = getProjectGithubRepos(project)
 
   return (
     <div className="project-modal-backdrop" onClick={onClose} role="presentation">
@@ -90,6 +90,29 @@ const ProjectModal = ({ project, onClose }) => {
           </section>
         )}
 
+        {githubRepos.length > 0 && (
+          <section className="project-modal-github">
+            <h3>GitHub</h3>
+            <div className="project-modal-github-list">
+              {githubRepos.map((repo) => (
+                <a
+                  key={repo.url}
+                  className="project-modal-github-link"
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {repo.og && <img src={repo.og} alt="" loading="lazy" />}
+                  <span>
+                    <i className="fab fa-github" aria-hidden="true"></i>
+                    {t.projects?.viewOnGithub || 'GitHub'} — {repo.name}
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
+
         {certificateHref && (
           <a
             className="project-modal-cert"
@@ -101,8 +124,6 @@ const ProjectModal = ({ project, onClose }) => {
             {t.projects?.viewCertificate || 'Ver certificado CRPC-INPI'}
           </a>
         )}
-
-        <GitHubRepos />
       </div>
     </div>
   )

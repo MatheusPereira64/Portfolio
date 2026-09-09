@@ -6,8 +6,9 @@ import './GitHubRepos.css'
 
 const HIDDEN = new Set(['portfolio', 'matheuspereira64'])
 
-const GitHubRepos = () => {
-  const { language } = useLanguage()
+const GitHubRepos = ({ variant = 'section' }) => {
+  const { language, translations } = useLanguage()
+  const t = translations[language]
   const [repos, setRepos] = useState([])
   const [status, setStatus] = useState('loading')
 
@@ -32,14 +33,10 @@ const GitHubRepos = () => {
     return () => { cancelled = true }
   }, [])
 
-  const title = language === 'pt'
-    ? 'Outros projetos no GitHub'
-    : language === 'es'
-      ? 'Otros proyectos en GitHub'
-      : 'Other projects on GitHub'
+  const title = t.projects?.githubReposTitle || 'GitHub'
 
   return (
-    <section className="github-repos">
+    <section className={`github-repos github-repos--${variant}`}>
       <h3>{title}</h3>
       {status === 'loading' && <p className="github-repos-status">…</p>}
       {status === 'error' && (

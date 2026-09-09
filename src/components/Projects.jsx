@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { PROJECTS, getLocalizedField } from '../data/projects'
+import { PROJECTS, getLocalizedField, getProjectGithubRepos } from '../data/projects'
 import SkillIcon from './SkillIcon'
 import ProjectModal from './ProjectModal'
+import GitHubRepos from './GitHubRepos'
 import './Projects.css'
 
 const Projects = () => {
@@ -124,6 +125,18 @@ const Projects = () => {
                 <span className="project-open-hint">
                   {t.projects?.openDetails || 'Ver detalhes'}
                 </span>
+                {getProjectGithubRepos(project)[0] && (
+                  <a
+                    className="project-github-link"
+                    href={getProjectGithubRepos(project)[0].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <i className="fab fa-github" aria-hidden="true"></i>
+                    {t.projects?.viewOnGithub || 'GitHub'}
+                  </a>
+                )}
               </div>
             </article>
           ))}
@@ -141,6 +154,7 @@ const Projects = () => {
             ))}
           </div>
         )}
+        <GitHubRepos variant="section" />
       </div>
       {openProjectData && (
         <ProjectModal project={openProjectData} onClose={closeProject} />
