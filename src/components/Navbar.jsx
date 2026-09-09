@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
@@ -6,7 +6,7 @@ import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
 import FlagIcon from './FlagIcon'
 import './Navbar.css'
 
-const MOBILE_BREAKPOINT = 1400
+const COMPACT_BREAKPOINT = 1200
 
 const LANGUAGES = [
   { code: 'pt', country: 'br', name: 'PT' },
@@ -57,22 +57,40 @@ const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`).matches
+  const [isCompact, setIsCompact] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(`(max-width: ${COMPACT_BREAKPOINT}px)`).matches
   )
   const { language, setLanguage, translations } = useLanguage()
   const { theme, toggleTheme } = useTheme()
   const t = translations[language]
   const langRef = useRef(null)
   const menuBtnRef = useRef(null)
+  const shellRef = useRef(null)
+  const measureRef = useRef(null)
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`)
-    const updateMobile = () => setIsMobile(mediaQuery.matches)
-    updateMobile()
-    mediaQuery.addEventListener('change', updateMobile)
-    return () => mediaQuery.removeEventListener('change', updateMobile)
-  }, [])
+  useLayoutEffect(() => {
+    const shell = shellRef.current
+    const measure = measureRef.current
+    if (!shell || !measure) return undefined
+
+    const mediaQuery = window.matchMedia(`(max-width: ${COMPACT_BREAKPOINT}px)`)
+
+    const updateCompact = () => {
+      const tooNarrow = mediaQuery.matches
+      const overflows = measure.scrollWidth > shell.clientWidth - 16
+      setIsCompact(tooNarrow || overflows)
+    }
+
+    updateCompact()
+    const observer = new ResizeObserver(updateCompact)
+    observer.observe(shell)
+    observer.observe(measure)
+    mediaQuery.addEventListener('change', updateCompact)
+    return () => {
+      observer.disconnect()
+      mediaQuery.removeEventListener('change', updateCompact)
+    }
+  }, [language])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,10 +131,10 @@ const Navbar = () => {
   }, [isMenuOpen])
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!isCompact) {
       setIsMenuOpen(false)
     }
-  }, [isMobile])
+  }, [isCompact])
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -151,21 +169,28 @@ const Navbar = () => {
     setIsLangOpen(false)
   }
 
-  const navLinks = (
-    <>
-      <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>{t.nav.home}</a></li>
-      <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{t.nav.about}</a></li>
-      <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')} aria-label={t.nav.services}>{t.nav.services}</a></li>
-      <li><a href="#skills" onClick={(e) => scrollToSection(e, 'skills')} aria-label={t.nav.skills}>{t.nav.skills}</a></li>
-      <li><a href="#experience" onClick={(e) => scrollToSection(e, 'experience')} aria-label={t.nav.experience || 'Experiência'}>{t.nav.experience || 'Experiência'}</a></li>
-      <li><a href="#teams" onClick={(e) => scrollToSection(e, 'teams')} aria-label={t.nav.projects}>{t.nav.projects}</a></li>
-      <li><a href="#stats" onClick={(e) => scrollToSection(e, 'stats')} aria-label={t.nav.stats || 'Estatísticas'}>{t.nav.stats || 'Estatísticas'}</a></li>
-      <li><a href="#blog" onClick={(e) => scrollToSection(e, 'blog')} aria-label={t.nav.blog || 'Blog'}>{t.nav.blog || 'Blog'}</a></li>
-      <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')} aria-label={t.nav.contact}>{t.nav.contact}</a></li>
-    </>
-  )
+  const navItems = [
+    { id: 'home', label: t.nav.home },
+    { id: 'about', label: t.nav.about },
+    { id: 'services', label: t.nav.services },
+    { id: 'skills', label: t.nav.skills },
+    { id: 'experience', label: t.nav.experience || 'Experiência' },
+    { id: 'teams', label: t.nav.projects },
+    { id: 'stats', label: t.nav.stats || 'Estatísticas' },
+    { id: 'blog', label: t.nav.blog || 'Blog' },
+    { id: 'contact', label: t.nav.contact },
+  ]
 
-  const themeToggleButton = (
+  const renderNavLinks = () =>
+    navItems.map((item) => (
+      <li key={item.id}>
+        <a href={`#${item.id}`} onClick={(e) => scrollToSection(e, item.id)} aria-label={item.label}>
+          {item.label}
+        </a>
+      </li>
+    ))
+
+  const renderThemeButton = () => (
     <button
       type="button"
       onClick={toggleTheme}
@@ -178,7 +203,7 @@ const Navbar = () => {
   )
 
   const cvDownloadLabel = t.nav.downloadCv || 'Download résumé'
-  const cvButton = (
+  const renderCvButton = () => (
     <button
       type="button"
       onClick={() => {
@@ -193,7 +218,7 @@ const Navbar = () => {
     </button>
   )
 
-  const mobileMenuPortal = isMobile && createPortal(
+  const mobileMenuPortal = isCompact && createPortal(
     <>
       <button
         type="button"
@@ -204,36 +229,50 @@ const Navbar = () => {
       <ul
         className={`menu-mobile${isMenuOpen ? ' active' : ''}`}
         aria-hidden={isMenuOpen ? undefined : true}
-        inert={isMenuOpen ? undefined : ''}
+        {...(isMenuOpen ? {} : { inert: '' })}
       >
-        {navLinks}
-        <li className="theme-toggle">{cvButton}</li>
-        <li className="theme-toggle">{themeToggleButton}</li>
+        {renderNavLinks()}
+        <li className="theme-toggle">{renderCvButton()}</li>
+        <li className="theme-toggle">{renderThemeButton()}</li>
       </ul>
     </>,
     document.body
   )
 
   return (
-    <nav className={`navbar ${isSticky ? 'sticky' : ''} ${isMenuOpen && isMobile ? 'menu-open' : ''}`}>
-      <div className="max-width">
+    <nav className={`navbar ${isSticky ? 'sticky' : ''} ${isCompact ? 'is-compact' : ''} ${isMenuOpen && isCompact ? 'menu-open' : ''}`}>
+      <div className="navbar-measure" ref={measureRef} aria-hidden="true" inert="">
+        <div className="logo">
+          <a tabIndex={-1}>
+            <span>Portfolio</span>
+          </a>
+        </div>
+        <ul className="menu menu-desktop">{renderNavLinks()}</ul>
+        <div className="navbar-actions">
+          <div className="theme-toggle">{renderCvButton()}</div>
+          <div className="theme-toggle">{renderThemeButton()}</div>
+          <LanguageSelector isOpen={false} onToggle={() => {}} onSelect={() => {}} language={language} />
+        </div>
+      </div>
+
+      <div className="max-width" ref={shellRef}>
         <div className="logo">
           <a href={SITE_PROFILE.linkedin} target="_blank" rel="noopener noreferrer">
             <span>Portfolio</span>
           </a>
         </div>
 
-        {!isMobile && (
+        {!isCompact && (
           <ul className="menu menu-desktop">
-            {navLinks}
+            {renderNavLinks()}
           </ul>
         )}
 
         <div className="navbar-actions" ref={langRef}>
-          {!isMobile && (
+          {!isCompact && (
             <>
-              <div className="theme-toggle">{cvButton}</div>
-              <div className="theme-toggle">{themeToggleButton}</div>
+              <div className="theme-toggle">{renderCvButton()}</div>
+              <div className="theme-toggle">{renderThemeButton()}</div>
             </>
           )}
           <LanguageSelector
@@ -242,7 +281,7 @@ const Navbar = () => {
             onSelect={handleLangSelect}
             language={language}
           />
-          {isMobile && (
+          {isCompact && (
             <button
               type="button"
               ref={menuBtnRef}

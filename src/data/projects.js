@@ -1,4 +1,7 @@
-/** Projetos em destaque — Indústria 4.0 (ITEGAM / CRPC-INPI) */
+/** Projetos em destaque — Indústria 4.0 (ITEGAM / CRPC-INPI).
+ *  Para ligar um card a um repositório: github: 'NomeDoRepo'
+ *  ou github: 'https://github.com/MatheusPereira64/NomeDoRepo'
+ */
 export const PROJECTS = [
   {
     id: 1,
@@ -135,8 +138,37 @@ export const PROJECTS = [
 export const GITHUB_USER = 'MatheusPereira64'
 export const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`
 
-export function getGithubOgImage(repoName) {
-  return `https://opengraph.githubassets.com/1/${GITHUB_USER}/${repoName}`
+export function getGithubOgImage(repoName, owner = GITHUB_USER) {
+  return `https://opengraph.githubassets.com/1/${owner}/${repoName}`
+}
+
+/** Aceita nome do repo (`WinCare`) ou URL (`https://github.com/user/repo`). */
+export function getProjectGithubRepos(project) {
+  const raw = project?.github
+  if (!raw) return []
+  const list = Array.isArray(raw) ? raw : [raw]
+  return list
+    .map((item) => {
+      if (typeof item !== 'string' || !item.trim()) return null
+      const value = item.trim()
+      const remote = value.match(/github\.com\/([^/]+)\/([^/#?]+)/i)
+      if (remote) {
+        const owner = remote[1]
+        const name = remote[2].replace(/\.git$/, '')
+        return {
+          name,
+          url: `https://github.com/${owner}/${name}`,
+          og: getGithubOgImage(name, owner),
+        }
+      }
+      const name = value.replace(/\.git$/, '')
+      return {
+        name,
+        url: `https://github.com/${GITHUB_USER}/${name}`,
+        og: getGithubOgImage(name),
+      }
+    })
+    .filter(Boolean)
 }
 
 export function getProjectCertificateHref(filename) {
