@@ -13,6 +13,12 @@ export const SITE_PROFILE = {
   linkedinActivity: 'https://www.linkedin.com/in/matheus-pereira64/recent-activity/all/',
   github: 'https://github.com/MatheusPereira64',
   portfolioUrl: 'https://matheuspereira64.github.io/Portfolio/',
+  /**
+   * Domínio no Plausible (ex.: matheuspereira64.github.io).
+   * Crie a conta em https://plausible.io e confirme o domínio.
+   * Pode sobrescrever com VITE_PLAUSIBLE_DOMAIN.
+   */
+  plausibleDomain: 'matheuspereira64.github.io',
 }
 
 export const CV_FILES = {

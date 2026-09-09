@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
 import { SITE_PROFILE } from '../constants/siteProfile'
@@ -11,17 +12,45 @@ const Blog = () => {
     threshold: 0.1,
     triggerOnce: true
   })
+  const [previews, setPreviews] = useState({})
 
-  const hasPosts = LINKEDIN_POSTS.length > 0
+  useEffect(() => {
+    const urls = [...new Set(LINKEDIN_POSTS.map((post) => post.linkedinUrl).filter(Boolean))]
+    urls.forEach((url) => {
+      fetch(`https://api.microlink.io/?url=${encodeURIComponent(url)}`)
+        .then((res) => res.json())
+        .then((payload) => {
+          const data = payload?.data
+          if (!data) return
+          setPreviews((prev) => ({
+            ...prev,
+            [url]: {
+              image: data.image?.url,
+              title: data.title,
+              description: data.description,
+            },
+          }))
+        })
+        .catch(() => {})
+    })
+  }, [])
 
   return (
     <section className="blog" id="blog" data-lang={language} ref={ref}>
       <div className="max-width">
         <h2 className="title">{t.blog?.title || 'Blog & Artigos'}</h2>
+        <p className="blog-note">
+          {language === 'pt'
+            ? 'O LinkedIn não deixa um site estático ler o feed sozinho. A prévia abaixo usa o Open Graph do link; para um post específico, cole a URL em linkedinPosts.js (⋯ → Copiar link).'
+            : language === 'es'
+              ? 'LinkedIn no permite leer el feed desde un sitio estático. La previa usa Open Graph del enlace; para un post concreto, pega la URL en linkedinPosts.js.'
+              : 'LinkedIn does not let a static site read your feed. Previews use Open Graph from the link; for a specific post, paste the URL into linkedinPosts.js (⋯ → Copy link).'}
+        </p>
 
-        {hasPosts ? (
-          <div className={`blog-grid ${inView ? 'animate' : ''}`}>
-            {LINKEDIN_POSTS.map((post, index) => (
+        <div className={`blog-grid ${inView ? 'animate' : ''}`}>
+          {LINKEDIN_POSTS.map((post, index) => {
+            const preview = previews[post.linkedinUrl]
+            return (
               <a
                 key={post.id}
                 href={post.linkedinUrl}
@@ -29,8 +58,10 @@ const Blog = () => {
                 rel="noopener noreferrer"
                 className="blog-card blog-card-link"
                 style={{ animationDelay: `${index * 0.1}s` }}
-                aria-label={`${getLocalizedField(post.title, language)} — ${t.blog?.viewOnLinkedIn || 'Ver no LinkedIn'}`}
               >
+                {preview?.image && (
+                  <img className="blog-preview-image" src={preview.image} alt="" loading="lazy" />
+                )}
                 <div className="blog-card-header">
                   <span className="blog-category">{getLocalizedField(post.category, language)}</span>
                   <span className="blog-linkedin-badge">
@@ -39,7 +70,9 @@ const Blog = () => {
                   </span>
                 </div>
                 <h3 className="blog-title">{getLocalizedField(post.title, language)}</h3>
-                <p className="blog-excerpt">{getLocalizedField(post.excerpt, language)}</p>
+                <p className="blog-excerpt">
+                  {preview?.description || getLocalizedField(post.excerpt, language)}
+                </p>
                 <div className="blog-card-footer">
                   <span className="blog-date">
                     {new Date(post.date).toLocaleDateString(
@@ -51,38 +84,21 @@ const Blog = () => {
                   </span>
                 </div>
               </a>
-            ))}
-          </div>
-        ) : (
-          <div className={`blog-empty ${inView ? 'animate' : ''}`}>
-            <p className="blog-empty-text">
-              {t.blog?.emptyMessage || 'Minhas publicações estão no LinkedIn.'}
-            </p>
-            <a
-              href={SITE_PROFILE.linkedinActivity}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="blog-linkedin-cta"
-            >
-              <i className="fab fa-linkedin" aria-hidden="true"></i>
-              {t.blog?.viewAllOnLinkedIn || 'Ver publicações no LinkedIn'}
-            </a>
-          </div>
-        )}
+            )
+          })}
+        </div>
 
-        {hasPosts && (
-          <div className="blog-footer-link">
-            <a
-              href={SITE_PROFILE.linkedinActivity}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="blog-linkedin-cta blog-linkedin-cta--secondary"
-            >
-              <i className="fab fa-linkedin" aria-hidden="true"></i>
-              {t.blog?.viewAllOnLinkedIn || 'Ver todas no LinkedIn'}
-            </a>
-          </div>
-        )}
+        <div className="blog-footer-link">
+          <a
+            href={SITE_PROFILE.linkedinActivity}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="blog-linkedin-cta blog-linkedin-cta--secondary"
+          >
+            <i className="fab fa-linkedin" aria-hidden="true"></i>
+            {t.blog?.viewAllOnLinkedIn || 'Ver todas no LinkedIn'}
+          </a>
+        </div>
       </div>
     </section>
   )

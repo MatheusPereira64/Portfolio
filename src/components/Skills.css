@@ -179,3 +179,124 @@
   }
 }
 
+.certifications-strip {
+  margin: 0 0 40px;
+}
+
+.certifications-strip h3 {
+  color: #dc143c;
+  font-size: 22px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cert-card {
+  background: #fff;
+  border: 1px solid rgba(220, 20, 60, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(220, 20, 60, 0.08);
+}
+
+.cert-card a,
+.cert-card > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: inherit;
+  min-height: 100%;
+}
+
+.cert-preview-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px;
+  height: 96px;
+}
+
+.cert-preview {
+  width: 72px;
+  height: 96px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #f3f3f3;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.cert-preview--photo {
+  object-fit: contain;
+  background: #fff;
+}
+
+.cert-preview-wrap .cert-preview {
+  position: absolute;
+  inset: 0;
+}
+
+.cert-preview--fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #dc143c;
+  font-size: 22px;
+}
+
+.cert-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.cert-card a:hover {
+  background: rgba(220, 20, 60, 0.04);
+}
+
+.cert-issuer {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #dc143c;
+}
+
+.cert-card strong {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #222;
+}
+
+.cert-year {
+  font-size: 13px;
+  color: #666;
+}
+
+[data-theme="dark"] .cert-card {
+  background: #242424;
+  border-color: rgba(220, 20, 60, 0.35);
+}
+
+[data-theme="dark"] .cert-card strong {
+  color: #fff;
+}
+
+[data-theme="dark"] .cert-preview {
+  background: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .cert-year {
+  color: #bbb;
+}
+

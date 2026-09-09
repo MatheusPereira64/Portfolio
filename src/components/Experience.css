@@ -173,7 +173,19 @@
   color: #666;
   line-height: 1.5;
   font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.experience-results {
+  color: #dc143c;
+  line-height: 1.45;
+  font-size: 12px;
+  font-weight: 600;
   margin: 0 0 12px;
+}
+
+[data-theme="dark"] .experience-results {
+  color: #ff6b81;
 }
 
 [data-theme="dark"] .experience-description {

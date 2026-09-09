@@ -200,3 +200,40 @@ section .title::after {
   }
 }
 
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 10050;
+  padding: 10px 16px;
+  background: #dc143c;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 3px solid #dc143c;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

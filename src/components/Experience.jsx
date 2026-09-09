@@ -36,7 +36,7 @@ const Experience = () => {
     },
     {
       year: '2024',
-      title: language === 'pt' ? 'Desenvolvedor Full Stack' : language === 'es' ? 'Desarrollador Full Stack' : 'Full Stack Developer',
+      title: 'Full Stack Software Engineer',
       company: language === 'pt' ? 'Projetos Pessoais e Freelancer' : language === 'es' ? 'Proyectos Personales y Freelancer' : 'Personal Projects & Freelancer',
       description: language === 'pt'
         ? 'Aplicações web completas com React, Node.js e APIs REST. Portfólios, sistemas de gestão e integrações modernas.'
@@ -48,13 +48,18 @@ const Experience = () => {
     {
       year: language === 'pt' ? '2025 - 2026' : '2025 - 2026',
       current: true,
-      title: language === 'pt' ? 'Desenvolvedor Full Stack' : language === 'es' ? 'Desarrollador Full Stack' : 'Full Stack Developer',
+      title: 'Full Stack Software Engineer',
       company: 'ITEGAM',
       description: language === 'pt'
         ? 'Projetos de PD&I para Indústria 4.0: aplicações web, APIs, monitoramento industrial em tempo real, dashboards (OEE, FPY) e integrações IoT.'
         : language === 'es'
         ? 'Proyectos de I+D para Industria 4.0: aplicaciones web, APIs, monitoreo industrial en tiempo real, dashboards (OEE, FPY) e integraciones IoT.'
         : 'R&D projects for Industry 4.0: web apps, APIs, real-time industrial monitoring, dashboards (OEE, FPY) and IoT integrations.',
+      results: language === 'pt'
+        ? 'Resultados: dashboards de OEE, FPY, produtividade e qualidade; dados em tempo real e integração IoT no chão de fábrica.'
+        : language === 'es'
+        ? 'Resultados: dashboards de OEE, FPY, productividad y calidad; datos en tiempo real e IoT en planta.'
+        : 'Results: OEE, FPY, productivity and quality dashboards; real-time data and IoT on the shop floor.',
       technologies: ['React', 'Vue.js', 'TypeScript', 'Node.js', 'Python', 'Java', 'PostgreSQL', 'Redis', 'Docker']
     }
   ]
@@ -78,6 +83,7 @@ const Experience = () => {
                 <h3 className="experience-role">{exp.title}</h3>
                 <h4 className="experience-company">{exp.company}</h4>
                 <p className="experience-description">{exp.description}</p>
+                {exp.results && <p className="experience-results">{exp.results}</p>}
                 <div className="experience-technologies">
                   {exp.technologies.map((tech) => (
                     <span key={tech} className="tech-tag">

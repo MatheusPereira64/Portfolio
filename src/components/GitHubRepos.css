@@ -1,0 +1,53 @@
+.github-repos {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.github-repos h3 {
+  margin-bottom: 14px;
+}
+
+.github-repos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.github-repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  overflow: hidden;
+  color: #fff;
+}
+
+.github-repo-card img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  background: #111;
+}
+
+.github-repo-card strong,
+.github-repo-card span {
+  padding: 0 10px;
+}
+
+.github-repo-card span {
+  padding-bottom: 10px;
+  color: #ccc;
+  font-size: 13px;
+}
+
+.github-repo-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 700px) {
+  .github-repos-grid {
+    grid-template-columns: 1fr;
+  }
+}

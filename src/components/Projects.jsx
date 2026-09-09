@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { PROJECTS, getLocalizedField, getProjectCertificateHref } from '../data/projects'
+import { PROJECTS, getLocalizedField } from '../data/projects'
 import SkillIcon from './SkillIcon'
+import ProjectModal from './ProjectModal'
 import './Projects.css'
 
 const Projects = () => {
@@ -9,6 +10,7 @@ const Projects = () => {
   const t = translations[language]
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsToShow, setItemsToShow] = useState(3)
+  const [openId, setOpenId] = useState(null)
   const carouselRef = useRef(null)
 
   const projects = useMemo(
@@ -51,6 +53,29 @@ const Projects = () => {
     setCurrentIndex(0)
   }, [language])
 
+  useEffect(() => {
+    const applyHash = () => {
+      const match = window.location.hash.match(/^#project-(\d+)/)
+      setOpenId(match ? Number(match[1]) : null)
+    }
+    applyHash()
+    window.addEventListener('hashchange', applyHash)
+    return () => window.removeEventListener('hashchange', applyHash)
+  }, [])
+
+  const openProject = (id) => {
+    window.location.hash = `project-${id}`
+  }
+
+  const closeProject = () => {
+    if (window.location.hash.startsWith('#project-')) {
+      history.replaceState(null, '', `${window.location.pathname}${window.location.search}#teams`)
+    }
+    setOpenId(null)
+  }
+
+  const openProjectData = projects.find((item) => item.id === openId) || null
+
   const getVisibleProjects = () => {
     const visible = []
     for (let i = 0; i < itemsToShow; i++) {
@@ -68,7 +93,15 @@ const Projects = () => {
         <h2 className="title">{t.projects.title}</h2>
         <div className="carousel owl-carousel" ref={carouselRef}>
           {visibleProjects.map((project, index) => (
-            <article key={`project-${project.id}-${index}`} className="card">
+            <article
+              key={`project-${project.id}-${index}`}
+              className="card"
+              role="button"
+              tabIndex={0}
+              onClick={() => openProject(project.id)}
+              onKeyDown={(event) => event.key === 'Enter' && openProject(project.id)}
+              aria-label={`${t.projects?.openDetails || 'Abrir detalhes'} — ${project.title}`}
+            >
               <div className="box">
                 <img
                   src={project.image}
@@ -88,18 +121,9 @@ const Projects = () => {
                     </li>
                   ))}
                 </ul>
-                {project.certificate && (
-                  <a
-                    href={getProjectCertificateHref(project.certificate)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-certificate-link"
-                    aria-label={`${t.projects?.viewCertificate || 'Ver certificado'} — ${project.title}`}
-                  >
-                    <i className="fas fa-award" aria-hidden="true"></i>
-                    {t.projects?.viewCertificate || 'Ver certificado CRPC-INPI'}
-                  </a>
-                )}
+                <span className="project-open-hint">
+                  {t.projects?.openDetails || 'Ver detalhes'}
+                </span>
               </div>
             </article>
           ))}
@@ -118,6 +142,9 @@ const Projects = () => {
           </div>
         )}
       </div>
+      {openProjectData && (
+        <ProjectModal project={openProjectData} onClose={closeProject} />
+      )}
     </section>
   )
 }

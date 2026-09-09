@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { CERTIFICATIONS, getCertificateHref, getCertificatePreviewSrc, getLocalizedField } from '../data/certifications'
+import CertificatePreview from './CertificatePreview'
 import SkillIcon from './SkillIcon'
 import './Skills.css'
 
@@ -64,11 +66,15 @@ const Skills = () => {
 
   const education = language === 'pt' ? [
     { title: 'Graduado em Engenharia da Computação', institution: 'FAMETRO', period: '2019 - 2024' },
-    { title: 'Inglês Fluente - C1', institution: 'ICBEU', period: '2018' },
+    { title: 'Inglês Fluente - C1', institution: 'ICBEU', period: '2019' },
     { title: 'Lógica e Programação WEB - Full Stack', institution: 'Flexpeak', period: '2023' }
+  ] : language === 'es' ? [
+    { title: 'Graduado en Ingeniería de Computación', institution: 'FAMETRO', period: '2019 - 2024' },
+    { title: 'Inglés fluido - C1', institution: 'ICBEU', period: '2019' },
+    { title: 'Lógica y Programación WEB - Full Stack', institution: 'Flexpeak', period: '2023' }
   ] : [
     { title: 'Graduated in Computer Engineering', institution: 'FAMETRO', period: '2019 - 2024' },
-    { title: 'Fluent English - C1', institution: 'ICBEU', period: '2018' },
+    { title: 'Fluent English - C1', institution: 'ICBEU', period: '2019' },
     { title: 'WEB Logic and Programming - Full Stack', institution: 'Flexpeak', period: '2023' }
   ]
 
@@ -76,6 +82,37 @@ const Skills = () => {
     <section className="skills" id="skills" ref={skillsRef} data-lang={language}>
       <div className="max-width">
         <h2 className="title">{t.skills.title}</h2>
+        <div className="certifications-strip" id="certifications">
+          <h3>{t.skills.certifications || 'Certificações'}</h3>
+          <ul className="certifications-grid">
+            {CERTIFICATIONS.map((cert) => {
+              const href = getCertificateHref(cert)
+              const previewSrc = getCertificatePreviewSrc(cert)
+              const title = getLocalizedField(cert.title, language)
+              const content = (
+                <>
+                  <CertificatePreview src={previewSrc} />
+                  <span className="cert-card-meta">
+                    <span className="cert-issuer">{cert.issuer}</span>
+                    <strong>{title}</strong>
+                    <span className="cert-year">{cert.year}</span>
+                  </span>
+                </>
+              )
+              return (
+                <li key={cert.id} className="cert-card">
+                  {href ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {content}
+                    </a>
+                  ) : (
+                    <div>{content}</div>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
         <div className="skills-content" ref={contentRef}>
           <div className="column left">
             <div className="text">{t.skills.text}</div>

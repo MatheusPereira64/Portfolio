@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
-import { SITE_PROFILE } from '../constants/siteProfile'
+import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
 import FlagIcon from './FlagIcon'
 import './Navbar.css'
 
@@ -177,6 +177,22 @@ const Navbar = () => {
     </button>
   )
 
+  const cvDownloadLabel = t.nav.downloadCv || 'Download résumé'
+  const cvButton = (
+    <button
+      type="button"
+      onClick={() => {
+        triggerCvDownload(language)
+        closeMenu()
+      }}
+      className="theme-button cv-nav-button"
+      aria-label={cvDownloadLabel}
+      title={cvDownloadLabel}
+    >
+      <i className="fas fa-file-download" aria-hidden="true"></i>
+    </button>
+  )
+
   const mobileMenuPortal = isMobile && createPortal(
     <>
       <button
@@ -191,6 +207,7 @@ const Navbar = () => {
         inert={isMenuOpen ? undefined : ''}
       >
         {navLinks}
+        <li className="theme-toggle">{cvButton}</li>
         <li className="theme-toggle">{themeToggleButton}</li>
       </ul>
     </>,
@@ -214,7 +231,10 @@ const Navbar = () => {
 
         <div className="navbar-actions" ref={langRef}>
           {!isMobile && (
-            <div className="theme-toggle">{themeToggleButton}</div>
+            <>
+              <div className="theme-toggle">{cvButton}</div>
+              <div className="theme-toggle">{themeToggleButton}</div>
+            </>
           )}
           <LanguageSelector
             isOpen={isLangOpen}

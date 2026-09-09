@@ -175,6 +175,10 @@
   transform: rotate(20deg) scale(1.1);
 }
 
+.cv-nav-button:hover {
+  transform: scale(1.08);
+}
+
 .language-selector {
   position: relative;
   flex-shrink: 0;

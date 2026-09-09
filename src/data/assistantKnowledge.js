@@ -49,10 +49,10 @@ const knowledge = {
       'Aplicações de Inteligência Artificial',
     ],
     careerGoals:
-      'Busca oportunidades como Frontend Software Engineer, Full Stack Developer, Technical Project Manager ou Industry 4.0 Software Engineer, aplicando tecnologia para melhorar experiências de utilizador, processos de negócio e operações industriais.',
+      'Busca oportunidades como Full Stack Software Engineer, Technical Project Manager ou Industry 4.0 Software Engineer, aplicando tecnologia para melhorar experiências de utilizador, processos de negócio e operações industriais.',
     faq: {
       currentRole:
-        'Matheus atua como Software Engineer e Project Manager, focado em aplicações web, soluções Industry 4.0 e projetos de transformação digital — incluindo projetos de pesquisa no ITEGAM.',
+        'Matheus atua como Full Stack Software Engineer no ITEGAM, focado em aplicações web, soluções Industry 4.0 e projetos de transformação digital.',
       preferredStack:
         'Stack principal: React, TypeScript, JavaScript, PHP, SQL, REST APIs, Git e tecnologias frontend modernas.',
       industryExperience:
@@ -74,7 +74,7 @@ const knowledge = {
     experience: [
       {
         period: '2025 — 2026',
-        title: 'Desenvolvedor Full Stack',
+        title: 'Full Stack Software Engineer',
         company: 'ITEGAM',
         summary:
           'Atuação em projetos de PD&I para Indústria 4.0: aplicações web, APIs, monitoramento e gestão de processos industriais. Frontend e backend, integrações com equipamentos e IoT, dados em tempo real, dashboards e indicadores (OEE, FPY, produtividade e qualidade). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis e Docker.',
@@ -82,7 +82,7 @@ const knowledge = {
       },
       {
         period: '2024',
-        title: 'Desenvolvedor Full Stack',
+        title: 'Full Stack Software Engineer',
         company: 'Projetos Pessoais e Freelancer',
         summary:
           'Aplicações web com React, Node.js, APIs REST e integrações (EmailJS, GitHub Pages).',
@@ -108,7 +108,7 @@ const knowledge = {
     education: [
       { title: 'Bacharelado em Engenharia da Computação', institution: 'FAMETRO', period: '2019 — 2024' },
       { title: 'Análise e Desenvolvimento de Sistemas', institution: 'ITEGAM', period: '2023 — 2024' },
-      { title: 'Inglês Fluente — C1', institution: 'ICBEU', period: '2018' },
+      { title: 'Inglês Fluente — C1', institution: 'ICBEU', period: '2019' },
       { title: 'Lógica e Programação WEB — Full Stack', institution: 'Flexpeak', period: '2023' },
     ],
     languages: [
@@ -172,10 +172,10 @@ const knowledge = {
       'Artificial Intelligence Applications',
     ],
     careerGoals:
-      'Seeking Frontend Software Engineer, Full Stack Developer, Technical Project Manager, or Industry 4.0 Software Engineer opportunities where technology can be leveraged to improve user experiences, business processes, and industrial operations.',
+      'Seeking Full Stack Software Engineer, Technical Project Manager, or Industry 4.0 Software Engineer opportunities where technology can be leveraged to improve user experiences, business processes, and industrial operations.',
     faq: {
       currentRole:
-        'Matheus works as a Software Engineer and Project Manager focused on web applications, Industry 4.0 solutions, and digital transformation projects — including research projects at ITEGAM.',
+        'Matheus works as a Full Stack Software Engineer at ITEGAM, focused on web applications, Industry 4.0 solutions, and digital transformation projects.',
       preferredStack:
         'His primary stack includes React, TypeScript, JavaScript, PHP, SQL, REST APIs, Git, and modern frontend technologies.',
       industryExperience:
@@ -196,7 +196,7 @@ const knowledge = {
     experience: [
       {
         period: '2025 — 2026',
-        title: 'Full Stack Developer',
+        title: 'Full Stack Software Engineer',
         company: 'ITEGAM',
         summary:
           'R&D projects for Industry 4.0: web apps, APIs, and industrial process monitoring. Frontend and backend work, equipment and IoT integrations, real-time data, dashboards and KPIs (OEE, FPY, productivity and quality). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis and Docker.',
@@ -204,7 +204,7 @@ const knowledge = {
       },
       {
         period: '2024',
-        title: 'Full Stack Developer',
+        title: 'Full Stack Software Engineer',
         company: 'Personal Projects & Freelancer',
         summary: 'Web apps with React, Node.js, REST APIs, and integrations (EmailJS, GitHub Pages).',
         technologies: ['React', 'Node.js', 'JavaScript', 'MongoDB', 'Express', 'Git'],
@@ -229,7 +229,7 @@ const knowledge = {
     education: [
       { title: 'Bachelor of Computer Engineering', institution: 'FAMETRO', period: '2019 — 2024' },
       { title: 'Systems Analysis and Development', institution: 'ITEGAM', period: '2023 — 2024' },
-      { title: 'Fluent English — C1', institution: 'ICBEU', period: '2018' },
+      { title: 'Fluent English — C1', institution: 'ICBEU', period: '2019' },
       { title: 'WEB Logic and Programming — Full Stack', institution: 'Flexpeak', period: '2023' },
     ],
     languages: [
@@ -292,10 +292,10 @@ const knowledge = {
       'Aplicaciones de Inteligencia Artificial',
     ],
     careerGoals:
-      'Busca oportunidades como Frontend Software Engineer, Full Stack Developer, Technical Project Manager o Industry 4.0 Software Engineer, aplicando tecnología para mejorar experiencias de usuario, procesos de negocio y operaciones industriales.',
+      'Busca oportunidades como Full Stack Software Engineer, Technical Project Manager o Industry 4.0 Software Engineer, aplicando tecnología para mejorar experiencias de usuario, procesos de negocio y operaciones industriales.',
     faq: {
       currentRole:
-        'Matheus trabaja como Software Engineer y Project Manager, enfocado en aplicaciones web, soluciones Industry 4.0 y proyectos de transformación digital — incluyendo proyectos de investigación en ITEGAM.',
+        'Matheus trabaja como Full Stack Software Engineer en ITEGAM, enfocado en aplicaciones web, soluciones Industry 4.0 y proyectos de transformación digital.',
       preferredStack:
         'Stack principal: React, TypeScript, JavaScript, PHP, SQL, REST APIs, Git y tecnologías frontend modernas.',
       industryExperience:
@@ -317,7 +317,7 @@ const knowledge = {
     experience: [
       {
         period: '2025 — 2026',
-        title: 'Desarrollador Full Stack',
+        title: 'Full Stack Software Engineer',
         company: 'ITEGAM',
         summary:
           'Proyectos de I+D para Industria 4.0: aplicaciones web, APIs y monitoreo de procesos industriales. Frontend y backend, integraciones con equipos e IoT, datos en tiempo real, dashboards e indicadores (OEE, FPY, productividad y calidad). Stack: React, Vue.js, TypeScript, Node.js, Python, Java, PostgreSQL, Redis y Docker.',
@@ -325,7 +325,7 @@ const knowledge = {
       },
       {
         period: '2024',
-        title: 'Desarrollador Full Stack',
+        title: 'Full Stack Software Engineer',
         company: 'Proyectos Personales y Freelancer',
         summary:
           'Aplicaciones web con React, Node.js, APIs REST e integraciones (EmailJS, GitHub Pages).',
@@ -351,7 +351,7 @@ const knowledge = {
     education: [
       { title: 'Licenciatura en Ingeniería de Computación', institution: 'FAMETRO', period: '2019 — 2024' },
       { title: 'Análisis y Desarrollo de Sistemas', institution: 'ITEGAM', period: '2023 — 2024' },
-      { title: 'Inglés Fluido — C1', institution: 'ICBEU', period: '2018' },
+      { title: 'Inglés Fluido — C1', institution: 'ICBEU', period: '2019' },
       { title: 'Lógica y Programación WEB — Full Stack', institution: 'Flexpeak', period: '2023' },
     ],
     languages: [

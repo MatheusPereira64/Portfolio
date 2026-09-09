@@ -42,12 +42,21 @@
   min-height: 0;
 }
 
+.project-open-hint {
+  display: inline-block;
+  margin-top: 8px;
+  color: #ffd700;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .teams .carousel .card {
   background: #222;
   border-radius: 10px;
   padding: 24px 20px 24px;
   text-align: center;
   overflow: hidden;
+  cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   flex: 1 1 calc(33.333% - 14px);
   min-width: 260px;

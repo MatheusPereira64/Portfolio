@@ -32,7 +32,9 @@ export const LanguageProvider = ({ children }) => {
         projects: 'Projetos',
         stats: 'Estatísticas',
         blog: 'Blog',
-        contact: 'Contato'
+        contact: 'Contato',
+        downloadCv: 'Baixar currículo',
+        skipLink: 'Ir para o conteúdo'
       },
       home: {
         greeting: 'Olá, meu nome é',
@@ -44,7 +46,7 @@ export const LanguageProvider = ({ children }) => {
         title: 'Sobre mim',
         subtitle: 'Quem eu sou ?',
         text: 'Eu sou Matheus e sou',
-        description: 'Desenvolvedor Full Stack com formação em Análise e Desenvolvimento de Sistemas. Tenho experiência em desenvolvimento web com foco em JavaScript, React e Node.js. Apaixonado por tecnologia e inovação, busco constantemente aprimorar minhas habilidades e contribuir para projetos que façam a diferença. Atualmente estudando no ITEGAM e desenvolvendo projetos pessoais para expandir meu portfólio.',
+        description: 'Full Stack Software Engineer com formação em Engenharia da Computação. Atuo no ITEGAM em projetos de PD&I para Indústria 4.0 — aplicações web, APIs, dashboards industriais e integrações IoT. Trabalho com React, Vue.js, TypeScript, Node.js, Python e PostgreSQL, da definição de requisitos ao deploy.',
         button: 'Meus serviços'
       },
       services: {
@@ -55,8 +57,9 @@ export const LanguageProvider = ({ children }) => {
         title: 'Meus talentos',
         subtitle: 'O que eu sei',
         text: 'Minhas competências e experiência profissional',
-        description: 'Estudante de Análise e Desenvolvimento de Sistemas no ITEGAM, com foco em desenvolvimento web full stack. Tenho experiência prática em JavaScript, React.js, Node.js e Python. Participei de projetos acadêmicos e pessoais que me permitiram desenvolver habilidades sólidas em programação, resolução de problemas e trabalho em equipe.',
+        description: 'Full Stack Software Engineer no ITEGAM, com foco em aplicações web, APIs e sistemas industriais. Experiência prática em JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL e Docker, além de dashboards e indicadores como OEE e FPY.',
         education: '🎓 Formação',
+        certifications: 'Certificações',
         button: 'Entrar em contato'
       },
       projects: {
@@ -65,6 +68,13 @@ export const LanguageProvider = ({ children }) => {
         viewCertificate: 'Ver certificado CRPC-INPI',
         technologies: 'Tecnologias',
         goToProject: 'Ir para o projeto',
+        openDetails: 'Ver detalhes',
+        closeDetails: 'Fechar detalhes',
+        problem: 'Problema',
+        contribution: 'O que eu fiz',
+        results: 'Resultados',
+        screenshots: 'Prévia',
+        certifications: 'Certificações',
       },
       experience: {
         title: 'Experiência',
@@ -80,7 +90,8 @@ export const LanguageProvider = ({ children }) => {
         readMore: 'Ler mais',
         viewOnLinkedIn: 'Ver no LinkedIn',
         viewAllOnLinkedIn: 'Ver publicações no LinkedIn',
-        emptyMessage: 'Minhas publicações e artigos estão no LinkedIn. Clique abaixo para acompanhar.',
+        emptyMessage: 'O LinkedIn não libera os posts automaticamente. Cole o link de cada publicação em linkedinPosts.js para exibir a prévia.',
+        previewUnavailable: 'Prévia indisponível — abra no LinkedIn',
       },
       contact: {
         title: 'Entre em contato',
@@ -110,7 +121,9 @@ export const LanguageProvider = ({ children }) => {
         projects: 'Projects',
         stats: 'Statistics',
         blog: 'Blog',
-        contact: 'Contact'
+        contact: 'Contact',
+        downloadCv: 'Download résumé',
+        skipLink: 'Skip to content'
       },
       home: {
         greeting: 'Hello, my name is',
@@ -122,7 +135,7 @@ export const LanguageProvider = ({ children }) => {
         title: 'About me',
         subtitle: 'Who am I?',
         text: 'I am Matheus and I am',
-        description: 'Full Stack Developer with a degree in Systems Analysis and Development. I have experience in web development focusing on JavaScript, React and Node.js. Passionate about technology and innovation, I constantly seek to improve my skills and contribute to projects that make a difference. Currently studying at ITEGAM and developing personal projects to expand my portfolio.',
+        description: 'Full Stack Software Engineer with a Computer Engineering degree. At ITEGAM I work on Industry 4.0 R&D — web apps, APIs, industrial dashboards, and IoT integrations. I use React, Vue.js, TypeScript, Node.js, Python, and PostgreSQL from requirements to deploy.',
         button: 'My services'
       },
       services: {
@@ -133,8 +146,9 @@ export const LanguageProvider = ({ children }) => {
         title: 'My skills',
         subtitle: 'What I know',
         text: 'My skills and professional experience',
-        description: 'Systems Analysis and Development student at ITEGAM, focusing on full stack web development. I have practical experience in JavaScript, React.js, Node.js and Python. I participated in academic and personal projects that allowed me to develop solid skills in programming, problem solving and teamwork.',
+        description: 'Full Stack Software Engineer at ITEGAM, focused on web apps, APIs, and industrial systems. Hands-on with JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL, and Docker, plus dashboards and KPIs such as OEE and FPY.',
         education: '🎓 Education',
+        certifications: 'Certifications',
         button: 'Get in touch'
       },
       projects: {
@@ -143,6 +157,13 @@ export const LanguageProvider = ({ children }) => {
         viewCertificate: 'View CRPC-INPI certificate',
         technologies: 'Technologies',
         goToProject: 'Go to project',
+        openDetails: 'View details',
+        closeDetails: 'Close details',
+        problem: 'Problem',
+        contribution: 'What I did',
+        results: 'Results',
+        screenshots: 'Preview',
+        certifications: 'Certifications',
       },
       experience: {
         title: 'Experience',
@@ -158,7 +179,8 @@ export const LanguageProvider = ({ children }) => {
         readMore: 'Read more',
         viewOnLinkedIn: 'View on LinkedIn',
         viewAllOnLinkedIn: 'View posts on LinkedIn',
-        emptyMessage: 'My posts and articles are on LinkedIn. Click below to follow along.',
+        emptyMessage: 'LinkedIn does not expose posts automatically. Paste each post URL into linkedinPosts.js to show a preview.',
+        previewUnavailable: 'Preview unavailable — open on LinkedIn',
       },
       contact: {
         title: 'Get in touch',
@@ -188,7 +210,9 @@ export const LanguageProvider = ({ children }) => {
         projects: 'Proyectos',
         stats: 'Estadísticas',
         blog: 'Blog',
-        contact: 'Contacto'
+        contact: 'Contacto',
+        downloadCv: 'Descargar currículum',
+        skipLink: 'Saltar al contenido'
       },
       home: {
         greeting: 'Hola, mi nombre es',
@@ -200,7 +224,7 @@ export const LanguageProvider = ({ children }) => {
         title: 'Sobre mí',
         subtitle: '¿Quién soy?',
         text: 'Soy Matheus y soy',
-        description: 'Desarrollador Full Stack con formación en Análisis y Desarrollo de Sistemas. Tengo experiencia en desarrollo web enfocado en JavaScript, React y Node.js. Apasionado por la tecnología y la innovación, busco constantemente mejorar mis habilidades y contribuir a proyectos que marquen la diferencia. Actualmente estudiando en ITEGAM y desarrollando proyectos personales para expandir mi portafolio.',
+        description: 'Full Stack Software Engineer con formación en Ingeniería de Computación. En ITEGAM trabajo en I+D para Industria 4.0 — aplicaciones web, APIs, dashboards industriales e integraciones IoT. Uso React, Vue.js, TypeScript, Node.js, Python y PostgreSQL, de requisitos al deploy.',
         button: 'Mis servicios'
       },
       services: {
@@ -211,8 +235,9 @@ export const LanguageProvider = ({ children }) => {
         title: 'Mis talentos',
         subtitle: 'Lo que sé',
         text: 'Mis competencias y experiencia profesional',
-        description: 'Estudiante de Análisis y Desarrollo de Sistemas en ITEGAM, con enfoque en desarrollo web full stack. Tengo experiencia práctica en JavaScript, React.js, Node.js y Python. Participé en proyectos académicos y personales que me permitieron desarrollar habilidades sólidas en programación, resolución de problemas y trabajo en equipo.',
+        description: 'Full Stack Software Engineer en ITEGAM, enfocado en aplicaciones web, APIs y sistemas industriales. Experiencia práctica en JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL y Docker, además de dashboards e indicadores como OEE y FPY.',
         education: '🎓 Formación',
+        certifications: 'Certificaciones',
         button: 'Ponerse en contacto'
       },
       projects: {
@@ -221,6 +246,13 @@ export const LanguageProvider = ({ children }) => {
         viewCertificate: 'Ver certificado CRPC-INPI',
         technologies: 'Tecnologías',
         goToProject: 'Ir al proyecto',
+        openDetails: 'Ver detalles',
+        closeDetails: 'Cerrar detalles',
+        problem: 'Problema',
+        contribution: 'Lo que hice',
+        results: 'Resultados',
+        screenshots: 'Vista previa',
+        certifications: 'Certificaciones',
       },
       experience: {
         title: 'Experiencia',
@@ -236,7 +268,8 @@ export const LanguageProvider = ({ children }) => {
         readMore: 'Leer más',
         viewOnLinkedIn: 'Ver en LinkedIn',
         viewAllOnLinkedIn: 'Ver publicaciones en LinkedIn',
-        emptyMessage: 'Mis publicaciones y artículos están en LinkedIn. Haz clic abajo para seguir.',
+        emptyMessage: 'LinkedIn no expone las publicaciones automáticamente. Pega la URL de cada post en linkedinPosts.js para mostrar la previa.',
+        previewUnavailable: 'Previa no disponible — abrir en LinkedIn',
       },
       contact: {
         title: 'Ponerse en contacto',
