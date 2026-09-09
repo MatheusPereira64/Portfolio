@@ -10,7 +10,7 @@ export const SITE_PROFILE = {
   /** valor para href tel: */
   phoneTel: '+5592992138870',
   linkedin: 'https://www.linkedin.com/in/matheus-pereira64/',
-  linkedinActivity: 'https://www.linkedin.com/in/matheus-pereira64/recent-activity/all/',
+  linkedinActivity: 'https://www.linkedin.com/in/matheus-pereira64/recent-activity/shares/',
   github: 'https://github.com/MatheusPereira64',
   portfolioUrl: 'https://matheuspereira64.github.io/Portfolio/',
   /**
