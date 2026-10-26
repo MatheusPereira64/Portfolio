@@ -9,6 +9,7 @@ import {
 } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
 import Icon from './Icon'
+import SkillIcon from './SkillIcon'
 import './ProjectCaseStudy.css'
 
 const ProjectCaseStudy = ({ project }) => {
@@ -84,6 +85,17 @@ const ProjectCaseStudy = ({ project }) => {
           }}
         />
 
+        {project.screenshots?.length > 0 && (
+          <section className="case-study-shots">
+            <h2>{copy.screenshots || 'Prévia'}</h2>
+            <div>
+              {project.screenshots.map((src) => (
+                <img key={src} src={getProjectImageSrc(src)} alt="" loading="lazy" />
+              ))}
+            </div>
+          </section>
+        )}
+
         <section>
           <h2>{copy.problem}</h2>
           <p>{getLocalizedField(project.problem, language)}</p>
@@ -113,7 +125,7 @@ const ProjectCaseStudy = ({ project }) => {
           <h2>{copy.technologies}</h2>
           <ul className="case-study-tech">
             {project.technologies.map((tech) => (
-              <li key={tech}>{tech}</li>
+              <li key={tech}><SkillIcon name={tech} />{tech}</li>
             ))}
           </ul>
         </section>

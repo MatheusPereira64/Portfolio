@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 
-const LanguageContext = createContext()
+export const LanguageContext = createContext(null)
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext)
@@ -73,8 +73,11 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Ir para o conteúdo'
       },
       home: {
-        role: 'Engenheiro de Software Full Stack',
+        greeting: 'Olá, meu nome é',
         name: 'Matheus Pereira',
+        subtitle: 'E eu sou:',
+        button: 'Sobre mim',
+        role: 'Engenheiro de Software Full Stack',
         proposition: 'Construo sistemas web e dashboards industriais (IoT, OEE/FPY) para o chão de fábrica — Manaus',
         talk: 'Falar comigo',
         downloadCv: 'Baixar CV',
@@ -84,7 +87,7 @@ export const LanguageProvider = ({ children }) => {
       about: {
         title: 'Sobre mim',
         subtitle: 'Quem eu sou ?',
-        text: 'Engenheiro de Software Full Stack',
+        text: 'Eu sou Matheus e sou',
         description: 'Full Stack Software Engineer com formação em Engenharia da Computação. Atuo no ITEGAM em projetos de PD&I para Indústria 4.0 — aplicações web, APIs, dashboards industriais e integrações IoT. Trabalho com React, Vue.js, TypeScript, Node.js, Python e PostgreSQL, da definição de requisitos ao deploy.',
         button: 'Entrar em contato'
       },
@@ -173,8 +176,11 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Skip to content'
       },
       home: {
-        role: 'Full Stack Software Engineer',
+        greeting: 'Hello, my name is',
         name: 'Matheus Pereira',
+        subtitle: 'And I am:',
+        button: 'About me',
+        role: 'Full Stack Software Engineer',
         proposition: 'I build web systems and industrial dashboards (IoT, OEE/FPY) for the shop floor — Manaus',
         talk: 'Talk to me',
         downloadCv: 'Download CV',
@@ -184,7 +190,7 @@ export const LanguageProvider = ({ children }) => {
       about: {
         title: 'About me',
         subtitle: 'Who am I?',
-        text: 'Full Stack Software Engineer',
+        text: 'I am Matheus and I am',
         description: 'Full Stack Software Engineer with a Computer Engineering degree. At ITEGAM I work on Industry 4.0 R&D — web apps, APIs, industrial dashboards, and IoT integrations. I use React, Vue.js, TypeScript, Node.js, Python, and PostgreSQL from requirements to deploy.',
         button: 'Get in touch'
       },
@@ -273,8 +279,11 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Saltar al contenido'
       },
       home: {
-        role: 'Ingeniero de Software Full Stack',
+        greeting: 'Hola, mi nombre es',
         name: 'Matheus Pereira',
+        subtitle: 'Y soy:',
+        button: 'Sobre mí',
+        role: 'Ingeniero de Software Full Stack',
         proposition: 'Construyo sistemas web y dashboards industriales (IoT, OEE/FPY) para el piso de planta — Manaus',
         talk: 'Hablar conmigo',
         downloadCv: 'Descargar CV',
@@ -284,7 +293,7 @@ export const LanguageProvider = ({ children }) => {
       about: {
         title: 'Sobre mí',
         subtitle: '¿Quién soy?',
-        text: 'Ingeniero de Software Full Stack',
+        text: 'Soy Matheus y soy',
         description: 'Full Stack Software Engineer con formación en Ingeniería de Computación. En ITEGAM trabajo en I+D para Industria 4.0 — aplicaciones web, APIs, dashboards industriales e integraciones IoT. Uso React, Vue.js, TypeScript, Node.js, Python y PostgreSQL, de requisitos al deploy.',
         button: 'Ponerse en contacto'
       },

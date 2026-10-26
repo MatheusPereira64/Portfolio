@@ -10,9 +10,12 @@ export const PROJECTS = [
   {
     id: 1,
     slug: 'sistema-inteligente-de-manufatura',
-    // TODO: print real anonimizado (Matheus fornece)
-    image: 'images/project-placeholder.svg',
-    screenshots: [],
+    image:
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
+    screenshots: [
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
+    ],
     period: null,
     decisions: null,
     title: {
@@ -54,9 +57,12 @@ export const PROJECTS = [
   {
     id: 2,
     slug: 'parametrizacao-de-maquinas-com-ia',
-    // TODO: print real anonimizado (Matheus fornece)
-    image: 'images/project-placeholder.svg',
-    screenshots: [],
+    image:
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+    screenshots: [
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
+    ],
     period: null,
     decisions: null,
     title: {
@@ -97,9 +103,12 @@ export const PROJECTS = [
   {
     id: 3,
     slug: 'monitoramento-de-producao',
-    // TODO: print real anonimizado (Matheus fornece)
-    image: 'images/project-placeholder.svg',
-    screenshots: [],
+    image:
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    screenshots: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    ],
     period: null,
     decisions: null,
     title: {
@@ -144,6 +153,10 @@ export const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/rep
 
 export const PROJECT_PLACEHOLDER = 'images/project-placeholder.svg'
 
+export function getGithubOgImage(repoName, owner = GITHUB_USER) {
+  return `https://opengraph.githubassets.com/1/${owner}/${repoName}`
+}
+
 export function getProjectImageSrc(image) {
   const value = image || PROJECT_PLACEHOLDER
   if (/^https?:/i.test(value)) return value
@@ -166,12 +179,14 @@ export function getProjectGithubRepos(project) {
         return {
           name,
           url: `https://github.com/${owner}/${name}`,
+          og: getGithubOgImage(name, owner),
         }
       }
       const name = value.replace(/\.git$/, '')
       return {
         name,
         url: `https://github.com/${GITHUB_USER}/${name}`,
+        og: getGithubOgImage(name),
       }
     })
     .filter(Boolean)

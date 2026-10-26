@@ -10,6 +10,7 @@ import {
 import { onNavigate, toHref } from '../utils/routes'
 import GitHubRepos from './GitHubRepos'
 import Icon from './Icon'
+import SkillIcon from './SkillIcon'
 import './Projects.css'
 
 const Projects = () => {
@@ -57,7 +58,7 @@ const Projects = () => {
                   <p className="project-description">{project.description}</p>
                   <ul className="project-tech-list" aria-label={t.projects?.technologies || 'Tecnologias'}>
                     {project.technologies.map((tech) => (
-                      <li key={tech} className="project-tech-tag">{tech}</li>
+                      <li key={tech} className="project-tech-tag"><SkillIcon name={tech} />{tech}</li>
                     ))}
                   </ul>
                   {project.certificate && (

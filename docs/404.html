@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Matheus Pereira</title>
+    <script>
+      (function () {
+        try {
+          sessionStorage.setItem('portfolio:redirect', location.href);
+        } catch (e) {}
+        location.replace('/Portfolio/' + location.search + location.hash);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

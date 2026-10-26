@@ -82,11 +82,11 @@ function AppShell() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
+    <LanguageProvider>
+      <ThemeProvider>
         <AppShell />
-      </LanguageProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </LanguageProvider>
   )
 }
 

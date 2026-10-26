@@ -30,11 +30,24 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 14px;
+  padding: 0 0 14px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 10px;
+  overflow: hidden;
   color: #fff;
   text-decoration: none;
+}
+
+.github-repo-card img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+  background: #111;
+}
+
+.github-repo-card strong,
+.github-repo-card > span {
+  padding: 0 14px;
 }
 
 .github-repo-card span {

@@ -214,6 +214,7 @@
 .skill-group li span {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   padding: 6px 12px;
   border-radius: 999px;
   background: rgba(220, 20, 60, 0.08);
@@ -221,6 +222,14 @@
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.skill-group .skill-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .skill-group li a:hover {

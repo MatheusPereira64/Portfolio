@@ -4,6 +4,7 @@ import { SKILL_GROUPS, projectsUsing } from '../data/skillGroups'
 import { getLocalizedField as getProjectField } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
 import CertificatePreview from './CertificatePreview'
+import SkillIcon from './SkillIcon'
 import './Skills.css'
 
 const Skills = () => {
@@ -42,6 +43,7 @@ const Skills = () => {
                         href={toHref(`/projetos/${project.slug}`)}
                         onClick={(event) => onNavigate(event, `/projetos/${project.slug}`)}
                       >
+                        <SkillIcon name={tech} />
                         {tech}
                       </a>
                     </li>
@@ -55,12 +57,13 @@ const Skills = () => {
                         event.preventDefault()
                         document.getElementById('teams')?.scrollIntoView({ behavior: 'smooth' })
                       }}>
+                        <SkillIcon name={tech} />
                         {tech}
                       </a>
                     </li>
                   )
                 }
-                return <li key={tech}><span>{tech}</span></li>
+                return <li key={tech}><span><SkillIcon name={tech} />{tech}</span></li>
               })}
             </ul>
           </div>

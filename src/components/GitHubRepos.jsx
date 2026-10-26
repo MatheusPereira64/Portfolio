@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { GITHUB_REPOS_URL, GITHUB_USER } from '../data/projects'
+import { GITHUB_REPOS_URL, GITHUB_USER, getGithubOgImage } from '../data/projects'
 import { SITE_PROFILE } from '../constants/siteProfile'
 import './GitHubRepos.css'
 
@@ -54,6 +54,11 @@ const GitHubRepos = ({ variant = 'section' }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
+              <img
+                src={getGithubOgImage(repo.name)}
+                alt=""
+                loading="lazy"
+              />
               <strong>{repo.name}</strong>
               <span>{repo.description || repo.language || 'GitHub'}</span>
               <span className="github-repo-meta">
