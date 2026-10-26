@@ -6,8 +6,26 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var redirect = sessionStorage.getItem('portfolio:redirect');
+          if (redirect) {
+            sessionStorage.removeItem('portfolio:redirect');
+            if (redirect !== location.href) history.replaceState(null, '', redirect);
+          }
+        } catch (e) {}
+        var saved = null;
+        try { saved = localStorage.getItem('selectedLanguage'); } catch (e) {}
+        var lang = saved;
+        if (lang !== 'pt' && lang !== 'en' && lang !== 'es') {
+          var navLang = (navigator.language || '').toLowerCase();
+          lang = navLang.indexOf('pt') === 0 ? 'pt' : navLang.indexOf('es') === 0 ? 'es' : 'en';
+        }
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+      })();
+    </script>
     
     <!-- Primary Meta Tags -->
     <title>Matheus Pereira - Full Stack Software Engineer | Portfolio</title>

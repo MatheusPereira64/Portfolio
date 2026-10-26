@@ -51,9 +51,19 @@ export function triggerCvDownload(locale = 'en') {
   document.body.removeChild(link)
 }
 
-/** Foto de perfil profissional (public/images/) */
-export const PROFILE_IMAGE = 'images/matheus-profile.png'
+/** Foto de perfil (WebP). O PNG original saiu de `public/` para não ir no build. */
+const PROFILE_560 = 'images/matheus-profile-560.webp'
+const PROFILE_280 = 'images/matheus-profile-280.webp'
 
 export function profileImageUrl() {
-  return `${import.meta.env.BASE_URL}${PROFILE_IMAGE}`
+  return `${import.meta.env.BASE_URL}${PROFILE_280}`
+}
+
+export function profileImageProps() {
+  const base = import.meta.env.BASE_URL
+  return {
+    src: `${base}${PROFILE_560}`,
+    srcSet: `${base}${PROFILE_280} 280w, ${base}${PROFILE_560} 560w`,
+    sizes: '(max-width: 500px) 180px, (max-width: 947px) 220px, 280px',
+  }
 }

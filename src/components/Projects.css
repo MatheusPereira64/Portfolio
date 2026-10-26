@@ -30,16 +30,25 @@
   content: "Proyectos destacados";
 }
 
-.teams .carousel {
-  display: flex;
+.teams .project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: nowrap;
   margin-top: 20px;
   position: relative;
-  overflow: visible;
-  min-height: 0;
+}
+
+.project-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-inpi {
+  display: inline-block;
+  margin-top: 4px;
+  color: #ffd700;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .project-open-hint {
@@ -70,7 +79,7 @@
   color: #ffd700;
 }
 
-.teams .carousel .card {
+.teams .project-grid .card {
   background: #222;
   border-radius: 10px;
   padding: 24px 20px 24px;
@@ -78,9 +87,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-  flex: 1 1 calc(33.333% - 14px);
-  min-width: 260px;
-  max-width: none;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -91,14 +98,14 @@
   animation: none;
 }
 
-.teams .carousel .card:hover {
+.teams .project-grid .card:hover {
   background: crimson;
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   opacity: 1;
 }
 
-.teams .carousel .card .box {
+.teams .project-grid .card .box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,11 +116,11 @@
   transition: none;
 }
 
-.teams .carousel .card:hover .box {
+.teams .project-grid .card:hover .box {
   transform: none;
 }
 
-.teams .carousel .card .text {
+.teams .project-grid .card .text {
   font-size: 18px;
   font-weight: 600;
   margin: 12px 0 10px;
@@ -121,8 +128,8 @@
   line-height: 1.35;
 }
 
-.teams .carousel .card p,
-.teams .carousel .card .project-description {
+.teams .project-grid .card p,
+.teams .project-grid .card .project-description {
   color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   line-height: 1.55;
@@ -198,18 +205,19 @@
   transform: translateY(-2px);
 }
 
-.teams .carousel .card img {
-  height: 120px;
-  width: 120px;
+.teams .project-grid .card img {
+  height: auto;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid crimson;
-  transition: border-color 0.3s ease;
+  border-radius: 12px;
+  border: 0;
+  background: #2e2e2e;
   flex-shrink: 0;
 }
 
-.teams .carousel .card:hover img {
-  border-color: #fff;
+.teams .project-grid .card:hover img {
+  filter: brightness(1.08);
 }
 
 .carousel-dots,
@@ -254,42 +262,35 @@
     padding: 80px 0;
   }
 
-  .teams .carousel {
+  .teams .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-    flex-wrap: wrap;
   }
 
-  .teams .carousel .card {
-    flex: 1 1 calc(50% - 8px);
-    min-width: 240px;
+  .teams .project-grid .card {
     padding: 20px 16px 18px;
   }
 
-  .teams .carousel .card .text {
+  .teams .project-grid .card .text {
     font-size: 16px;
   }
 
-  .teams .carousel .card .project-description {
+  .teams .project-grid .card .project-description {
     font-size: 13px;
   }
 }
 
 @media (max-width: 690px) {
-  .teams .carousel {
-    flex-direction: column;
-    align-items: stretch;
+  .teams .project-grid {
+    grid-template-columns: 1fr;
   }
 
-  .teams .carousel .card {
-    flex: 1 1 100%;
+  .teams .project-grid .card {
     width: 100%;
-    min-width: 100%;
-    max-width: 100%;
   }
 
-  .teams .carousel .card img {
-    height: 100px;
-    width: 100px;
+  .teams .project-grid .card img {
+    width: 100%;
   }
 
   .project-certificate-link {

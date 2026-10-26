@@ -212,11 +212,11 @@
   gap: 10px;
 }
 
-.blog-read-more i {
+.blog-read-more .icon {
   transition: transform 0.3s ease;
 }
 
-.blog-read-more:hover i {
+.blog-read-more:hover .icon {
   transform: translateX(5px);
 }
 

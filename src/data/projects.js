@@ -1,16 +1,20 @@
 /** Projetos em destaque — Indústria 4.0 (ITEGAM / CRPC-INPI).
  *  Para ligar um card a um repositório: github: 'NomeDoRepo'
  *  ou github: 'https://github.com/MatheusPereira64/NomeDoRepo'
+ *
+ *  Papel no estudo de caso reaproveita `contribution`.
+ *  TODO: período real (Matheus fornece) — campo `period` ({ pt, en, es } ou string)
+ *  TODO: decisões técnicas (Matheus fornece) — campo `decisions` ({ pt, en, es } ou string)
  */
 export const PROJECTS = [
   {
     id: 1,
-    image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
-    ],
+    slug: 'sistema-inteligente-de-manufatura',
+    // TODO: print real anonimizado (Matheus fornece)
+    image: 'images/project-placeholder.svg',
+    screenshots: [],
+    period: null,
+    decisions: null,
     title: {
       pt: 'Sistema Inteligente de Manufatura (IoT)',
       en: 'Smart Manufacturing System (IoT)',
@@ -49,12 +53,12 @@ export const PROJECTS = [
   },
   {
     id: 2,
-    image:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
-    ],
+    slug: 'parametrizacao-de-maquinas-com-ia',
+    // TODO: print real anonimizado (Matheus fornece)
+    image: 'images/project-placeholder.svg',
+    screenshots: [],
+    period: null,
+    decisions: null,
     title: {
       pt: 'Parametrização de Máquinas com IA',
       en: 'AI Machine Parameterization System',
@@ -92,12 +96,12 @@ export const PROJECTS = [
   },
   {
     id: 3,
-    image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    ],
+    slug: 'monitoramento-de-producao',
+    // TODO: print real anonimizado (Matheus fornece)
+    image: 'images/project-placeholder.svg',
+    screenshots: [],
+    period: null,
+    decisions: null,
     title: {
       pt: 'Monitoramento de Produção em Tempo Real',
       en: 'Real-Time Production Monitoring UI',
@@ -138,8 +142,12 @@ export const PROJECTS = [
 export const GITHUB_USER = 'MatheusPereira64'
 export const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`
 
-export function getGithubOgImage(repoName, owner = GITHUB_USER) {
-  return `https://opengraph.githubassets.com/1/${owner}/${repoName}`
+export const PROJECT_PLACEHOLDER = 'images/project-placeholder.svg'
+
+export function getProjectImageSrc(image) {
+  const value = image || PROJECT_PLACEHOLDER
+  if (/^https?:/i.test(value)) return value
+  return `${import.meta.env.BASE_URL}${value.replace(/^\//, '')}`
 }
 
 /** Aceita nome do repo (`WinCare`) ou URL (`https://github.com/user/repo`). */
@@ -158,14 +166,12 @@ export function getProjectGithubRepos(project) {
         return {
           name,
           url: `https://github.com/${owner}/${name}`,
-          og: getGithubOgImage(name, owner),
         }
       }
       const name = value.replace(/\.git$/, '')
       return {
         name,
         url: `https://github.com/${GITHUB_USER}/${name}`,
-        og: getGithubOgImage(name),
       }
     })
     .filter(Boolean)
@@ -184,4 +190,8 @@ export function getLocalizedField(field, language) {
 
 export function getProjectById(id) {
   return PROJECTS.find((project) => String(project.id) === String(id)) || null
+}
+
+export function getProjectBySlug(slug) {
+  return PROJECTS.find((project) => project.slug === slug) || null
 }

@@ -1,6 +1,5 @@
 import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
-import SkillIcon from './SkillIcon'
 import './Experience.css'
 
 const Experience = () => {
@@ -86,10 +85,7 @@ const Experience = () => {
                 {exp.results && <p className="experience-results">{exp.results}</p>}
                 <div className="experience-technologies">
                   {exp.technologies.map((tech) => (
-                    <span key={tech} className="tech-tag">
-                      <SkillIcon name={tech} />
-                      {tech}
-                    </span>
+                    <span key={tech} className="tech-tag">{tech}</span>
                   ))}
                 </div>
               </article>

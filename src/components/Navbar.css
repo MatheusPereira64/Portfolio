@@ -3,7 +3,7 @@
   width: 100%;
   z-index: 999;
   padding: 20px 0;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
   background: rgba(0, 0, 0, 0.25);
 }
@@ -83,11 +83,13 @@
   text-decoration: none;
 }
 
-.navbar.sticky .logo a {
+.navbar.sticky .logo a,
+.navbar.sticky .logo a span {
   color: #333;
 }
 
-[data-theme="dark"] .navbar.sticky .logo a {
+[data-theme="dark"] .navbar.sticky .logo a,
+[data-theme="dark"] .navbar.sticky .logo a span {
   color: #fff;
 }
 
@@ -255,7 +257,7 @@
   letter-spacing: 0.5px;
 }
 
-.language-button i {
+.language-button .icon {
   font-size: 10px;
   margin-left: 2px;
 }
@@ -351,7 +353,7 @@
   font-size: 14px;
 }
 
-.language-option i.fa-check {
+.language-option .icon-check {
   color: #dc143c;
   font-size: 12px;
 }

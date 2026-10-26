@@ -28,8 +28,6 @@ export function canUseAI() {
 }
 
 export function isGeminiConfigured() {
-  const key = (import.meta.env.VITE_GEMINI_API_KEY || '').trim()
   const proxy = (import.meta.env.VITE_GEMINI_PROXY_URL || '').trim()
-  if (proxy) return true
-  return key.length > 0 && key !== 'sua_chave_aqui' && key.startsWith('AIza')
+  return proxy.length > 0
 }

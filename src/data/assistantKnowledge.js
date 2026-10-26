@@ -5,28 +5,28 @@ export const ASSISTANT_PERSONA = {
 }
 
 export const SKILLS = [
-  { name: 'JavaScript', percentage: 95 },
-  { name: 'TypeScript', percentage: 88 },
-  { name: 'React', percentage: 95 },
-  { name: 'PHP', percentage: 90 },
-  { name: 'Data Visualization', percentage: 92 },
-  { name: 'ECharts', percentage: 90 },
-  { name: 'Requirements Analysis', percentage: 90 },
-  { name: 'Project Management', percentage: 88 },
-  { name: 'Industry 4.0', percentage: 88 },
-  { name: 'Node.js', percentage: 90 },
-  { name: 'HTML/CSS', percentage: 95 },
-  { name: 'SQL', percentage: 85 },
-  { name: 'REST APIs', percentage: 88 },
-  { name: 'Agile/Scrum', percentage: 85 },
-  { name: 'Python', percentage: 85 },
-  { name: 'Vue.js', percentage: 80 },
-  { name: 'MongoDB', percentage: 80 },
-  { name: 'Docker', percentage: 78 },
-  { name: 'Git', percentage: 85 },
-  { name: 'AWS', percentage: 72 },
-  { name: 'Spring Boot', percentage: 75 },
-  { name: 'CI/CD', percentage: 80 },
+  { name: 'JavaScript' },
+  { name: 'TypeScript' },
+  { name: 'React' },
+  { name: 'PHP' },
+  { name: 'Data Visualization' },
+  { name: 'ECharts' },
+  { name: 'Requirements Analysis' },
+  { name: 'Project Management' },
+  { name: 'Industry 4.0' },
+  { name: 'Node.js' },
+  { name: 'HTML/CSS' },
+  { name: 'SQL' },
+  { name: 'REST APIs' },
+  { name: 'Agile/Scrum' },
+  { name: 'Python' },
+  { name: 'Vue.js' },
+  { name: 'MongoDB' },
+  { name: 'Docker' },
+  { name: 'Git' },
+  { name: 'AWS' },
+  { name: 'Spring Boot' },
+  { name: 'CI/CD' },
 ]
 
 const knowledge = {
@@ -408,7 +408,7 @@ export function getWhatsAppUrl() {
 /** Text block injected into Gemini system prompt */
 export function buildKnowledgeContext(language) {
   const k = getKnowledge(language)
-  const skillsLine = SKILLS.map((s) => `${s.name} (${s.percentage}%)`).join(', ')
+  const skillsLine = SKILLS.map((s) => s.name).join(', ')
   const specLine = k.specializations.join(', ')
   const expBlock = k.experience
     .map(

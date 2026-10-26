@@ -12,20 +12,17 @@
 - Limite: **10 mensagens IA por sessão** (sessionStorage)
 - Fallback automático se a IA falhar ou não estiver configurada
 
-## Configuração local
+## Configuração
+
+O cliente só fala com o proxy. A chave não entra no bundle.
 
 1. Copie `.env.example` → `.env`
-2. Adicione `VITE_GEMINI_API_KEY` ([Google AI Studio](https://aistudio.google.com/app/apikey))
-3. `npm run dev`
+2. Faça deploy de `api/gemini-proxy.example.mjs` (Cloudflare Worker, Vercel Function, etc.)
+3. Defina o secret `GEMINI_API_KEY` **no servidor** (por exemplo `wrangler secret put GEMINI_API_KEY`)
+4. No `.env`: `VITE_GEMINI_PROXY_URL=https://seu-proxy...`
+5. `npm run dev`
 
-## Produção — proxy recomendado
-
-A chave no frontend (`VITE_*`) fica visível no bundle. Para produção:
-
-1. Deploy do exemplo em `api/gemini-proxy.example.mjs` (Cloudflare Worker, Vercel Function, etc.)
-2. Defina o secret `GEMINI_API_KEY` no servidor
-3. No `.env` / GitHub Secrets: `VITE_GEMINI_PROXY_URL=https://seu-proxy...`
-4. Remova ou deixe vazio `VITE_GEMINI_API_KEY` no build de produção
+Não coloque a chave em `VITE_*`, em GitHub Actions nem em qualquer ficheiro que vá para o browser.
 
 ## Base de conhecimento
 

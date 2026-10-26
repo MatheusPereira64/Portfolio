@@ -6,7 +6,8 @@ export function getLocalizedField(field, language) {
 
 export function getCertificateAssetHref(filename) {
   if (!filename) return null
-  return `${import.meta.env.BASE_URL}certificados/${encodeURIComponent(filename)}`
+  const encoded = filename.split('/').map((part) => encodeURIComponent(part)).join('/')
+  return `${import.meta.env.BASE_URL}certificados/${encoded}`
 }
 
 export function getCertificateHref(cert) {
@@ -15,7 +16,16 @@ export function getCertificateHref(cert) {
 }
 
 export function getCertificatePreviewSrc(cert) {
-  return getCertificateAssetHref(cert?.image || cert?.file)
+  if (cert?.preview) return getCertificateAssetHref(cert.preview)
+  const image = cert?.image
+  if (image && !String(image).toLowerCase().endsWith('.pdf')) {
+    return getCertificateAssetHref(image)
+  }
+  return null
+}
+
+export function countInpiRegistrations() {
+  return CERTIFICATIONS.filter((cert) => cert.issuer === 'INPI').length
 }
 
 export function isPdfCertificate(src) {
@@ -29,6 +39,7 @@ export const CERTIFICATIONS = [
     issuer: 'INPI',
     year: '2025',
     file: 'certificado-crpc-inpi-01.pdf',
+    preview: 'thumbs/certificado-crpc-inpi-01.webp',
   },
   {
     id: 'crpc-2',
@@ -36,6 +47,7 @@ export const CERTIFICATIONS = [
     issuer: 'INPI',
     year: '2025',
     file: 'certificado-crpc-inpi-02.pdf',
+    preview: 'thumbs/certificado-crpc-inpi-02.webp',
   },
   {
     id: 'crpc-3',
@@ -43,6 +55,7 @@ export const CERTIFICATIONS = [
     issuer: 'INPI',
     year: '2025',
     file: 'certificado-crpc-inpi-03.pdf',
+    preview: 'thumbs/certificado-crpc-inpi-03.webp',
   },
   {
     id: 'fametro',
@@ -50,6 +63,7 @@ export const CERTIFICATIONS = [
     issuer: 'FAMETRO',
     year: '2025',
     image: 'diploma-fametro-engenharia.jpg',
+    preview: 'thumbs/diploma-fametro-engenharia.webp',
   },
   {
     id: 'flexpeak',
@@ -57,6 +71,7 @@ export const CERTIFICATIONS = [
     issuer: 'Flexpeak',
     year: '2023',
     image: 'certificado-flexpeak-logica-web.jpg',
+    preview: 'thumbs/certificado-flexpeak-logica-web.webp',
   },
   {
     id: 'samsung',
@@ -64,6 +79,7 @@ export const CERTIFICATIONS = [
     issuer: 'Samsung Ocean',
     year: '2022–2023',
     file: 'certificado-samsung-ocean.pdf',
+    preview: 'thumbs/certificado-samsung-ocean.webp',
   },
   {
     id: 'icbeu',
@@ -71,5 +87,6 @@ export const CERTIFICATIONS = [
     issuer: 'ICBEU',
     year: '2019',
     image: 'certificado-icbeu-ingles.jpg',
+    preview: 'thumbs/certificado-icbeu-ingles.webp',
   },
 ]

@@ -10,15 +10,51 @@ export const useLanguage = () => {
   return context
 }
 
+const SUPPORTED_LANGUAGES = ['pt', 'en', 'es']
+
+function readSavedLanguage() {
+  try {
+    const saved = localStorage.getItem('selectedLanguage')
+    if (SUPPORTED_LANGUAGES.includes(saved)) return saved
+  } catch {
+    /* armazenamento indisponível */
+  }
+  return null
+}
+
+export function detectLanguage() {
+  const saved = readSavedLanguage()
+  if (saved) return saved
+  const candidates = typeof navigator !== 'undefined'
+    ? [navigator.language, ...(navigator.languages || [])]
+    : []
+  for (const candidate of candidates) {
+    const tag = String(candidate || '').toLowerCase()
+    if (tag.startsWith('pt')) return 'pt'
+    if (tag.startsWith('es')) return 'es'
+  }
+  return 'en'
+}
+
+function applyDocumentLanguage(language) {
+  if (typeof document === 'undefined') return
+  document.documentElement.lang = language === 'pt' ? 'pt-BR' : language
+}
+
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
-    return localStorage.getItem('selectedLanguage') || 'en'
+    const initial = detectLanguage()
+    applyDocumentLanguage(initial)
+    return initial
   })
 
   useEffect(() => {
-    localStorage.setItem('selectedLanguage', language)
-    const htmlLang = language === 'pt' ? 'pt-BR' : language
-    document.documentElement.lang = htmlLang
+    try {
+      localStorage.setItem('selectedLanguage', language)
+    } catch {
+      /* ignore */
+    }
+    applyDocumentLanguage(language)
   }, [language])
 
   const translations = {
@@ -37,17 +73,20 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Ir para o conteúdo'
       },
       home: {
-        greeting: 'Olá, meu nome é',
+        role: 'Engenheiro de Software Full Stack',
         name: 'Matheus Pereira',
-        subtitle: 'E eu sou:',
-        button: 'Sobre mim'
+        proposition: 'Construo sistemas web e dashboards industriais (IoT, OEE/FPY) para o chão de fábrica — Manaus',
+        talk: 'Falar comigo',
+        downloadCv: 'Baixar CV',
+        available: 'Disponível para projetos',
+        inpi: '{count} softwares registrados no INPI'
       },
       about: {
         title: 'Sobre mim',
         subtitle: 'Quem eu sou ?',
-        text: 'Eu sou Matheus e sou',
+        text: 'Engenheiro de Software Full Stack',
         description: 'Full Stack Software Engineer com formação em Engenharia da Computação. Atuo no ITEGAM em projetos de PD&I para Indústria 4.0 — aplicações web, APIs, dashboards industriais e integrações IoT. Trabalho com React, Vue.js, TypeScript, Node.js, Python e PostgreSQL, da definição de requisitos ao deploy.',
-        button: 'Meus serviços'
+        button: 'Entrar em contato'
       },
       services: {
         title: 'Meus serviços',
@@ -77,6 +116,12 @@ export const LanguageProvider = ({ children }) => {
         certifications: 'Certificações',
         viewOnGithub: 'Ver no GitHub',
         githubReposTitle: 'Repositórios no GitHub',
+        role: 'Papel',
+        period: 'Período',
+        decisions: 'Decisões técnicas',
+        backToProjects: 'Voltar aos projetos',
+        registeredInpi: 'Software registrado no INPI',
+        notFound: 'Projeto não encontrado',
       },
       experience: {
         title: 'Experiência',
@@ -128,17 +173,20 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Skip to content'
       },
       home: {
-        greeting: 'Hello, my name is',
+        role: 'Full Stack Software Engineer',
         name: 'Matheus Pereira',
-        subtitle: 'And I am:',
-        button: 'About me'
+        proposition: 'I build web systems and industrial dashboards (IoT, OEE/FPY) for the shop floor — Manaus',
+        talk: 'Talk to me',
+        downloadCv: 'Download CV',
+        available: 'Available for projects',
+        inpi: '{count} software registrations at INPI'
       },
       about: {
         title: 'About me',
         subtitle: 'Who am I?',
-        text: 'I am Matheus and I am',
+        text: 'Full Stack Software Engineer',
         description: 'Full Stack Software Engineer with a Computer Engineering degree. At ITEGAM I work on Industry 4.0 R&D — web apps, APIs, industrial dashboards, and IoT integrations. I use React, Vue.js, TypeScript, Node.js, Python, and PostgreSQL from requirements to deploy.',
-        button: 'My services'
+        button: 'Get in touch'
       },
       services: {
         title: 'My services',
@@ -168,6 +216,12 @@ export const LanguageProvider = ({ children }) => {
         certifications: 'Certifications',
         viewOnGithub: 'View on GitHub',
         githubReposTitle: 'GitHub repositories',
+        role: 'Role',
+        period: 'Period',
+        decisions: 'Technical decisions',
+        backToProjects: 'Back to projects',
+        registeredInpi: 'Software registered at INPI',
+        notFound: 'Project not found',
       },
       experience: {
         title: 'Experience',
@@ -219,17 +273,20 @@ export const LanguageProvider = ({ children }) => {
         skipLink: 'Saltar al contenido'
       },
       home: {
-        greeting: 'Hola, mi nombre es',
+        role: 'Ingeniero de Software Full Stack',
         name: 'Matheus Pereira',
-        subtitle: 'Y soy:',
-        button: 'Sobre mí'
+        proposition: 'Construyo sistemas web y dashboards industriales (IoT, OEE/FPY) para el piso de planta — Manaus',
+        talk: 'Hablar conmigo',
+        downloadCv: 'Descargar CV',
+        available: 'Disponible para proyectos',
+        inpi: '{count} softwares registrados en el INPI'
       },
       about: {
         title: 'Sobre mí',
         subtitle: '¿Quién soy?',
-        text: 'Soy Matheus y soy',
+        text: 'Ingeniero de Software Full Stack',
         description: 'Full Stack Software Engineer con formación en Ingeniería de Computación. En ITEGAM trabajo en I+D para Industria 4.0 — aplicaciones web, APIs, dashboards industriales e integraciones IoT. Uso React, Vue.js, TypeScript, Node.js, Python y PostgreSQL, de requisitos al deploy.',
-        button: 'Mis servicios'
+        button: 'Ponerse en contacto'
       },
       services: {
         title: 'Mis servicios',
@@ -259,6 +316,12 @@ export const LanguageProvider = ({ children }) => {
         certifications: 'Certificaciones',
         viewOnGithub: 'Ver en GitHub',
         githubReposTitle: 'Repositorios en GitHub',
+        role: 'Papel',
+        period: 'Período',
+        decisions: 'Decisiones técnicas',
+        backToProjects: 'Volver a los proyectos',
+        registeredInpi: 'Software registrado en el INPI',
+        notFound: 'Proyecto no encontrado',
       },
       experience: {
         title: 'Experiencia',

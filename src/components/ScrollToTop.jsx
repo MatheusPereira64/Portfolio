@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Icon from './Icon'
 import './ScrollToTop.css'
 
 const ScrollToTop = () => {
@@ -24,7 +25,7 @@ const ScrollToTop = () => {
       className={`scroll-up-btn ${isVisible ? 'show' : ''}`}
       onClick={scrollToTop}
     >
-      <i className="fas fa-angle-up"></i>
+      <Icon name="angle-up" />
     </div>
   )
 }

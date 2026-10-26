@@ -90,7 +90,7 @@ npm install
 
 3. **Configure variáveis de ambiente** (copie `.env.example` → `.env` na raiz do repositório)
 
-**Chatbot com IA (opcional):** `VITE_GEMINI_API_KEY` — [Google AI Studio](https://aistudio.google.com/app/apikey)
+**Chatbot com IA (opcional):** só via proxy. Defina `VITE_GEMINI_PROXY_URL` e mantenha a chave no servidor (`api/gemini-proxy.example.mjs`). Não use `VITE_GEMINI_API_KEY` no cliente.
 
 **Formulário de contacto → `matheuspereira6464@gmail.com` (recomendado):** [EmailJS](https://www.emailjs.com/) — crie Service + Template com campos `from_name`, `from_email`, `reply_to`, `subject`, `message` e destinatário **To** = seu Gmail. Preencha no `.env`:
 

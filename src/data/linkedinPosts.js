@@ -6,6 +6,8 @@
  * 2. ⋯ → Copiar link para a publicação
  * 3. Cole em `linkedinUrl` abaixo (precisa ter `activity-123...` no endereço)
  * O blog monta o embed oficial sozinho.
+ * A secção só aparece no site quando o link tem um id de atividade.
+ * Sem isso, o visitante não vê a secção nem instruções de desenvolvimento.
  */
 export const LINKEDIN_POSTS = [
   {
@@ -68,6 +70,10 @@ export function getLocalizedField(field, language) {
 }
 
 /** Converte o link copiado do post no iframe oficial do LinkedIn. */
+export function getPublishedPosts() {
+  return LINKEDIN_POSTS.filter((post) => getLinkedInEmbedSrc(post.linkedinUrl))
+}
+
 export function getLinkedInEmbedSrc(url) {
   if (!url || typeof url !== 'string') return null
   const urn = url.match(/urn:li:(activity|share|ugcPost):(\d+)/i)
