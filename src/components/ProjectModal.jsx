@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { getLocalizedField, getProjectCertificateHref, getProjectGithubRepos } from '../data/projects'
-import SkillIcon from './SkillIcon'
+import Icon from './Icon'
 import './ProjectModal.css'
 
 const ProjectModal = ({ project, onClose }) => {
@@ -48,7 +48,7 @@ const ProjectModal = ({ project, onClose }) => {
           ref={closeRef}
           aria-label={t.projects?.closeDetails || 'Fechar'}
         >
-          <i className="fas fa-times" aria-hidden="true"></i>
+          <Icon name="times" />
         </button>
 
         <img className="project-modal-hero" src={project.image} alt="" />
@@ -71,10 +71,7 @@ const ProjectModal = ({ project, onClose }) => {
           <h3>{t.projects?.technologies || 'Stack'}</h3>
           <ul className="project-modal-tech">
             {project.technologies.map((tech) => (
-              <li key={tech}>
-                <SkillIcon name={tech} />
-                {tech}
-              </li>
+              <li key={tech}>{tech}</li>
             ))}
           </ul>
         </section>
@@ -104,7 +101,7 @@ const ProjectModal = ({ project, onClose }) => {
                 >
                   {repo.og && <img src={repo.og} alt="" loading="lazy" />}
                   <span>
-                    <i className="fab fa-github" aria-hidden="true"></i>
+                    <Icon name="github" />
                     {t.projects?.viewOnGithub || 'GitHub'} — {repo.name}
                   </span>
                 </a>
@@ -120,7 +117,7 @@ const ProjectModal = ({ project, onClose }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fas fa-award" aria-hidden="true"></i>
+            <Icon name="award" />
             {t.projects?.viewCertificate || 'Ver certificado CRPC-INPI'}
           </a>
         )}

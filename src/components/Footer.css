@@ -72,14 +72,14 @@ footer::before {
   gap: 15px;
 }
 
-.tech-icons i {
+.tech-icons .icon {
   font-size: 24px;
   color: #ccc;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.tech-icons i:hover {
+.tech-icons .icon:hover {
   color: #dc143c;
   transform: translateY(-3px);
 }
@@ -98,7 +98,7 @@ footer::before {
   color: #ccc;
 }
 
-.contact-item i {
+.contact-item .icon {
   font-size: 16px;
   color: #dc143c;
   width: 20px;

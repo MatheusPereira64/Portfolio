@@ -2,8 +2,11 @@ import { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
-import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
+import { triggerCvDownload } from '../constants/siteProfile'
+import { getPublishedPosts } from '../data/linkedinPosts'
+import { goToSection, toHref } from '../utils/routes'
 import FlagIcon from './FlagIcon'
+import Icon from './Icon'
 import './Navbar.css'
 
 const COMPACT_BREAKPOINT = 1200
@@ -29,7 +32,7 @@ const LanguageSelector = ({ isOpen, onToggle, onSelect, language }) => {
       >
         <FlagIcon country={currentLang.country} />
         <span className="lang-code">{currentLang.name}</span>
-        <i className={`fas fa-chevron-${isOpen ? 'up' : 'down'}`} aria-hidden="true"></i>
+        <Icon name={isOpen ? 'chevron-up' : 'chevron-down'} />
       </button>
       {isOpen && (
         <div className="language-dropdown" role="listbox">
@@ -44,7 +47,7 @@ const LanguageSelector = ({ isOpen, onToggle, onSelect, language }) => {
             >
               <FlagIcon country={lang.country} />
               <span className="lang-code">{lang.name}</span>
-              {language === lang.code && <i className="fas fa-check" aria-hidden="true"></i>}
+              {language === lang.code && <Icon name="check" />}
             </button>
           ))}
         </div>
@@ -151,15 +154,11 @@ const Navbar = () => {
   }
 
   const scrollToSection = (e, sectionId) => {
-    e.preventDefault()
-    const element = document.getElementById(sectionId)
-    if (element) {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur()
-      }
-      element.scrollIntoView({ behavior: 'smooth' })
-      closeMenu()
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
     }
+    goToSection(e, sectionId)
+    closeMenu()
   }
 
   const handleLangToggle = () => setIsLangOpen((open) => !open)
@@ -171,13 +170,10 @@ const Navbar = () => {
 
   const navItems = [
     { id: 'home', label: t.nav.home },
-    { id: 'about', label: t.nav.about },
-    { id: 'services', label: t.nav.services },
-    { id: 'skills', label: t.nav.skills },
-    { id: 'experience', label: t.nav.experience || 'Experiência' },
     { id: 'teams', label: t.nav.projects },
-    { id: 'stats', label: t.nav.stats || 'Estatísticas' },
-    { id: 'blog', label: t.nav.blog || 'Blog' },
+    { id: 'experience', label: t.nav.experience || 'Experiência' },
+    { id: 'about', label: t.nav.about },
+    ...(getPublishedPosts().length ? [{ id: 'blog', label: t.nav.blog || 'Blog' }] : []),
     { id: 'contact', label: t.nav.contact },
   ]
 
@@ -198,7 +194,7 @@ const Navbar = () => {
       aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
       title={theme === 'light' ? 'Modo escuro' : 'Modo claro'}
     >
-      <i className={`fas ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`}></i>
+      <Icon name={theme === 'light' ? 'moon' : 'sun'} />
     </button>
   )
 
@@ -214,7 +210,7 @@ const Navbar = () => {
       aria-label={cvDownloadLabel}
       title={cvDownloadLabel}
     >
-      <i className="fas fa-file-download" aria-hidden="true"></i>
+      <Icon name="file-download" />
     </button>
   )
 
@@ -243,8 +239,8 @@ const Navbar = () => {
     <nav className={`navbar ${isSticky ? 'sticky' : ''} ${isCompact ? 'is-compact' : ''} ${isMenuOpen && isCompact ? 'menu-open' : ''}`}>
       <div className="navbar-measure" ref={measureRef} aria-hidden="true" inert="">
         <div className="logo">
-          <a tabIndex={-1}>
-            <span>Portfolio</span>
+          <a href="#home" tabIndex={-1}>
+            <span>Matheus Pereira</span>
           </a>
         </div>
         <ul className="menu menu-desktop">{renderNavLinks()}</ul>
@@ -257,8 +253,8 @@ const Navbar = () => {
 
       <div className="max-width" ref={shellRef}>
         <div className="logo">
-          <a href={SITE_PROFILE.linkedin} target="_blank" rel="noopener noreferrer">
-            <span>Portfolio</span>
+          <a href={`${toHref('/')}#home`} onClick={(event) => scrollToSection(event, 'home')}>
+            <span>Matheus Pereira</span>
           </a>
         </div>
 
@@ -290,7 +286,7 @@ const Navbar = () => {
               aria-expanded={isMenuOpen}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+              <Icon name={isMenuOpen ? 'times' : 'bars'} />
             </button>
           )}
         </div>

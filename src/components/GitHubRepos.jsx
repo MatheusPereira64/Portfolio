@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { GITHUB_REPOS_URL, GITHUB_USER, getGithubOgImage } from '../data/projects'
 import { SITE_PROFILE } from '../constants/siteProfile'
+import Reveal from './Reveal'
 import './GitHubRepos.css'
 
 const HIDDEN = new Set(['portfolio', 'matheuspereira64'])
@@ -46,9 +47,11 @@ const GitHubRepos = ({ variant = 'section' }) => {
       )}
       {status === 'ready' && (
         <div className="github-repos-grid">
-          {repos.map((repo) => (
-            <a
+          {repos.map((repo, index) => (
+            <Reveal
+              as="a"
               key={repo.id}
+              index={index}
               className="github-repo-card"
               href={repo.html_url}
               target="_blank"
@@ -61,7 +64,11 @@ const GitHubRepos = ({ variant = 'section' }) => {
               />
               <strong>{repo.name}</strong>
               <span>{repo.description || repo.language || 'GitHub'}</span>
-            </a>
+              <span className="github-repo-meta">
+                {repo.language && <span>{repo.language}</span>}
+                <span>★ {repo.stargazers_count ?? 0}</span>
+              </span>
+            </Reveal>
           ))}
         </div>
       )}

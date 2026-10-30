@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
+import Icon from './Icon'
+import Reveal from './Reveal'
 import { isEmailJsConfigured, sendContactEmail } from '../utils/sendContactEmail'
 
 const Contact = () => {
@@ -105,9 +107,9 @@ const Contact = () => {
   return (
     <section className="contact" id="contact" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.contact.title}</h2>
+        <Reveal as="h2" className="title">{t.contact.title}</Reveal>
         <div className="contact-content">
-          <div className="column left">
+          <Reveal className="column left">
             <div className="text">{t.contact.text}</div>
             <p>{t.contact.description}</p>
             <div className="cv-download-group">
@@ -119,7 +121,7 @@ const Contact = () => {
                   onClick={() => triggerCvDownload('en')}
                   aria-label={`${cv.heading} — ${cv.en}`}
                 >
-                  <i className="fas fa-download"></i>
+                  <Icon name="download" />
                   {cv.en}
                 </button>
                 <button
@@ -128,50 +130,50 @@ const Contact = () => {
                   onClick={() => triggerCvDownload('pt')}
                   aria-label={`${cv.heading} — ${cv.pt}`}
                 >
-                  <i className="fas fa-download"></i>
+                  <Icon name="download" />
                   {cv.pt}
                 </button>
               </div>
             </div>
             <div className="icons">
               <div className="row">
-                <i className="fas fa-user"></i>
+                <Icon name="user" />
                 <div className="info">
                   <div className="head">{t.contact.name}</div>
                   <div className="sub-title">Matheus Pereira de Souza</div>
                 </div>
               </div>
               <div className="row">
-                <i className="fas fa-map-marker-alt"></i>
+                <Icon name="map-marker-alt" />
                 <div className="info">
                   <div className="head">{language === 'pt' ? 'Localização' : 'Location'}</div>
                   <div className="sub-title">{language === 'pt' ? 'Manaus, Amazonas - Brasil' : 'Manaus, Amazonas - Brazil'}</div>
                 </div>
               </div>
               <div className="row">
-                <i className="fas fa-phone"></i>
+                <Icon name="phone" />
                 <div className="info">
                   <div className="head">{language === 'pt' ? 'Telefone' : 'Phone'}</div>
                   <div className="sub-title">+55 (92) 99213-8870</div>
                 </div>
               </div>
               <div className="row">
-                <i className="fas fa-envelope"></i>
+                <Icon name="envelope" />
                 <div className="info">
                   <div className="head">Email</div>
                   <div className="sub-title">{SITE_PROFILE.email}</div>
                 </div>
               </div>
               <div className="row">
-                <i className="fab fa-linkedin"></i>
+                <Icon name="linkedin" />
                 <div className="info">
                   <div className="head">LinkedIn</div>
                   <div className="sub-title">{SITE_PROFILE.linkedin.replace(/^https:\/\//, '')}</div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="column right">
+          </Reveal>
+          <Reveal className="column right" index={1}>
             <div className="text">{t.contact.formTitle}</div>
             <p className="form-instruction">
               {isEmailJsConfigured()
@@ -232,7 +234,7 @@ const Contact = () => {
               </div>
               {submitStatus === 'success' && (
                 <div className="form-message success">
-                  <i className="fas fa-check-circle"></i>
+                  <Icon name="check-circle" />
                   {language === 'pt' 
                     ? 'Mensagem enviada com sucesso!' 
                     : language === 'es'
@@ -242,7 +244,7 @@ const Contact = () => {
               )}
               {submitStatus === 'mailto' && (
                 <div className="form-message success">
-                  <i className="fas fa-check-circle"></i>
+                  <Icon name="check-circle" />
                   {language === 'pt'
                     ? 'O seu cliente de email foi aberto. Confirme o envio para concluir.'
                     : language === 'es'
@@ -252,7 +254,7 @@ const Contact = () => {
               )}
               {submitStatus === 'error' && (
                 <div className="form-message error">
-                  <i className="fas fa-exclamation-circle"></i>
+                  <Icon name="exclamation-circle" />
                   {language === 'pt'
                     ? 'Erro ao enviar mensagem. Tente novamente.'
                     : language === 'es'
@@ -268,7 +270,7 @@ const Contact = () => {
                 </button>
               </div>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

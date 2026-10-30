@@ -1,6 +1,6 @@
 .github-repos {
   margin-top: 28px;
-  padding-top: 20px;
+  padding: 20px 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
@@ -30,10 +30,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 0 0 14px;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 10px;
   overflow: hidden;
   color: #fff;
+  text-decoration: none;
 }
 
 .github-repo-card img {
@@ -44,14 +46,21 @@
 }
 
 .github-repo-card strong,
-.github-repo-card span {
-  padding: 0 10px;
+.github-repo-card > span {
+  padding: 0 14px;
 }
 
 .github-repo-card span {
-  padding-bottom: 10px;
   color: #ccc;
   font-size: 13px;
+}
+
+.github-repo-meta {
+  display: flex;
+  gap: 12px;
+  color: #ffd700;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .github-repo-card:hover {

@@ -8,6 +8,25 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/Portfolio/apple-touch-icon.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var redirect = sessionStorage.getItem('portfolio:redirect');
+          if (redirect) {
+            sessionStorage.removeItem('portfolio:redirect');
+            if (redirect !== location.href) history.replaceState(null, '', redirect);
+          }
+        } catch (e) {}
+        var saved = null;
+        try { saved = localStorage.getItem('selectedLanguage'); } catch (e) {}
+        var lang = saved;
+        if (lang !== 'pt' && lang !== 'en' && lang !== 'es') {
+          var navLang = (navigator.language || '').toLowerCase();
+          lang = navLang.indexOf('pt') === 0 ? 'pt' : navLang.indexOf('es') === 0 ? 'es' : 'en';
+        }
+        document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+      })();
+    </script>
     
     <!-- Primary Meta Tags -->
     <title>Matheus Pereira - Full Stack Software Engineer | Portfolio</title>
@@ -63,10 +82,10 @@
     }
     </script>
     
-    <script type="module" crossorigin src="/Portfolio/assets/index-CtI7_h5r.js"></script>
-    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-B_nYKLeA.css">
+    <script type="module" crossorigin src="/Portfolio/assets/index-DNjvw221.js"></script>
+    <link rel="stylesheet" crossorigin href="/Portfolio/assets/index-BhGjDTkw.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"></div>
   </body>
 </html>

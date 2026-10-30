@@ -1,4 +1,5 @@
 import { SITE_PROFILE, getCvHref } from '../constants/siteProfile'
+import { getPublishedPosts } from '../data/linkedinPosts'
 import {
   getKnowledge,
   getWhatsAppUrl,
@@ -154,7 +155,7 @@ const builders = {
         label: `📝 ${L(language, 'blog')}`,
         url: SITE_PROFILE.linkedinActivity,
       },
-      { type: 'scroll', label: '📝 Blog', section: 'blog' },
+      ...(getPublishedPosts().length ? [{ type: 'scroll', label: '📝 Blog', section: 'blog' }] : []),
     ],
     suggestedReplies:
       language === 'pt'
@@ -247,15 +248,13 @@ const builders = {
   },
 
   skills: (language) => {
-    const top = SKILLS.slice(0, 8)
-      .map((s) => `${s.name} — ${s.percentage}%`)
-      .join('\n')
+    const top = SKILLS.map((s) => s.name).join(', ')
     const text =
       language === 'pt'
-        ? `Principais habilidades:\n\n${top}\n\n…e mais na secção Habilidades.`
+        ? `Tecnologias que uso:\n\n${top}\n\nEstão agrupadas na secção Sobre.`
         : language === 'es'
-          ? `Habilidades principales:\n\n${top}\n\n…y más en la sección Habilidades.`
-          : `Top skills:\n\n${top}\n\n…and more in the Skills section.`
+          ? `Tecnologías que uso:\n\n${top}\n\nEstán agrupadas en la sección Sobre.`
+          : `Technologies I use:\n\n${top}\n\nThey are grouped in the About section.`
     return {
       text,
       links: [
@@ -396,7 +395,7 @@ const builders = {
           label: `📝 ${L(language, 'blog')}`,
           url: SITE_PROFILE.linkedinActivity,
         },
-        { type: 'scroll', label: '📝 Blog', section: 'blog' },
+        ...(getPublishedPosts().length ? [{ type: 'scroll', label: '📝 Blog', section: 'blog' }] : []),
         { type: 'link', label: `🔗 ${L(language, 'linkedin')}`, url: SITE_PROFILE.linkedin },
       ],
       suggestedReplies:

@@ -179,6 +179,75 @@
   }
 }
 
+.about-details {
+  margin-top: 48px;
+}
+
+.skill-groups h3,
+.about-details > .education-info h4,
+.certifications-strip h3 {
+  text-align: left;
+}
+
+.skill-groups {
+  display: grid;
+  gap: 22px;
+  margin-bottom: 36px;
+}
+
+.skill-group h4 {
+  margin-bottom: 10px;
+  color: #dc143c;
+  font-size: 16px;
+}
+
+.skill-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skill-group li a,
+.skill-group li span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(220, 20, 60, 0.08);
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skill-group .skill-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.skill-group li a:hover {
+  background: #dc143c;
+  color: #fff;
+}
+
+[data-theme="dark"] .skill-group li a,
+[data-theme="dark"] .skill-group li span {
+  color: #f3f3f3;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .skill-group li a:hover {
+  background: #dc143c;
+  color: #fff;
+}
+
 .certifications-strip {
   margin: 0 0 40px;
 }

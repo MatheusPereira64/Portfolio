@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import App from './App'
 import './index.css'
+import './reveal.css'
 import { SITE_PROFILE } from './constants/siteProfile'
 
 const plausibleDomain = import.meta.env.VITE_PLAUSIBLE_DOMAIN || SITE_PROFILE.plausibleDomain

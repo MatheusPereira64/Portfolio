@@ -11,6 +11,7 @@ import {
 } from '../utils/chatbotResponses'
 import { getAIResponse, isGeminiConfigured, canUseAI } from '../utils/chatbotAI'
 import { handleChatAction } from '../utils/chatbotActions'
+import Icon from './Icon'
 import './Chatbot.css'
 
 const Chatbot = () => {
@@ -187,7 +188,7 @@ const Chatbot = () => {
         onClick={() => setIsOpen(!isOpen)}
         aria-label={language === 'pt' ? 'Abrir assistente' : 'Open assistant'}
       >
-        <i className={`fas ${isOpen ? 'fa-times' : 'fa-comments'}`}></i>
+        <Icon name={isOpen ? 'times' : 'comments'} />
       </button>
       {isOpen && (
         <div className="chatbot-container">
@@ -199,6 +200,8 @@ const Chatbot = () => {
                 alt=""
                 width={40}
                 height={40}
+                loading="lazy"
+                decoding="async"
               />
               <div>
                 <h3>{personaName}</h3>
@@ -215,7 +218,7 @@ const Chatbot = () => {
               onClick={() => setIsOpen(false)}
               aria-label={language === 'pt' ? 'Fechar' : 'Close'}
             >
-              <i className="fas fa-times"></i>
+              <Icon name="times" />
             </button>
           </div>
           <div className="chatbot-messages">
@@ -274,7 +277,7 @@ const Chatbot = () => {
               disabled={isLoading}
             />
             <button type="submit" aria-label="Send" disabled={isLoading || !inputValue.trim()}>
-              <i className="fas fa-paper-plane"></i>
+              <Icon name="paper-plane" />
             </button>
           </form>
         </div>

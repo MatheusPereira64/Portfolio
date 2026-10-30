@@ -1,0 +1,136 @@
+.code-window-wrap {
+  position: relative;
+  width: min(34rem, 100%);
+  margin: 18px 0 8px;
+}
+
+.code-window-source {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: pre;
+  border: 0;
+}
+
+.code-window {
+  background: #16181d;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  text-align: left;
+  color: #d6deeb;
+  font: 13px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  animation: code-window-open 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--open, 0.2s) both;
+}
+
+.code-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #23262e;
+  color: #9aa3b2;
+  font-size: 12px;
+}
+
+.code-window-bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #5c6370;
+}
+
+.code-window-bar span {
+  margin-left: 8px;
+}
+
+.code-window pre {
+  margin: 0;
+  padding: 14px 16px 16px;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-line {
+  display: block;
+  overflow: hidden;
+  white-space: pre;
+  width: 0;
+  animation: code-type var(--d) steps(var(--n), end) var(--t) forwards;
+}
+
+.tok-k {
+  color: #c792ea;
+}
+
+.tok-s {
+  color: #ecc48d;
+}
+
+.tok-p {
+  color: #82aaff;
+}
+
+.code-caret {
+  display: inline-block;
+  width: 0.55ch;
+  height: 1.05em;
+  margin-left: 1px;
+  background: #fff;
+  vertical-align: text-bottom;
+  animation: code-caret-blink 1s steps(1) infinite;
+}
+
+@keyframes code-type {
+  to {
+    width: calc(var(--n) * 1ch);
+  }
+}
+
+@keyframes code-window-open {
+  from {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0.2;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes code-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .code-window {
+    font-size: 11px;
+  }
+
+  .code-window pre {
+    padding: 10px 12px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .code-window,
+  .code-line,
+  .code-caret {
+    animation: none !important;
+  }
+
+  .code-window {
+    clip-path: none !important;
+    opacity: 1 !important;
+  }
+
+  .code-line {
+    width: auto !important;
+  }
+}

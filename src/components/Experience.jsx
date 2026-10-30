@@ -1,15 +1,11 @@
-import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
+import Reveal from './Reveal'
 import SkillIcon from './SkillIcon'
 import './Experience.css'
 
 const Experience = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
-  const { ref, inView } = useInView({
-    threshold: 0.15,
-    triggerOnce: true
-  })
 
   const experiences = [
     {
@@ -65,15 +61,16 @@ const Experience = () => {
   ]
 
   return (
-    <section className="experience" id="experience" data-lang={language} ref={ref}>
+    <section className="experience" id="experience" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.experience?.title || 'Experiência'}</h2>
-        <ol className={`experience-timeline ${inView ? 'animate' : ''}`}>
+        <Reveal as="h2" className="title">{t.experience?.title || 'Experiência'}</Reveal>
+        <ol className="experience-timeline">
           {experiences.map((exp, index) => (
-            <li
+            <Reveal
+              as="li"
               key={`${exp.company}-${index}`}
               className={`experience-step${exp.current ? ' current' : ''}`}
-              style={{ animationDelay: `${index * 0.16}s` }}
+              index={index}
             >
               <time className="experience-year">{exp.year}</time>
               <div className="experience-axis">
@@ -86,14 +83,11 @@ const Experience = () => {
                 {exp.results && <p className="experience-results">{exp.results}</p>}
                 <div className="experience-technologies">
                   {exp.technologies.map((tech) => (
-                    <span key={tech} className="tech-tag">
-                      <SkillIcon name={tech} />
-                      {tech}
-                    </span>
+                    <span key={tech} className="tech-tag"><SkillIcon name={tech} />{tech}</span>
                   ))}
                 </div>
               </article>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </div>
