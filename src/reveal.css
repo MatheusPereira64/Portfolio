@@ -1,0 +1,42 @@
+.js .reveal:not(.in) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js .card.reveal:not(.in),
+.js .teams .project-grid .card.reveal:not(.in) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js .reveal.in:not(.settled) {
+  animation: block-in 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.js .reveal.settled {
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes block-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .reveal:not(.in),
+  .js .card.reveal:not(.in),
+  .js .teams .project-grid .card.reveal:not(.in) {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}

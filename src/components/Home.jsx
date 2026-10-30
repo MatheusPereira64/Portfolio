@@ -1,81 +1,87 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
 import { profileImageProps, SITE_PROFILE } from '../constants/siteProfile'
-import { TYPED_ROLES } from '../constants/typedRoles'
 import { goToSection } from '../utils/routes'
-import Typed from 'typed.js'
+import CodeWindow from './CodeWindow'
 import './Home.css'
 
-const Home = () => {
+const DOTS_A = [
+  [90, 70, 2],
+  [210, 160, 1.4],
+  [340, 40, 1.8],
+  [480, 210, 1.2],
+  [620, 90, 2.2],
+  [760, 180, 1.5],
+  [900, 50, 1.7],
+  [1040, 150, 1.3],
+  [150, 320, 1.6],
+  [400, 360, 2],
+  [680, 300, 1.4],
+  [980, 340, 1.8],
+]
+
+const DOTS_B = [
+  [40, 140, 1.5],
+  [180, 240, 2.1],
+  [300, 110, 1.2],
+  [520, 40, 1.6],
+  [700, 220, 1.3],
+  [860, 120, 2],
+  [1100, 80, 1.4],
+  [260, 420, 1.7],
+  [560, 380, 1.2],
+  [820, 400, 1.9],
+  [1080, 280, 1.5],
+]
+
+function ParticleLayer({ dots, className }) {
+  return (
+    <svg className={className} viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {dots.map(([cx, cy, r]) => (
+        <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} />
+      ))}
+    </svg>
+  )
+}
+
+const Home = ({ typingDelay = 0.3 }) => {
   const { translations, language } = useLanguage()
   const t = translations[language]
-  const typedRef = useRef(null)
-  const typedInstance = useRef(null)
-  const homeRef = useRef(null)
+  const { ref, inView } = useInView({ threshold: 0 })
+  const [motionPaused, setMotionPaused] = useState(false)
 
   useEffect(() => {
-    const strings = TYPED_ROLES[language] || TYPED_ROLES.en
-
-    if (typedRef.current) {
-      if (typedInstance.current) {
-        typedInstance.current.destroy()
-      }
-      typedInstance.current = new Typed(typedRef.current, {
-        strings,
-        typeSpeed: 100,
-        backSpeed: 60,
-        backDelay: 1000,
-        startDelay: 500,
-        loop: true,
-        showCursor: true,
-        cursorChar: '|',
-      })
+    const sync = () => {
+      document.documentElement.classList.toggle('tab-hidden', document.hidden)
     }
-
-    return () => {
-      if (typedInstance.current) {
-        typedInstance.current.destroy()
-        typedInstance.current = null
-      }
-    }
-  }, [language])
-
-  useEffect(() => {
-    const createParticle = () => {
-      if (!homeRef.current) return
-
-      const particle = document.createElement('div')
-      particle.className = 'particle'
-      homeRef.current.appendChild(particle)
-
-      const size = Math.random() * 5 + 2
-      const startX = Math.random() * window.innerWidth
-      const duration = Math.random() * 3000 + 2000
-
-      particle.style.left = `${startX}px`
-      particle.style.width = `${size}px`
-      particle.style.height = `${size}px`
-      particle.style.animationDuration = `${duration}ms`
-
-      setTimeout(() => {
-        particle.remove()
-      }, duration)
-    }
-
-    const interval = setInterval(createParticle, 300)
-    return () => clearInterval(interval)
+    sync()
+    document.addEventListener('visibilitychange', sync)
+    return () => document.removeEventListener('visibilitychange', sync)
   }, [])
 
+  const particlesPaused = motionPaused || !inView
+
   return (
-    <section className="home" id="home" ref={homeRef}>
+    <section className="home" id="home" ref={ref}>
+      <div className={`hero-particles${particlesPaused ? ' is-paused' : ''}`} aria-hidden="true">
+        <ParticleLayer dots={DOTS_A} className="hero-particles-layer hero-particles-layer-a" />
+        <ParticleLayer dots={DOTS_B} className="hero-particles-layer hero-particles-layer-b" />
+      </div>
+      <button
+        type="button"
+        className="hero-motion-toggle"
+        aria-pressed={motionPaused}
+        onClick={() => setMotionPaused((paused) => !paused)}
+      >
+        {motionPaused ? t.home.playMotion : t.home.pauseMotion}
+      </button>
       <div className="max-width">
         <div className="home-inner">
           <div className="home-content">
-            <div className="text-1">{t.home.greeting}</div>
-            <div className="text-2">{t.home.name}</div>
-            <div className="text-3">
-              {t.home.subtitle} <span className="typing" ref={typedRef}></span>
-            </div>
+            <p className="text-1">{t.home.greeting}</p>
+            <h1 className="text-2">{t.home.name}</h1>
+            <CodeWindow delay={typingDelay} />
             <a href="#about" onClick={(event) => goToSection(event, 'about')}>
               {t.home.button}
             </a>

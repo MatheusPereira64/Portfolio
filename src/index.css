@@ -123,23 +123,6 @@ body.theme-transition * {
   100% { transform: translateY(0px); }
 }
 
-@keyframes particle-float {
-  0% {
-    transform: translateY(100vh) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
 /* Global Styles */
 .max-width {
   max-width: 1300px;
@@ -202,16 +185,6 @@ section .title::after {
   opacity: 1;
   transform: translateY(0);
   animation: float 6s ease-in-out infinite;
-}
-
-/* Particle effect */
-.particle {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  pointer-events: none;
-  animation: particle-float linear infinite;
-  z-index: 1;
 }
 
 /* Responsive */

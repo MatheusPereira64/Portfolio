@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
 import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
 import Icon from './Icon'
+import Reveal from './Reveal'
 import { isEmailJsConfigured, sendContactEmail } from '../utils/sendContactEmail'
 
 const Contact = () => {
@@ -106,9 +107,9 @@ const Contact = () => {
   return (
     <section className="contact" id="contact" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.contact.title}</h2>
+        <Reveal as="h2" className="title">{t.contact.title}</Reveal>
         <div className="contact-content">
-          <div className="column left">
+          <Reveal className="column left">
             <div className="text">{t.contact.text}</div>
             <p>{t.contact.description}</p>
             <div className="cv-download-group">
@@ -171,8 +172,8 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="column right">
+          </Reveal>
+          <Reveal className="column right" index={1}>
             <div className="text">{t.contact.formTitle}</div>
             <p className="form-instruction">
               {isEmailJsConfigured()
@@ -269,7 +270,7 @@ const Contact = () => {
                 </button>
               </div>
             </form>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

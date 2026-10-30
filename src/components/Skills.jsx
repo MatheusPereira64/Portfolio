@@ -4,6 +4,7 @@ import { SKILL_GROUPS, projectsUsing } from '../data/skillGroups'
 import { getLocalizedField as getProjectField } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
 import CertificatePreview from './CertificatePreview'
+import Reveal from './Reveal'
 import SkillIcon from './SkillIcon'
 import './Skills.css'
 
@@ -29,8 +30,8 @@ const Skills = () => {
     <div className="about-details">
       <div className="skill-groups" id="skills">
         <h3>{t.skills?.text || 'Tecnologias'}</h3>
-        {SKILL_GROUPS.map((group) => (
-          <div key={group.id} className="skill-group">
+        {SKILL_GROUPS.map((group, index) => (
+          <Reveal key={group.id} className="skill-group" index={index}>
             <h4>{getLocalizedField(group.label, language)}</h4>
             <ul>
               {group.items.map((tech) => {
@@ -66,27 +67,27 @@ const Skills = () => {
                 return <li key={tech}><span><SkillIcon name={tech} />{tech}</span></li>
               })}
             </ul>
-          </div>
+          </Reveal>
         ))}
       </div>
 
       <div className="education-info">
         <h4>{t.skills.education}</h4>
-        {education.map((edu) => (
-          <div key={edu.title} className="education-item">
+        {education.map((edu, index) => (
+          <Reveal key={edu.title} className="education-item" index={index}>
             <p>
               <strong>{edu.title}</strong><br />
               {edu.institution}<br />
               {edu.period}
             </p>
-          </div>
+          </Reveal>
         ))}
       </div>
 
       <div className="certifications-strip" id="certifications">
         <h3>{t.skills.certifications || 'Certificações'}</h3>
         <ul className="certifications-grid">
-          {CERTIFICATIONS.map((cert) => {
+          {CERTIFICATIONS.map((cert, index) => {
             const href = getCertificateHref(cert)
             const previewSrc = getCertificatePreviewSrc(cert)
             const title = getLocalizedField(cert.title, language)
@@ -101,7 +102,7 @@ const Skills = () => {
               </>
             )
             return (
-              <li key={cert.id} className="cert-card">
+              <Reveal as="li" key={cert.id} className="cert-card" index={index}>
                 {href ? (
                   <a href={href} target="_blank" rel="noopener noreferrer">
                     {content}
@@ -109,7 +110,7 @@ const Skills = () => {
                 ) : (
                   <div>{content}</div>
                 )}
-              </li>
+              </Reveal>
             )
           })}
         </ul>

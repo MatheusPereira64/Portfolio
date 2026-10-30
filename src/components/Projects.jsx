@@ -10,6 +10,7 @@ import {
 import { onNavigate, toHref } from '../utils/routes'
 import GitHubRepos from './GitHubRepos'
 import Icon from './Icon'
+import Reveal from './Reveal'
 import SkillIcon from './SkillIcon'
 import './Projects.css'
 
@@ -30,13 +31,13 @@ const Projects = () => {
   return (
     <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.projects.title}</h2>
+        <Reveal as="h2" className="title">{t.projects.title}</Reveal>
         <div className="project-grid">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             const href = toHref(`/projetos/${project.slug}`)
             const github = getProjectGithubRepos(project)[0]
             return (
-              <article key={project.id} className="card">
+              <Reveal as="article" key={project.id} className="card" index={index}>
                 <a
                   className="box project-card-link"
                   href={href}
@@ -79,7 +80,7 @@ const Projects = () => {
                     {t.projects?.viewOnGithub || 'GitHub'}
                   </a>
                 )}
-              </article>
+              </Reveal>
             )
           })}
         </div>

@@ -80,23 +80,6 @@
   justify-items: center;
   text-align: center;
   padding: 0 12px;
-  opacity: 0;
-  transform: translateY(18px);
-}
-
-.experience-timeline.animate .experience-step {
-  animation: experienceStepIn 0.55s ease forwards;
-}
-
-@keyframes experienceStepIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .experience-year {

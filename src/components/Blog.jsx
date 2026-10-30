@@ -1,35 +1,32 @@
-import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
 import { SITE_PROFILE } from '../constants/siteProfile'
 import { getLocalizedField, getLinkedInEmbedSrc, getPublishedPosts } from '../data/linkedinPosts'
 import Icon from './Icon'
+import Reveal from './Reveal'
 import './Blog.css'
 
 const Blog = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
   const posts = getPublishedPosts()
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  })
 
   if (!posts.length) return null
 
   return (
-    <section className="blog" id="blog" data-lang={language} ref={ref}>
+    <section className="blog" id="blog" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.blog?.title || 'Blog & Artigos'}</h2>
+        <Reveal as="h2" className="title">{t.blog?.title || 'Blog & Artigos'}</Reveal>
 
-        <div className={`blog-grid ${inView ? 'animate' : ''}`}>
+        <div className="blog-grid">
           {posts.map((post, index) => {
             const embedSrc = getLinkedInEmbedSrc(post.linkedinUrl)
             const title = getLocalizedField(post.title, language)
             return (
-              <article
+              <Reveal
+                as="article"
                 key={post.id}
                 className={`blog-card${embedSrc ? ' blog-card--embed' : ''}`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                index={index}
               >
                 {embedSrc ? (
                   <iframe
@@ -74,7 +71,7 @@ const Blog = () => {
                     </div>
                   </>
                 )}
-              </article>
+              </Reveal>
             )
           })}
         </div>

@@ -79,6 +79,14 @@
   color: #ffd700;
 }
 
+.js .teams .project-grid .card.reveal {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.js .teams .project-grid .card.reveal.settled {
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .teams .project-grid .card {
   background: #222;
   border-radius: 10px;

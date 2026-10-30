@@ -82,7 +82,19 @@ export const LanguageProvider = ({ children }) => {
         talk: 'Falar comigo',
         downloadCv: 'Baixar CV',
         available: 'Disponível para projetos',
-        inpi: '{count} softwares registrados no INPI'
+        inpi: '{count} softwares registrados no INPI',
+        pauseMotion: 'Pausar fundo',
+        playMotion: 'Retomar fundo',
+        code: {
+          file: 'matheus.js',
+          nameKey: 'nome',
+          cityKey: 'cidade',
+          companyKey: 'empresa',
+          focusKey: 'foco',
+          availableKey: 'disponivel',
+          focusWeb: 'sistemas web',
+          focusDash: 'dashboards industriais',
+        }
       },
       about: {
         title: 'Sobre mim',
@@ -185,7 +197,19 @@ export const LanguageProvider = ({ children }) => {
         talk: 'Talk to me',
         downloadCv: 'Download CV',
         available: 'Available for projects',
-        inpi: '{count} software registrations at INPI'
+        inpi: '{count} software registrations at INPI',
+        pauseMotion: 'Pause background',
+        playMotion: 'Resume background',
+        code: {
+          file: 'matheus.js',
+          nameKey: 'name',
+          cityKey: 'city',
+          companyKey: 'company',
+          focusKey: 'focus',
+          availableKey: 'available',
+          focusWeb: 'web systems',
+          focusDash: 'industrial dashboards',
+        }
       },
       about: {
         title: 'About me',
@@ -288,7 +312,19 @@ export const LanguageProvider = ({ children }) => {
         talk: 'Hablar conmigo',
         downloadCv: 'Descargar CV',
         available: 'Disponible para proyectos',
-        inpi: '{count} softwares registrados en el INPI'
+        inpi: '{count} softwares registrados en el INPI',
+        pauseMotion: 'Pausar fondo',
+        playMotion: 'Reanudar fondo',
+        code: {
+          file: 'matheus.js',
+          nameKey: 'nombre',
+          cityKey: 'ciudad',
+          companyKey: 'empresa',
+          focusKey: 'foco',
+          availableKey: 'disponible',
+          focusWeb: 'sistemas web',
+          focusDash: 'dashboards industriales',
+        }
       },
       about: {
         title: 'Sobre mí',

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import About from './components/About'
@@ -13,7 +13,9 @@ import ProjectCaseStudy from './components/ProjectCaseStudy'
 import { LanguageProvider, useLanguage } from './context/LanguageContext'
 import { ThemeProvider } from './context/ThemeContext'
 import { getProjectBySlug } from './data/projects'
-import { useAppPath } from './utils/routes'
+import { getAppPath, useAppPath } from './utils/routes'
+import { openingDecision } from './utils/opening'
+import OpeningMark from './components/OpeningMark'
 import './App.css'
 import './section-titles-mobile.css'
 
@@ -21,6 +23,22 @@ function AppShell() {
   const { language, translations } = useLanguage()
   const t = translations[language]
   const path = useAppPath()
+  const [opening, setOpening] = useState(() => openingDecision(getAppPath() === '/'))
+  const [typingDelay, setTypingDelay] = useState(() => (opening === 'play' ? 2.7 : 0.3))
+
+  if (opening === 'deferred' && path === '/') {
+    const next = openingDecision(true)
+    setOpening(next)
+    if (next === 'play') setTypingDelay(2.7)
+  }
+
+  const openingFinished = useRef(false)
+  const finishOpening = useCallback((reason) => {
+    if (openingFinished.current) return
+    openingFinished.current = true
+    if (reason === 'skip') setTypingDelay(0.15)
+    setOpening('done')
+  }, [])
   const slugMatch = path.match(/^\/projetos\/([^/]+)$/)
   const slug = slugMatch ? decodeURIComponent(slugMatch[1]) : null
   const project = slug ? getProjectBySlug(slug) : null
@@ -59,12 +77,13 @@ function AppShell() {
         {t.nav.skipLink || 'Skip to content'}
       </a>
       <Navbar />
+      {opening === 'play' && path === '/' && <OpeningMark onFinish={finishOpening} />}
       <main id="conteudo">
         {slug ? (
           <ProjectCaseStudy project={project} />
         ) : (
           <>
-            <Home />
+            <Home typingDelay={typingDelay} />
             <Projects />
             <Experience />
             <About />

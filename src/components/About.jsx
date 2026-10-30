@@ -4,6 +4,7 @@ import { profileImageProps } from '../constants/siteProfile'
 import { TYPED_ROLES } from '../constants/typedRoles'
 import { goToSection } from '../utils/routes'
 import Typed from 'typed.js'
+import Reveal from './Reveal'
 import Skills from './Skills'
 import './About.css'
 
@@ -43,9 +44,9 @@ const About = () => {
   return (
     <section className="about" id="about" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.about.title}</h2>
+        <Reveal as="h2" className="title">{t.about.title}</Reveal>
         <div className="about-content">
-          <div className="column left">
+          <Reveal className="column left">
             <div className="profile-photo-frame">
               <img
                 {...profileImageProps()}
@@ -57,8 +58,8 @@ const About = () => {
                 height={400}
               />
             </div>
-          </div>
-          <div className="column right">
+          </Reveal>
+          <Reveal className="column right" index={1}>
             <div className="text">
               {t.about.text} <span className="typing-2" ref={typedRef}></span>
             </div>
@@ -66,7 +67,7 @@ const About = () => {
             <a href="#contact" onClick={(event) => goToSection(event, 'contact')}>
               {t.about.button}
             </a>
-          </div>
+          </Reveal>
         </div>
         <Skills />
       </div>

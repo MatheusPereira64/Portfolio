@@ -25,6 +25,7 @@
           lang = navLang.indexOf('pt') === 0 ? 'pt' : navLang.indexOf('es') === 0 ? 'es' : 'en';
         }
         document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+        document.documentElement.classList.add('js');
       })();
     </script>
     
