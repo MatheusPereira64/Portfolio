@@ -221,20 +221,6 @@ html.tab-hidden .hero-particles-layer {
   }
 }
 
-.hero-motion-toggle {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: rgba(0, 0, 0, 0.28);
-  color: #fff;
-  border-radius: 999px;
-  padding: 6px 12px;
-  font: 600 12px/1.2 Inter, system-ui, sans-serif;
-  cursor: pointer;
-}
-
 @media (max-width: 500px) {
   .home {
     padding-top: 96px;
@@ -265,10 +251,6 @@ html.tab-hidden .hero-particles-layer {
   .hero-particles-layer,
   .home-profile-ring {
     animation: none !important;
-  }
-
-  .hero-motion-toggle {
-    display: none;
   }
 }
 

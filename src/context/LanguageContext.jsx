@@ -100,8 +100,6 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Baixar CV',
         available: 'Disponível para projetos',
         inpi: '{count} softwares registrados no INPI',
-        pauseMotion: 'Pausar fundo',
-        playMotion: 'Retomar fundo',
         code: {
           file: 'matheus.js',
           nameKey: 'nome',
@@ -246,8 +244,6 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Download CV',
         available: 'Available for projects',
         inpi: '{count} software registrations at INPI',
-        pauseMotion: 'Pause background',
-        playMotion: 'Resume background',
         code: {
           file: 'matheus.js',
           nameKey: 'name',
@@ -392,8 +388,6 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Descargar CV',
         available: 'Disponible para proyectos',
         inpi: '{count} softwares registrados en el INPI',
-        pauseMotion: 'Pausar fondo',
-        playMotion: 'Reanudar fondo',
         code: {
           file: 'matheus.js',
           nameKey: 'nombre',

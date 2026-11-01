@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
 import { getCvFilename, getCvHref, profileImageProps, SITE_PROFILE } from '../constants/siteProfile'
@@ -49,7 +49,6 @@ const Home = ({ typingDelay = 0.3 }) => {
   const { translations, language } = useLanguage()
   const t = translations[language]
   const { ref, inView } = useInView({ threshold: 0 })
-  const [motionPaused, setMotionPaused] = useState(false)
 
   useEffect(() => {
     const sync = () => {
@@ -60,22 +59,12 @@ const Home = ({ typingDelay = 0.3 }) => {
     return () => document.removeEventListener('visibilitychange', sync)
   }, [])
 
-  const particlesPaused = motionPaused || !inView
-
   return (
     <section className="home" id="home" ref={ref}>
-      <div className={`hero-particles${particlesPaused ? ' is-paused' : ''}`} aria-hidden="true">
+      <div className={`hero-particles${inView ? '' : ' is-paused'}`} aria-hidden="true">
         <ParticleLayer dots={DOTS_A} className="hero-particles-layer hero-particles-layer-a" />
         <ParticleLayer dots={DOTS_B} className="hero-particles-layer hero-particles-layer-b" />
       </div>
-      <button
-        type="button"
-        className="hero-motion-toggle"
-        aria-pressed={motionPaused}
-        onClick={() => setMotionPaused((paused) => !paused)}
-      >
-        {motionPaused ? t.home.playMotion : t.home.pauseMotion}
-      </button>
       <div className="max-width">
         <div className="home-inner">
           <div className="home-content">
