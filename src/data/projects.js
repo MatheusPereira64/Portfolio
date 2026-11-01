@@ -3,8 +3,8 @@
  *  ou github: 'https://github.com/MatheusPereira64/NomeDoRepo'
  *
  *  `demo`: só URL de deploy confirmada (responde 200). Sem deploy, deixe de fora.
- *  `image`: print real em public/images/projects (npm run projects:screenshots).
- *  Sem `image`, o card usa o placeholder neutro.
+ *  `image`: em public/images/projects (npm run projects:images). Sem `image`, usa o placeholder.
+ *  `imageKind: 'mock'`: ilustração, não é tela real; o card mostra o selo "Ilustração".
  *  `slug`: só para quem tem estudo de caso (`problem`, `contribution`, `results`).
  *
  *  Papel no estudo de caso reaproveita `contribution`.
@@ -42,7 +42,8 @@ export const PROJECTS = [
       en: 'Industry 4.0',
       es: 'Industria 4.0',
     },
-    image: null,
+    image: 'images/projects/manufatura.webp',
+    imageKind: 'mock',
     screenshots: [],
     period: null,
     decisions: null,
@@ -90,7 +91,8 @@ export const PROJECTS = [
       en: 'Industry 4.0',
       es: 'Industria 4.0',
     },
-    image: null,
+    image: 'images/projects/parametrizacao.webp',
+    imageKind: 'mock',
     screenshots: [],
     period: null,
     decisions: null,
@@ -137,7 +139,8 @@ export const PROJECTS = [
       en: 'Industry 4.0',
       es: 'Industria 4.0',
     },
-    image: null,
+    image: 'images/projects/monitoramento.webp',
+    imageKind: 'mock',
     screenshots: [],
     period: null,
     decisions: null,
@@ -178,7 +181,8 @@ export const PROJECTS = [
   },
   {
     id: 5,
-    image: null,
+    image: 'images/projects/nexo-assist.webp',
+    imageKind: 'mock',
     github: 'Project-Nexo-Assist-',
     title: {
       pt: 'Nexo Assist',
@@ -199,7 +203,7 @@ export const PROJECTS = [
   },
   {
     id: 6,
-    image: null,
+    image: 'images/projects/mp-agenda.webp',
     github: 'PWA-AGENDAMENTO',
     title: {
       pt: 'MP Agenda',
@@ -220,7 +224,8 @@ export const PROJECTS = [
   },
   {
     id: 7,
-    image: null,
+    image: 'images/projects/fintrack.webp',
+    imageKind: 'mock',
     github: 'Fintrack',
     title: {
       pt: 'FinTrack',
@@ -241,7 +246,8 @@ export const PROJECTS = [
   },
   {
     id: 8,
-    image: null,
+    image: 'images/projects/wincare.webp',
+    imageKind: 'mock',
     github: 'WinCare',
     title: {
       pt: 'WinCare',

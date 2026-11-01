@@ -1,13 +1,13 @@
 .github-repos {
   margin-top: 28px;
   padding: 20px 0 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(127, 127, 127, 0.3);
 }
 
 .github-repos--section {
   margin-top: 48px;
   padding-top: 28px;
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid rgba(127, 127, 127, 0.3);
 }
 
 .github-repos h3 {
@@ -15,9 +15,8 @@
 }
 
 .github-repos--section h3 {
-  color: #ffd700;
+  color: inherit;
   font-size: 20px;
-  text-align: center;
 }
 
 .github-repos-grid {
@@ -31,10 +30,10 @@
   flex-direction: column;
   gap: 8px;
   padding: 0 0 14px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(127, 127, 127, 0.1);
   border-radius: 10px;
   overflow: hidden;
-  color: #fff;
+  color: inherit;
   text-decoration: none;
 }
 
@@ -51,20 +50,21 @@
 }
 
 .github-repo-card span {
-  color: #ccc;
+  color: inherit;
+  opacity: 0.8;
   font-size: 13px;
 }
 
 .github-repo-meta {
   display: flex;
   gap: 12px;
-  color: #ffd700;
+  color: inherit;
   font-size: 12px;
   font-weight: 600;
 }
 
 .github-repo-card:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(127, 127, 127, 0.2);
 }
 
 @media (max-width: 700px) {

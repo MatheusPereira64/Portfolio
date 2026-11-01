@@ -1,69 +1,100 @@
 .teams {
-  color: #fff;
-  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
   position: relative;
-  min-height: 500px;
   padding: 100px 0;
-}
-
-.teams .title::before {
   background: #fff;
+  color: #111;
 }
 
-.teams .title {
-  color: #fff;
+[data-theme="dark"] .teams {
+  background: #050505;
+  color: #f5f5f5;
 }
 
-.teams .title::after {
-  font-size: 20px;
-  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
-  content: "Projetos em destaque";
-  color: #ffd700;
-  padding: 0 8px;
+.projects-heading {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
 }
 
-.teams[data-lang="en"] .title::after {
-  content: "Featured projects";
+.projects-intro {
+  margin-top: 16px;
+  color: #555;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
-.teams[data-lang="es"] .title::after {
-  content: "Proyectos destacados";
-}
-
-.teams .project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin-top: 20px;
-  position: relative;
-}
-
-.js .teams .project-grid .card.reveal.settled {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.teams .project-grid .card {
+.projects-toolbar {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 28px 0 20px;
+}
+
+.projects-status {
+  color: #555;
+  font-size: 14px;
+}
+
+.projects-arrows {
+  display: flex;
+  gap: 12px;
+}
+
+.projects-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.projects-arrow:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.projects-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.projects-track {
+  position: relative;
+  display: flex;
+  gap: 36px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.projects-track::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-track:focus-visible {
+  outline-offset: 6px;
+}
+
+.project-card {
+  display: flex;
+  flex: 0 0 44%;
   flex-direction: column;
   min-width: 0;
-  margin: 0;
+  scroll-snap-align: start;
+}
+
+.project-card-frame {
+  position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  background: #fff;
-  color: #333;
-  text-align: left;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.teams .project-grid .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.26);
-}
-
-[data-theme="dark"] .teams .project-grid .card {
-  background: #1f1f1f;
-  color: #f2f2f2;
+  border-radius: 14px;
+  background: #1a1a1a;
 }
 
 .project-card-media {
@@ -72,54 +103,58 @@
   height: auto;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-  background: #2e2e2e;
+  transition: transform 0.3s ease;
 }
 
-.project-card-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
+.project-card:hover .project-card-media {
+  transform: scale(1.02);
 }
 
-.project-card-title {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.project-card-category {
-  margin-top: -6px;
-  color: #666;
-  font-size: 13px;
-}
-
-.project-card-description {
-  color: #555;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.project-inpi {
-  color: #b91c3c;
+.project-card-mock {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
   font-size: 12px;
   font-weight: 600;
 }
 
-[data-theme="dark"] .project-card-category,
-[data-theme="dark"] .project-card-description {
-  color: #bdbdbd;
+.project-card-title {
+  margin-top: 22px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-[data-theme="dark"] .project-inpi {
-  color: #ff8fa3;
+.project-card-category {
+  margin-top: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.project-card-description {
+  margin-top: 14px;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.project-inpi {
+  margin-top: 12px;
+  color: #b91c3c;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .project-tech-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 20px;
   list-style: none;
 }
 
@@ -127,14 +162,10 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 10px;
-  border: 1px solid rgba(0, 0, 0, 0.22);
+  padding: 6px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
   border-radius: 999px;
-  font-size: 12px;
-}
-
-[data-theme="dark"] .project-tech-tag {
-  border-color: rgba(255, 255, 255, 0.28);
+  font-size: 13px;
 }
 
 .project-tech-tag .skill-icon {
@@ -148,9 +179,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-top: auto;
-  padding-top: 10px;
 }
 
 .project-action {
@@ -159,11 +189,11 @@
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  padding: 0 16px;
-  border: 1px solid #111;
+  padding: 0 18px;
+  border: 1px solid currentColor;
   border-radius: 999px;
   background: transparent;
-  color: #111;
+  color: inherit;
   font-size: 14px;
   font-weight: 600;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -173,7 +203,9 @@
   background: rgba(0, 0, 0, 0.07);
 }
 
-.project-action-primary {
+.project-action-primary,
+.project-action-primary:hover {
+  border-color: #111;
   background: #111;
   color: #fff;
 }
@@ -182,17 +214,38 @@
   background: #3a3a3a;
 }
 
-[data-theme="dark"] .project-action {
-  border-color: #f2f2f2;
-  color: #f2f2f2;
+.project-no-repo {
+  width: 100%;
+  color: #666;
+  font-size: 12px;
 }
 
+[data-theme="dark"] .projects-intro,
+[data-theme="dark"] .projects-status,
+[data-theme="dark"] .project-card-category,
+[data-theme="dark"] .project-card-description,
+[data-theme="dark"] .project-no-repo {
+  color: #bdbdbd;
+}
+
+[data-theme="dark"] .project-inpi {
+  color: #ff8fa3;
+}
+
+[data-theme="dark"] .projects-arrow,
+[data-theme="dark"] .project-tech-tag {
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="dark"] .projects-arrow:hover:not(:disabled),
 [data-theme="dark"] .project-action:hover {
   background: rgba(255, 255, 255, 0.12);
 }
 
-[data-theme="dark"] .project-action-primary {
-  background: #f2f2f2;
+[data-theme="dark"] .project-action-primary,
+[data-theme="dark"] .project-action-primary:hover {
+  border-color: #f5f5f5;
+  background: #f5f5f5;
   color: #111;
 }
 
@@ -200,72 +253,36 @@
   background: #cfcfcf;
 }
 
-.project-no-repo {
-  width: 100%;
-  color: #666;
-  font-size: 12px;
-}
-
-[data-theme="dark"] .project-no-repo {
-  color: #bdbdbd;
-}
-
-.carousel-dots,
-.owl-dots {
-  text-align: center;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 5px;
-}
-
-.carousel-dots .dot,
-.owl-dot {
-  height: 13px;
-  width: 13px;
-  margin: 0 5px;
-  outline: none !important;
-  border-radius: 50%;
-  border: 2px solid crimson !important;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: transparent;
-  padding: 0;
-  display: inline-block;
-}
-
-.carousel-dots .dot.active,
-.owl-dot.active {
-  width: 35px;
-  border-radius: 14px;
-}
-
-.carousel-dots .dot.active,
-.carousel-dots .dot:hover,
-.owl-dot.active,
-.owl-dot:hover {
-  background: crimson !important;
-}
-
 @media (max-width: 947px) {
   .teams {
     padding: 80px 0;
   }
 
-  .teams .project-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+  .projects-track {
+    gap: 20px;
+  }
+
+  .project-card {
+    flex-basis: 62%;
   }
 }
 
 @media (max-width: 690px) {
-  .teams .project-grid {
-    grid-template-columns: 1fr;
+  .project-card {
+    flex-basis: 86%;
+  }
+
+  .project-card-title {
+    font-size: 24px;
+  }
+
+  .project-card-description {
+    font-size: 15px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .teams .project-grid .card:hover {
+  .project-card:hover .project-card-media {
     transform: none;
   }
 }

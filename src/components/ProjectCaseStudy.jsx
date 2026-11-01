@@ -71,7 +71,7 @@ const ProjectCaseStudy = ({ project }) => {
         <h1>{title}</h1>
         <p className="case-study-lead">{getLocalizedField(project.description, language)}</p>
 
-        {project.image && (
+        {project.image && project.imageKind !== 'mock' && (
           <img
             className="case-study-cover"
             src={getProjectImageSrc(project.image)}
