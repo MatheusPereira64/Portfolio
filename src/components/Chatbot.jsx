@@ -2,17 +2,32 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { ASSISTANT_PERSONA } from '../data/assistantKnowledge'
 import { profileImageUrl } from '../constants/siteProfile'
-import { detectIntent, shouldTryAI } from '../utils/chatbotIntents'
+import { detectQuery, shouldTryAI } from '../utils/chatbotIntents'
 import {
   getStructuredResponse,
   getGreeting,
   getDefaultQuickReplies,
-  getAiUnavailableMessage,
 } from '../utils/chatbotResponses'
 import { getAIResponse, isGeminiConfigured, canUseAI } from '../utils/chatbotAI'
 import { handleChatAction } from '../utils/chatbotActions'
 import Icon from './Icon'
 import './Chatbot.css'
+
+const AI_TIMEOUT_MS = 12000
+const NARROW_SCREEN = '(max-width: 480px)'
+
+const RestartIcon = () => (
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+    <path
+      d="M4 12a8 8 0 1 0 2.6-5.9M4 4v4.5h4.5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -20,10 +35,18 @@ const Chatbot = () => {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [quickReplies, setQuickReplies] = useState([])
-  const messagesEndRef = useRef(null)
-  const { language } = useLanguage()
+  const logRef = useRef(null)
+  const inputRef = useRef(null)
+  const toggleRef = useRef(null)
+  const { language, translations } = useLanguage()
+  const copy = translations[language].nav
 
-  const personaName = ASSISTANT_PERSONA.name[language] || ASSISTANT_PERSONA.en
+  const personaName = ASSISTANT_PERSONA.name[language] || ASSISTANT_PERSONA.name.en
+
+  const startConversation = useCallback(() => {
+    setMessages([{ type: 'bot', text: getGreeting(language), isGreeting: true }])
+    setQuickReplies(getDefaultQuickReplies(language))
+  }, [language])
 
   const pushBotMessage = useCallback((payload) => {
     setMessages((prev) => [
@@ -34,60 +57,64 @@ const Chatbot = () => {
         links: payload.links || [],
       },
     ])
-    if (payload.suggestedReplies?.length) {
-      setQuickReplies(payload.suggestedReplies)
-    }
+    setQuickReplies(payload.suggestedReplies || [])
   }, [])
 
+  // Sem conversa em andamento, a saudação acompanha o idioma do site.
   useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      setMessages([{ type: 'bot', text: getGreeting(language) }])
+    if (!isOpen) return
+    setMessages((prev) => {
+      if (prev.length > 1 || (prev.length === 1 && !prev[0].isGreeting)) return prev
       setQuickReplies(getDefaultQuickReplies(language))
-    }
-  }, [isOpen, language, messages.length])
+      return [{ type: 'bot', text: getGreeting(language), isGreeting: true }]
+    })
+  }, [isOpen, language])
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (!isOpen) return undefined
+    // Em tela de toque, focar o campo abriria o teclado por cima das sugestões.
+    const touch = window.matchMedia('(pointer: coarse)').matches
+    ;(touch ? logRef.current : inputRef.current)?.focus()
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+        toggleRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
+  // Resposta longa: mostra o começo dela, não o fim.
+  useEffect(() => {
+    const log = logRef.current
+    if (!log) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const last = log.querySelector('.message:last-of-type')
+    const showStart = !isLoading && last?.classList.contains('bot')
+    log.scrollTo({
+      top: showStart ? last.offsetTop - 12 : log.scrollHeight,
+      behavior: reduced ? 'auto' : 'smooth',
+    })
   }, [messages, isLoading])
 
   const processMessage = async (messageText) => {
     const trimmed = messageText.trim()
-    if (!trimmed) return
+    if (!trimmed || isLoading) return
 
     const userMessage = { type: 'user', text: trimmed }
     setMessages((prev) => [...prev, userMessage])
+    setQuickReplies([])
 
-    const intent = detectIntent(trimmed, language)
-
-    if (intent) {
-      const response = getStructuredResponse(intent, language)
-      pushBotMessage(response)
+    const query = detectQuery(trimmed, language)
+    if (query) {
+      pushBotMessage(getStructuredResponse(query, language))
       return
     }
 
-    const tryAI = shouldTryAI(trimmed, intent) && canUseAI() && isGeminiConfigured()
-
+    const tryAI = shouldTryAI(trimmed) && canUseAI() && isGeminiConfigured()
     if (!tryAI) {
-      if (shouldTryAI(trimmed, intent) && !canUseAI()) {
-        const response = getStructuredResponse('default', language)
-        pushBotMessage({
-          text: `${getAiUnavailableMessage(language, 'rate_limit')}\n\n${response.text}`,
-          links: response.links,
-          suggestedReplies: response.suggestedReplies,
-        })
-        return
-      }
-      if (shouldTryAI(trimmed, intent) && !isGeminiConfigured()) {
-        const response = getStructuredResponse('default', language)
-        pushBotMessage({
-          text: `${getAiUnavailableMessage(language, 'no_key')}\n\n${response.text}`,
-          links: response.links,
-          suggestedReplies: response.suggestedReplies,
-        })
-        return
-      }
-      const response = getStructuredResponse('default', language)
-      pushBotMessage(response)
+      pushBotMessage(getStructuredResponse('default', language))
       return
     }
 
@@ -96,7 +123,7 @@ const Chatbot = () => {
       const history = [...messages, userMessage]
       const aiResponse = await Promise.race([
         getAIResponse(trimmed, history, language),
-        new Promise((resolve) => setTimeout(() => resolve(null), 12000)),
+        new Promise((resolve) => setTimeout(() => resolve(null), AI_TIMEOUT_MS)),
       ])
 
       if (aiResponse?.text) {
@@ -106,19 +133,13 @@ const Chatbot = () => {
           suggestedReplies: getDefaultQuickReplies(language),
         })
       } else {
-        const response = getStructuredResponse('default', language)
-        pushBotMessage({
-          text: `${getAiUnavailableMessage(language, 'error')}\n\n${response.text}`,
-          links: response.links,
-          suggestedReplies: response.suggestedReplies,
-        })
+        pushBotMessage(getStructuredResponse('default', language))
       }
     } finally {
       setIsLoading(false)
+      inputRef.current?.focus()
     }
   }
-
-  const handleQuickReply = (reply) => processMessage(reply)
 
   const handleSend = (e) => {
     e.preventDefault()
@@ -127,21 +148,32 @@ const Chatbot = () => {
     setInputValue('')
   }
 
+  // Em tela estreita o painel cobre a página: fecha para mostrar o destino.
+  const runAction = (action) => {
+    handleChatAction(action)
+    if (window.matchMedia(NARROW_SCREEN).matches) setIsOpen(false)
+  }
+
   const renderLink = (link, linkIndex) => {
-    if (link.type === 'plain' || link.plain) {
-      return (
-        <span key={linkIndex} className="message-chip message-chip--static">
-          {link.label}
-        </span>
-      )
-    }
     if (link.type === 'scroll') {
       return (
         <button
           key={linkIndex}
           type="button"
-          className="message-link message-link--action"
-          onClick={() => handleChatAction({ type: 'scroll', section: link.section })}
+          className="message-link"
+          onClick={() => runAction({ type: 'scroll', section: link.section })}
+        >
+          {link.label}
+        </button>
+      )
+    }
+    if (link.type === 'route') {
+      return (
+        <button
+          key={linkIndex}
+          type="button"
+          className="message-link"
+          onClick={() => runAction({ type: 'route', path: link.path })}
         >
           {link.label}
         </button>
@@ -152,9 +184,9 @@ const Chatbot = () => {
         <button
           key={linkIndex}
           type="button"
-          className="message-link message-link--action"
+          className="message-link"
           onClick={() =>
-            handleChatAction({
+            runAction({
               type: 'contact',
               subject: link.subject,
               message: link.message,
@@ -166,12 +198,13 @@ const Chatbot = () => {
       )
     }
     if (link.url) {
+      const external = link.url.startsWith('http')
       return (
         <a
           key={linkIndex}
           href={link.url}
-          target={link.url.startsWith('http') ? '_blank' : undefined}
-          rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+          target={external ? '_blank' : undefined}
+          rel={external ? 'noopener noreferrer' : undefined}
           className="message-link"
         >
           {link.label}
@@ -184,14 +217,18 @@ const Chatbot = () => {
   return (
     <>
       <button
+        type="button"
+        ref={toggleRef}
         className={`chatbot-toggle ${isOpen ? 'open' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label={language === 'pt' ? 'Abrir assistente' : 'Open assistant'}
+        aria-label={isOpen ? copy.chatClose : copy.chatOpen}
+        aria-expanded={isOpen}
+        aria-controls="chatbot-panel"
       >
         <Icon name={isOpen ? 'times' : 'comments'} />
       </button>
       {isOpen && (
-        <div className="chatbot-container">
+        <div className="chatbot-container" id="chatbot-panel" role="dialog" aria-label={personaName}>
           <div className="chatbot-header">
             <div className="chatbot-header__identity">
               <img
@@ -205,23 +242,39 @@ const Chatbot = () => {
               />
               <div>
                 <h3>{personaName}</h3>
-                <span className="chatbot-header__subtitle">
-                  {language === 'pt'
-                    ? 'Portfólio de Matheus Pereira'
-                    : language === 'es'
-                      ? 'Portafolio de Matheus Pereira'
-                      : "Matheus Pereira's portfolio"}
-                </span>
+                <span className="chatbot-header__subtitle">{copy.chatSubtitle}</span>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              aria-label={language === 'pt' ? 'Fechar' : 'Close'}
-            >
-              <Icon name="times" />
-            </button>
+            <div className="chatbot-header__actions">
+              <button
+                type="button"
+                onClick={startConversation}
+                aria-label={copy.chatRestart}
+                title={copy.chatRestart}
+              >
+                <RestartIcon />
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsOpen(false)
+                  toggleRef.current?.focus()
+                }}
+                aria-label={copy.chatClose}
+                title={copy.chatClose}
+              >
+                <Icon name="times" />
+              </button>
+            </div>
           </div>
-          <div className="chatbot-messages">
+          <div
+            className="chatbot-messages"
+            ref={logRef}
+            role="log"
+            aria-live="polite"
+            aria-label={copy.chatLog}
+            tabIndex={0}
+          >
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.type}`}>
                 <div className="message-content">
@@ -236,8 +289,8 @@ const Chatbot = () => {
             ))}
             {isLoading && (
               <div className="message bot">
-                <div className="message-content">
-                  <div className="typing-indicator">
+                <div className="message-content" role="status" aria-label={copy.chatTyping}>
+                  <div className="typing-indicator" aria-hidden="true">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -247,36 +300,30 @@ const Chatbot = () => {
             )}
             {!isLoading && quickReplies.length > 0 && (
               <div className="quick-replies">
-                {quickReplies.map((reply, index) => (
+                {quickReplies.map((reply) => (
                   <button
-                    key={`${reply}-${index}`}
+                    key={reply}
                     type="button"
                     className="quick-reply-btn"
-                    onClick={() => handleQuickReply(reply)}
+                    onClick={() => processMessage(reply)}
                   >
                     {reply}
                   </button>
                 ))}
               </div>
             )}
-            <div ref={messagesEndRef} />
           </div>
           <form className="chatbot-input" onSubmit={handleSend}>
             <input
+              ref={inputRef}
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder={
-                language === 'pt'
-                  ? 'Digite sua mensagem...'
-                  : language === 'es'
-                    ? 'Escribe tu mensaje...'
-                    : 'Type your message...'
-              }
-              aria-label="Chat message"
-              disabled={isLoading}
+              placeholder={copy.chatPlaceholder}
+              aria-label={copy.chatInput}
+              maxLength={500}
             />
-            <button type="submit" aria-label="Send" disabled={isLoading || !inputValue.trim()}>
+            <button type="submit" aria-label={copy.chatSend} disabled={isLoading || !inputValue.trim()}>
               <Icon name="paper-plane" />
             </button>
           </form>

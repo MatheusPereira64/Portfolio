@@ -71,6 +71,15 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contato',
         downloadCv: 'Baixar currículo',
         skipLink: 'Ir para o conteúdo',
+        chatOpen: "Abrir assistente",
+        chatClose: "Fechar assistente",
+        chatSubtitle: "Portfólio de Matheus Pereira",
+        chatRestart: "Recomeçar conversa",
+        chatPlaceholder: "Pergunte sobre projetos, experiência...",
+        chatInput: "Sua mensagem",
+        chatSend: "Enviar mensagem",
+        chatLog: "Conversa com o assistente",
+        chatTyping: "Digitando",
         logoLabel: 'Matheus Pereira, ir para o início',
         languageButton: 'Idioma: {language}. Alterar idioma',
         languageMenu: 'Escolher idioma',
@@ -120,7 +129,7 @@ export const LanguageProvider = ({ children }) => {
         subtitle: 'O que eu sei',
         text: 'Minhas competências e experiência profissional',
         description: 'Full Stack Software Engineer no ITEGAM, com foco em aplicações web, APIs e sistemas industriais. Experiência prática em JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL e Docker, além de dashboards e indicadores como OEE e FPY.',
-        education: '🎓 Formação',
+        education: 'Formação',
         certifications: 'Certificações',
         button: 'Entrar em contato'
       },
@@ -138,7 +147,6 @@ export const LanguageProvider = ({ children }) => {
         screenshots: 'Prévia',
         certifications: 'Certificações',
         viewOnGithub: 'Ver no GitHub',
-        githubReposTitle: 'Repositórios no GitHub',
         role: 'Papel',
         period: 'Período',
         decisions: 'Decisões técnicas',
@@ -159,7 +167,10 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experiência',
-        subtitle: 'Minha jornada'
+        subtitle: 'Minha jornada',
+        intro: 'Do trabalho mais recente aos primeiros sistemas, com as tecnologias usadas em cada etapa.',
+        current: 'Atual',
+        results: 'Resultados:'
       },
       stats: {
         title: 'Estatísticas',
@@ -205,6 +216,15 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contact',
         downloadCv: 'Download résumé',
         skipLink: 'Skip to content',
+        chatOpen: "Open assistant",
+        chatClose: "Close assistant",
+        chatSubtitle: "Matheus Pereira's portfolio",
+        chatRestart: "Restart conversation",
+        chatPlaceholder: "Ask about projects, experience...",
+        chatInput: "Your message",
+        chatSend: "Send message",
+        chatLog: "Conversation with the assistant",
+        chatTyping: "Typing",
         logoLabel: 'Matheus Pereira, go to the top',
         languageButton: 'Language: {language}. Change language',
         languageMenu: 'Choose language',
@@ -254,7 +274,7 @@ export const LanguageProvider = ({ children }) => {
         subtitle: 'What I know',
         text: 'My skills and professional experience',
         description: 'Full Stack Software Engineer at ITEGAM, focused on web apps, APIs, and industrial systems. Hands-on with JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL, and Docker, plus dashboards and KPIs such as OEE and FPY.',
-        education: '🎓 Education',
+        education: 'Education',
         certifications: 'Certifications',
         button: 'Get in touch'
       },
@@ -272,7 +292,6 @@ export const LanguageProvider = ({ children }) => {
         screenshots: 'Preview',
         certifications: 'Certifications',
         viewOnGithub: 'View on GitHub',
-        githubReposTitle: 'GitHub repositories',
         role: 'Role',
         period: 'Period',
         decisions: 'Technical decisions',
@@ -293,7 +312,10 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experience',
-        subtitle: 'My journey'
+        subtitle: 'My journey',
+        intro: 'From the most recent work back to the first systems, with the technologies used at each step.',
+        current: 'Current',
+        results: 'Results:'
       },
       stats: {
         title: 'Statistics',
@@ -339,6 +361,15 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contacto',
         downloadCv: 'Descargar currículum',
         skipLink: 'Saltar al contenido',
+        chatOpen: "Abrir asistente",
+        chatClose: "Cerrar asistente",
+        chatSubtitle: "Portafolio de Matheus Pereira",
+        chatRestart: "Reiniciar conversación",
+        chatPlaceholder: "Pregunta sobre proyectos, experiencia...",
+        chatInput: "Tu mensaje",
+        chatSend: "Enviar mensaje",
+        chatLog: "Conversación con el asistente",
+        chatTyping: "Escribiendo",
         logoLabel: 'Matheus Pereira, ir al inicio',
         languageButton: 'Idioma: {language}. Cambiar idioma',
         languageMenu: 'Elegir idioma',
@@ -388,7 +419,7 @@ export const LanguageProvider = ({ children }) => {
         subtitle: 'Lo que sé',
         text: 'Mis competencias y experiencia profesional',
         description: 'Full Stack Software Engineer en ITEGAM, enfocado en aplicaciones web, APIs y sistemas industriales. Experiencia práctica en JavaScript, TypeScript, React, Vue.js, Node.js, Python, PostgreSQL y Docker, además de dashboards e indicadores como OEE y FPY.',
-        education: '🎓 Formación',
+        education: 'Formación',
         certifications: 'Certificaciones',
         button: 'Ponerse en contacto'
       },
@@ -406,7 +437,6 @@ export const LanguageProvider = ({ children }) => {
         screenshots: 'Vista previa',
         certifications: 'Certificaciones',
         viewOnGithub: 'Ver en GitHub',
-        githubReposTitle: 'Repositorios en GitHub',
         role: 'Papel',
         period: 'Período',
         decisions: 'Decisiones técnicas',
@@ -427,7 +457,10 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experiencia',
-        subtitle: 'Mi trayectoria'
+        subtitle: 'Mi trayectoria',
+        intro: 'Del trabajo más reciente a los primeros sistemas, con las tecnologías usadas en cada etapa.',
+        current: 'Actual',
+        results: 'Resultados:'
       },
       stats: {
         title: 'Estadísticas',

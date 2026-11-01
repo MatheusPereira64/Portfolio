@@ -12,24 +12,10 @@ const Skills = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
 
-  const education = language === 'pt' ? [
-    { title: 'Graduado em Engenharia da Computação', institution: 'FAMETRO', period: '2019 - 2024' },
-    { title: 'Inglês Fluente - C1', institution: 'ICBEU', period: '2019' },
-    { title: 'Lógica e Programação WEB - Full Stack', institution: 'Flexpeak', period: '2023' }
-  ] : language === 'es' ? [
-    { title: 'Graduado en Ingeniería de Computación', institution: 'FAMETRO', period: '2019 - 2024' },
-    { title: 'Inglés fluido - C1', institution: 'ICBEU', period: '2019' },
-    { title: 'Lógica y Programación WEB - Full Stack', institution: 'Flexpeak', period: '2023' }
-  ] : [
-    { title: 'Graduated in Computer Engineering', institution: 'FAMETRO', period: '2019 - 2024' },
-    { title: 'Fluent English - C1', institution: 'ICBEU', period: '2019' },
-    { title: 'WEB Logic and Programming - Full Stack', institution: 'Flexpeak', period: '2023' }
-  ]
-
   return (
     <div className="about-details">
       <div className="skill-groups" id="skills">
-        <h3>{t.skills?.text || 'Tecnologias'}</h3>
+        <h3>{t.projects.technologies}</h3>
         {SKILL_GROUPS.map((group, index) => (
           <Reveal key={group.id} className="skill-group" index={index}>
             <h4>{getLocalizedField(group.label, language)}</h4>
@@ -67,19 +53,6 @@ const Skills = () => {
                 return <li key={tech}><span><SkillIcon name={tech} />{tech}</span></li>
               })}
             </ul>
-          </Reveal>
-        ))}
-      </div>
-
-      <div className="education-info">
-        <h4>{t.skills.education}</h4>
-        {education.map((edu, index) => (
-          <Reveal key={edu.title} className="education-item" index={index}>
-            <p>
-              <strong>{edu.title}</strong><br />
-              {edu.institution}<br />
-              {edu.period}
-            </p>
           </Reveal>
         ))}
       </div>

@@ -269,7 +269,6 @@ export const PROJECTS = [
 ]
 
 export const GITHUB_USER = 'MatheusPereira64'
-export const GITHUB_REPOS_URL = `https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`
 
 export const PROJECT_PLACEHOLDER = 'images/project-placeholder.svg'
 

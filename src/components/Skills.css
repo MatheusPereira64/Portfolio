@@ -58,57 +58,8 @@
   box-shadow: 0 8px 25px rgba(220, 20, 60, 0.5);
 }
 
-.education-info {
-  margin: 30px 0;
-  padding: 25px;
-  background: rgba(220, 20, 60, 0.05);
-  border-left: 4px solid #dc143c;
-  border-radius: 8px;
-}
-
-.education-info h4 {
-  color: #dc143c;
-  font-size: 18px;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.education-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 6px;
-  border-left: 3px solid #dc143c;
-}
-
-.education-item:last-child {
-  margin-bottom: 0;
-}
-
-.education-info p {
-  line-height: 1.6;
-  color: #555;
-  margin: 0;
-}
-
-.education-info strong {
-  color: #333;
-}
-
 [data-theme="dark"] .skills .title::after {
   background: #1a1a1a;
-}
-
-[data-theme="dark"] .education-item {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-[data-theme="dark"] .education-info p {
-  color: #ccc;
-}
-
-[data-theme="dark"] .education-info strong {
-  color: #fff;
 }
 
 .skills .skills-content .right .bars {
@@ -184,8 +135,10 @@
 }
 
 .skill-groups h3,
-.about-details > .education-info h4,
 .certifications-strip h3 {
+  color: inherit;
+  font-size: 22px;
+  font-weight: 700;
   text-align: left;
 }
 
@@ -197,8 +150,8 @@
 
 .skill-group h4 {
   margin-bottom: 10px;
-  color: #dc143c;
   font-size: 16px;
+  font-weight: 600;
 }
 
 .skill-group ul {
@@ -210,8 +163,8 @@
   padding: 0;
 }
 
-.skill-group li a,
-.skill-group li span {
+.skill-group li > a,
+.skill-group li > span {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -237,8 +190,8 @@
   color: #fff;
 }
 
-[data-theme="dark"] .skill-group li a,
-[data-theme="dark"] .skill-group li span {
+[data-theme="dark"] .skill-group li > a,
+[data-theme="dark"] .skill-group li > span {
   color: #f3f3f3;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -253,10 +206,7 @@
 }
 
 .certifications-strip h3 {
-  color: #dc143c;
-  font-size: 22px;
   margin-bottom: 18px;
-  text-align: center;
 }
 
 .certifications-grid {

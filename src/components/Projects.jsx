@@ -9,7 +9,6 @@ import {
   getProjectImageSrc,
 } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
-import GitHubRepos from './GitHubRepos'
 import Icon from './Icon'
 import Reveal from './Reveal'
 import SkillIcon from './SkillIcon'
@@ -97,8 +96,8 @@ const Projects = () => {
   return (
     <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
-        <Reveal as="h2" className="projects-heading">{t.projects.title}</Reveal>
-        <Reveal as="p" className="projects-intro">{t.projects.intro}</Reveal>
+        <Reveal as="h2" className="section-heading">{t.projects.title}</Reveal>
+        <Reveal as="p" className="section-intro">{t.projects.intro}</Reveal>
         <div className="projects-toolbar">
           <p className="projects-status" aria-live="polite">{status}</p>
           <div className="projects-arrows">
@@ -198,7 +197,6 @@ const Projects = () => {
             )
           })}
         </div>
-        <GitHubRepos variant="section" />
       </div>
     </section>
   )

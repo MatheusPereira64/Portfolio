@@ -1,4 +1,5 @@
 import { SITE_PROFILE, getCvHref } from '../constants/siteProfile'
+import { PROJECTS, getLocalizedField, getProjectGithubRepos } from './projects'
 
 export const ASSISTANT_PERSONA = {
   name: { pt: 'Assistente do Portfólio', en: 'Portfolio Assistant', es: 'Asistente del Portafolio' },
@@ -32,7 +33,7 @@ export const SKILLS = [
 const knowledge = {
   pt: {
     greeting:
-      'Olá! Sou o assistente do portfólio de Matheus Pereira — engenheiro de software com foco em React, Industry 4.0 e gestão de projetos. Pergunte sobre experiência, projetos industriais ou contacto.',
+      'Olá! Sou o assistente do portfólio de Matheus Pereira. Posso falar sobre projetos, experiência, tecnologias, formação ou como entrar em contato. Sobre o que você quer saber?',
     professionalSummary:
       'Engenheiro de Computação e Engenheiro de Software com experiência em desenvolvimento frontend, gestão de projetos, transformação digital industrial e soluções Industry 4.0. Especializado em React, TypeScript, JavaScript, dashboards industriais, sistemas de relatórios e plataformas de monitoramento de produção. Experiência em liderar projetos, levantamento de requisitos e entrega de software da concepção ao deploy.',
     specializations: [
@@ -49,14 +50,14 @@ const knowledge = {
       'Aplicações de Inteligência Artificial',
     ],
     careerGoals:
-      'Busca oportunidades como Full Stack Software Engineer, Technical Project Manager ou Industry 4.0 Software Engineer, aplicando tecnologia para melhorar experiências de utilizador, processos de negócio e operações industriais.',
+      'Busca oportunidades como Full Stack Software Engineer, Technical Project Manager ou Industry 4.0 Software Engineer, aplicando tecnologia para melhorar experiências de usuário, processos de negócio e operações industriais.',
     faq: {
       currentRole:
         'Matheus atua como Full Stack Software Engineer no ITEGAM, focado em aplicações web, soluções Industry 4.0 e projetos de transformação digital.',
       preferredStack:
         'Stack principal: React, TypeScript, JavaScript, PHP, SQL, REST APIs, Git e tecnologias frontend modernas.',
       industryExperience:
-        'Experiência em sistemas para ambientes de manufatura, monitoramento de produção, controlo de qualidade e otimização de processos industriais.',
+        'Experiência em sistemas para ambientes de manufatura, monitoramento de produção, controle de qualidade e otimização de processos industriais.',
       remoteWork:
         'Aberto a oportunidades remotas internacionais e posições de software engineering no exterior.',
       leadership:
@@ -69,7 +70,7 @@ const knowledge = {
       location: 'Manaus, Amazonas — Brasil',
       workModes: ['Remoto (internacional)', 'Híbrido', 'Presencial (Manaus)'],
       salaryNote:
-        'Faixas salariais são tratadas em conversa direta — use o formulário de contacto ou WhatsApp.',
+        'Faixas salariais são tratadas em conversa direta — use o formulário de contato ou WhatsApp.',
     },
     experience: [
       {
@@ -101,7 +102,7 @@ const knowledge = {
         title: 'Engenharia da Computação — Desenvolvimento de Software',
         company: 'FAMETRO · Samsung Ocean',
         summary:
-          'Projetos académicos e programas Samsung Ocean em React.js, JavaScript, Unity e Python durante a graduação em Engenharia da Computação.',
+          'Projetos acadêmicos e programas Samsung Ocean em React.js, JavaScript, Unity e Python durante a graduação em Engenharia da Computação.',
         technologies: ['JavaScript', 'React', 'Python', 'HTML/CSS', 'Unity', 'Git'],
       },
     ],
@@ -114,48 +115,14 @@ const knowledge = {
     languages: [
       { name: 'Português', level: 'Nativo' },
       { name: 'Inglês', level: 'Fluente (C1 — ICBEU)' },
-      { name: 'Espanhol', level: 'Intermediário (site trilingue)' },
-    ],
-    projects: [
-      {
-        name: 'Sistema Inteligente de Monitoramento de Produção',
-        stack: ['React', 'TypeScript', 'Charts', 'Industrial Data'],
-        problem:
-          'Plataforma de monitoramento e analytics de produção em tempo real para ambientes Industry 4.0.',
-      },
-      {
-        name: 'Otimização de Parâmetros de Máquinas com IA',
-        stack: ['Artificial Intelligence', 'React', 'Data Analysis'],
-        problem:
-          'Sistema inteligente para otimizar parâmetros de máquinas e melhorar a eficiência de manufatura.',
-      },
-      {
-        name: 'Plataforma Industrial de Relatórios de Qualidade',
-        stack: ['React', 'ECharts', 'SQL', 'Data Visualization'],
-        problem:
-          'Dashboard e relatórios para análise de defeitos e monitoramento da qualidade de produção.',
-      },
-      {
-        name: 'Portfólio Profissional (este site)',
-        stack: ['React', 'Vite', 'EmailJS', 'GitHub Pages', 'CSS3'],
-        problem: 'Apresentar perfil, projetos e contacto de forma moderna, multilingue e responsiva.',
-        url: SITE_PROFILE.portfolioUrl,
-        repo: `${SITE_PROFILE.github}/Portfolio`,
-      },
-      {
-        name: 'Repositórios no GitHub',
-        stack: ['JavaScript', 'React', 'Node.js', 'Python', 'PHP'],
-        problem: 'Mais projetos académicos, industriais e pessoais — consulte o perfil GitHub.',
-        url: SITE_PROFILE.github,
-        repo: SITE_PROFILE.github,
-      },
+      { name: 'Espanhol', level: 'Intermediário (site trilíngue)' },
     ],
     blogNote:
-      'Artigos e publicações estão no LinkedIn. Posso indicar o perfil ou abrir a secção Blog.',
+      'Artigos e publicações estão no LinkedIn. Posso indicar o perfil ou abrir a seção Blog.',
   },
   en: {
     greeting:
-      "Hi! I'm Matheus Pereira's portfolio assistant — software engineer focused on React, Industry 4.0, and project management. Ask about experience, industrial projects, or how to get in touch.",
+      "Hi! I'm the assistant on Matheus Pereira's portfolio. I can tell you about projects, experience, technologies, education, or how to get in touch. What would you like to know?",
     professionalSummary:
       'Computer Engineer and Software Engineer with experience in frontend development, project management, industrial digital transformation, and Industry 4.0 solutions. Specialized in React, TypeScript, JavaScript, industrial dashboards, reporting systems, and production monitoring platforms. Experienced in leading projects, gathering requirements, and delivering software solutions from conception to deployment.',
     specializations: [
@@ -237,45 +204,11 @@ const knowledge = {
       { name: 'English', level: 'Fluent (C1 — ICBEU)' },
       { name: 'Spanish', level: 'Intermediate (trilingual site)' },
     ],
-    projects: [
-      {
-        name: 'Intelligent Production Monitoring System',
-        stack: ['React', 'TypeScript', 'Charts', 'Industrial Data'],
-        problem:
-          'Real-time production monitoring and analytics platform for Industry 4.0 environments.',
-      },
-      {
-        name: 'AI-Powered Machine Parameter Optimization',
-        stack: ['Artificial Intelligence', 'React', 'Data Analysis'],
-        problem:
-          'Intelligent system designed to optimize machine parameters and improve manufacturing efficiency.',
-      },
-      {
-        name: 'Industrial Quality Reporting Platform',
-        stack: ['React', 'ECharts', 'SQL', 'Data Visualization'],
-        problem:
-          'Dashboard and reporting platform used for defect analysis and production quality monitoring.',
-      },
-      {
-        name: 'Professional Portfolio (this site)',
-        stack: ['React', 'Vite', 'EmailJS', 'GitHub Pages', 'CSS3'],
-        problem: 'Showcase profile, projects, and contact in a modern, multilingual, responsive way.',
-        url: SITE_PROFILE.portfolioUrl,
-        repo: `${SITE_PROFILE.github}/Portfolio`,
-      },
-      {
-        name: 'GitHub Repositories',
-        stack: ['JavaScript', 'React', 'Node.js', 'Python', 'PHP'],
-        problem: 'More academic, industrial, and personal projects — see the GitHub profile.',
-        url: SITE_PROFILE.github,
-        repo: SITE_PROFILE.github,
-      },
-    ],
     blogNote: 'Posts and articles are on LinkedIn. I can share the profile or open the Blog section.',
   },
   es: {
     greeting:
-      '¡Hola! Soy el asistente del portafolio de Matheus Pereira — ingeniero de software enfocado en React, Industry 4.0 y gestión de proyectos. Pregunta sobre experiencia, proyectos industriales o contacto.',
+      '¡Hola! Soy el asistente del portafolio de Matheus Pereira. Puedo hablar de proyectos, experiencia, tecnologías, formación o cómo ponerte en contacto. ¿Qué te gustaría saber?',
     professionalSummary:
       'Ingeniero de Computación e Ingeniero de Software con experiencia en desarrollo frontend, gestión de proyectos, transformación digital industrial y soluciones Industry 4.0. Especializado en React, TypeScript, JavaScript, dashboards industriales, sistemas de informes y plataformas de monitoreo de producción. Experiencia liderando proyectos, recopilando requisitos y entregando software desde la concepción hasta el despliegue.',
     specializations: [
@@ -359,40 +292,6 @@ const knowledge = {
       { name: 'Inglés', level: 'Fluido (C1 — ICBEU)' },
       { name: 'Español', level: 'Intermedio (sitio trilingüe)' },
     ],
-    projects: [
-      {
-        name: 'Sistema Inteligente de Monitoreo de Producción',
-        stack: ['React', 'TypeScript', 'Charts', 'Industrial Data'],
-        problem:
-          'Plataforma de monitoreo y analytics de producción en tiempo real para entornos Industry 4.0.',
-      },
-      {
-        name: 'Optimización de Parámetros de Máquinas con IA',
-        stack: ['Artificial Intelligence', 'React', 'Data Analysis'],
-        problem:
-          'Sistema inteligente para optimizar parámetros de máquinas y mejorar la eficiencia de manufactura.',
-      },
-      {
-        name: 'Plataforma Industrial de Informes de Calidad',
-        stack: ['React', 'ECharts', 'SQL', 'Data Visualization'],
-        problem:
-          'Dashboard e informes para análisis de defectos y monitoreo de calidad de producción.',
-      },
-      {
-        name: 'Portafolio Profesional (este sitio)',
-        stack: ['React', 'Vite', 'EmailJS', 'GitHub Pages', 'CSS3'],
-        problem: 'Presentar perfil, proyectos y contacto de forma moderna, multilingüe y responsiva.',
-        url: SITE_PROFILE.portfolioUrl,
-        repo: `${SITE_PROFILE.github}/Portfolio`,
-      },
-      {
-        name: 'Repositorios en GitHub',
-        stack: ['JavaScript', 'React', 'Node.js', 'Python', 'PHP'],
-        problem: 'Más proyectos académicos, industriales y personales — consulta el perfil de GitHub.',
-        url: SITE_PROFILE.github,
-        repo: SITE_PROFILE.github,
-      },
-    ],
     blogNote: 'Artículos y publicaciones están en LinkedIn.',
   },
 }
@@ -413,20 +312,18 @@ export function buildKnowledgeContext(language) {
   const expBlock = k.experience
     .map(
       (e) =>
-        `- ${e.period}: ${e.title} @ ${e.company}. ${e.summary} [${e.technologies.join(', ')}]`
+        `- ${e.period}: ${e.title} @ ${e.company}. ${e.summary}`
     )
     .join('\n')
   const eduBlock = k.education
     .map((e) => `- ${e.title}, ${e.institution} (${e.period})`)
     .join('\n')
   const langBlock = k.languages.map((l) => `- ${l.name}: ${l.level}`).join('\n')
-  const projBlock = k.projects
-    .map((p) => {
-      const urlPart = p.url ? ` URL: ${p.url}` : ''
-      const repoPart = p.repo ? ` Repo: ${p.repo}` : ''
-      return `- ${p.name}: ${p.problem} Stack: ${p.stack.join(', ')}.${urlPart}${repoPart}`
-    })
-    .join('\n')
+  const projBlock = PROJECTS.map((project) => {
+    const demo = project.demo ? ` URL: ${project.demo}` : ''
+    const repo = getProjectGithubRepos(project)[0]
+    return `- ${getLocalizedField(project.title, language)}: ${getLocalizedField(project.description, language)} Stack: ${project.technologies.join(', ')}.${demo}${repo ? ` Repo: ${repo.url}` : ''}`
+  }).join('\n')
 
   return `
 Name: ${SITE_PROFILE.fullName}

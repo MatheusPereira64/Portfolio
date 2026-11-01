@@ -26,4 +26,4 @@ Não coloque a chave em `VITE_*`, em GitHub Actions nem em qualquer ficheiro que
 
 ## Base de conhecimento
 
-Edite `src/data/assistantKnowledge.js` — experiência, formação, projetos e skills usados pelo assistente e pela IA.
+Edite `src/data/assistantKnowledge.js` — experiência, formação e skills usados pelo assistente e pela IA. Os projetos vêm de `src/data/projects.js`.

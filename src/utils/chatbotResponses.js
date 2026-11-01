@@ -5,6 +5,14 @@ import {
   getWhatsAppUrl,
   SKILLS,
 } from '../data/assistantKnowledge'
+import { CERTIFICATIONS, getCertificateHref } from '../data/certifications'
+import {
+  PROJECTS,
+  getLocalizedField,
+  getProjectById,
+  getProjectGithubRepos,
+} from '../data/projects'
+import { PROJECT_SHORT_NAMES } from './chatbotIntents'
 
 const labels = {
   pt: {
@@ -12,7 +20,8 @@ const labels = {
     goSkills: 'Ver habilidades',
     goExperience: 'Ver experiência',
     goAbout: 'Sobre mim',
-    goContact: 'Ir para contacto',
+    goEducation: 'Ver formação',
+    goContact: 'Ir para contato',
     sendMessage: 'Enviar mensagem',
     downloadCv: 'Baixar CV (PDF)',
     whatsapp: 'WhatsApp',
@@ -21,12 +30,17 @@ const labels = {
     blog: 'Ver posts no LinkedIn',
     openPortfolio: 'Abrir portfólio',
     defaultSuggest: ['Experiência', 'Projetos', 'WhatsApp', 'Currículo'],
+    viewProject: 'Ver projeto',
+    viewDetails: 'Ver detalhes',
+    inpi: 'Software registrado no INPI.',
+    projectsWord: 'Projetos',
   },
   en: {
     goProjects: 'View projects on site',
     goSkills: 'View skills',
     goExperience: 'View experience',
     goAbout: 'About me',
+    goEducation: 'View education',
     goContact: 'Go to contact',
     sendMessage: 'Send a message',
     downloadCv: 'Download CV (PDF)',
@@ -36,12 +50,17 @@ const labels = {
     blog: 'View posts on LinkedIn',
     openPortfolio: 'Open portfolio',
     defaultSuggest: ['Experience', 'Projects', 'WhatsApp', 'Résumé'],
+    viewProject: 'View project',
+    viewDetails: 'View details',
+    inpi: 'Software registered at INPI.',
+    projectsWord: 'Projects',
   },
   es: {
     goProjects: 'Ver proyectos en el sitio',
     goSkills: 'Ver habilidades',
     goExperience: 'Ver experiencia',
     goAbout: 'Sobre mí',
+    goEducation: 'Ver formación',
     goContact: 'Ir a contacto',
     sendMessage: 'Enviar mensaje',
     downloadCv: 'Descargar CV (PDF)',
@@ -51,6 +70,10 @@ const labels = {
     blog: 'Ver posts en LinkedIn',
     openPortfolio: 'Abrir portafolio',
     defaultSuggest: ['Experiencia', 'Proyectos', 'WhatsApp', 'CV'],
+    viewProject: 'Ver proyecto',
+    viewDetails: 'Ver detalles',
+    inpi: 'Software registrado en el INPI.',
+    projectsWord: 'Proyectos',
   },
 }
 
@@ -82,8 +105,8 @@ function contactLinks(language) {
   const phone =
     language === 'en' ? SITE_PROFILE.phoneDisplayEn : SITE_PROFILE.phoneDisplayPt
   return [
-    { type: 'plain', label: `📧 ${SITE_PROFILE.email}` },
-    { type: 'plain', label: `📱 ${phone}` },
+    { type: 'link', label: `📧 ${SITE_PROFILE.email}`, url: `mailto:${SITE_PROFILE.email}` },
+    { type: 'link', label: `📱 ${phone}`, url: `tel:${SITE_PROFILE.phoneTel}` },
     { type: 'link', label: `💬 ${L(language, 'whatsapp')}`, url: getWhatsAppUrl() },
     { type: 'link', label: `🔗 ${L(language, 'linkedin')}`, url: SITE_PROFILE.linkedin },
     { type: 'link', label: `🔗 ${L(language, 'github')}`, url: SITE_PROFILE.github },
@@ -93,7 +116,7 @@ function contactLinks(language) {
       label: `✉️ ${L(language, 'sendMessage')}`,
       subject:
         language === 'pt'
-          ? 'Contacto via portfólio'
+          ? 'Contato via portfólio'
           : language === 'es'
             ? 'Contacto vía portafolio'
             : 'Contact via portfolio',
@@ -104,15 +127,13 @@ function contactLinks(language) {
 const builders = {
   contact: (language) => {
     const k = getKnowledge(language)
-    const phone =
-      language === 'en' ? SITE_PROFILE.phoneDisplayEn : SITE_PROFILE.phoneDisplayPt
     return {
       text:
         language === 'pt'
-          ? `Contacto de ${SITE_PROFILE.shortName}:\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n📍 ${k.availability.location}`
+          ? `Estes são os contatos de ${SITE_PROFILE.shortName}, em ${k.availability.location}:`
           : language === 'es'
-            ? `Contacto de ${SITE_PROFILE.shortName}:\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n📍 ${k.availability.location}`
-            : `How to reach ${SITE_PROFILE.shortName}:\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n📍 ${k.availability.location}`,
+            ? `Estos son los contactos de ${SITE_PROFILE.shortName}, en ${k.availability.location}:`
+            : `Here is how to reach ${SITE_PROFILE.shortName}, based in ${k.availability.location}:`,
       links: contactLinks(language),
       suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
     }
@@ -177,7 +198,7 @@ const builders = {
       {
         type: 'link',
         label: `🌐 ${L(language, 'openPortfolio')}`,
-        url: `${SITE_PROFILE.github}/Portfolio`,
+        url: SITE_PROFILE.portfolioUrl,
       },
       { type: 'scroll', label: `🚀 ${L(language, 'goProjects')}`, section: 'teams' },
     ],
@@ -192,7 +213,7 @@ const builders = {
   whatsapp: (language) => ({
     text:
       language === 'pt'
-        ? 'Pode enviar mensagem directa pelo WhatsApp:'
+        ? 'Você pode enviar uma mensagem direta pelo WhatsApp:'
         : language === 'es'
           ? 'Puedes enviar un mensaje directo por WhatsApp:'
           : 'You can send a direct WhatsApp message:',
@@ -216,42 +237,34 @@ const builders = {
     ],
     suggestedReplies:
       language === 'pt'
-        ? ['Experiência', 'Skills', 'Contato']
+        ? ['Experiência', 'Tecnologias', 'Contato']
         : language === 'es'
-          ? ['Experiencia', 'Skills', 'Contacto']
-          : ['Experience', 'Skills', 'Contact'],
+          ? ['Experiencia', 'Tecnologías', 'Contacto']
+          : ['Experience', 'Technologies', 'Contact'],
   }),
 
   projects: (language) => {
-    const k = getKnowledge(language)
-    const lines = k.projects
-      .map(
-        (p, i) =>
-          `${i + 1}. **${p.name}**\n   ${p.problem}\n   Stack: ${p.stack.join(', ')}`
-      )
-      .join('\n\n')
-    const text =
+    const lines = PROJECTS.map(
+      (project) => `• ${getLocalizedField(project.title, language)} (${getLocalizedField(project.category, language)})`
+    ).join('\n')
+    const intro =
       language === 'pt'
-        ? `Principais projetos:\n\n${lines.replace(/\*\*/g, '')}`
+        ? 'Estes são os projetos de Matheus. Escolha um para saber mais:'
         : language === 'es'
-          ? `Proyectos principales:\n\n${lines.replace(/\*\*/g, '')}`
-          : `Main projects:\n\n${lines.replace(/\*\*/g, '')}`
-
-    const links = [
-      { type: 'scroll', label: `🚀 ${L(language, 'goProjects')}`, section: 'teams' },
-      { type: 'link', label: `🔗 ${L(language, 'github')}`, url: SITE_PROFILE.github },
-    ]
-    k.projects.forEach((p) => {
-      if (p.url) links.push({ type: 'link', label: `🌐 ${p.name}`, url: p.url })
-    })
-    return { text, links, suggestedReplies: getDefaultQuickReplies(language) }
+          ? 'Estos son los proyectos de Matheus. Elige uno para saber más:'
+          : "These are Matheus's projects. Pick one to learn more:"
+    return {
+      text: `${intro}\n\n${lines}`,
+      links: [{ type: 'scroll', label: `🚀 ${L(language, 'goProjects')}`, section: 'teams' }],
+      suggestedReplies: PROJECTS.map((project) => PROJECT_SHORT_NAMES[project.id].label),
+    }
   },
 
   skills: (language) => {
     const top = SKILLS.map((s) => s.name).join(', ')
     const text =
       language === 'pt'
-        ? `Tecnologias que uso:\n\n${top}\n\nEstão agrupadas na secção Sobre.`
+        ? `Tecnologias que uso:\n\n${top}\n\nEstão agrupadas na seção Sobre mim.`
         : language === 'es'
           ? `Tecnologías que uso:\n\n${top}\n\nEstán agrupadas en la sección Sobre.`
           : `Technologies I use:\n\n${top}\n\nThey are grouped in the About section.`
@@ -316,22 +329,22 @@ const builders = {
       .join('\n\n')
     const text =
       language === 'pt'
-        ? `Formação académica:\n\n${lines}`
+        ? `Formação acadêmica:\n\n${lines}`
         : language === 'es'
           ? `Formación académica:\n\n${lines}`
           : `Education:\n\n${lines}`
     return {
       text,
       links: [
-        { type: 'scroll', label: `📊 ${L(language, 'goSkills')}`, section: 'skills' },
+        { type: 'scroll', label: `🎓 ${L(language, 'goEducation')}`, section: 'education' },
         ...cvDownloadLinks(language),
       ],
       suggestedReplies:
         language === 'pt'
-          ? ['Experiência', 'Inglês', 'Contato']
+          ? ['Experiência', 'Projetos', 'Contato']
           : language === 'es'
-            ? ['Experiencia', 'Inglés', 'Contacto']
-            : ['Experience', 'English', 'Contact'],
+            ? ['Experiencia', 'Proyectos', 'Contacto']
+            : ['Experience', 'Projects', 'Contact'],
     }
   },
 
@@ -471,10 +484,10 @@ const builders = {
   message: (language) => ({
     text:
       language === 'pt'
-        ? 'Abro o formulário de contacto para você:'
+        ? 'O formulário de contato está aqui:'
         : language === 'es'
-          ? 'Abro el formulario de contacto:'
-          : 'Opening the contact form for you:',
+          ? 'El formulario de contacto está aquí:'
+          : 'The contact form is here:',
     links: [
       {
         type: 'contact',
@@ -497,27 +510,115 @@ const builders = {
     suggestedReplies: [],
   }),
 
-  default: (language) => {
-    const k = getKnowledge(language)
-    const phone =
-      language === 'en' ? SITE_PROFILE.phoneDisplayEn : SITE_PROFILE.phoneDisplayPt
+  certifications: (language) => {
+    const lines = CERTIFICATIONS.map(
+      (cert) => `• ${getLocalizedField(cert.title, language)} (${cert.issuer}, ${cert.year})`
+    ).join('\n')
+    const heading = language === 'pt' ? 'Certificações:' : language === 'es' ? 'Certificaciones:' : 'Certifications:'
     return {
-      text:
-        language === 'pt'
-          ? `${SITE_PROFILE.fullName}\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n\n${k.availability.status}\n\nUse os botões abaixo ou pergunte sobre experiência, projetos, formação ou disponibilidade.`
-          : language === 'es'
-            ? `${SITE_PROFILE.fullName}\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n\n${k.availability.status}\n\nUsa los botones o pregunta sobre experiencia, proyectos o contacto.`
-            : `${SITE_PROFILE.fullName}\n\n📧 ${SITE_PROFILE.email}\n📱 ${phone}\n\n${k.availability.status}\n\nUse the quick buttons or ask about experience, projects, education, or availability.`,
-      links: contactLinks(language).concat(cvDownloadLinks(language)),
+      text: `${heading}\n\n${lines}`,
+      links: [{ type: 'scroll', label: `🎓 ${L(language, 'goAbout')}`, section: 'certifications' }],
       suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
     }
   },
+
+  location: (language) => {
+    const k = getKnowledge(language)
+    return {
+      text: `📍 ${k.availability.location}\n🌍 ${k.availability.workModes.join(', ')}`,
+      links: [{ type: 'scroll', label: `📍 ${L(language, 'goContact')}`, section: 'contact' }],
+      suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
+    }
+  },
+
+  currentRole: (language) => ({
+    text: getKnowledge(language).faq.currentRole,
+    links: [{ type: 'scroll', label: `💼 ${L(language, 'goExperience')}`, section: 'experience' }],
+    suggestedReplies: labels[language]?.defaultSuggest || labels.en.defaultSuggest,
+  }),
+
+  greeting: (language) => ({
+    text:
+      language === 'pt'
+        ? 'Olá! Sobre o que você quer saber?'
+        : language === 'es'
+          ? '¡Hola! ¿Qué te gustaría saber?'
+          : 'Hi! What would you like to know?',
+    suggestedReplies: getDefaultQuickReplies(language),
+  }),
+
+  thanks: (language) => ({
+    text:
+      language === 'pt'
+        ? 'De nada! Se quiser falar direto com Matheus, é só usar um dos botões.'
+        : language === 'es'
+          ? '¡De nada! Si quieres hablar directamente con Matheus, usa uno de los botones.'
+          : "You're welcome! To talk to Matheus directly, use one of the buttons.",
+    suggestedReplies: language === 'pt' ? ['Contato', 'WhatsApp', 'Currículo'] : language === 'es' ? ['Contacto', 'WhatsApp', 'CV'] : ['Contact', 'WhatsApp', 'Résumé'],
+  }),
+
+  project: (language, { projectId }) => {
+    const project = getProjectById(projectId)
+    if (!project) return builders.projects(language)
+    const repo = getProjectGithubRepos(project)[0]
+    const title = getLocalizedField(project.title, language)
+    const category = getLocalizedField(project.category, language)
+    const inpi = project.certificate ? `\n\n${L(language, 'inpi')}` : ''
+    const links = []
+    if (project.demo) links.push({ type: 'link', label: `🌐 ${L(language, 'viewProject')}`, url: project.demo })
+    if (project.slug) links.push({ type: 'route', label: `📄 ${L(language, 'viewDetails')}`, path: `/projetos/${project.slug}` })
+    if (repo) links.push({ type: 'link', label: `🔗 ${L(language, 'github')}`, url: repo.url })
+    return {
+      text: `${title} (${category})\n\n${getLocalizedField(project.description, language)}${inpi}\n\nStack: ${project.technologies.join(', ')}`,
+      links,
+      suggestedReplies: [L(language, 'projectsWord'), ...(language === 'pt' ? ['Experiência', 'Contato'] : language === 'es' ? ['Experiencia', 'Contacto'] : ['Experience', 'Contact'])],
+    }
+  },
+
+  tech: (language, { techs }) => {
+    const k = getKnowledge(language)
+    const wanted = techs.map((tech) => tech.toLowerCase())
+    const uses = (list) => (list || []).some((item) => wanted.includes(item.toLowerCase()))
+    const jobs = k.experience.filter((item) => uses(item.technologies)).map((item) => item.company)
+    const related = PROJECTS.filter((project) => uses(project.technologies))
+    const names = techs.join(', ')
+    const lines = []
+    if (jobs.length) lines.push(`• ${language === 'en' ? 'Experience' : language === 'es' ? 'Experiencia' : 'Experiência'}: ${jobs.join(', ')}`)
+    if (related.length) {
+      lines.push(`• ${L(language, 'projectsWord')}: ${related.map((project) => PROJECT_SHORT_NAMES[project.id].label).join(', ')}`)
+    }
+    const intro =
+      language === 'pt'
+        ? `Sim, Matheus trabalha com ${names}.`
+        : language === 'es'
+          ? `Sí, Matheus trabaja con ${names}.`
+          : `Yes, Matheus works with ${names}.`
+    return {
+      text: lines.length ? `${intro}\n\n${lines.join('\n')}` : intro,
+      links: [{ type: 'scroll', label: `📊 ${L(language, 'goSkills')}`, section: 'skills' }],
+      suggestedReplies: related.slice(0, 3).map((project) => PROJECT_SHORT_NAMES[project.id].label),
+    }
+  },
+
+  default: (language) => ({
+    text:
+      language === 'pt'
+        ? 'Não tenho essa informação aqui. Escolha um dos assuntos abaixo ou fale direto com Matheus.'
+        : language === 'es'
+          ? 'No tengo esa información aquí. Elige uno de los temas de abajo o habla directamente con Matheus.'
+          : "I don't have that information here. Pick a topic below or talk to Matheus directly.",
+    links: [
+      { type: 'link', label: `💬 ${L(language, 'whatsapp')}`, url: getWhatsAppUrl() },
+      { type: 'link', label: `📧 ${SITE_PROFILE.email}`, url: `mailto:${SITE_PROFILE.email}` },
+    ],
+    suggestedReplies: getDefaultQuickReplies(language),
+  }),
 }
 
-export function getStructuredResponse(intent, language) {
-  const key = intent === 'cv' ? 'cv' : intent
-  const builder = builders[key] || builders.default
-  return builder(language)
+export function getStructuredResponse(query, language) {
+  const { intent, ...details } = typeof query === 'string' ? { intent: query } : query
+  const builder = builders[intent] || builders.default
+  return builder(language, details)
 }
 
 export function getGreeting(language) {
@@ -526,31 +627,9 @@ export function getGreeting(language) {
 
 export function getDefaultQuickReplies(language) {
   const map = {
-    pt: ['Contato', 'Currículo', 'Projetos', 'Experiência', 'WhatsApp'],
-    en: ['Contact', 'Résumé', 'Projects', 'Experience', 'WhatsApp'],
-    es: ['Contacto', 'CV', 'Proyectos', 'Experiencia', 'WhatsApp'],
+    pt: ['Projetos', 'Experiência', 'Tecnologias', 'Formação', 'Disponibilidade', 'Contato'],
+    en: ['Projects', 'Experience', 'Technologies', 'Education', 'Availability', 'Contact'],
+    es: ['Proyectos', 'Experiencia', 'Tecnologías', 'Formación', 'Disponibilidad', 'Contacto'],
   }
   return map[language] || map.en
-}
-
-export function getAiUnavailableMessage(language, reason) {
-  if (reason === 'rate_limit') {
-    return language === 'pt'
-      ? 'Limite de mensagens com IA atingido nesta sessão. Use os botões rápidos — as respostas instantâneas continuam disponíveis.'
-      : language === 'es'
-        ? 'Límite de mensajes con IA alcanzado en esta sesión. Usa los botones rápidos.'
-        : 'AI message limit reached for this session. Quick buttons still work instantly.'
-  }
-  if (reason === 'no_key') {
-    return language === 'pt'
-      ? 'Modo IA não configurado. Respostas instantâneas estão activas — experimente Contacto, Projetos ou Experiência.'
-      : language === 'es'
-        ? 'Modo IA no configurado. Respuestas instantáneas activas.'
-        : 'AI mode not configured. Instant answers are active — try Contact, Projects, or Experience.'
-  }
-  return language === 'pt'
-    ? 'Não consegui usar a IA agora. Aqui está a informação mais relevante:'
-    : language === 'es'
-      ? 'No pude usar la IA ahora. Aquí está la información relevante:'
-      : "Couldn't reach AI right now. Here's the most relevant info:"
 }

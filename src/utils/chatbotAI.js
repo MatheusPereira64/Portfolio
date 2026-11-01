@@ -1,6 +1,12 @@
 import { buildSystemPrompt } from '../data/assistantKnowledge'
 import { canUseAI, incrementAIUsage, isGeminiConfigured } from './chatbotRateLimit'
 
+const RECENT_MESSAGES = 4
+const RECENT_MESSAGE_CHARS = 200
+const MAX_QUESTION_CHARS = 300
+/** O proxy recusa prompts maiores que isto (api/gemini-proxy.example.mjs). */
+const MAX_PROMPT_CHARS = 8000
+
 const debug = import.meta.env.DEV
   ? (...args) => console.log('[Chatbot AI]', ...args)
   : () => {}
@@ -18,14 +24,14 @@ function extractLinks(text) {
   return links
 }
 
-async function callProxy(prompt, history) {
+async function callProxy(prompt) {
   const proxyUrl = import.meta.env.VITE_GEMINI_PROXY_URL?.trim()
   if (!proxyUrl) return null
 
   const response = await fetch(proxyUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt, history }),
+    body: JSON.stringify({ prompt }),
   })
 
   if (!response.ok) {
@@ -51,10 +57,15 @@ export async function getAIResponse(messageText, conversationHistory, language) 
   const systemPrompt = buildSystemPrompt(language)
 
   try {
-    return await callProxy(
-      `${systemPrompt}\n\nUser: ${messageText}`,
-      conversationHistory
-    )
+    const recent = conversationHistory
+      .slice(-RECENT_MESSAGES - 1, -1)
+      .map((message) => `${message.type === 'user' ? 'User' : 'Assistant'}: ${message.text.slice(0, RECENT_MESSAGE_CHARS)}`)
+      .join('\n')
+    const question = `\n\nUser: ${messageText.slice(0, MAX_QUESTION_CHARS)}`
+    const header = '\n\nConversation so far:\n'
+    const room = MAX_PROMPT_CHARS - systemPrompt.length - question.length - header.length
+    const conversation = recent && room > 0 ? `${header}${recent.slice(-room)}` : ''
+    return await callProxy(`${systemPrompt}${conversation}${question}`)
   } catch (err) {
     debug('AI error', err.message)
     return null
