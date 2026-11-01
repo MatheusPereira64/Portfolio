@@ -7,7 +7,6 @@ import './Footer.css'
 
 const Footer = () => {
   const { translations, language } = useLanguage()
-  const t = translations[language]
   const nav = translations[language].nav
   const year = new Date().getFullYear()
   const showBlog = getPublishedPosts().length > 0
@@ -74,7 +73,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-section">
-            <h3>{t.contact.title}</h3>
+            <h3>{nav.contact}</h3>
             <div className="contact-info">
               <div className="contact-item">
                 <Icon name="phone" title="Telefone" />

@@ -39,18 +39,6 @@ export function getCvHref(locale = 'en') {
   return `${import.meta.env.BASE_URL}curriculo/${encodeURIComponent(getCvFilename(locale))}`
 }
 
-export function triggerCvDownload(locale = 'en') {
-  const filename = getCvFilename(locale)
-  const url = getCvHref(locale)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = filename
-  link.rel = 'noopener noreferrer'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
-}
-
 /** Foto de perfil (WebP). O PNG original saiu de `public/` para não ir no build. */
 const PROFILE_560 = 'images/matheus-profile-560.webp'
 const PROFILE_280 = 'images/matheus-profile-280.webp'

@@ -28,6 +28,7 @@ import nodeJs from '@fortawesome/fontawesome-free/svgs/brands/node-js.svg?raw'
 import python from '@fortawesome/fontawesome-free/svgs/brands/python.svg?raw'
 import react from '@fortawesome/fontawesome-free/svgs/brands/react.svg?raw'
 import squareJs from '@fortawesome/fontawesome-free/svgs/brands/square-js.svg?raw'
+import whatsapp from '@fortawesome/fontawesome-free/svgs/brands/whatsapp.svg?raw'
 
 const ICONS = {
   'angle-up': angleUp,
@@ -45,6 +46,7 @@ const ICONS = {
   'file-download': fileArrowDown,
   'file-pdf': filePdf,
   github,
+  whatsapp,
   'html5': html5,
   'css3-alt': css3Alt,
   'js-square': squareJs,

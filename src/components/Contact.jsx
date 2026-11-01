@@ -1,20 +1,25 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import './Contact.css'
-import { SITE_PROFILE, triggerCvDownload } from '../constants/siteProfile'
+import { SITE_PROFILE, getCvFilename, getCvHref } from '../constants/siteProfile'
+import { getWhatsAppUrl } from '../data/assistantKnowledge'
 import Icon from './Icon'
 import Reveal from './Reveal'
 import { isEmailJsConfigured, sendContactEmail } from '../utils/sendContactEmail'
 
+const EMPTY_FORM = {
+  from_name: '',
+  from_email: '',
+  subject: '',
+  message: ''
+}
+
+const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+
 const Contact = () => {
   const { translations, language } = useLanguage()
-  const t = translations[language]
-  const [formData, setFormData] = useState({
-    from_name: '',
-    from_email: '',
-    subject: '',
-    message: ''
-  })
+  const t = translations[language].contact
+  const [formData, setFormData] = useState(EMPTY_FORM)
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
@@ -39,13 +44,8 @@ const Contact = () => {
     const { name, value } = e.target
     setFormData(prev => ({ ...prev, [name]: value }))
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+      setErrors(prev => ({ ...prev, [name]: false }))
     }
-  }
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return emailRegex.test(email)
   }
 
   const handleSubmit = async (e) => {
@@ -55,7 +55,7 @@ const Contact = () => {
     if (!formData.from_name.trim()) {
       newErrors.from_name = true
     }
-    if (!formData.from_email.trim() || !validateEmail(formData.from_email)) {
+    if (!validateEmail(formData.from_email.trim())) {
       newErrors.from_email = true
     }
     if (!formData.subject.trim()) {
@@ -65,9 +65,11 @@ const Contact = () => {
       newErrors.message = true
     }
 
-    if (Object.keys(newErrors).length > 0) {
+    const invalid = Object.keys(newErrors)
+    if (invalid.length > 0) {
       setErrors(newErrors)
-      setSubmitStatus('error')
+      setSubmitStatus('invalid')
+      e.currentTarget.elements[invalid[0]]?.focus()
       return
     }
 
@@ -77,15 +79,10 @@ const Contact = () => {
     try {
       const { method } = await sendContactEmail(formData)
 
-      setFormData({
-        from_name: '',
-        from_email: '',
-        subject: '',
-        message: ''
-      })
+      setFormData(EMPTY_FORM)
       setErrors({})
       setSubmitStatus(method === 'emailjs' ? 'success' : 'mailto')
-      
+
       setTimeout(() => {
         setSubmitStatus(null)
       }, 5000)
@@ -97,177 +94,132 @@ const Contact = () => {
     }
   }
 
-  const cvLabels = {
-    pt: { heading: 'Baixar currículo', en: 'English', pt: 'Português' },
-    en: { heading: 'Download résumé', en: 'English', pt: 'Portuguese' },
-    es: { heading: 'Descargar currículum', en: 'English', pt: 'Portugués' },
-  }
-  const cv = cvLabels[language] || cvLabels.en
+  const channels = [
+    {
+      id: 'email',
+      icon: 'envelope',
+      label: 'Email',
+      value: SITE_PROFILE.email,
+      href: `mailto:${SITE_PROFILE.email}`,
+    },
+    {
+      id: 'whatsapp',
+      icon: 'whatsapp',
+      label: 'WhatsApp',
+      value: SITE_PROFILE.phoneDisplayPt,
+      href: getWhatsAppUrl(),
+    },
+    {
+      id: 'linkedin',
+      icon: 'linkedin',
+      label: 'LinkedIn',
+      value: SITE_PROFILE.linkedin.replace(/^https:\/\/www\.|\/$/g, ''),
+      href: SITE_PROFILE.linkedin,
+    },
+    {
+      id: 'github',
+      icon: 'github',
+      label: 'GitHub',
+      value: SITE_PROFILE.github.replace(/^https:\/\//, ''),
+      href: SITE_PROFILE.github,
+    },
+  ]
+
+  const fieldProps = (name) => ({
+    id: `contact-${name}`,
+    name,
+    value: formData[name],
+    onChange: handleChange,
+    required: true,
+    'aria-invalid': errors[name] ? true : undefined,
+    className: errors[name] ? 'error' : undefined,
+  })
+
+  const statusMessage = {
+    success: t.sent,
+    mailto: t.mailtoOpened,
+    invalid: t.invalid,
+    error: t.sendError,
+  }[submitStatus]
+  const statusOk = submitStatus === 'success' || submitStatus === 'mailto'
 
   return (
     <section className="contact" id="contact" data-lang={language}>
       <div className="max-width">
-        <Reveal as="h2" className="title">{t.contact.title}</Reveal>
+        <Reveal as="h2" className="section-heading">{t.title}</Reveal>
+        <Reveal as="p" className="section-intro">{t.description}</Reveal>
         <div className="contact-content">
-          <Reveal className="column left">
-            <div className="text">{t.contact.text}</div>
-            <p>{t.contact.description}</p>
-            <div className="cv-download-group">
-              <p className="cv-download-label">{cv.heading}</p>
-              <div className="cv-download-actions">
-                <button
-                  type="button"
-                  className="cv-download-btn"
-                  onClick={() => triggerCvDownload('en')}
-                  aria-label={`${cv.heading} — ${cv.en}`}
-                >
+          <Reveal className="contact-direct">
+            <ul className="contact-channels">
+              {channels.map((channel) => {
+                const external = channel.href.startsWith('http')
+                return (
+                  <li key={channel.id}>
+                    <a
+                      className="contact-channel"
+                      href={channel.href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                    >
+                      <span className="contact-channel-icon"><Icon name={channel.icon} /></span>
+                      <span className="contact-channel-text">
+                        <strong>{channel.label}</strong>
+                        <span>{channel.value}</span>
+                      </span>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+            <p className="contact-location">
+              <Icon name="map-marker-alt" />
+              {t.location}
+            </p>
+            <div className="contact-cv">
+              <p>{t.cvHeading}</p>
+              <div>
+                <a className="contact-cv-link" href={getCvHref('pt')} download={getCvFilename('pt')} lang="pt-BR">
                   <Icon name="download" />
-                  {cv.en}
-                </button>
-                <button
-                  type="button"
-                  className="cv-download-btn"
-                  onClick={() => triggerCvDownload('pt')}
-                  aria-label={`${cv.heading} — ${cv.pt}`}
-                >
+                  {t.cvPortuguese}
+                </a>
+                <a className="contact-cv-link" href={getCvHref('en')} download={getCvFilename('en')} lang="en">
                   <Icon name="download" />
-                  {cv.pt}
-                </button>
-              </div>
-            </div>
-            <div className="icons">
-              <div className="row">
-                <Icon name="user" />
-                <div className="info">
-                  <div className="head">{t.contact.name}</div>
-                  <div className="sub-title">Matheus Pereira de Souza</div>
-                </div>
-              </div>
-              <div className="row">
-                <Icon name="map-marker-alt" />
-                <div className="info">
-                  <div className="head">{language === 'pt' ? 'Localização' : 'Location'}</div>
-                  <div className="sub-title">{language === 'pt' ? 'Manaus, Amazonas - Brasil' : 'Manaus, Amazonas - Brazil'}</div>
-                </div>
-              </div>
-              <div className="row">
-                <Icon name="phone" />
-                <div className="info">
-                  <div className="head">{language === 'pt' ? 'Telefone' : 'Phone'}</div>
-                  <div className="sub-title">+55 (92) 99213-8870</div>
-                </div>
-              </div>
-              <div className="row">
-                <Icon name="envelope" />
-                <div className="info">
-                  <div className="head">Email</div>
-                  <div className="sub-title">{SITE_PROFILE.email}</div>
-                </div>
-              </div>
-              <div className="row">
-                <Icon name="linkedin" />
-                <div className="info">
-                  <div className="head">LinkedIn</div>
-                  <div className="sub-title">{SITE_PROFILE.linkedin.replace(/^https:\/\//, '')}</div>
-                </div>
+                  English
+                </a>
               </div>
             </div>
           </Reveal>
-          <Reveal className="column right" index={1}>
-            <div className="text">{t.contact.formTitle}</div>
-            <p className="form-instruction">
-              {isEmailJsConfigured()
-                ? (language === 'pt'
-                  ? 'Preencha o formulário abaixo. A mensagem será enviada diretamente para o meu email.'
-                  : language === 'es'
-                  ? 'Completa el formulario. El mensaje se enviará directamente a mi correo.'
-                  : 'Fill in the form below. Your message will be sent directly to my email.')
-                : t.contact.formInstruction}
-            </p>
-            <form onSubmit={handleSubmit}>
-              <div className="fields">
-                <div className="field name">
-                  <input
-                    type="text"
-                    name="from_name"
-                    placeholder={t.contact.namePlaceholder}
-                    value={formData.from_name}
-                    onChange={handleChange}
-                    className={errors.from_name ? 'error' : formData.from_name ? 'success' : ''}
-                    required
-                  />
-                </div>
-                <div className="field email">
-                  <input
-                    type="email"
-                    name="from_email"
-                    placeholder={t.contact.emailPlaceholder}
-                    value={formData.from_email}
-                    onChange={handleChange}
-                    className={errors.from_email ? 'error' : formData.from_email && validateEmail(formData.from_email) ? 'success' : ''}
-                    required
-                  />
-                </div>
+          <Reveal className="contact-form-wrap" index={1}>
+            <form className="contact-form" onSubmit={handleSubmit} noValidate>
+              <div className="contact-field">
+                <label htmlFor="contact-from_name">{t.name}</label>
+                <input type="text" autoComplete="name" {...fieldProps('from_name')} />
               </div>
-              <div className="field">
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder={t.contact.subjectPlaceholder}
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className={errors.subject ? 'error' : formData.subject ? 'success' : ''}
-                  required
-                />
+              <div className="contact-field">
+                <label htmlFor="contact-from_email">{t.email}</label>
+                <input type="email" autoComplete="email" {...fieldProps('from_email')} />
               </div>
-              <div className="field textarea">
-                <textarea
-                  cols="30"
-                  rows="10"
-                  name="message"
-                  placeholder={t.contact.messagePlaceholder}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={errors.message ? 'error' : formData.message ? 'success' : ''}
-                  required
-                ></textarea>
+              <div className="contact-field contact-field--wide">
+                <label htmlFor="contact-subject">{t.subject}</label>
+                <input type="text" {...fieldProps('subject')} />
               </div>
-              {submitStatus === 'success' && (
-                <div className="form-message success">
-                  <Icon name="check-circle" />
-                  {language === 'pt' 
-                    ? 'Mensagem enviada com sucesso!' 
-                    : language === 'es'
-                    ? '¡Mensaje enviado con éxito!'
-                    : 'Message sent successfully!'}
-                </div>
-              )}
-              {submitStatus === 'mailto' && (
-                <div className="form-message success">
-                  <Icon name="check-circle" />
-                  {language === 'pt'
-                    ? 'O seu cliente de email foi aberto. Confirme o envio para concluir.'
-                    : language === 'es'
-                    ? 'Se abrió tu cliente de correo. Confirma el envío para completar.'
-                    : 'Your email client was opened. Confirm sending to complete.'}
-                </div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="form-message error">
-                  <Icon name="exclamation-circle" />
-                  {language === 'pt'
-                    ? 'Erro ao enviar mensagem. Tente novamente.'
-                    : language === 'es'
-                    ? 'Error al enviar mensaje. Inténtalo de nuevo.'
-                    : 'Error sending message. Please try again.'}
-                </div>
-              )}
-              <div className="button">
+              <div className="contact-field contact-field--wide">
+                <label htmlFor="contact-message">{t.message}</label>
+                <textarea rows="5" {...fieldProps('message')}></textarea>
+              </div>
+              <div className="contact-form-footer">
                 <button type="submit" disabled={isSubmitting}>
-                  {isSubmitting 
-                    ? (language === 'pt' ? 'Enviando...' : language === 'es' ? 'Enviando...' : 'Sending...')
-                    : t.contact.send}
+                  {isSubmitting ? t.sending : t.send}
                 </button>
+                {!isEmailJsConfigured() && <p className="contact-form-hint">{t.mailtoHint}</p>}
+              </div>
+              <div role="status" aria-live="polite">
+                {statusMessage && (
+                  <p className={`form-message ${statusOk ? 'success' : 'error'}`}>
+                    <Icon name={statusOk ? 'check-circle' : 'exclamation-circle'} />
+                    {statusMessage}
+                  </p>
+                )}
               </div>
             </form>
           </Reveal>
@@ -278,4 +230,3 @@ const Contact = () => {
 }
 
 export default Contact
-
