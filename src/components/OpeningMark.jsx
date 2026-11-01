@@ -1,7 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
+import MpMark from './MpMark'
 import './OpeningMark.css'
 
 export default function OpeningMark({ onFinish }) {
+  const rootRef = useRef(null)
+
+  // Mede o logo do header para a marca "pousar" nele; só transform e cor, sem layout.
+  useLayoutEffect(() => {
+    const root = rootRef.current
+    const mark = root?.querySelector('svg')
+    const target = document.querySelector('.navbar .max-width .logo .mp-mark')
+    if (!mark || !target) return
+    const from = mark.getBoundingClientRect()
+    const to = target.getBoundingClientRect()
+    if (!from.width || !to.width) return
+    root.style.setProperty('--land-x', `${to.left + to.width / 2 - (from.left + from.width / 2)}px`)
+    root.style.setProperty('--land-y', `${to.top + to.height / 2 - (from.top + from.height / 2)}px`)
+    root.style.setProperty('--land-scale', String(to.width / from.width))
+    root.style.setProperty('--land-color', getComputedStyle(target).color)
+  }, [])
+
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) {
@@ -21,6 +39,7 @@ export default function OpeningMark({ onFinish }) {
 
   return (
     <div
+      ref={rootRef}
       className="opening"
       aria-hidden="true"
       onClick={() => onFinish('skip')}
@@ -29,17 +48,7 @@ export default function OpeningMark({ onFinish }) {
         if (event.animationName === 'opening-out') onFinish('end')
       }}
     >
-      <svg viewBox="0 0 150 44" role="presentation">
-        <g>
-          <path className="br-open" d="M24 12 10 22 24 32" />
-          <g className="mp">
-            <path d="M40 36V8L56 26 72 8V36" />
-            <path d="M86 36V8H99Q109 8 109 17T99 26H86" />
-          </g>
-          <path className="br-close" d="M117 36 127 8" />
-          <path className="br-close" d="M133 12 147 22 133 32" />
-        </g>
-      </svg>
+      <MpMark />
     </div>
   )
 }

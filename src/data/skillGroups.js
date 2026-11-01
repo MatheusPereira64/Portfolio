@@ -37,10 +37,11 @@ function projectText(project) {
 
 export function projectsUsing(tech) {
   const key = tech.toLowerCase()
+  const withCaseStudy = PROJECTS.filter((project) => project.slug)
   if (key === 'oee' || key === 'fpy') {
-    return PROJECTS.filter((project) => projectText(project).includes(key))
+    return withCaseStudy.filter((project) => projectText(project).includes(key))
   }
-  return PROJECTS.filter((project) =>
+  return withCaseStudy.filter((project) =>
     (project.technologies || []).some((item) => item.toLowerCase() === key)
   )
 }

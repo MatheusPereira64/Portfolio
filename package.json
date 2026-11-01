@@ -10,6 +10,7 @@
     "deploy": "npm run build && gh-pages -d docs",
     "og:install": "playwright install chromium",
     "og:screenshot": "node scripts/generate-og-preview.mjs",
+    "projects:screenshots": "node scripts/capture-project-screenshots.mjs",
     "build:og": "npm run build && npm run og:screenshot"
   },
   "dependencies": {

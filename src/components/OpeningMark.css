@@ -13,6 +13,7 @@
   width: min(22rem, 80vw);
   height: auto;
   overflow: visible;
+  animation: opening-land 0.7s cubic-bezier(0.65, 0, 0.35, 1) 1.6s forwards;
 }
 
 .opening g {
@@ -58,8 +59,15 @@
 
 @keyframes opening-out {
   to {
-    opacity: 0;
+    background-color: transparent;
     visibility: hidden;
+  }
+}
+
+@keyframes opening-land {
+  to {
+    transform: translate(var(--land-x, 0), var(--land-y, 0)) scale(var(--land-scale, 1));
+    color: var(--land-color, #fff);
   }
 }
 

@@ -108,7 +108,34 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
+.home .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.home .home-content .hero-actions a {
+  margin-top: 0;
+}
+
+.home .home-content a.hero-cta-secondary {
+  background: transparent;
+  border-color: #fff;
+  box-shadow: none;
+}
+
+.home .home-content a.hero-cta-secondary:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #881337;
+}
+
 @media (max-width: 947px) {
+  .home .hero-actions {
+    justify-content: center;
+  }
+
   .home .home-inner {
     flex-direction: column-reverse;
     text-align: center;
@@ -129,7 +156,7 @@
   }
 
   .home .home-content a {
-    font-size: 23px;
+    font-size: 20px;
     padding: 10px 30px;
   }
 }

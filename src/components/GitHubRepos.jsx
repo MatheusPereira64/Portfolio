@@ -1,11 +1,24 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
-import { GITHUB_REPOS_URL, GITHUB_USER, getGithubOgImage } from '../data/projects'
+import {
+  GITHUB_REPOS_URL,
+  GITHUB_USER,
+  PROJECTS,
+  PROJECT_PLACEHOLDER,
+  getGithubOgImage,
+  getProjectGithubRepos,
+  getProjectImageSrc,
+} from '../data/projects'
 import { SITE_PROFILE } from '../constants/siteProfile'
 import Reveal from './Reveal'
 import './GitHubRepos.css'
 
-const HIDDEN = new Set(['portfolio', 'matheuspereira64'])
+const HIDDEN = new Set([
+  'portfolio',
+  'matheuspereira64',
+  'wedding---m-b',
+  ...PROJECTS.flatMap((project) => getProjectGithubRepos(project).map((repo) => repo.name.toLowerCase())),
+])
 
 const GitHubRepos = ({ variant = 'section' }) => {
   const { language, translations } = useLanguage()
@@ -61,6 +74,10 @@ const GitHubRepos = ({ variant = 'section' }) => {
                 src={getGithubOgImage(repo.name)}
                 alt=""
                 loading="lazy"
+                onError={(event) => {
+                  event.currentTarget.onerror = null
+                  event.currentTarget.src = getProjectImageSrc(PROJECT_PLACEHOLDER)
+                }}
               />
               <strong>{repo.name}</strong>
               <span>{repo.description || repo.language || 'GitHub'}</span>

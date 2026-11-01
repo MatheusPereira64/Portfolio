@@ -70,7 +70,15 @@ export const LanguageProvider = ({ children }) => {
         blog: 'Blog',
         contact: 'Contato',
         downloadCv: 'Baixar currículo',
-        skipLink: 'Ir para o conteúdo'
+        skipLink: 'Ir para o conteúdo',
+        logoLabel: 'Matheus Pereira, ir para o início',
+        languageButton: 'Idioma: {language}. Alterar idioma',
+        languageMenu: 'Escolher idioma',
+        themeToDark: 'Ativar modo escuro',
+        themeToLight: 'Ativar modo claro',
+        openMenu: 'Abrir menu',
+        closeMenu: 'Fechar menu',
+        mainNavigation: 'Navegação principal'
       },
       home: {
         greeting: 'Olá, meu nome é',
@@ -137,6 +145,11 @@ export const LanguageProvider = ({ children }) => {
         backToProjects: 'Voltar aos projetos',
         registeredInpi: 'Software registrado no INPI',
         notFound: 'Projeto não encontrado',
+        viewProject: 'Ver projeto',
+        screenshotAlt: 'Captura de tela de {title}',
+        opensInNewTab: 'abre em nova aba',
+        noPublicRepo: 'Sem repositório público',
+        noPublicRepoLabel: 'Perfil no GitHub. Este projeto não tem repositório público',
       },
       experience: {
         title: 'Experiência',
@@ -185,7 +198,15 @@ export const LanguageProvider = ({ children }) => {
         blog: 'Blog',
         contact: 'Contact',
         downloadCv: 'Download résumé',
-        skipLink: 'Skip to content'
+        skipLink: 'Skip to content',
+        logoLabel: 'Matheus Pereira, go to the top',
+        languageButton: 'Language: {language}. Change language',
+        languageMenu: 'Choose language',
+        themeToDark: 'Switch to dark mode',
+        themeToLight: 'Switch to light mode',
+        openMenu: 'Open menu',
+        closeMenu: 'Close menu',
+        mainNavigation: 'Main navigation'
       },
       home: {
         greeting: 'Hello, my name is',
@@ -252,6 +273,11 @@ export const LanguageProvider = ({ children }) => {
         backToProjects: 'Back to projects',
         registeredInpi: 'Software registered at INPI',
         notFound: 'Project not found',
+        viewProject: 'View project',
+        screenshotAlt: 'Screenshot of {title}',
+        opensInNewTab: 'opens in a new tab',
+        noPublicRepo: 'No public repository',
+        noPublicRepoLabel: 'GitHub profile. This project has no public repository',
       },
       experience: {
         title: 'Experience',
@@ -300,7 +326,15 @@ export const LanguageProvider = ({ children }) => {
         blog: 'Blog',
         contact: 'Contacto',
         downloadCv: 'Descargar currículum',
-        skipLink: 'Saltar al contenido'
+        skipLink: 'Saltar al contenido',
+        logoLabel: 'Matheus Pereira, ir al inicio',
+        languageButton: 'Idioma: {language}. Cambiar idioma',
+        languageMenu: 'Elegir idioma',
+        themeToDark: 'Activar modo oscuro',
+        themeToLight: 'Activar modo claro',
+        openMenu: 'Abrir menú',
+        closeMenu: 'Cerrar menú',
+        mainNavigation: 'Navegación principal'
       },
       home: {
         greeting: 'Hola, mi nombre es',
@@ -367,6 +401,11 @@ export const LanguageProvider = ({ children }) => {
         backToProjects: 'Volver a los proyectos',
         registeredInpi: 'Software registrado en el INPI',
         notFound: 'Proyecto no encontrado',
+        viewProject: 'Ver proyecto',
+        screenshotAlt: 'Captura de pantalla de {title}',
+        opensInNewTab: 'se abre en una pestaña nueva',
+        noPublicRepo: 'Sin repositorio público',
+        noPublicRepoLabel: 'Perfil de GitHub. Este proyecto no tiene repositorio público',
       },
       experience: {
         title: 'Experiencia',

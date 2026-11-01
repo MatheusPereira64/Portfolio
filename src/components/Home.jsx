@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
-import { profileImageProps, SITE_PROFILE } from '../constants/siteProfile'
+import { getCvFilename, getCvHref, profileImageProps, SITE_PROFILE } from '../constants/siteProfile'
 import { goToSection } from '../utils/routes'
 import CodeWindow from './CodeWindow'
 import './Home.css'
@@ -82,9 +82,14 @@ const Home = ({ typingDelay = 0.3 }) => {
             <p className="text-1">{t.home.greeting}</p>
             <h1 className="text-2">{t.home.name}</h1>
             <CodeWindow delay={typingDelay} />
-            <a href="#about" onClick={(event) => goToSection(event, 'about')}>
-              {t.home.button}
-            </a>
+            <div className="hero-actions">
+              <a href="#contact" onClick={(event) => goToSection(event, 'contact')}>
+                {t.home.talk}
+              </a>
+              <a className="hero-cta-secondary" href={getCvHref(language)} download={getCvFilename(language)}>
+                {t.home.downloadCv}
+              </a>
+            </div>
           </div>
           <div className="home-profile">
             <div className="home-profile-ring">

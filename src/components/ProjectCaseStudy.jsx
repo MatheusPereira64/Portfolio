@@ -5,7 +5,6 @@ import {
   getProjectCertificateHref,
   getProjectGithubRepos,
   getProjectImageSrc,
-  PROJECT_PLACEHOLDER,
 } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
 import Icon from './Icon'
@@ -72,18 +71,16 @@ const ProjectCaseStudy = ({ project }) => {
         <h1>{title}</h1>
         <p className="case-study-lead">{getLocalizedField(project.description, language)}</p>
 
-        <img
-          className="case-study-cover"
-          src={getProjectImageSrc(project.image)}
-          alt=""
-          width={960}
-          height={540}
-          decoding="async"
-          onError={(event) => {
-            event.currentTarget.onerror = null
-            event.currentTarget.src = getProjectImageSrc(PROJECT_PLACEHOLDER)
-          }}
-        />
+        {project.image && (
+          <img
+            className="case-study-cover"
+            src={getProjectImageSrc(project.image)}
+            alt=""
+            width={960}
+            height={540}
+            decoding="async"
+          />
+        )}
 
         {project.screenshots?.length > 0 && (
           <section className="case-study-shots">

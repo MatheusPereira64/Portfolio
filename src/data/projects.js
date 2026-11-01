@@ -1,6 +1,11 @@
-/** Projetos em destaque — Indústria 4.0 (ITEGAM / CRPC-INPI).
+/** Projetos em destaque — Indústria 4.0 (ITEGAM / CRPC-INPI) e repositórios públicos.
  *  Para ligar um card a um repositório: github: 'NomeDoRepo'
  *  ou github: 'https://github.com/MatheusPereira64/NomeDoRepo'
+ *
+ *  `demo`: só URL de deploy confirmada (responde 200). Sem deploy, deixe de fora.
+ *  `image`: print real em public/images/projects (npm run projects:screenshots).
+ *  Sem `image`, o card usa o placeholder neutro.
+ *  `slug`: só para quem tem estudo de caso (`problem`, `contribution`, `results`).
  *
  *  Papel no estudo de caso reaproveita `contribution`.
  *  TODO: período real (Matheus fornece) — campo `period` ({ pt, en, es } ou string)
@@ -8,14 +13,37 @@
  */
 export const PROJECTS = [
   {
+    id: 4,
+    image: 'images/projects/cunoku.webp',
+    demo: 'https://cunoku.cunokugame.workers.dev/',
+    github: 'CunokuGame',
+    title: {
+      pt: 'Cunoku',
+      en: 'Cunoku',
+      es: 'Cunoku',
+    },
+    category: {
+      pt: 'Jogo de cartas · PWA',
+      en: 'Card game · PWA',
+      es: 'Juego de cartas · PWA',
+    },
+    description: {
+      pt: 'Jogo de cartas original inspirado na cultura e na estética japonesas, com regras próprias. Dá para criar ou entrar em salas, usar a fila rápida e jogar contra bots.',
+      en: 'Original card game inspired by Japanese culture and aesthetics, with its own rules. Create or join rooms, use the quick queue, or play against bots.',
+      es: 'Juego de cartas original inspirado en la cultura y la estética japonesas, con reglas propias. Permite crear o unirse a salas, usar la cola rápida y jugar contra bots.',
+    },
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'WebSockets', 'Cloudflare Workers', 'PostgreSQL'],
+  },
+  {
     id: 1,
     slug: 'sistema-inteligente-de-manufatura',
-    image:
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
-    ],
+    category: {
+      pt: 'Indústria 4.0',
+      en: 'Industry 4.0',
+      es: 'Industria 4.0',
+    },
+    image: null,
+    screenshots: [],
     period: null,
     decisions: null,
     title: {
@@ -57,12 +85,13 @@ export const PROJECTS = [
   {
     id: 2,
     slug: 'parametrizacao-de-maquinas-com-ia',
-    image:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
-    ],
+    category: {
+      pt: 'Indústria 4.0',
+      en: 'Industry 4.0',
+      es: 'Industria 4.0',
+    },
+    image: null,
+    screenshots: [],
     period: null,
     decisions: null,
     title: {
@@ -103,12 +132,13 @@ export const PROJECTS = [
   {
     id: 3,
     slug: 'monitoramento-de-producao',
-    image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-    screenshots: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-    ],
+    category: {
+      pt: 'Indústria 4.0',
+      en: 'Industry 4.0',
+      es: 'Industria 4.0',
+    },
+    image: null,
+    screenshots: [],
     period: null,
     decisions: null,
     title: {
@@ -145,6 +175,90 @@ export const PROJECTS = [
       'Industry 4.0',
     ],
     certificate: 'certificado-crpc-inpi-03.pdf',
+  },
+  {
+    id: 5,
+    image: null,
+    github: 'Project-Nexo-Assist-',
+    title: {
+      pt: 'Nexo Assist',
+      en: 'Nexo Assist',
+      es: 'Nexo Assist',
+    },
+    category: {
+      pt: 'Agente de IA · Service desk',
+      en: 'AI agent · Service desk',
+      es: 'Agente de IA · Service desk',
+    },
+    description: {
+      pt: 'Protótipo de agente para service desk de TI. Consulta a central de ajuda e os chamados, pede confirmação antes de gravar e passa a conversa para um analista quando a regra manda.',
+      en: 'Prototype agent for an IT service desk. It checks the help center and tickets, asks for confirmation before saving, and hands the conversation to an analyst when the rules require it.',
+      es: 'Prototipo de agente para service desk de TI. Consulta la central de ayuda y los tickets, pide confirmación antes de guardar y pasa la conversación a un analista cuando la regla lo exige.',
+    },
+    technologies: ['Next.js', 'TypeScript', 'Mastra', 'SQLite', 'Drizzle ORM'],
+  },
+  {
+    id: 6,
+    image: null,
+    github: 'PWA-AGENDAMENTO',
+    title: {
+      pt: 'MP Agenda',
+      en: 'MP Agenda',
+      es: 'MP Agenda',
+    },
+    category: {
+      pt: 'PWA · Agendamento online',
+      en: 'PWA · Online booking',
+      es: 'PWA · Reservas en línea',
+    },
+    description: {
+      pt: 'Agendamento online para salões, barbearias, clínicas e autônomos. O cliente marca um horário real e o negócio acompanha a agenda, os clientes e a receita estimada.',
+      en: 'Online booking for salons, barbershops, clinics, and freelancers. Customers pick a real time slot and the business tracks its schedule, customers, and estimated revenue.',
+      es: 'Reservas en línea para salones, barberías, clínicas y autónomos. El cliente elige un horario real y el negocio sigue su agenda, sus clientes y los ingresos estimados.',
+    },
+    technologies: ['React', 'TypeScript', 'Vite', 'Express', 'Prisma', 'PostgreSQL'],
+  },
+  {
+    id: 7,
+    image: null,
+    github: 'Fintrack',
+    title: {
+      pt: 'FinTrack',
+      en: 'FinTrack',
+      es: 'FinTrack',
+    },
+    category: {
+      pt: 'App Android · Finanças pessoais',
+      en: 'Android app · Personal finance',
+      es: 'App Android · Finanzas personales',
+    },
+    description: {
+      pt: 'App Android que lê as notificações bancárias, identifica tipo, valor e banco de cada transação e registra tudo automaticamente em um banco local.',
+      en: 'Android app that reads bank notifications, identifies each transaction type, amount, and bank, and records everything automatically in a local database.',
+      es: 'App Android que lee las notificaciones bancarias, identifica tipo, valor y banco de cada transacción y lo registra todo automáticamente en una base local.',
+    },
+    technologies: ['React Native', 'TypeScript', 'Zustand', 'SQLite'],
+  },
+  {
+    id: 8,
+    image: null,
+    github: 'WinCare',
+    title: {
+      pt: 'WinCare',
+      en: 'WinCare',
+      es: 'WinCare',
+    },
+    category: {
+      pt: 'App desktop · Windows',
+      en: 'Desktop app · Windows',
+      es: 'App de escritorio · Windows',
+    },
+    description: {
+      pt: 'Central de manutenção do Windows que reúne diagnóstico, reparo, limpeza e monitoramento em um só app, sem precisar abrir o CMD ou o PowerShell.',
+      en: 'Windows maintenance hub that brings diagnostics, repair, cleanup, and monitoring into one app, with no need to open CMD or PowerShell.',
+      es: 'Central de mantenimiento de Windows que reúne diagnóstico, reparación, limpieza y monitoreo en una sola app, sin abrir CMD ni PowerShell.',
+    },
+    technologies: ['Electron', 'React', 'TypeScript', 'Tailwind CSS'],
   },
 ]
 
