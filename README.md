@@ -164,7 +164,9 @@ O GitHub precisa estar em **Settings → Pages → Source: GitHub Actions**. Vej
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+O código deste projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE).
+
+A licença não cobre minha foto, meus currículos e certificados, nem as imagens de projetos. As fontes em `src/assets/fonts` seguem a licença OFL.
 
 ---
 
