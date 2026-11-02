@@ -8,10 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "og:install": "playwright install chromium",
-    "og:screenshot": "node scripts/generate-og-preview.mjs",
+    "og:image": "node scripts/generate-og-preview.mjs",
     "projects:images": "node scripts/generate-project-images.mjs",
-    "readme:previews": "node scripts/capture-readme-previews.mjs",
-    "build:og": "npm run build && npm run og:screenshot"
+    "readme:previews": "node scripts/capture-readme-previews.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",

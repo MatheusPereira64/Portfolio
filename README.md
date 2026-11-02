@@ -125,6 +125,7 @@ Sem EmailJS, o formulário abre o app de email do visitante com a mensagem pront
 | `npm run build` | Build de produção em `docs/` (fora do Git) |
 | `npm run preview` | Serve o build localmente |
 | `npm run og:install` | Baixa o Chromium do Playwright (uma vez) |
+| `npm run og:image` | Regenera a imagem de prévia do link |
 | `npm run projects:images` | Regenera as imagens dos cartões de projeto |
 | `npm run readme:previews` | Regenera as prévias deste README |
 

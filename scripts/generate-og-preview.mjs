@@ -1,113 +1,69 @@
 /**
- * Gera public/preview.png (1200×630) para Open Graph / LinkedIn / WhatsApp.
+ * Gera public/og-image.png (1200×630), a imagem de prévia do link no WhatsApp,
+ * LinkedIn e outras redes. O WhatsApp pode omitir imagens pesadas: MAX_BYTES é a margem.
  *
  * Uso:
- *   npm run og:install      (primeira vez — baixa o Chromium)
- *   npm run og:screenshot   (build se necessário + screenshot)
- *   npm run build:og        (build + screenshot)
+ *   npm run og:install   (primeira vez — baixa o Chromium)
+ *   npm run og:image
  */
 
 import { chromium } from 'playwright'
-import { spawn } from 'node:child_process'
-import { copyFileSync, existsSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const ROOT = path.resolve(__dirname, '..')
-const PORT = 4173
-const BASE_PATH = '/Portfolio/'
-const URL = `http://127.0.0.1:${PORT}${BASE_PATH}`
-const CAPTURE_WIDTH = 1920
-const CAPTURE_HEIGHT = 1080
-const OG_WIDTH = 1200
-const OG_HEIGHT = 630
-const CLIP_X = Math.round((CAPTURE_WIDTH - OG_WIDTH) / 2)
-const PUBLIC_OUT = path.join(ROOT, 'public', 'preview.png')
-const DOCS_OUT = path.join(ROOT, 'docs', 'preview.png')
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const OUT = path.join(ROOT, 'public', 'og-image.png')
+const WIDTH = 1200
+const HEIGHT = 630
+const MAX_BYTES = 300 * 1024
 
-function run(command, args) {
-  return new Promise((resolve, reject) => {
-    const proc = spawn(command, args, { cwd: ROOT, shell: true, stdio: 'inherit' })
-    proc.on('error', reject)
-    proc.on('close', (code) => {
-      if (code === 0) resolve()
-      else reject(new Error(`${command} ${args.join(' ')} exited with code ${code}`))
-    })
-  })
+const font = (weight) => {
+  const data = readFileSync(path.join(ROOT, 'src', 'assets', 'fonts', `inter-latin-${weight}.woff2`))
+  return `@font-face { font-family: Inter; font-weight: ${weight}; src: url(data:font/woff2;base64,${data.toString('base64')}) format('woff2'); }`
 }
 
-async function waitForServer(url, timeoutMs = 45000) {
-  const deadline = Date.now() + timeoutMs
-  while (Date.now() < deadline) {
-    try {
-      const res = await fetch(url, { redirect: 'follow' })
-      if (res.ok) return
-    } catch {
-      /* server not ready yet */
-    }
-    await new Promise((r) => setTimeout(r, 400))
+const HTML = `<!doctype html><html><head><meta charset="utf-8"><style>
+  ${font(400)}
+  ${font(700)}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: ${WIDTH}px;
+    height: ${HEIGHT}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 96px;
+    border-left: 16px solid #dc143c;
+    background: #050505;
+    color: #f5f5f5;
+    font-family: Inter, sans-serif;
   }
-  throw new Error(`Preview server did not respond at ${url}`)
+  svg { display: block; width: 280px; height: auto; overflow: visible; }
+  g { fill: none; stroke: currentColor; stroke-width: 3.4; stroke-linejoin: round; stroke-linecap: round; }
+  h1 { margin-top: 56px; font-size: 84px; font-weight: 700; line-height: 1.1; }
+  p { margin-top: 18px; font-size: 40px; color: #d4d4d4; }
+</style></head><body>
+  <svg viewBox="0 0 150 44"><g>
+    <path d="M24 12 10 22 24 32" />
+    <path d="M40 36V8L56 26 72 8V36" />
+    <path d="M86 36V8H99Q109 8 109 17T99 26H86" />
+    <path d="M117 36 127 8" />
+    <path d="M133 12 147 22 133 32" />
+  </g></svg>
+  <h1>Matheus Pereira</h1>
+  <p>Full Stack Software Engineer</p>
+</body></html>`
+
+const browser = await chromium.launch()
+try {
+  const page = await browser.newPage({ viewport: { width: WIDTH, height: HEIGHT } })
+  await page.setContent(HTML, { waitUntil: 'load' })
+  await page.evaluate(() => document.fonts.ready)
+  const png = await page.screenshot({ type: 'png' })
+  if (png.length > MAX_BYTES) throw new Error(`og-image.png tem ${png.length} bytes (limite ${MAX_BYTES})`)
+  writeFileSync(OUT, png)
+  console.log(`og-image.png: ${Math.round(png.length / 1024)} KB`)
+} finally {
+  await browser.close()
 }
-
-async function main() {
-  const docsIndex = path.join(ROOT, 'docs', 'index.html')
-  if (!existsSync(docsIndex)) {
-    console.log('→ docs/ not found, running build first…')
-    await run('npm', ['run', 'build'])
-  }
-
-  console.log('→ Starting vite preview…')
-  const server = spawn(
-    'npx',
-    ['vite', 'preview', '--port', String(PORT), '--host', '127.0.0.1', '--strictPort'],
-    { cwd: ROOT, shell: true, stdio: 'pipe' }
-  )
-
-  let browser
-  try {
-    await waitForServer(URL)
-    console.log('→ Capturing Open Graph screenshot (1200×630)…')
-
-    browser = await chromium.launch({ headless: true })
-    const page = await browser.newPage({
-      viewport: { width: CAPTURE_WIDTH, height: CAPTURE_HEIGHT },
-      deviceScaleFactor: 1,
-    })
-
-    await page.goto(URL, { waitUntil: 'networkidle', timeout: 60000 })
-    await page.waitForLoadState('domcontentloaded')
-    // Aguarda fontes, hero e animação typed.js estabilizarem
-    await page.waitForTimeout(3000)
-    await page.evaluate(() => window.scrollTo(0, 0))
-
-    await page.screenshot({
-      path: PUBLIC_OUT,
-      type: 'png',
-      clip: { x: CLIP_X, y: 0, width: OG_WIDTH, height: OG_HEIGHT },
-    })
-
-    console.log(`✓ Saved ${PUBLIC_OUT}`)
-
-    if (existsSync(path.join(ROOT, 'docs'))) {
-      copyFileSync(PUBLIC_OUT, DOCS_OUT)
-      console.log(`✓ Copied to ${DOCS_OUT}`)
-    }
-
-    console.log('\nPróximo passo: atualize o cache em')
-    console.log('  https://www.linkedin.com/post-inspector/')
-  } finally {
-    if (browser) await browser.close()
-    server.kill('SIGTERM')
-  }
-}
-
-main().catch((err) => {
-  if (err.message?.includes('Executable doesn\'t exist')) {
-    console.error('\nChromium do Playwright não instalado. Execute:\n  npm run og:install\n')
-  } else {
-    console.error(err)
-  }
-  process.exit(1)
-})
