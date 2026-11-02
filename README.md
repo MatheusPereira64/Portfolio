@@ -1,98 +1,110 @@
-# 🚀 Portfólio de Matheus Pereira - React
+# Portfólio de Matheus Pereira
 
 <div align="center">
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Acesse_Agora-dc143c?style=for-the-badge&logo=github)](https://matheuspereira64.github.io/Portfolio/)
-[![GitHub](https://img.shields.io/badge/📂_Código_Fonte-GitHub-181717?style=for-the-badge&logo=github)](https://github.com/MatheusPereira64/Portfolio)
-[![React](https://img.shields.io/badge/⚛️_React-18.2.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/⚡_Vite-5.0.8-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![Site no ar](https://img.shields.io/badge/🌐_Site_no_ar-Acessar-dc143c?style=for-the-badge&logo=github)](https://matheuspereira64.github.io/Portfolio/)
+[![React](https://img.shields.io/badge/⚛️_React-18-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/⚡_Vite-5-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+
+**[matheuspereira64.github.io/Portfolio](https://matheuspereira64.github.io/Portfolio/)**
 
 </div>
 
-> ⚠️ **ATENÇÃO**: Este é o repositório da **versão React** do portfólio. Para testar localmente e garantir que está vendo a versão mais atualizada, execute `npm run dev` após instalar as dependências.
+Portfólio pessoal em React, com projetos, experiência, formação e contato em português, inglês e espanhol, nos temas claro e escuro.
 
-## 🌐 **PRÉVIA INTERATIVA - VERSÃO REACT**
+## 🖼️ Prévias
 
-### 🚀 **Acesse a Versão React Online:**
-🔗 **[>>> CLIQUE AQUI PARA VER O PORTFÓLIO REACT FUNCIONANDO <<<](https://matheuspereira64.github.io/Portfolio/)**
+### Início
 
-> 💡 **Nota**: O portfólio React está hospedado no GitHub Pages com todas as animações e funcionalidades funcionando perfeitamente! Se você ver a versão HTML antiga, limpe o cache do navegador (Ctrl+Shift+R ou Cmd+Shift+R).
+![Tela inicial com o logo MP, a apresentação, a janela de código matheus.js e os botões Falar comigo e Baixar CV](readme-assets/inicio.webp)
 
-### 🧪 **Teste Localmente (Recomendado):**
+### Projetos
 
-Para garantir que está vendo a versão React mais atualizada, execute localmente:
+Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy, botão para ver o projeto.
+
+![Seção Meus Projetos no tema escuro, com o carrossel de cartões](readme-assets/projetos.webp)
+
+<details>
+<summary>Ver no tema claro</summary>
+
+![Seção Meus Projetos no tema claro](readme-assets/projetos-claro.webp)
+
+</details>
+
+### Experiência
+
+![Linha do tempo de experiência, com o trabalho mais recente primeiro](readme-assets/experiencia.webp)
+
+### Sobre mim e formação
+
+![Seção Sobre mim com foto, apresentação e lista de formação](readme-assets/sobre.webp)
+
+### Contato
+
+![Seção de contato com canais diretos, currículo e formulário](readme-assets/contato.webp)
+
+### Chatbot
+
+![Chatbot aberto respondendo sobre o projeto Cunoku, com links e sugestões](readme-assets/chatbot.webp)
+
+### No celular
+
+<p>
+  <img src="readme-assets/celular-inicio.webp" alt="Tela inicial no celular" width="250">
+  <img src="readme-assets/celular-projetos.webp" alt="Carrossel de projetos no celular" width="250">
+  <img src="readme-assets/celular-experiencia.webp" alt="Experiência no celular" width="250">
+</p>
+
+> As prévias são geradas com `npm run readme:previews`. Nos cartões de projeto, as imagens com o selo "Ilustração" são mocks, não telas reais.
+
+## ✨ Funcionalidades
+
+- **3 idiomas:** português, inglês e espanhol, com seletor acessível por teclado
+- **Tema claro e escuro:** segue o sistema e guarda a escolha
+- **Projetos:** carrossel com links para GitHub, deploy e estudos de caso
+- **Chatbot:** respostas instantâneas sobre projetos, tecnologias, experiência e contato, com IA opcional via proxy
+- **Contato:** formulário com validação, enviado por EmailJS ou pelo app de email do visitante
+- **Currículo:** download em português e inglês
+- **Acessibilidade:** navegação por teclado, foco gerenciado e respeito a `prefers-reduced-motion`
+- **Responsivo:** do celular ao desktop
+
+## 📱 Seções
+
+1. **Início:** abertura animada `<MP/>`, apresentação e botões de contato e currículo
+2. **Projetos:** carrossel com os projetos em destaque
+3. **Experiência:** linha do tempo profissional
+4. **Sobre mim:** apresentação, formação, tecnologias e certificações
+5. **Blog:** publicações do LinkedIn, quando houver posts cadastrados
+6. **Contato:** canais diretos, currículo e formulário
+
+## 🛠️ Tecnologias
+
+- **React 18** e **Vite 5**
+- **CSS** próprio, sem framework
+- **Typed.js:** texto digitado na seção Sobre mim
+- **react-intersection-observer:** entrada das seções ao rolar
+- **EmailJS:** envio do formulário de contato
+- **Font Awesome:** ícones
+- **Playwright** (só em desenvolvimento): geração de imagens e prévias
+
+## 📦 Instalação
+
+Requer Node.js 20 (a versão usada nos workflows do repositório).
 
 ```bash
-# 1. Clone o repositório
 git clone https://github.com/MatheusPereira64/Portfolio.git
 cd Portfolio
-
-# 2. Instale as dependências
 npm install
-
-# 3. Execute em modo desenvolvimento
 npm run dev
 ```
 
-O site estará disponível em: **`http://localhost:5173`** 🎉
+O site abre em **`http://localhost:5173/Portfolio/`**.
 
-### 🎯 **Navegação Rápida:**
-- 🏠 **[Início](https://matheuspereira64.github.io/Portfolio/#home)** - Apresentação com animação Typed.js
-- 👨‍💻 **[Sobre Mim](https://matheuspereira64.github.io/Portfolio/#about)** - CV completo e formação
-- 🛠️ **[Serviços](https://matheuspereira64.github.io/Portfolio/#services)** - Cards interativos com animações
-- 📊 **[Habilidades](https://matheuspereira64.github.io/Portfolio/#skills)** - Barras animadas de progresso
-- 🚀 **[Projetos](https://matheuspereira64.github.io/Portfolio/#teams)** - Carousel de projetos responsivo
-- 📞 **[Contato](https://matheuspereira64.github.io/Portfolio/#contact)** - Formulário funcional com validação
+### Variáveis de ambiente (opcionais)
 
-### 🌍 **Funcionalidades da Versão React:**
-- **🇧🇷/🇺🇸/🇪🇸 Troca de Idioma**: Português ↔ Inglês ↔ Espanhol
-- **📱 Totalmente Responsivo**: Adaptável a todos os dispositivos
-- **✨ Animações Suaves**: Transições e efeitos hover elegantes
-- **🎨 Design Moderno**: Interface limpa com glassmorphism e gradientes
-- **🌙 Modo Escuro/Claro**: Toggle de tema com persistência
-- **🤖 Chatbot com IA**: Integração com Google Gemini API (gratuita)
-- **📧 Formulário de Contato**: Sistema funcional via EmailJS
-- **📊 Estatísticas Animadas**: Contadores e achievements
-- **📝 Seção de Blog**: Artigos e conteúdo
-- **💼 Timeline de Experiência**: Histórico profissional
-- **📥 Download de CV**: Botão para baixar currículo em PDF
-- **⚡ Performance Otimizada**: Build rápido com Vite
+Copie `.env.example` para `.env` na raiz do repositório.
 
----
-
-## 🛠️ **Tecnologias Utilizadas**
-
-- **React 18** - Biblioteca JavaScript para construção de interfaces
-- **Vite** - Build tool moderna e rápida
-- **CSS3** - Estilização com animações e gradientes
-- **Typed.js** - Animação de texto digitando
-- **Font Awesome** - Ícones
-- **React Hooks** - Gerenciamento de estado e efeitos
-
-## 📦 **Instalação e Execução**
-
-### Pré-requisitos
-- Node.js (versão 16 ou superior)
-- npm ou yarn
-
-### Passos para instalação
-
-1. **Clone o repositório**
-```bash
-git clone https://github.com/MatheusPereira64/Portfolio.git
-cd Portfolio
-```
-
-2. **Instale as dependências**
-```bash
-npm install
-```
-
-3. **Configure variáveis de ambiente** (copie `.env.example` → `.env` na raiz do repositório)
-
-**Chatbot com IA (opcional):** só via proxy. Defina `VITE_GEMINI_PROXY_URL` e mantenha a chave no servidor (`api/gemini-proxy.example.mjs`). Não use `VITE_GEMINI_API_KEY` no cliente.
-
-**Formulário de contacto → `matheuspereira6464@gmail.com` (recomendado):** [EmailJS](https://www.emailjs.com/) — crie Service + Template com campos `from_name`, `from_email`, `reply_to`, `subject`, `message` e destinatário **To** = seu Gmail. Preencha no `.env`:
+**Formulário de contato:** crie no [EmailJS](https://www.emailjs.com/) um Service e um Template com os campos `from_name`, `from_email`, `reply_to`, `subject` e `message`. Depois preencha:
 
 ```env
 VITE_EMAILJS_SERVICE_ID=...
@@ -100,124 +112,60 @@ VITE_EMAILJS_TEMPLATE_ID=...
 VITE_EMAILJS_PUBLIC_KEY=...
 ```
 
-Sem EmailJS, o formulário abre o **mailto** no browser do visitante (menos fiável).
+Sem EmailJS, o formulário abre o app de email do visitante com a mensagem pronta.
 
-Para **GitHub Pages via Actions**, adicione os mesmos nomes em **Settings → Secrets and variables → Actions**.
+**Chatbot com IA:** funciona só via proxy. Defina `VITE_GEMINI_PROXY_URL` e mantenha a chave no servidor, como em `api/gemini-proxy.example.mjs`. Veja [CHATBOT_SETUP.md](CHATBOT_SETUP.md). Sem proxy, o chatbot usa apenas as respostas instantâneas.
 
-4. **Execute o projeto em modo desenvolvimento**
-```bash
-npm run dev
-```
+### Scripts
 
-5. **Build para produção** (gera `docs/` para o GitHub Pages)
-```bash
-npm run build
-```
+| Comando | O que faz |
+|---|---|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` | Build de produção em `docs/` |
+| `npm run preview` | Serve o build localmente |
+| `npm run og:install` | Baixa o Chromium do Playwright (uma vez) |
+| `npm run projects:images` | Regenera as imagens dos cartões de projeto |
+| `npm run readme:previews` | Regenera as prévias deste README |
 
-6. **Preview do build**
-```bash
-npm run preview
-```
-
-7. **Deploy para GitHub Pages**
-```bash
-npm run deploy
-```
-
-## 📁 **Estrutura do Repositório**
-
-Este repositório **é** o projeto — a raiz no GitHub corresponde à pasta `Portfolio/` no seu PC.
+## 📁 Estrutura
 
 ```
-Portfolio/                    ← raiz do Git (padrão Vite)
-├── src/                      ← código React
+Portfolio/
+├── src/
 │   ├── components/
-│   ├── context/
 │   ├── constants/
+│   ├── context/          ← idioma e tema
+│   ├── data/             ← projetos, certificações e base do chatbot
 │   └── utils/
-├── public/                   ← imagens, CV, assets estáticos
-├── docs/                     ← build de produção (GitHub Pages)
+├── public/               ← imagens, currículos e certificados
+├── readme-assets/        ← prévias deste README
+├── scripts/              ← geração de imagens
+├── api/                  ← exemplo de proxy do chatbot
+├── docs/                 ← build de produção
 ├── .github/workflows/
-├── index.html
-├── vite.config.js
-├── package.json
-└── README.md
+└── vite.config.js
 ```
 
-> **Deploy:** `npm run build` gera **`docs/`**. A pasta `dist/` fica no `.gitignore` e não é usada para publicação.
+## 🚀 Deploy
 
-## 🌟 **Características**
+O workflow `.github/workflows/deploy-pages.yml` faz o build e publica o site no GitHub Pages a cada push para `main`, `development` ou `feat/react-refactor`. Pushes que alteram apenas `docs/` ou arquivos `.md` não disparam o deploy.
 
-- **🎨 Design Moderno**: Interface limpa com efeitos glassmorphism e gradientes
-- **📱 Responsivo**: Adaptável a todos os dispositivos (desktop, tablet, mobile)
-- **🌐 Multilíngue**: Suporte para Português, Inglês e Espanhol com Context API
-- **✨ Animações Suaves**: Transições e efeitos hover elegantes
-- **📧 Formulário de Contato**: Envio via EmailJS para o email do portfólio (fallback mailto)
-- **⚡ Performance**: Build otimizado com Vite
-- **🔧 Componentização**: Código organizado em componentes reutilizáveis
+No push para `main`, o workflow `ci.yml` também atualiza a pasta `docs/` com um commit automático.
 
-## 📱 **Seções**
+No GitHub, use **Settings → Pages → Source: GitHub Actions**. Mais opções em [DEPLOY.md](DEPLOY.md).
 
-1. **Home**: Apresentação inicial com animação de texto (Typed.js)
-2. **Sobre Mim**: Informações pessoais e formação acadêmica
-3. **Meus Serviços**: Cards com os serviços oferecidos
-4. **Habilidades**: Barras de progresso animadas das tecnologias
-5. **Experiência**: Timeline interativa com histórico profissional
-6. **Projetos**: Carousel com projetos desenvolvidos
-7. **Estatísticas**: Contadores animados de achievements
-8. **Blog**: Seção de artigos e conteúdo
-9. **Contato**: Formulário funcional e informações de contato
-10. **Chatbot**: Assistente virtual com IA (Google Gemini) ou respostas pré-programadas
+> Não abra o `index.html` direto no navegador ou com Live Server: o JSX precisa do Vite. Use `npm run dev` ou `npm run preview`.
 
-## 🚀 **Deploy no GitHub Pages**
+## 📧 Contato
 
-### Opção A — GitHub Actions (recomendado)
+- **Email:** matheuspereira6464@gmail.com
+- **LinkedIn:** [Matheus Pereira](https://www.linkedin.com/in/matheus-pereira64/)
+- **Telefone:** +55 (92) 99213-8870
 
-O workflow `.github/workflows/deploy-pages.yml` faz **`npm ci`**, **`npm run build`** e publica o conteúdo de **`docs/`** automaticamente nos pushes para **`main`**, **`development`** ou **`feat/react-refactor`**.
-
-1. No GitHub: **Settings → Pages → Build and deployment → Source**, escolhe **GitHub Actions** (não uses “Deploy from a branch” ao mesmo tempo para evitar confusão).
-2. Faz push deste repositório; na aba **Actions** verifica que o workflow **Deploy GitHub Pages** concluiu com sucesso.
-3. Abre **`https://matheuspereira64.github.io/Portfolio/`**.
-
-### Opção B — Branch + pasta `/docs`
-
-No GitHub, ao publicar a partir de um branch, só existem **`/` (root)** ou **`/docs`** — não há **`/dist`**.
-
-1. Localmente: **`npm run build`** gera **`docs/`**.
-2. Commit e push da pasta **`docs/`**.
-3. **Settings → Pages**: Branch à tua escolha e **Folder: `/docs`**.
-
-### Opção C — Branch `gh-pages`
-
-**`npm run deploy`** envia o build para **`gh-pages`**; nas Pages escolhe esse branch e pasta **`/ (root)`**.
-
-### ⚠️ **IMPORTANTE**
-
-1. **Não abras** `index.html` com **Live Server**, duplo clique nem **`file://`**. Esse HTML referencia **`main.jsx`**; só o Vite converte JSX. Para local: **`npm run dev`** ou, após build, **`npm run preview`** (abre por exemplo `http://localhost:4173/Portfolio/`).
-2. **URL do site**: **`https://matheuspereira64.github.io/Portfolio/`**. Caminhos para pastas fonte no repo podem devolver `.jsx` e o erro de MIME.
-
-### Erro `MIME type "text/jsx"`
-
-- **Desenvolvimento**: usa sempre **`npm run dev`** ou **`npm run preview`**, não Live Server na raiz do projeto.
-- **Produção**: garante Pages com **GitHub Actions** ou pasta **`/docs`** com build atualizado; faz **hard refresh** (Ctrl+Shift+R).
-
-### Configuração do Vite
-
-O arquivo `vite.config.js` está configurado com:
-- `base: '/Portfolio/'` — caminho base para GitHub Pages
-- `build.outDir: 'docs'` — saída do build na pasta **`docs/`**
-- Build otimizado para produção
-
-## 📧 **Contato**
-
-- **Email**: matheuspereira6464@gmail.com
-- **LinkedIn**: [Matheus Pereira](https://www.linkedin.com/in/matheus-pereira64/)
-- **Telefone**: +55 (92) 99213-8870
-
-## 📄 **Licença**
+## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-⭐ **Desenvolvido por Matheus Pereira de Souza**
+**Desenvolvido por Matheus Pereira de Souza**

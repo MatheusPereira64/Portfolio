@@ -11,6 +11,7 @@
     "og:install": "playwright install chromium",
     "og:screenshot": "node scripts/generate-og-preview.mjs",
     "projects:images": "node scripts/generate-project-images.mjs",
+    "readme:previews": "node scripts/capture-readme-previews.mjs",
     "build:og": "npm run build && npm run og:screenshot"
   },
   "dependencies": {
