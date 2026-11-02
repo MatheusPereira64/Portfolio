@@ -11,7 +11,7 @@ Há um único caminho: **cada push na `main` publica o site** no GitHub Pages, p
 | `main` | Verifica o build e publica o site |
 | `development` | Só verifica o build (`ci.yml`), sem publicar |
 
-Pushes que alteram apenas `docs/` ou arquivos `.md` não disparam esses workflows.
+Pushes que alteram apenas arquivos `.md` não disparam esses workflows.
 
 ## Configuração no GitHub
 
@@ -42,4 +42,4 @@ npm run preview
 
 Abre por exemplo `http://localhost:4173/Portfolio/`
 
-O build é gravado em `docs/`, mas essa pasta não é o que vai para o ar: não é preciso commitá-la.
+O build é gravado em `docs/`, que fica fora do Git: o deploy gera a sua própria versão no GitHub Actions.

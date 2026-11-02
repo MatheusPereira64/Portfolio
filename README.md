@@ -122,7 +122,7 @@ Sem EmailJS, o formulário abre o app de email do visitante com a mensagem pront
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção em `docs/` |
+| `npm run build` | Build de produção em `docs/` (fora do Git) |
 | `npm run preview` | Serve o build localmente |
 | `npm run og:install` | Baixa o Chromium do Playwright (uma vez) |
 | `npm run projects:images` | Regenera as imagens dos cartões de projeto |
@@ -142,14 +142,13 @@ Portfolio/
 ├── readme-assets/        ← prévias deste README
 ├── scripts/              ← geração de imagens
 ├── api/                  ← exemplo de proxy do chatbot
-├── docs/                 ← saída local do build
 ├── .github/workflows/
 └── vite.config.js
 ```
 
 ## 🚀 Deploy
 
-O site tem um único caminho de publicação: a cada push na `main`, o workflow `.github/workflows/deploy-pages.yml` faz o build e publica no GitHub Pages. Pushes que alteram apenas `docs/` ou arquivos `.md` não disparam o deploy.
+O site tem um único caminho de publicação: a cada push na `main`, o workflow `.github/workflows/deploy-pages.yml` faz o build e publica no GitHub Pages. Pushes que alteram apenas arquivos `.md` não disparam o deploy.
 
 A `development` serve para testar: o push nela roda o build de verificação (`ci.yml`), mas não publica o site.
 
