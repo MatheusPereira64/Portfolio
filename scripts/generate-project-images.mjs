@@ -2,7 +2,7 @@
  * Gera as imagens dos cartões em public/images/projects/*.webp (1280×800).
  *
  * - Cunoku: print real do deploy, dentro de um notebook desenhado.
- * - MP Agenda: tela real do README do repositório, dentro do mesmo notebook.
+ * - MP Agenda e WinCare: telas reais dos READMEs dos repositórios, no mesmo notebook.
  * - Demais: mocks ilustrativos (em `imageKind: 'mock'` no projects.js). Sem números
  *   nem dados: gráficos e valores são só formas.
  *
@@ -27,6 +27,8 @@ const WEBP_QUALITY = 0.84
 const CUNOKU_URL = 'https://cunoku.cunokugame.workers.dev/'
 const MP_AGENDA_SCREEN =
   'https://raw.githubusercontent.com/MatheusPereira64/PWA-AGENDAMENTO/main/docs/imagens/painel.png'
+const WINCARE_SCREEN =
+  'https://raw.githubusercontent.com/MatheusPereira64/WinCare/main/docs/screenshots/dashboard.png'
 
 const BASE_CSS = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -116,14 +118,6 @@ const MOCKS = {
       <div class="row" style="gap:10px"><div style="padding:9px 18px;border-radius:999px;background:var(--strong);color:#07131a;font-size:18px;font-weight:700">Confirmar</div>
       <div style="padding:9px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.3);font-size:18px">Falar com analista</div></div>
     </div>`))),
-  'wincare.webp': page('#2563eb', '#60a5fa', `<div style="position:relative;width:1010px;height:640px;border-radius:14px;overflow:hidden;background:#10141c;border:2px solid #3a4150;box-shadow:0 40px 90px rgba(0,0,0,.6)">
-    <div style="display:flex;align-items:center;height:42px;padding:0 18px;background:#0c1017;font-size:17px;color:#b6bfce"><span>WinCare</span>
-      <span style="margin-left:auto;letter-spacing:18px">— ▢ ✕</span></div>
-    <div style="height:calc(100% - 42px)">${app('WinCare', `
-      <h1>Central de manutenção</h1>
-      <div class="row">${machine('Diagnóstico')}${machine('Reparo')}</div>
-      <div class="row">${machine('Limpeza', true)}${machine('Monitoramento')}</div>
-      <div class="panel grow"><div class="label" style="margin-bottom:10px">Desempenho</div><div style="height:calc(100% - 36px)">${lineChart}</div></div>`)}</div></div>`),
   'fintrack.webp': page('#059669', '#34d399', `<div style="position:relative;width:340px;height:690px;padding:14px;border-radius:44px;background:#161a22;border:2px solid #3a4150;box-shadow:0 40px 90px rgba(0,0,0,.6)">
     <div style="display:flex;flex-direction:column;gap:14px;height:100%;padding:34px 18px 18px;border-radius:32px;background:#10141c;overflow:hidden">
       <h1 style="font-size:28px">FinTrack</h1>
@@ -177,9 +171,13 @@ try {
   await live.waitForTimeout(3500)
   await render('cunoku.webp', framed('#dc2626', '#f87171', await live.screenshot({ type: 'png' })))
 
-  const screen = await fetch(MP_AGENDA_SCREEN)
-  if (!screen.ok) throw new Error(`${MP_AGENDA_SCREEN} respondeu ${screen.status}`)
-  await render('mp-agenda.webp', framed('#db2777', '#f472b6', Buffer.from(await screen.arrayBuffer()), 1.6))
+  const download = async (url) => {
+    const response = await fetch(url)
+    if (!response.ok) throw new Error(`${url} respondeu ${response.status}`)
+    return Buffer.from(await response.arrayBuffer())
+  }
+  await render('mp-agenda.webp', framed('#db2777', '#f472b6', await download(MP_AGENDA_SCREEN), 1.6))
+  await render('wincare.webp', framed('#2563eb', '#60a5fa', await download(WINCARE_SCREEN)))
 
   for (const [file, html] of Object.entries(MOCKS)) await render(file, html)
 } finally {

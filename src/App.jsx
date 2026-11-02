@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
 import About from './components/About'
+import Services from './components/Services'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Blog from './components/Blog'
@@ -87,6 +88,7 @@ function AppShell() {
             <Projects />
             <Experience />
             <About />
+            <Services />
             <Blog />
             <Contact />
           </>

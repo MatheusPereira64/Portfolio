@@ -120,7 +120,8 @@ export const LanguageProvider = ({ children }) => {
       },
       services: {
         title: 'Meus serviços',
-        subtitle: 'O que eu ofereço'
+        subtitle: 'O que eu ofereço',
+        intro: 'O que posso construir ou melhorar para a sua empresa ou o seu projeto.'
       },
       skills: {
         title: 'Meus talentos',
@@ -264,7 +265,8 @@ export const LanguageProvider = ({ children }) => {
       },
       services: {
         title: 'My services',
-        subtitle: 'What I offer'
+        subtitle: 'What I offer',
+        intro: 'What I can build or improve for your company or project.'
       },
       skills: {
         title: 'My skills',
@@ -408,7 +410,8 @@ export const LanguageProvider = ({ children }) => {
       },
       services: {
         title: 'Mis servicios',
-        subtitle: 'Lo que ofrezco'
+        subtitle: 'Lo que ofrezco',
+        intro: 'Lo que puedo construir o mejorar para tu empresa o tu proyecto.'
       },
       skills: {
         title: 'Mis talentos',

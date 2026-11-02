@@ -1,5 +1,6 @@
 import { SITE_PROFILE, getCvHref } from '../constants/siteProfile'
 import { PROJECTS, getLocalizedField, getProjectGithubRepos } from './projects'
+import { SERVICES } from './services'
 
 export const ASSISTANT_PERSONA = {
   name: { pt: 'Assistente do Portfólio', en: 'Portfolio Assistant', es: 'Asistente del Portafolio' },
@@ -364,6 +365,8 @@ ${eduBlock}
 
 Languages:
 ${langBlock}
+
+Services: ${SERVICES.map((service) => getLocalizedField(service.title, language)).join(', ')}
 
 Projects:
 ${projBlock}

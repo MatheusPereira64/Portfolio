@@ -74,8 +74,9 @@ Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy,
 2. **Projetos:** carrossel com os projetos em destaque
 3. **Experiência:** linha do tempo profissional
 4. **Sobre mim:** apresentação, formação, tecnologias e certificações
-5. **Blog:** publicações do LinkedIn, quando houver posts cadastrados
-6. **Contato:** canais diretos, currículo e formulário
+5. **Serviços:** o que posso construir ou melhorar
+6. **Blog:** publicações do LinkedIn, quando houver posts cadastrados
+7. **Contato:** canais diretos, currículo e formulário
 
 ## 🛠️ Tecnologias
 

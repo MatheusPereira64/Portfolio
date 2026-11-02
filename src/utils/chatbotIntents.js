@@ -15,6 +15,7 @@ const QUICK_REPLY_INTENTS = {
     Mensagem: 'message',
     Disponibilidade: 'availability',
     Tecnologias: 'skills',
+    Serviços: 'services',
   },
   en: {
     Contact: 'contact',
@@ -29,6 +30,7 @@ const QUICK_REPLY_INTENTS = {
     Message: 'message',
     Availability: 'availability',
     Technologies: 'skills',
+    Services: 'services',
   },
   es: {
     Contacto: 'contact',
@@ -42,6 +44,7 @@ const QUICK_REPLY_INTENTS = {
     Mensaje: 'message',
     Disponibilidad: 'availability',
     Tecnologías: 'skills',
+    Servicios: 'services',
   },
 }
 
@@ -180,6 +183,14 @@ const INTENT_PATTERNS = {
     /\bcareer\b/i,
     /\bitegam\b/i,
     /\bvia\s+certa\b/i,
+  ],
+  services: [
+    /\bservi[cç]os?\b/i,
+    /\bservicios?\b/i,
+    /\bservices?\b/i,
+    /\bo\s+que\s+(ele\s+|voc[eê]\s+)?(faz|oferece)\b/i,
+    /\bwhat\s+(do\s+you|does\s+he)\s+(do|offer)\b/i,
+    /\bqu[eé]\s+(hace|ofrece|ofreces|haces)\b/i,
   ],
   skills: [
     /\bhabilidade(s)?\b/i,

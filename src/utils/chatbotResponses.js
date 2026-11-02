@@ -12,6 +12,7 @@ import {
   getProjectById,
   getProjectGithubRepos,
 } from '../data/projects'
+import { SERVICES } from '../data/services'
 import { PROJECT_SHORT_NAMES } from './chatbotIntents'
 
 const labels = {
@@ -20,6 +21,7 @@ const labels = {
     goSkills: 'Ver habilidades',
     goExperience: 'Ver experiência',
     goAbout: 'Sobre mim',
+    goServices: 'Ver serviços',
     goEducation: 'Ver formação',
     goContact: 'Ir para contato',
     sendMessage: 'Enviar mensagem',
@@ -40,6 +42,7 @@ const labels = {
     goSkills: 'View skills',
     goExperience: 'View experience',
     goAbout: 'About me',
+    goServices: 'View services',
     goEducation: 'View education',
     goContact: 'Go to contact',
     sendMessage: 'Send a message',
@@ -60,6 +63,7 @@ const labels = {
     goSkills: 'Ver habilidades',
     goExperience: 'Ver experiencia',
     goAbout: 'Sobre mí',
+    goServices: 'Ver servicios',
     goEducation: 'Ver formación',
     goContact: 'Ir a contacto',
     sendMessage: 'Enviar mensaje',
@@ -510,6 +514,21 @@ const builders = {
     suggestedReplies: [],
   }),
 
+  services: (language) => {
+    const lines = SERVICES.map((service) => `• ${getLocalizedField(service.title, language)}`).join('\n')
+    const intro =
+      language === 'pt'
+        ? 'Estes são os serviços que Matheus oferece:'
+        : language === 'es'
+          ? 'Estos son los servicios que ofrece Matheus:'
+          : 'These are the services Matheus offers:'
+    return {
+      text: `${intro}\n\n${lines}`,
+      links: [{ type: 'scroll', label: `🛠️ ${L(language, 'goServices')}`, section: 'services' }],
+      suggestedReplies: language === 'pt' ? ['Projetos', 'Contato'] : language === 'es' ? ['Proyectos', 'Contacto'] : ['Projects', 'Contact'],
+    }
+  },
+
   certifications: (language) => {
     const lines = CERTIFICATIONS.map(
       (cert) => `• ${getLocalizedField(cert.title, language)} (${cert.issuer}, ${cert.year})`
@@ -627,9 +646,9 @@ export function getGreeting(language) {
 
 export function getDefaultQuickReplies(language) {
   const map = {
-    pt: ['Projetos', 'Experiência', 'Tecnologias', 'Formação', 'Disponibilidade', 'Contato'],
-    en: ['Projects', 'Experience', 'Technologies', 'Education', 'Availability', 'Contact'],
-    es: ['Proyectos', 'Experiencia', 'Tecnologías', 'Formación', 'Disponibilidad', 'Contacto'],
+    pt: ['Projetos', 'Serviços', 'Experiência', 'Tecnologias', 'Formação', 'Disponibilidade', 'Contato'],
+    en: ['Projects', 'Services', 'Experience', 'Technologies', 'Education', 'Availability', 'Contact'],
+    es: ['Proyectos', 'Servicios', 'Experiencia', 'Tecnologías', 'Formación', 'Disponibilidad', 'Contacto'],
   }
   return map[language] || map.en
 }

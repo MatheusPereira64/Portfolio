@@ -247,7 +247,6 @@ export const PROJECTS = [
   {
     id: 8,
     image: 'images/projects/wincare.webp',
-    imageKind: 'mock',
     github: 'WinCare',
     title: {
       pt: 'WinCare',

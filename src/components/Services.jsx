@@ -1,86 +1,52 @@
-import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { getLocalizedField } from '../data/projects'
+import { SERVICES } from '../data/services'
+import Reveal from './Reveal'
 import './Services.css'
+
+const ICON_PATHS = {
+  web: 'M3 6.5A1.5 1.5 0 0 1 4.5 5h15A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5zM3 9.5h18M6 7.25h.01M8.5 7.25h.01',
+  chart: 'M4 4v16h16M8 16v-4M12 16V8M16 16v-6',
+  plug: 'M9 3v5M15 3v5M6.5 8h11v3a5.5 5.5 0 0 1-11 0zM12 16.5V21',
+  phone: 'M8 3h8a1.5 1.5 0 0 1 1.5 1.5v15A1.5 1.5 0 0 1 16 21H8a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 8 3zM11 18h2',
+  spark: 'M12 3.5l1.9 5.1a2.5 2.5 0 0 0 1.5 1.5l5.1 1.9-5.1 1.9a2.5 2.5 0 0 0-1.5 1.5L12 20.5l-1.9-5.1a2.5 2.5 0 0 0-1.5-1.5L3.5 12l5.1-1.9a2.5 2.5 0 0 0 1.5-1.5z',
+  tools: 'M14.5 6.5a4 4 0 0 1 5-1.2l-2.8 2.8 1.2 1.2 2.8-2.8a4 4 0 0 1-5.4 5.1L8 18.4a2 2 0 0 1-2.9-2.9l6.8-6.8a4 4 0 0 1 2.6-2.2z',
+}
+
+const ServiceIcon = ({ name }) => (
+  <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true" focusable="false">
+    <path
+      d={ICON_PATHS[name]}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
 
 const Services = () => {
   const { translations, language } = useLanguage()
-  const t = translations[language]
-  const servicesRef = useRef(null)
-  const [animatedCards, setAnimatedCards] = useState(new Set())
-
-  const services = [
-    {
-      icon: 'fas fa-code',
-      title: language === 'pt' ? 'Desenvolvimento Frontend' : 'Frontend Development',
-      description: language === 'pt' 
-        ? 'Criação de interfaces modernas e responsivas utilizando React.js, HTML5, CSS3 e JavaScript. Foco na experiência do usuário e design intuitivo com performance otimizada.'
-        : 'Creation of modern and responsive interfaces using React.js, HTML5, CSS3 and JavaScript. Focus on user experience and intuitive design with optimized performance.'
-    },
-    {
-      icon: 'fas fa-server',
-      title: language === 'pt' ? 'Desenvolvimento Backend' : 'Backend Development',
-      description: language === 'pt'
-        ? 'Desenvolvimento de APIs robustas e escaláveis com Node.js e Python. Implementação de bancos de dados, autenticação e integração de serviços externos.'
-        : 'Development of robust and scalable APIs with Node.js and Python. Implementation of databases, authentication and integration of external services.'
-    },
-    {
-      icon: 'fas fa-mobile-alt',
-      title: language === 'pt' ? 'Aplicações Full Stack' : 'Full Stack Applications',
-      description: language === 'pt'
-        ? 'Desenvolvimento completo de aplicações web, desde o frontend até o backend, incluindo deploy e manutenção. Soluções personalizadas para diferentes necessidades de negócio.'
-        : 'Complete development of web applications, from frontend to backend, including deployment and maintenance. Customized solutions for different business needs.'
-    }
-  ]
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute('data-index'))
-            setAnimatedCards((prev) => new Set([...prev, index]))
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-
-    if (servicesRef.current) {
-      const cards = servicesRef.current.querySelectorAll('.card')
-      cards.forEach((card) => observer.observe(card))
-    }
-
-    return () => {
-      if (servicesRef.current) {
-        const cards = servicesRef.current.querySelectorAll('.card')
-        cards.forEach((card) => observer.unobserve(card))
-      }
-    }
-  }, [])
+  const t = translations[language].services
 
   return (
     <section className="services" id="services" data-lang={language}>
       <div className="max-width">
-        <h2 className="title">{t.services.title}</h2>
-        <div className="serv-content" ref={servicesRef}>
-          {services.map((service, index) => (
-            <div 
-              key={index} 
-              className={`card ${animatedCards.has(index) ? 'animate' : ''}`}
-              data-index={index}
-            >
-              <div className="box">
-                <i className={service.icon}></i>
-              </div>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-            </div>
+        <Reveal as="h2" className="section-heading">{t.title}</Reveal>
+        <Reveal as="p" className="section-intro">{t.intro}</Reveal>
+        <ul className="services-grid">
+          {SERVICES.map((service, index) => (
+            <Reveal as="li" key={service.id} className="service-card" index={index}>
+              <ServiceIcon name={service.icon} />
+              <h3>{getLocalizedField(service.title, language)}</h3>
+              <p>{getLocalizedField(service.description, language)}</p>
+            </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )
 }
 
 export default Services
-
