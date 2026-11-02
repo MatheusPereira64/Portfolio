@@ -142,18 +142,18 @@ Portfolio/
 ├── readme-assets/        ← prévias deste README
 ├── scripts/              ← geração de imagens
 ├── api/                  ← exemplo de proxy do chatbot
-├── docs/                 ← build de produção
+├── docs/                 ← saída local do build
 ├── .github/workflows/
 └── vite.config.js
 ```
 
 ## 🚀 Deploy
 
-O workflow `.github/workflows/deploy-pages.yml` faz o build e publica o site no GitHub Pages a cada push para `main`, `development` ou `feat/react-refactor`. Pushes que alteram apenas `docs/` ou arquivos `.md` não disparam o deploy.
+O site tem um único caminho de publicação: a cada push na `main`, o workflow `.github/workflows/deploy-pages.yml` faz o build e publica no GitHub Pages. Pushes que alteram apenas `docs/` ou arquivos `.md` não disparam o deploy.
 
-No push para `main`, o workflow `ci.yml` também atualiza a pasta `docs/` com um commit automático.
+A `development` serve para testar: o push nela roda o build de verificação (`ci.yml`), mas não publica o site.
 
-No GitHub, use **Settings → Pages → Source: GitHub Actions**. Mais opções em [DEPLOY.md](DEPLOY.md).
+O GitHub precisa estar em **Settings → Pages → Source: GitHub Actions**. Veja [DEPLOY.md](DEPLOY.md).
 
 > Não abra o `index.html` direto no navegador ou com Live Server: o JSX precisa do Vite. Use `npm run dev` ou `npm run preview`.
 
