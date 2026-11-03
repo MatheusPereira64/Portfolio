@@ -149,6 +149,12 @@ const Projects = () => {
                 </div>
                 <h3 className="project-card-title">{project.title}</h3>
                 <p className="project-card-category">{project.category}</p>
+                {project.impact && (
+                  <p className="project-impact">
+                    <strong>{project.impact.value}</strong>
+                    <span>{getLocalizedField(project.impact.label, language)}</span>
+                  </p>
+                )}
                 <p className="project-card-description">{project.description}</p>
                 {project.certificate && (
                   <p className="project-inpi">{t.projects.registeredInpi}</p>

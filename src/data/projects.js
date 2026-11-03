@@ -5,6 +5,7 @@
  *  `demo`: só URL de deploy confirmada (responde 200). Sem deploy, deixe de fora.
  *  `image`: em public/images/projects (npm run projects:images). Sem `image`, usa o placeholder.
  *  `imageKind: 'mock'`: ilustração, não é tela real; o card mostra o selo "Ilustração".
+ *  `impact`: resultado com número, sempre o mesmo declarado no currículo.
  *  `slug`: só para quem tem estudo de caso (`problem`, `contribution`, `results`).
  *
  *  Papel no estudo de caso reaproveita `contribution`.
@@ -13,30 +14,16 @@
  */
 export const PROJECTS = [
   {
-    id: 4,
-    image: 'images/projects/cunoku.webp',
-    demo: 'https://cunoku.cunokugame.workers.dev/',
-    github: 'CunokuGame',
-    title: {
-      pt: 'Cunoku',
-      en: 'Cunoku',
-      es: 'Cunoku',
-    },
-    category: {
-      pt: 'Jogo de cartas · PWA',
-      en: 'Card game · PWA',
-      es: 'Juego de cartas · PWA',
-    },
-    description: {
-      pt: 'Jogo de cartas original inspirado na cultura e na estética japonesas, com regras próprias. Dá para criar ou entrar em salas, usar a fila rápida e jogar contra bots.',
-      en: 'Original card game inspired by Japanese culture and aesthetics, with its own rules. Create or join rooms, use the quick queue, or play against bots.',
-      es: 'Juego de cartas original inspirado en la cultura y la estética japonesas, con reglas propias. Permite crear o unirse a salas, usar la cola rápida y jugar contra bots.',
-    },
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'WebSockets', 'Cloudflare Workers', 'PostgreSQL'],
-  },
-  {
     id: 1,
     slug: 'sistema-inteligente-de-manufatura',
+    impact: {
+      value: '40%',
+      label: {
+        pt: 'menos tempo para gerar relatórios',
+        en: 'less time to generate reports',
+        es: 'menos tiempo para generar informes',
+      },
+    },
     category: {
       pt: 'Indústria 4.0',
       en: 'Industry 4.0',
@@ -86,6 +73,14 @@ export const PROJECTS = [
   {
     id: 2,
     slug: 'parametrizacao-de-maquinas-com-ia',
+    impact: {
+      value: '90%',
+      label: {
+        pt: 'de melhoria na precisão dos processos',
+        en: 'improvement in process accuracy',
+        es: 'de mejora en la precisión de los procesos',
+      },
+    },
     category: {
       pt: 'Indústria 4.0',
       en: 'Industry 4.0',
@@ -134,6 +129,14 @@ export const PROJECTS = [
   {
     id: 3,
     slug: 'monitoramento-de-producao',
+    impact: {
+      value: '90%',
+      label: {
+        pt: 'de melhoria na eficiência do monitoramento',
+        en: 'improvement in monitoring efficiency',
+        es: 'de mejora en la eficiencia del monitoreo',
+      },
+    },
     category: {
       pt: 'Indústria 4.0',
       en: 'Industry 4.0',
@@ -178,6 +181,28 @@ export const PROJECTS = [
       'Industry 4.0',
     ],
     certificate: 'certificado-crpc-inpi-03.pdf',
+  },
+  {
+    id: 4,
+    image: 'images/projects/cunoku.webp',
+    demo: 'https://cunoku.cunokugame.workers.dev/',
+    github: 'CunokuGame',
+    title: {
+      pt: 'Cunoku',
+      en: 'Cunoku',
+      es: 'Cunoku',
+    },
+    category: {
+      pt: 'Jogo de cartas · PWA',
+      en: 'Card game · PWA',
+      es: 'Juego de cartas · PWA',
+    },
+    description: {
+      pt: 'Jogo de cartas original inspirado na cultura e na estética japonesas, com regras próprias. Dá para criar ou entrar em salas, usar a fila rápida e jogar contra bots.',
+      en: 'Original card game inspired by Japanese culture and aesthetics, with its own rules. Create or join rooms, use the quick queue, or play against bots.',
+      es: 'Juego de cartas original inspirado en la cultura y la estética japonesas, con reglas propias. Permite crear o unirse a salas, usar la cola rápida y jugar contra bots.',
+    },
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'WebSockets', 'Cloudflare Workers', 'PostgreSQL'],
   },
   {
     id: 5,

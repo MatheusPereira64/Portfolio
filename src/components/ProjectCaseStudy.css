@@ -148,3 +148,13 @@
 [data-theme="dark"] .case-study-seal {
   background: rgba(220, 20, 60, 0.2);
 }
+
+.case-study-impact strong {
+  color: #b91c3c;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .case-study-impact strong {
+  color: #ff8fa3;
+}

@@ -323,7 +323,8 @@ export function buildKnowledgeContext(language) {
   const projBlock = PROJECTS.map((project) => {
     const demo = project.demo ? ` URL: ${project.demo}` : ''
     const repo = getProjectGithubRepos(project)[0]
-    return `- ${getLocalizedField(project.title, language)}: ${getLocalizedField(project.description, language)} Stack: ${project.technologies.join(', ')}.${demo}${repo ? ` Repo: ${repo.url}` : ''}`
+    const impact = project.impact ? ` Result: ${project.impact.value} ${getLocalizedField(project.impact.label, language)}.` : ''
+    return `- ${getLocalizedField(project.title, language)}: ${getLocalizedField(project.description, language)}${impact} Stack: ${project.technologies.join(', ')}.${demo}${repo ? ` Repo: ${repo.url}` : ''}`
   }).join('\n')
 
   return `

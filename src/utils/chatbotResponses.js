@@ -583,12 +583,13 @@ const builders = {
     const title = getLocalizedField(project.title, language)
     const category = getLocalizedField(project.category, language)
     const inpi = project.certificate ? `\n\n${L(language, 'inpi')}` : ''
+    const impact = project.impact ? `\n\n${project.impact.value} ${getLocalizedField(project.impact.label, language)}.` : ''
     const links = []
     if (project.demo) links.push({ type: 'link', label: `🌐 ${L(language, 'viewProject')}`, url: project.demo })
     if (project.slug) links.push({ type: 'route', label: `📄 ${L(language, 'viewDetails')}`, path: `/projetos/${project.slug}` })
     if (repo) links.push({ type: 'link', label: `🔗 ${L(language, 'github')}`, url: repo.url })
     return {
-      text: `${title} (${category})\n\n${getLocalizedField(project.description, language)}${inpi}\n\nStack: ${project.technologies.join(', ')}`,
+      text: `${title} (${category})\n\n${getLocalizedField(project.description, language)}${impact}${inpi}\n\nStack: ${project.technologies.join(', ')}`,
       links,
       suggestedReplies: [L(language, 'projectsWord'), ...(language === 'pt' ? ['Experiência', 'Contato'] : language === 'es' ? ['Experiencia', 'Contacto'] : ['Experience', 'Contact'])],
     }

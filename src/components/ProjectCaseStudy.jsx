@@ -115,6 +115,11 @@ const ProjectCaseStudy = ({ project }) => {
         )}
         <section>
           <h2>{copy.results}</h2>
+          {project.impact && (
+            <p className="case-study-impact">
+              <strong>{project.impact.value}</strong> {getLocalizedField(project.impact.label, language)}
+            </p>
+          )}
           <p>{getLocalizedField(project.results, language)}</p>
         </section>
 
