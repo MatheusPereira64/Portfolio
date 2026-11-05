@@ -2,7 +2,7 @@
  * Gera as imagens dos cartões em public/images/projects/*.webp (1280×800).
  *
  * - Cunoku: print real do deploy, dentro de um notebook desenhado.
- * - MP Agenda e WinCare: telas reais dos READMEs dos repositórios, no mesmo notebook.
+ * - MP Agenda, WinCare e TraceMind: telas reais dos READMEs dos repositórios, no mesmo notebook.
  * - Demais: mocks ilustrativos (em `imageKind: 'mock'` no projects.js). Sem números
  *   nem dados: gráficos e valores são só formas.
  *
@@ -29,6 +29,9 @@ const MP_AGENDA_SCREEN =
   'https://raw.githubusercontent.com/MatheusPereira64/PWA-AGENDAMENTO/main/docs/imagens/painel.png'
 const WINCARE_SCREEN =
   'https://raw.githubusercontent.com/MatheusPereira64/WinCare/main/docs/screenshots/dashboard.png'
+
+const TRACEMIND_SCREEN =
+  'https://raw.githubusercontent.com/MatheusPereira64/TraceMind/main/docs/screenshots/overview.png'
 
 const BASE_CSS = `
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -178,6 +181,7 @@ try {
   }
   await render('mp-agenda.webp', framed('#db2777', '#f472b6', await download(MP_AGENDA_SCREEN), 1.6))
   await render('wincare.webp', framed('#2563eb', '#60a5fa', await download(WINCARE_SCREEN)))
+  await render('tracemind.webp', framed('#4f46e5', '#818cf8', await download(TRACEMIND_SCREEN)))
 
   for (const [file, html] of Object.entries(MOCKS)) await render(file, html)
 } finally {

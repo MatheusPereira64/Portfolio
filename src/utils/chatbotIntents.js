@@ -51,6 +51,7 @@ const QUICK_REPLY_INTENTS = {
 /** Nome curto (botões) e termos que identificam cada projeto em uma pergunta. */
 export const PROJECT_SHORT_NAMES = {
   4: { label: 'Cunoku', terms: ['cunoku'] },
+  9: { label: 'TraceMind', terms: ['tracemind', 'trace mind'] },
   1: { label: 'Manufatura', terms: ['manufatura', 'manufactura', 'manufacturing system'] },
   2: { label: 'Parametrização', terms: ['parametrizacao', 'parametrizacion', 'parameterization'] },
   3: { label: 'Monitoramento', terms: ['monitoramento', 'monitoreo', 'monitoring'] },

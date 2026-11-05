@@ -183,6 +183,27 @@ export const PROJECTS = [
     certificate: 'certificado-crpc-inpi-03.pdf',
   },
   {
+    id: 9,
+    image: 'images/projects/tracemind.webp',
+    github: 'TraceMind',
+    title: {
+      pt: 'TraceMind',
+      en: 'TraceMind',
+      es: 'TraceMind',
+    },
+    category: {
+      pt: 'Observabilidade de IA · Full stack',
+      en: 'AI observability · Full stack',
+      es: 'Observabilidad de IA · Full stack',
+    },
+    description: {
+      pt: 'Plataforma de observabilidade para aplicações com LLM: registra cada chamada ao modelo e mostra tokens, custos, percentis de latência e erros, com SDK em TypeScript e suporte a OpenTelemetry.',
+      en: 'Observability platform for LLM applications: it traces every model call and shows tokens, costs, latency percentiles and errors, with a TypeScript SDK and OpenTelemetry support.',
+      es: 'Plataforma de observabilidad para aplicaciones con LLM: registra cada llamada al modelo y muestra tokens, costos, percentiles de latencia y errores, con SDK en TypeScript y soporte para OpenTelemetry.',
+    },
+    technologies: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Redis', 'OpenTelemetry'],
+  },
+  {
     id: 4,
     image: 'images/projects/cunoku.webp',
     demo: 'https://cunoku.cunokugame.workers.dev/',
