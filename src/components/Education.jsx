@@ -5,7 +5,7 @@ import TimelineCard from './TimelineCard'
 import './Education.css'
 
 /**
- * Dados do currículo. O inglês segue o ano do currículo (2018).
+ * Dados do currículo, com os períodos conferidos no LinkedIn.
  * Logo da FAMETRO: ícone oficial do site fametro.edu.br. Logo do ICBEU: imagem enviada pelo Matheus.
  */
 const EDUCATION = [
@@ -43,10 +43,10 @@ const EDUCATION = [
     id: 'icbeu',
     mark: 'IC',
     logo: 'images/logos/icbeu.webp',
-    start: '2018',
-    period: { pt: 'Concluído em 2018', en: 'Completed in 2018', es: 'Concluido en 2018' },
+    start: '2014',
+    period: '2014 – 2018',
     org: 'ICBEU',
-    place: { pt: 'Brasil · Curso de idioma', en: 'Brazil · Language course', es: 'Brasil · Curso de idioma' },
+    place: { pt: 'Brasil · Concluído', en: 'Brazil · Completed', es: 'Brasil · Concluido' },
     title: {
       pt: 'Programa Avançado de Inglês',
       en: 'Advanced English Program',

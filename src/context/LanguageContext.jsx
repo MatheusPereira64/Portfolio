@@ -100,6 +100,7 @@ export const LanguageProvider = ({ children }) => {
         proposition: 'Construo sistemas web e dashboards industriais (IoT, OEE/FPY) para o chão de fábrica — Manaus',
         talk: 'Falar comigo',
         downloadCv: 'Baixar CV',
+        viewProjects: "Ver projetos",
         available: 'Disponível para projetos',
         inpi: '{count} softwares registrados no INPI',
         codeTabs: "Exemplos de código",
@@ -116,11 +117,22 @@ export const LanguageProvider = ({ children }) => {
         }
       },
       about: {
+        portraitAlt: "Matheus Pereira programando no computador, com fones de ouvido",
         title: 'Sobre mim',
         subtitle: 'Quem eu sou ?',
         text: 'Eu sou Matheus e sou',
         description: 'Full Stack Software Engineer com formação em Engenharia da Computação. Atuo no ITEGAM em projetos de PD&I para Indústria 4.0 — aplicações web, APIs, dashboards industriais e integrações IoT. Trabalho com React, Vue.js, TypeScript, Node.js, Python e PostgreSQL, da definição de requisitos ao deploy.',
-        button: 'Entrar em contato'
+        button: 'Entrar em contato',
+        headline: 'Construo software que roda',
+        headlineAccent: 'no chão de fábrica.',
+        bio: [
+          'Sou **Matheus Pereira**, engenheiro da computação de **Manaus**. Trabalho como Full Stack Software Engineer no **ITEGAM**, em projetos de PD&I para a Indústria 4.0: aplicações web, APIs, dashboards industriais e integrações IoT.',
+          'No dia a dia uso React, Vue.js, TypeScript, Node.js, Python e PostgreSQL, da definição de requisitos ao deploy. Três desses sistemas viraram **softwares registrados no INPI**.',
+        ],
+        stats: { inpi: 'Softwares no INPI', projects: 'Projetos publicados', years: 'Anos de experiência' },
+        timelineLabel: 'Minha trajetória',
+        timeline: ['Primeiros cursos', 'Primeiro emprego', 'Engenharia concluída', 'Full Stack no ITEGAM'],
+        today: 'Hoje'
       },
       services: {
         title: 'Meus serviços',
@@ -271,6 +283,7 @@ export const LanguageProvider = ({ children }) => {
         proposition: 'I build web systems and industrial dashboards (IoT, OEE/FPY) for the shop floor — Manaus',
         talk: 'Talk to me',
         downloadCv: 'Download CV',
+        viewProjects: "View projects",
         available: 'Available for projects',
         inpi: '{count} software registrations at INPI',
         codeTabs: "Code samples",
@@ -287,11 +300,22 @@ export const LanguageProvider = ({ children }) => {
         }
       },
       about: {
+        portraitAlt: "Matheus Pereira coding at his desk, wearing headphones",
         title: 'About me',
         subtitle: 'Who am I?',
         text: 'I am Matheus and I am',
         description: 'Full Stack Software Engineer with a Computer Engineering degree. At ITEGAM I work on Industry 4.0 R&D — web apps, APIs, industrial dashboards, and IoT integrations. I use React, Vue.js, TypeScript, Node.js, Python, and PostgreSQL from requirements to deploy.',
-        button: 'Get in touch'
+        button: 'Get in touch',
+        headline: 'I build software that runs',
+        headlineAccent: 'on the factory floor.',
+        bio: [
+          "I'm **Matheus Pereira**, a computer engineer from **Manaus, Brazil**. I work as a Full Stack Software Engineer at **ITEGAM**, on Industry 4.0 R&D projects: web apps, APIs, industrial dashboards and IoT integrations.",
+          'Day to day I use React, Vue.js, TypeScript, Node.js, Python and PostgreSQL, from requirements to deploy. Three of these systems became **software registered at INPI**, Brazil’s patent office.',
+        ],
+        stats: { inpi: 'Software registered at INPI', projects: 'Published projects', years: 'Years of experience' },
+        timelineLabel: 'My path',
+        timeline: ['First courses', 'First job', 'Engineering degree', 'Full Stack at ITEGAM'],
+        today: 'Today'
       },
       services: {
         title: 'My services',
@@ -442,6 +466,7 @@ export const LanguageProvider = ({ children }) => {
         proposition: 'Construyo sistemas web y dashboards industriales (IoT, OEE/FPY) para el piso de planta — Manaus',
         talk: 'Hablar conmigo',
         downloadCv: 'Descargar CV',
+        viewProjects: "Ver proyectos",
         available: 'Disponible para proyectos',
         inpi: '{count} softwares registrados en el INPI',
         codeTabs: "Ejemplos de código",
@@ -458,11 +483,22 @@ export const LanguageProvider = ({ children }) => {
         }
       },
       about: {
+        portraitAlt: "Matheus Pereira programando en su escritorio, con auriculares",
         title: 'Sobre mí',
         subtitle: '¿Quién soy?',
         text: 'Soy Matheus y soy',
         description: 'Full Stack Software Engineer con formación en Ingeniería de Computación. En ITEGAM trabajo en I+D para Industria 4.0 — aplicaciones web, APIs, dashboards industriales e integraciones IoT. Uso React, Vue.js, TypeScript, Node.js, Python y PostgreSQL, de requisitos al deploy.',
-        button: 'Ponerse en contacto'
+        button: 'Ponerse en contacto',
+        headline: 'Construyo software que funciona',
+        headlineAccent: 'en la planta de producción.',
+        bio: [
+          'Soy **Matheus Pereira**, ingeniero de computación de **Manaus, Brasil**. Trabajo como Full Stack Software Engineer en el **ITEGAM**, en proyectos de I+D para la Industria 4.0: aplicaciones web, APIs, dashboards industriales e integraciones IoT.',
+          'En el día a día uso React, Vue.js, TypeScript, Node.js, Python y PostgreSQL, de los requisitos al deploy. Tres de estos sistemas se convirtieron en **softwares registrados en el INPI**.',
+        ],
+        stats: { inpi: 'Softwares en el INPI', projects: 'Proyectos publicados', years: 'Años de experiencia' },
+        timelineLabel: 'Mi trayectoria',
+        timeline: ['Primeros cursos', 'Primer empleo', 'Ingeniería concluida', 'Full Stack en el ITEGAM'],
+        today: 'Hoy'
       },
       services: {
         title: 'Mis servicios',

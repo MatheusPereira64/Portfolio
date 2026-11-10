@@ -1,7 +1,7 @@
 .code-window-wrap {
   position: relative;
-  width: min(36rem, 100%);
-  margin: 18px 0 8px;
+  width: min(40rem, 100%);
+  margin: 24px auto 8px;
 }
 
 .code-window {

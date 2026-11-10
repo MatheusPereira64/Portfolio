@@ -531,7 +531,7 @@ const builders = {
 
   certifications: (language) => {
     const lines = CERTIFICATIONS.map(
-      (cert) => `• ${getLocalizedField(cert.title, language)} (${cert.issuer}, ${cert.year})`
+      (cert) => `• ${getLocalizedField(cert.title, language)} (${[cert.issuer, cert.year].filter(Boolean).join(', ')})`
     ).join('\n')
     const heading = language === 'pt' ? 'Certificações:' : language === 'es' ? 'Certificaciones:' : 'Certifications:'
     return {

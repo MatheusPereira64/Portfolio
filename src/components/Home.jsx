@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
-import { getCvFilename, getCvHref, profileImageProps, SITE_PROFILE } from '../constants/siteProfile'
 import { goToSection } from '../utils/routes'
 import CodeWindow from './CodeWindow'
 import './Home.css'
@@ -72,24 +71,12 @@ const Home = ({ typingDelay = 0.3 }) => {
             <h1 className="text-2">{t.home.name}</h1>
             <CodeWindow delay={typingDelay} />
             <div className="hero-actions">
-              <a href="#contact" onClick={(event) => goToSection(event, 'contact')}>
+              <a href="#teams" onClick={(event) => goToSection(event, 'teams')}>
+                {t.home.viewProjects}
+              </a>
+              <a className="hero-cta-secondary" href="#contact" onClick={(event) => goToSection(event, 'contact')}>
                 {t.home.talk}
               </a>
-              <a className="hero-cta-secondary" href={getCvHref(language)} download={getCvFilename(language)}>
-                {t.home.downloadCv}
-              </a>
-            </div>
-          </div>
-          <div className="home-profile">
-            <div className="home-profile-ring">
-              <img
-                {...profileImageProps()}
-                alt={SITE_PROFILE.fullName}
-                width={280}
-                height={280}
-                fetchpriority="high"
-                decoding="async"
-              />
             </div>
           </div>
         </div>

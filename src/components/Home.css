@@ -19,41 +19,17 @@
 
 .home .home-inner {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 48px;
+  justify-content: center;
   width: 100%;
+  text-align: center;
 }
 
 .home .home-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.home-profile {
-  flex-shrink: 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-}
-
-.home-profile-ring {
-  width: 280px;
-  height: 280px;
-  padding: 5px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffd700 0%, #fff 45%, #dc143c 100%);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-}
-
-.home-profile-ring img {
   width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 12%;
-  border: 4px solid rgba(255, 255, 255, 0.95);
-  display: block;
+  min-width: 0;
 }
 
 .home .home-content .text-1 {
@@ -111,8 +87,9 @@
 .home .hero-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
 .home .home-content .hero-actions a {
@@ -132,20 +109,6 @@
 }
 
 @media (max-width: 947px) {
-  .home .hero-actions {
-    justify-content: center;
-  }
-
-  .home .home-inner {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 32px;
-  }
-
-  .home-profile-ring {
-    width: 220px;
-    height: 220px;
-  }
 
   .home .home-content .text-2 {
     font-size: 70px;
@@ -176,8 +139,7 @@
 }
 
 .home-inner,
-.home-content,
-.home-profile {
+.home-content {
   position: relative;
   z-index: 1;
 }
@@ -235,31 +197,11 @@ html.tab-hidden .hero-particles-layer {
     font-size: clamp(20px, 6.5vw, 27px);
   }
 
-  .home-profile-ring {
-    width: 180px;
-    height: 180px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .home-profile-ring {
-    animation: profile-float 6s ease-in-out infinite;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-particles-layer,
-  .home-profile-ring {
+  .hero-particles-layer {
     animation: none !important;
   }
 }
 
-@keyframes profile-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}

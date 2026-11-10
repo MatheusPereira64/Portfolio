@@ -1,0 +1,131 @@
+.about-portrait {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #050505;
+  isolation: isolate;
+}
+
+/* Bordas somem no fundo escuro, como num retrato iluminado só pela tela. */
+.about-portrait-stage {
+  position: relative;
+  aspect-ratio: 1;
+  -webkit-mask-image: radial-gradient(ellipse 66% 64% at 56% 52%, #000 45%, transparent 100%);
+  mask-image: radial-gradient(ellipse 66% 64% at 56% 52%, #000 45%, transparent 100%);
+  animation: portrait-breathe 9s ease-in-out infinite alternate;
+}
+
+.about-portrait-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.45) brightness(1.08);
+}
+
+/* Duotone: o cinza vira vermelho do site, o preto continua preto. */
+.about-portrait-tint {
+  position: absolute;
+  inset: 0;
+  background: #ff4d6a;
+  mix-blend-mode: multiply;
+}
+
+/* Só a pessoa e a tela ficam acesas; parede e janela caem no escuro. */
+.about-portrait-tint::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 52% 56% at 54% 50%, transparent 38%, rgba(0, 0, 0, 0.82) 100%),
+    linear-gradient(90deg, transparent 55%, rgba(0, 0, 0, 0.35) 100%);
+}
+
+/* Luz do monitor: oscila como uma tela rolando código. */
+.about-portrait-screen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(34% 44% at 20% 44%, rgba(255, 110, 130, 0.5), transparent 70%);
+  mix-blend-mode: screen;
+  animation: portrait-screen 3.6s steps(1, end) infinite;
+}
+
+/* Textura pontilhada e linhas finas, no estilo da referência. */
+.about-portrait-dots {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle, rgba(0, 0, 0, 0.55) 0.9px, transparent 1.3px) 0 0 / 3px 3px,
+    repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+
+.about-portrait-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30%;
+  height: 30%;
+  background: linear-gradient(180deg, transparent, rgba(255, 160, 175, 0.16), transparent);
+  mix-blend-mode: screen;
+  animation: portrait-scan 6.5s linear infinite;
+}
+
+.about-portrait.is-paused .about-portrait-stage,
+.about-portrait.is-paused .about-portrait-screen,
+.about-portrait.is-paused .about-portrait-scan,
+html.tab-hidden .about-portrait-stage,
+html.tab-hidden .about-portrait-screen,
+html.tab-hidden .about-portrait-scan {
+  animation-play-state: paused;
+}
+
+@keyframes portrait-breathe {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.035) translate3d(-0.6%, -0.8%, 0);
+  }
+}
+
+@keyframes portrait-screen {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  31% {
+    opacity: 0.6;
+  }
+  47% {
+    opacity: 0.85;
+  }
+  63% {
+    opacity: 0.7;
+  }
+  79% {
+    opacity: 1;
+  }
+}
+
+@keyframes portrait-scan {
+  to {
+    transform: translateY(440%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-portrait-stage,
+  .about-portrait-screen,
+  .about-portrait-scan {
+    animation: none;
+  }
+
+  .about-portrait-scan {
+    display: none;
+  }
+}

@@ -43,7 +43,7 @@ const RegistrationCard = ({ cert, index, language, viewLabel }) => {
         </span>
         <span className="cert-doc-body">
           <span className="cert-doc-title">{title}</span>
-          <span className="cert-doc-meta">{cert.issuer}, {cert.year}</span>
+          <span className="cert-doc-meta">{[cert.issuer, cert.year].filter(Boolean).join(', ')}</span>
           <span className="cert-doc-action">{viewLabel}</span>
         </span>
       </a>
@@ -52,23 +52,23 @@ const RegistrationCard = ({ cert, index, language, viewLabel }) => {
   )
 }
 
-/** Curso: linha discreta, com miniatura ao lado. */
+/** Curso: linha discreta, com miniatura ao lado (ou a sigla de quem emitiu, em `cert.mark`). */
 const CourseRow = ({ cert, index, language, viewLabel }) => {
   const href = getCertificateHref(cert)
   const preview = getCertificatePreviewSrc(cert)
 
   return (
     <Reveal as="li" className="cert-row" index={index}>
-      <span className="cert-row-thumb" aria-hidden="true">
+      <span className={`cert-row-thumb${preview ? '' : ' is-mark'}`} aria-hidden="true">
         {preview ? (
           <img src={preview} alt="" width={120} height={85} loading="lazy" decoding="async" />
         ) : (
-          <Icon name="award" />
+          cert.mark || <Icon name="award" />
         )}
       </span>
       <div className="cert-row-text">
         <h4 className="cert-row-title">{cleanTitle(cert, language)}</h4>
-        <p className="cert-row-meta">{cert.issuer}, {cert.year}</p>
+        <p className="cert-row-meta">{[cert.issuer, cert.year].filter(Boolean).join(', ')}</p>
         <Tags tags={cert.tags} />
       </div>
       {href && (
@@ -85,6 +85,9 @@ const Certifications = () => {
   const t = translations[language].certifications
   const registrations = CERTIFICATIONS.filter((cert) => cert.issuer === 'INPI')
   const courses = CERTIFICATIONS.filter((cert) => cert.issuer !== 'INPI' && !IN_EDUCATION.has(cert.id))
+    .map((cert, order) => ({ cert, order }))
+    .sort((a, b) => (parseInt(b.cert.year, 10) || 0) - (parseInt(a.cert.year, 10) || 0) || a.order - b.order)
+    .map(({ cert }) => cert)
 
   return (
     <section className="certifications" id="certifications" data-lang={language}>

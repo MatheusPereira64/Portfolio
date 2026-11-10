@@ -103,18 +103,14 @@ const Projects = () => {
   return (
     <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
-        <div className="projects-head">
-          <Reveal as="h2" className="section-heading">{t.projects.title}</Reveal>
-          <Reveal className="projects-head-aside" index={1}>
-            <p className="section-intro">{t.projects.intro}</p>
-            <a className="projects-github" href={SITE_PROFILE.github} target="_blank" rel="noopener noreferrer">
-              {t.projects.githubMore}
-              <Icon name="github" />
-            </a>
-          </Reveal>
-        </div>
+        <Reveal as="h2" className="section-heading">{t.projects.title}</Reveal>
+        <Reveal as="p" className="section-intro">{t.projects.intro}</Reveal>
         <div className="projects-toolbar">
           <p className="projects-status" aria-live="polite">{status}</p>
+          <a className="projects-github" href={SITE_PROFILE.github} target="_blank" rel="noopener noreferrer">
+            <Icon name="github" />
+            {t.projects.githubMore}
+          </a>
           <div className="projects-arrows">
             <button
               type="button"

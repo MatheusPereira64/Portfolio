@@ -1,91 +1,213 @@
 .about {
+  --about-accent: #b91c3c;
+  --about-ink: #111;
+  --about-body: #47474d;
+  --about-muted: #6b6b72;
+  --about-line: rgba(17, 17, 17, 0.14);
+
   padding: 100px 0;
   background: #fff;
-  color: #111;
+  color: var(--about-ink);
 }
 
 [data-theme="dark"] .about {
+  --about-accent: #ff6b84;
+  --about-ink: #f5f5f5;
+  --about-body: #b8b8bf;
+  --about-muted: #8d8d95;
+  --about-line: rgba(255, 255, 255, 0.14);
+
   background: #050505;
-  color: #f5f5f5;
 }
 
 .about-content {
   display: grid;
-  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
-  align-items: start;
-  gap: 56px;
-  margin-top: 40px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: 48px;
 }
 
-.about-photo {
-  position: sticky;
-  top: 96px;
+.about-main {
+  max-width: 620px;
 }
 
-.about-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1.15;
-  object-fit: cover;
-  object-position: center 12%;
-  border-radius: 14px;
-}
+/* ---------- Título e frase de abertura ---------- */
 
-.about-lead {
-  min-height: 1.4em;
-  font-size: 24px;
+.about-label {
+  color: var(--about-accent);
+  font-size: 16px;
   font-weight: 600;
   line-height: 1.4;
 }
 
-.about-lead span {
-  color: #b91c3c;
-}
-
-[data-theme="dark"] .about-lead span {
-  color: #ff8fa3;
-}
-
-.about-description {
+.about-headline {
   margin-top: 14px;
-  color: #444;
-  font-size: 16px;
+  font-size: clamp(34px, 4.4vw, 54px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.about-headline-accent {
+  color: var(--about-accent);
+}
+
+@media (min-width: 561px) {
+  .about-headline-accent {
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Bio ---------- */
+
+.about-bio {
+  margin-top: 24px;
+}
+
+.about-bio p {
+  color: var(--about-body);
+  font-size: 17px;
   line-height: 1.7;
 }
+
+.about-bio p + p {
+  margin-top: 14px;
+}
+
+.about-bio strong {
+  color: var(--about-ink);
+  font-weight: 650;
+}
+
+/* ---------- Números ---------- */
+
+.about-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 48px;
+  margin-top: 36px;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.about-stat dd {
+  color: var(--about-accent);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-stat dt {
+  margin-top: 8px;
+  color: var(--about-muted);
+  font-size: 14px;
+}
+
+/* ---------- Trajetória ---------- */
+
+.about-path {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 40px;
+  list-style: none;
+}
+
+.about-path li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 12px;
+}
+
+/* Linha que liga um marco ao próximo, passando pelos pontos. */
+.about-path li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(1.4em + 10px + 5px);
+  left: 18px;
+  right: 6px;
+  height: 1px;
+  background: var(--about-line);
+}
+
+.about-path-year {
+  color: var(--about-ink);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+
+.about-path-dot {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--about-muted);
+  border-radius: 50%;
+  background: transparent;
+}
+
+.about-path-label {
+  color: var(--about-muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.about-path li.is-now .about-path-year,
+.about-path li.is-now .about-path-label {
+  color: var(--about-accent);
+}
+
+.about-path li.is-now .about-path-dot {
+  border-color: var(--about-accent);
+  background: var(--about-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--about-accent) 22%, transparent);
+}
+
+/* ---------- Botão ---------- */
 
 .about-cta {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  margin-top: 20px;
-  padding: 0 20px;
-  border: 1px solid #111;
+  min-height: 46px;
+  margin-top: 40px;
+  padding: 0 22px;
   border-radius: 999px;
-  background: #111;
+  background: var(--about-ink);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
-  transition: background-color 0.2s ease;
-}
-
-.about-cta:hover {
-  background: #3a3a3a;
-}
-
-[data-theme="dark"] .about-description {
-  color: #bdbdbd;
+  transition: opacity 0.2s ease;
 }
 
 [data-theme="dark"] .about-cta {
-  border-color: #f5f5f5;
-  background: #f5f5f5;
   color: #111;
 }
 
-[data-theme="dark"] .about-cta:hover {
-  background: #cfcfcf;
+.about-cta:hover {
+  opacity: 0.82;
 }
+
+/* ---------- Retrato ---------- */
+
+.about-photo {
+  justify-self: end;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* No escuro o retrato perde a moldura e se funde ao fundo. */
+[data-theme="dark"] .about-photo .about-portrait {
+  border-radius: 0;
+}
+
+/* ---------- Responsivo ---------- */
 
 @media (max-width: 947px) {
   .about {
@@ -94,18 +216,52 @@
 
   .about-content {
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 40px;
+  }
+
+  .about-main {
+    max-width: none;
   }
 
   .about-photo {
-    position: static;
-    max-width: 280px;
+    grid-row: 1;
+    justify-self: start;
+    max-width: 380px;
   }
 }
 
-@media (max-width: 500px) {
-  .about-lead {
-    font-size: 20px;
+@media (max-width: 560px) {
+  .about-bio p {
+    font-size: 16px;
   }
 
+  .about-stats {
+    gap: 20px 32px;
+  }
+
+  .about-stat dd {
+    font-size: 34px;
+  }
+
+  .about-path {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  /* No celular a linha do tempo fica vertical: ano, ponto e texto na mesma linha. */
+  .about-path li {
+    display: grid;
+    grid-template-columns: 56px 11px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+  }
+
+  .about-path li:not(:last-child)::after {
+    top: 22px;
+    bottom: -22px;
+    left: calc(56px + 14px + 5px);
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
 }
