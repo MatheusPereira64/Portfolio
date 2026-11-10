@@ -8,24 +8,10 @@ import {
   getProjectGithubRepos,
   getProjectImageSrc,
 } from '../data/projects'
-import { onNavigate, toHref } from '../utils/routes'
 import Icon from './Icon'
+import ProjectModal from './ProjectModal'
 import Reveal from './Reveal'
-import SkillIcon from './SkillIcon'
 import './Projects.css'
-
-const ExternalLinkIcon = () => (
-  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
-    <path
-      d="M6.5 3H3v10h10V9.5M9 3h4v4M13 3 7.5 8.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-)
 
 const ChevronIcon = ({ direction }) => (
   <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
@@ -40,11 +26,21 @@ const ChevronIcon = ({ direction }) => (
   </svg>
 )
 
+/** Endereço mostrado na barra do cartão: o deploy, o repositório ou o registro no INPI. */
+function cardAddress(project) {
+  if (project.demo) return new URL(project.demo).host + new URL(project.demo).pathname.replace(/\/$/, '')
+  const repo = getProjectGithubRepos(project)[0]
+  if (repo) return repo.url.replace(/^https:\/\//, '')
+  return null
+}
+
 const Projects = () => {
   const { translations, language } = useLanguage()
   const t = translations[language]
   const trackRef = useRef(null)
   const [range, setRange] = useState({ first: 0, visible: 1, atEnd: false })
+  const [openId, setOpenId] = useState(null)
+  const openerRef = useRef(null)
 
   const projects = useMemo(
     () =>
@@ -92,12 +88,31 @@ const Projects = () => {
     .replace('{from}', range.first + 1)
     .replace('{to}', range.atEnd ? total : Math.min(range.first + range.visible, total))
     .replace('{total}', total)
+  const openProject = PROJECTS.find((project) => project.id === openId)
+
+  // O foco volta ao botão do cartão, mesmo quando o modal foi aberto pela imagem.
+  const open = (id, button) => {
+    openerRef.current = button
+    setOpenId(id)
+  }
+  const close = () => {
+    setOpenId(null)
+    requestAnimationFrame(() => openerRef.current?.focus())
+  }
 
   return (
     <section className="teams" id="teams" data-lang={language}>
       <div className="max-width">
-        <Reveal as="h2" className="section-heading">{t.projects.title}</Reveal>
-        <Reveal as="p" className="section-intro">{t.projects.intro}</Reveal>
+        <div className="projects-head">
+          <Reveal as="h2" className="section-heading">{t.projects.title}</Reveal>
+          <Reveal className="projects-head-aside" index={1}>
+            <p className="section-intro">{t.projects.intro}</p>
+            <a className="projects-github" href={SITE_PROFILE.github} target="_blank" rel="noopener noreferrer">
+              {t.projects.githubMore}
+              <Icon name="github" />
+            </a>
+          </Reveal>
+        </div>
         <div className="projects-toolbar">
           <p className="projects-status" aria-live="polite">{status}</p>
           <div className="projects-arrows">
@@ -129,15 +144,23 @@ const Projects = () => {
           tabIndex={0}
           onScroll={measure}
         >
-          {projects.map((project) => {
-            const repo = getProjectGithubRepos(project)[0]
+          {projects.map((project, index) => {
             const isMock = project.imageKind === 'mock'
+            const address = cardAddress(project)
             const altText = isMock ? t.projects.mockAlt : t.projects.screenshotAlt
             return (
               <article key={project.id} className="project-card">
-                <div className="project-card-frame">
+                <div className="project-card-bar">
+                  <span className="project-card-dots" aria-hidden="true"><i /><i /><i /></span>
+                  <span className="project-card-address">{address || t.projects.privateAddress}</span>
+                  {project.demo && <span className="project-card-live">{t.projects.live}</span>}
+                  {isMock && <span className="project-card-badge">{t.projects.mockLabel}</span>}
+                </div>
+                <div
+                  className="project-card-media"
+                  onClick={(event) => open(project.id, event.currentTarget.querySelector('.project-card-open'))}
+                >
                   <img
-                    className="project-card-media"
                     src={getProjectImageSrc(project.image || PROJECT_PLACEHOLDER)}
                     alt={project.image ? altText.replace('{title}', project.title) : ''}
                     width={1280}
@@ -145,65 +168,40 @@ const Projects = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                  {isMock && <span className="project-card-mock">{t.projects.mockLabel}</span>}
-                </div>
-                <h3 className="project-card-title">{project.title}</h3>
-                <p className="project-card-category">{project.category}</p>
-                {project.impact && (
-                  <p className="project-impact">
-                    <strong>{project.impact.value}</strong>
-                    <span>{getLocalizedField(project.impact.label, language)}</span>
-                  </p>
-                )}
-                <p className="project-card-description">{project.description}</p>
-                {project.certificate && (
-                  <p className="project-inpi">{t.projects.registeredInpi}</p>
-                )}
-                <ul className="project-tech-list" aria-label={t.projects.technologies}>
-                  {project.technologies.map((tech) => (
-                    <li key={tech} className="project-tech-tag"><SkillIcon name={tech} />{tech}</li>
-                  ))}
-                </ul>
-                <div className="project-card-footer">
-                  <a
-                    className="project-action"
-                    href={repo ? repo.url : SITE_PROFILE.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={repo ? `GitHub: ${project.title}` : t.projects.noPublicRepoLabel}
-                  >
-                    <Icon name="github" />
-                    GitHub
-                  </a>
-                  {project.demo && (
-                    <a
-                      className="project-action project-action-primary"
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${t.projects.viewProject}: ${project.title} (${t.projects.opensInNewTab})`}
-                    >
-                      {t.projects.viewProject}
-                      <ExternalLinkIcon />
-                    </a>
-                  )}
-                  {project.slug && (
-                    <a
-                      className="project-action project-action-primary"
-                      href={toHref(`/projetos/${project.slug}`)}
-                      aria-label={`${t.projects.openDetails}: ${project.title}`}
-                      onClick={(event) => onNavigate(event, `/projetos/${project.slug}`)}
-                    >
-                      {t.projects.openDetails}
-                    </a>
-                  )}
-                  {!repo && <span className="project-no-repo">{t.projects.noPublicRepo}</span>}
+                  <div className="project-card-overlay">
+                    <p className="project-card-meta">
+                      {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')} · {project.category}
+                    </p>
+                    <h3 className="project-card-title">{project.title}</h3>
+                    {project.impact && (
+                      <p className="project-card-impact">
+                        <strong>{project.impact.value}</strong> {getLocalizedField(project.impact.label, language)}
+                      </p>
+                    )}
+                    <div className="project-card-row">
+                      <p className="project-card-description">{project.description}</p>
+                      <button
+                        type="button"
+                        className="project-card-open"
+                        aria-haspopup="dialog"
+                        aria-label={`${t.projects.openProject}: ${project.title}`}
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          open(project.id, event.currentTarget)
+                        }}
+                      >
+                        {t.projects.openProject}
+                        <Icon name="arrow-right" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </article>
             )
           })}
         </div>
       </div>
+      {openProject && <ProjectModal project={openProject} onClose={close} />}
     </section>
   )
 }

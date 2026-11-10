@@ -50,9 +50,9 @@ const Footer = () => {
             <h3>{language === 'pt' ? 'Links Rápidos' : language === 'es' ? 'Enlaces rápidos' : 'Quick Links'}</h3>
             <ul className="footer-menu">
               <li><a href="#home" onClick={(e) => scrollToSection(e, 'home')}>{nav.home}</a></li>
+              <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{nav.about}</a></li>
               <li><a href="#teams" onClick={(e) => scrollToSection(e, 'teams')}>{nav.projects}</a></li>
               <li><a href="#experience" onClick={(e) => scrollToSection(e, 'experience')}>{nav.experience}</a></li>
-              <li><a href="#about" onClick={(e) => scrollToSection(e, 'about')}>{nav.about}</a></li>
               <li><a href="#services" onClick={(e) => scrollToSection(e, 'services')}>{nav.services}</a></li>
               {showBlog && <li><a href="#blog" onClick={(e) => scrollToSection(e, 'blog')}>{nav.blog}</a></li>}
               <li><a href="#contact" onClick={(e) => scrollToSection(e, 'contact')}>{nav.contact}</a></li>

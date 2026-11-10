@@ -3,6 +3,8 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import About from './components/About'
 import Services from './components/Services'
+import Education from './components/Education'
+import Certifications from './components/Certifications'
 import Experience from './components/Experience'
 import Projects from './components/Projects'
 import Blog from './components/Blog'
@@ -85,9 +87,11 @@ function AppShell() {
         ) : (
           <>
             <Home typingDelay={typingDelay} />
+            <About />
             <Projects />
             <Experience />
-            <About />
+            <Education />
+            <Certifications />
             <Services />
             <Blog />
             <Contact />

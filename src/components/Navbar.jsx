@@ -259,9 +259,11 @@ const Navbar = () => {
 
   const navItems = [
     { id: 'home', label: t.nav.home },
+    { id: 'about', label: t.nav.about },
     { id: 'teams', label: t.nav.projects },
     { id: 'experience', label: t.nav.experience || 'Experiência' },
-    { id: 'about', label: t.nav.about },
+    { id: 'education', label: t.nav.education },
+    { id: 'certifications', label: t.nav.certifications },
     { id: 'services', label: t.nav.services },
     ...(getPublishedPosts().length ? [{ id: 'blog', label: t.nav.blog || 'Blog' }] : []),
     { id: 'contact', label: t.nav.contact },

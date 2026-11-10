@@ -271,7 +271,6 @@ export const PROJECTS = [
   {
     id: 7,
     image: 'images/projects/fintrack.webp',
-    imageKind: 'mock',
     github: 'Fintrack',
     title: {
       pt: 'FinTrack',

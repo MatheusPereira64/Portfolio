@@ -71,6 +71,8 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contato',
         downloadCv: 'Baixar currículo',
         skipLink: 'Ir para o conteúdo',
+        education: "Formação",
+        certifications: "Certificados",
         chatOpen: "Abrir assistente",
         chatClose: "Fechar assistente",
         chatSubtitle: "Portfólio de Matheus Pereira",
@@ -100,6 +102,8 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Baixar CV',
         available: 'Disponível para projetos',
         inpi: '{count} softwares registrados no INPI',
+        codeTabs: "Exemplos de código",
+        codeFooter: "Perfil · Manaus · Indústria 4.0",
         code: {
           file: 'matheus.js',
           nameKey: 'nome',
@@ -153,6 +157,12 @@ export const LanguageProvider = ({ children }) => {
         registeredInpi: 'Software registrado no INPI',
         notFound: 'Projeto não encontrado',
         viewProject: 'Ver projeto',
+        githubMore: "Ver mais projetos no GitHub",
+        openProject: "Ver projeto",
+        viewDemo: "Ver demo online",
+        closeModal: "Fechar",
+        live: "NO AR",
+        privateAddress: "Projeto interno · ITEGAM",
         screenshotAlt: 'Captura de tela de {title}',
         intro: 'Sistemas industriais e projetos pessoais, com as tecnologias usadas em cada um.',
         showing: 'Exibindo {from}–{to} de {total}',
@@ -166,6 +176,7 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experiência',
+        role: "Atuação",
         subtitle: 'Minha jornada',
         intro: 'Do trabalho mais recente aos primeiros sistemas, com as tecnologias usadas em cada etapa.',
         current: 'Atual',
@@ -183,6 +194,21 @@ export const LanguageProvider = ({ children }) => {
         viewAllOnLinkedIn: 'Ver publicações no LinkedIn',
         emptyMessage: 'O LinkedIn não libera os posts automaticamente. Cole o link de cada publicação em linkedinPosts.js para exibir a prévia.',
         previewUnavailable: 'Prévia indisponível — abra no LinkedIn',
+      },
+      education: {
+        title: "Formação Acadêmica",
+        intro: "Graduação e idiomas que sustentam o meu trabalho.",
+        degree: "Graduação",
+        course: "Curso"
+      },
+      certifications: {
+        title: "Certificados e registros",
+        intro: "Softwares registrados no INPI e cursos que concluí.",
+        registrations: "Registros de software no INPI",
+        courses: "Certificados",
+        view: "Ver certificado",
+        viewRegistration: "Ver registro",
+        linkedin: "Ver todos os certificados no LinkedIn"
       },
       contact: {
         title: "Entre em contato",
@@ -216,6 +242,8 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contact',
         downloadCv: 'Download résumé',
         skipLink: 'Skip to content',
+        education: "Education",
+        certifications: "Certificates",
         chatOpen: "Open assistant",
         chatClose: "Close assistant",
         chatSubtitle: "Matheus Pereira's portfolio",
@@ -245,6 +273,8 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Download CV',
         available: 'Available for projects',
         inpi: '{count} software registrations at INPI',
+        codeTabs: "Code samples",
+        codeFooter: "Profile · Manaus · Industry 4.0",
         code: {
           file: 'matheus.js',
           nameKey: 'name',
@@ -298,6 +328,12 @@ export const LanguageProvider = ({ children }) => {
         registeredInpi: 'Software registered at INPI',
         notFound: 'Project not found',
         viewProject: 'View project',
+        githubMore: "See more projects on GitHub",
+        openProject: "View project",
+        viewDemo: "View live demo",
+        closeModal: "Close",
+        live: "LIVE",
+        privateAddress: "Internal project · ITEGAM",
         screenshotAlt: 'Screenshot of {title}',
         intro: 'Industrial systems and personal projects, with the technologies used in each one.',
         showing: 'Showing {from}–{to} of {total}',
@@ -311,6 +347,7 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experience',
+        role: "Role",
         subtitle: 'My journey',
         intro: 'From the most recent work back to the first systems, with the technologies used at each step.',
         current: 'Current',
@@ -328,6 +365,21 @@ export const LanguageProvider = ({ children }) => {
         viewAllOnLinkedIn: 'View posts on LinkedIn',
         emptyMessage: 'LinkedIn does not expose posts automatically. Paste each post URL into linkedinPosts.js to show a preview.',
         previewUnavailable: 'Preview unavailable — open on LinkedIn',
+      },
+      education: {
+        title: "Education",
+        intro: "Degree and languages behind my work.",
+        degree: "Degree",
+        course: "Course"
+      },
+      certifications: {
+        title: "Certificates and registrations",
+        intro: "Software registered at INPI and courses I completed.",
+        registrations: "Software registrations at INPI",
+        courses: "Certificates",
+        view: "View certificate",
+        viewRegistration: "View registration",
+        linkedin: "See all certificates on LinkedIn"
       },
       contact: {
         title: "Get in touch",
@@ -361,6 +413,8 @@ export const LanguageProvider = ({ children }) => {
         contact: 'Contacto',
         downloadCv: 'Descargar currículum',
         skipLink: 'Saltar al contenido',
+        education: "Formación",
+        certifications: "Certificados",
         chatOpen: "Abrir asistente",
         chatClose: "Cerrar asistente",
         chatSubtitle: "Portafolio de Matheus Pereira",
@@ -390,6 +444,8 @@ export const LanguageProvider = ({ children }) => {
         downloadCv: 'Descargar CV',
         available: 'Disponible para proyectos',
         inpi: '{count} softwares registrados en el INPI',
+        codeTabs: "Ejemplos de código",
+        codeFooter: "Perfil · Manaus · Industria 4.0",
         code: {
           file: 'matheus.js',
           nameKey: 'nombre',
@@ -443,6 +499,12 @@ export const LanguageProvider = ({ children }) => {
         registeredInpi: 'Software registrado en el INPI',
         notFound: 'Proyecto no encontrado',
         viewProject: 'Ver proyecto',
+        githubMore: "Ver más proyectos en GitHub",
+        openProject: "Ver proyecto",
+        viewDemo: "Ver demo en línea",
+        closeModal: "Cerrar",
+        live: "EN LÍNEA",
+        privateAddress: "Proyecto interno · ITEGAM",
         screenshotAlt: 'Captura de pantalla de {title}',
         intro: 'Sistemas industriales y proyectos personales, con las tecnologías usadas en cada uno.',
         showing: 'Mostrando {from}–{to} de {total}',
@@ -456,6 +518,7 @@ export const LanguageProvider = ({ children }) => {
       },
       experience: {
         title: 'Experiencia',
+        role: "Rol",
         subtitle: 'Mi trayectoria',
         intro: 'Del trabajo más reciente a los primeros sistemas, con las tecnologías usadas en cada etapa.',
         current: 'Actual',
@@ -473,6 +536,21 @@ export const LanguageProvider = ({ children }) => {
         viewAllOnLinkedIn: 'Ver publicaciones en LinkedIn',
         emptyMessage: 'LinkedIn no expone las publicaciones automáticamente. Pega la URL de cada post en linkedinPosts.js para mostrar la previa.',
         previewUnavailable: 'Previa no disponible — abrir en LinkedIn',
+      },
+      education: {
+        title: "Formación Académica",
+        intro: "Graduación e idiomas que sustentan mi trabajo.",
+        degree: "Graduación",
+        course: "Curso"
+      },
+      certifications: {
+        title: "Certificados y registros",
+        intro: "Softwares registrados en el INPI y cursos que concluí.",
+        registrations: "Registros de software en el INPI",
+        courses: "Certificados",
+        view: "Ver certificado",
+        viewRegistration: "Ver registro",
+        linkedin: "Ver todos los certificados en LinkedIn"
       },
       contact: {
         title: "Ponte en contacto",

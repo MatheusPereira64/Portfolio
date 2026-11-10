@@ -73,53 +73,7 @@
   background: #3a3a3a;
 }
 
-.about-education {
-  margin-top: 40px;
-}
-
-.about-subheading {
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.education-list {
-  margin-top: 12px;
-  list-style: none;
-}
-
-.education-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 14px 0;
-  border-top: 1px solid rgba(127, 127, 127, 0.3);
-}
-
-.education-row strong {
-  display: block;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.education-row div span {
-  display: block;
-  margin-top: 2px;
-  color: #555;
-  font-size: 14px;
-}
-
-.education-period {
-  flex-shrink: 0;
-  color: #555;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-[data-theme="dark"] .about-description,
-[data-theme="dark"] .education-row div span,
-[data-theme="dark"] .education-period {
+[data-theme="dark"] .about-description {
   color: #bdbdbd;
 }
 
@@ -154,12 +108,4 @@
     font-size: 20px;
   }
 
-  .education-row {
-    display: block;
-  }
-
-  .education-period {
-    display: block;
-    margin-top: 2px;
-  }
 }

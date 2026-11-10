@@ -1,9 +1,8 @@
 import { useLanguage } from '../context/LanguageContext'
-import { CERTIFICATIONS, getCertificateHref, getCertificatePreviewSrc, getLocalizedField } from '../data/certifications'
+import { getLocalizedField } from '../data/certifications'
 import { SKILL_GROUPS, projectsUsing } from '../data/skillGroups'
 import { getLocalizedField as getProjectField } from '../data/projects'
 import { onNavigate, toHref } from '../utils/routes'
-import CertificatePreview from './CertificatePreview'
 import Reveal from './Reveal'
 import SkillIcon from './SkillIcon'
 import './Skills.css'
@@ -55,38 +54,6 @@ const Skills = () => {
             </ul>
           </Reveal>
         ))}
-      </div>
-
-      <div className="certifications-strip" id="certifications">
-        <h3>{t.skills.certifications || 'Certificações'}</h3>
-        <ul className="certifications-grid">
-          {CERTIFICATIONS.map((cert, index) => {
-            const href = getCertificateHref(cert)
-            const previewSrc = getCertificatePreviewSrc(cert)
-            const title = getLocalizedField(cert.title, language)
-            const content = (
-              <>
-                <CertificatePreview src={previewSrc} />
-                <span className="cert-card-meta">
-                  <span className="cert-issuer">{cert.issuer}</span>
-                  <strong>{title}</strong>
-                  <span className="cert-year">{cert.year}</span>
-                </span>
-              </>
-            )
-            return (
-              <Reveal as="li" key={cert.id} className="cert-card" index={index}>
-                {href ? (
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    {content}
-                  </a>
-                ) : (
-                  <div>{content}</div>
-                )}
-              </Reveal>
-            )
-          })}
-        </ul>
       </div>
     </div>
   )

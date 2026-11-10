@@ -35,6 +35,7 @@ export function isPdfCertificate(src) {
 export const CERTIFICATIONS = [
   {
     id: 'crpc-1',
+    tags: ['Indústria 4.0', 'IoT', 'Vue.js'],
     title: { pt: 'CRPC-INPI — Sistema Inteligente de Manufatura', en: 'CRPC-INPI — Smart Manufacturing System', es: 'CRPC-INPI — Sistema Inteligente de Manufactura' },
     issuer: 'INPI',
     year: '2025',
@@ -43,6 +44,7 @@ export const CERTIFICATIONS = [
   },
   {
     id: 'crpc-2',
+    tags: ['Indústria 4.0', 'IA', 'Python'],
     title: { pt: 'CRPC-INPI — Parametrização de Máquinas com IA', en: 'CRPC-INPI — AI Machine Parameterization', es: 'CRPC-INPI — Parametrización de Máquinas con IA' },
     issuer: 'INPI',
     year: '2025',
@@ -51,6 +53,7 @@ export const CERTIFICATIONS = [
   },
   {
     id: 'crpc-3',
+    tags: ['Indústria 4.0', 'Dashboards', 'Vue.js'],
     title: { pt: 'CRPC-INPI — Monitoramento de Produção', en: 'CRPC-INPI — Production Monitoring', es: 'CRPC-INPI — Monitoreo de Producción' },
     issuer: 'INPI',
     year: '2025',
@@ -67,6 +70,7 @@ export const CERTIFICATIONS = [
   },
   {
     id: 'flexpeak',
+    tags: ['Full Stack', 'JavaScript', 'Web'],
     title: { pt: 'Lógica e Programação WEB — Full Stack', en: 'WEB Logic and Programming — Full Stack', es: 'Lógica y Programación WEB — Full Stack' },
     issuer: 'Flexpeak',
     year: '2023',
@@ -75,6 +79,7 @@ export const CERTIFICATIONS = [
   },
   {
     id: 'samsung',
+    tags: ['React', 'JavaScript', 'Unity', 'Python'],
     title: { pt: 'Samsung Ocean — React, JS, Unity, Python', en: 'Samsung Ocean — React, JS, Unity, Python', es: 'Samsung Ocean — React, JS, Unity, Python' },
     issuer: 'Samsung Ocean',
     year: '2022–2023',
