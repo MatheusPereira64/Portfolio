@@ -219,7 +219,9 @@ export const LanguageProvider = ({ children }) => {
         courses: "Certificados",
         view: "Ver certificado",
         viewRegistration: "Ver registro",
-        linkedin: "Ver todos os certificados no LinkedIn"
+        linkedin: "Ver todos os certificados no LinkedIn",
+        close: "Fechar certificado",
+        openFull: "Abrir em nova aba"
       },
       contact: {
         title: "Entre em contato",
@@ -402,7 +404,9 @@ export const LanguageProvider = ({ children }) => {
         courses: "Certificates",
         view: "View certificate",
         viewRegistration: "View registration",
-        linkedin: "See all certificates on LinkedIn"
+        linkedin: "See all certificates on LinkedIn",
+        close: "Close certificate",
+        openFull: "Open in new tab"
       },
       contact: {
         title: "Get in touch",
@@ -585,7 +589,9 @@ export const LanguageProvider = ({ children }) => {
         courses: "Certificados",
         view: "Ver certificado",
         viewRegistration: "Ver registro",
-        linkedin: "Ver todos los certificados en LinkedIn"
+        linkedin: "Ver todos los certificados en LinkedIn",
+        close: "Cerrar certificado",
+        openFull: "Abrir en una pestaña nueva"
       },
       contact: {
         title: "Ponte en contacto",

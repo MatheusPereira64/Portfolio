@@ -43,9 +43,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Registros INPI: o documento em destaque ---------- */
+/* ---------- Grade: o mesmo cartão para registros e cursos ---------- */
 
-.cert-docs {
+.cert-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
@@ -53,53 +53,52 @@
   list-style: none;
 }
 
-.cert-doc {
+.cert-card {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--cert-line);
   border-radius: 14px;
   background: var(--cert-surface);
+  transition: border-color 0.2s ease;
 }
 
-.cert-doc-link {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  color: inherit;
-  text-decoration: none;
-}
-
-.cert-doc-link:focus-visible {
-  outline: 2px solid var(--cert-accent);
-  outline-offset: -2px;
-  border-radius: 14px;
+.cert-card:hover,
+.cert-card:focus-within {
+  border-color: color-mix(in srgb, var(--cert-accent) 45%, transparent);
 }
 
 /* A "mesa" onde a folha fica apoiada: só o topo do documento aparece. */
-.cert-doc-desk {
-  position: relative;
+.cert-card-desk {
   display: flex;
   justify-content: center;
-  height: 230px;
-  padding-top: 28px;
+  height: 200px;
+  padding: 26px 26px 0;
   overflow: hidden;
   background: var(--cert-desk);
 }
 
-.cert-doc-paper {
-  display: block;
-  width: 190px;
-  aspect-ratio: 220 / 311;
+.cert-card-paper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 480 / 340;
   overflow: hidden;
-  border-radius: 2px;
+  border-radius: 3px;
   background: #fff;
   color: var(--cert-accent);
+  font-size: 32px;
   box-shadow: var(--cert-paper-shadow);
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.cert-doc-paper img {
+.cert-card-desk.is-portrait .cert-card-paper {
+  width: 180px;
+  aspect-ratio: 220 / 311;
+}
+
+.cert-card-paper img {
   display: block;
   width: 100%;
   height: 100%;
@@ -108,51 +107,82 @@
 }
 
 /* Ao apontar, a folha sobe e mostra mais do conteúdo. */
-.cert-doc-link:hover .cert-doc-paper,
-.cert-doc-link:focus-visible .cert-doc-paper {
-  transform: translateY(-14px);
+.cert-card:hover .cert-card-paper,
+.cert-card:focus-within .cert-card-paper {
+  transform: translateY(-12px);
 }
 
-.cert-doc-body {
+.cert-card-body {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 22px 22px 0;
+  padding: 20px 22px 22px;
   border-top: 1px solid var(--cert-line);
 }
 
-.cert-doc-title {
-  font-size: 18px;
+.cert-card-title {
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.35;
   text-wrap: balance;
 }
 
-.cert-doc-meta {
-  margin-top: 6px;
-  color: var(--cert-muted);
-  font-size: 14px;
-}
-
-.cert-doc-action {
-  align-self: flex-start;
-  margin-top: 16px;
+.cert-card-issuer {
+  margin-top: 8px;
   color: var(--cert-accent);
   font-size: 14px;
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  text-decoration-color: transparent;
-  transition: text-decoration-color 0.2s ease;
 }
 
-.cert-doc-link:hover .cert-doc-action {
-  text-decoration-color: currentColor;
+.cert-card-year {
+  margin-top: 4px;
+  color: var(--cert-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
 }
 
-.cert-doc .cert-tags {
-  padding: 14px 22px 22px;
+.cert-card .cert-tags {
+  margin-top: 14px;
+}
+
+/* O botão fica sempre no pé do cartão, alinhado entre colunas. */
+.cert-card-action {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  margin-top: auto;
+  padding: 0 16px;
+  border: 1px solid var(--cert-accent);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cert-accent);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Sem tags, o texto logo acima do botão ganha o mesmo respiro. */
+.cert-card-body > :not(.cert-tags):has(+ .cert-card-action) {
+  margin-bottom: 18px;
+}
+
+.cert-card-action:hover {
+  background: var(--cert-accent);
+  color: #fff;
+}
+
+[data-theme="dark"] .cert-card-action:hover {
+  color: #111;
+}
+
+.cert-card-action:focus-visible {
+  outline: 2px solid var(--cert-accent);
+  outline-offset: 2px;
 }
 
 /* ---------- Tags ---------- */
@@ -161,6 +191,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  margin-bottom: 18px;
   list-style: none;
 }
 
@@ -172,89 +203,6 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 1.5;
-}
-
-/* ---------- Cursos: lista discreta ---------- */
-
-.cert-rows {
-  margin-top: 12px;
-  list-style: none;
-  border-top: 1px solid var(--cert-line);
-}
-
-.cert-row {
-  display: grid;
-  grid-template-columns: 120px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 24px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--cert-line);
-}
-
-.cert-row-thumb {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  aspect-ratio: 220 / 156;
-  overflow: hidden;
-  border-radius: 4px;
-  background: #fff;
-  color: var(--cert-accent);
-  box-shadow: 0 0 0 1px var(--cert-line);
-}
-
-.cert-row-thumb.is-mark {
-  background: var(--cert-desk);
-  box-shadow: none;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.cert-row-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cert-row-title {
-  font-size: 17px;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.cert-row-meta {
-  margin-top: 4px;
-  color: var(--cert-muted);
-  font-size: 14px;
-}
-
-.cert-row .cert-tags {
-  margin-top: 10px;
-}
-
-.cert-row-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 0 16px;
-  border: 1px solid var(--cert-accent);
-  border-radius: 8px;
-  color: var(--cert-accent);
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.cert-row-link:hover {
-  background: var(--cert-accent);
-  color: #fff;
-}
-
-[data-theme="dark"] .cert-row-link:hover {
-  color: #111;
 }
 
 /* ---------- LinkedIn ---------- */
@@ -286,7 +234,7 @@
 /* ---------- Responsivo ---------- */
 
 @media (max-width: 1100px) {
-  .cert-docs {
+  .cert-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -298,39 +246,24 @@
 }
 
 @media (max-width: 640px) {
-  .cert-docs {
+  .cert-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .cert-doc-desk {
-    height: 200px;
-  }
-
-  .cert-row {
-    grid-template-columns: 88px minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-  }
-
-  .cert-row-thumb {
-    width: 88px;
-  }
-
-  .cert-row-link {
-    grid-column: 2;
-    justify-self: start;
+  .cert-card-desk {
+    height: 180px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cert-doc-paper,
-  .cert-doc-action,
-  .cert-row-link {
+  .cert-card,
+  .cert-card-paper,
+  .cert-card-action {
     transition: none;
   }
 
-  .cert-doc-link:hover .cert-doc-paper,
-  .cert-doc-link:focus-visible .cert-doc-paper {
+  .cert-card:hover .cert-card-paper,
+  .cert-card:focus-within .cert-card-paper {
     transform: none;
   }
 }
