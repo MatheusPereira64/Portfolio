@@ -16,11 +16,17 @@ Portfólio pessoal em React, com projetos, experiência, formação e contato em
 
 ### Início
 
-![Tela inicial com o logo MP, a apresentação, a janela de código matheus.js e os botões Falar comigo e Baixar CV](readme-assets/inicio.webp)
+Nome, títulos que se alternam no "Eu sou …", janela de código com abas e os botões Ver projetos e Falar comigo.
+
+![Tela inicial em vermelho com o nome Matheus Pereira, o texto Eu sou Dev Front-end, a janela de código matheus.js e os botões Ver projetos e Falar comigo](readme-assets/inicio.webp)
+
+### Sobre mim
+
+![Seção Sobre mim com o título Transformo ideias complexas em soluções digitais inteligentes, escaláveis e de alto impacto, o resumo profissional e a foto animada](readme-assets/sobre.webp)
 
 ### Projetos
 
-Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy, botão para ver o projeto.
+Carrossel com contador e setas. Cada cartão abre um modal com detalhes, botão para o GitHub e, nos projetos com deploy, botão para ver o projeto.
 
 ![Seção Meus Projetos no tema escuro, com o carrossel de cartões](readme-assets/projetos.webp)
 
@@ -33,15 +39,28 @@ Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy,
 
 ### Experiência
 
-![Linha do tempo de experiência, com o trabalho mais recente primeiro](readme-assets/experiencia.webp)
+![Linha do tempo de experiência, com o trabalho mais recente primeiro e os ícones das tecnologias](readme-assets/experiencia.webp)
 
-### Sobre mim e formação
+### Formação
 
-![Seção Sobre mim com foto, apresentação e lista de formação](readme-assets/sobre.webp)
+![Formação Acadêmica com os cartões da FAMETRO e do ICBEU](readme-assets/formacao.webp)
+
+### Certificados e registros
+
+Registros de software no INPI e cursos no mesmo formato de cartão. Certificados em imagem abrem num visualizador com botão de fechar.
+
+![Seção Certificados e registros com os três registros de software no INPI](readme-assets/certificados.webp)
+
+<details>
+<summary>Ver certificado aberto</summary>
+
+![Visualizador mostrando o certificado de Segurança em Computação em Nuvem, com o botão de fechar no canto](readme-assets/certificado-aberto.webp)
+
+</details>
 
 ### Contato
 
-![Seção de contato com canais diretos, currículo e formulário](readme-assets/contato.webp)
+![Seção de contato com canais diretos, currículo em português e inglês, formulário e o rodapé](readme-assets/contato.webp)
 
 ### Chatbot
 
@@ -50,9 +69,10 @@ Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy,
 ### No celular
 
 <p>
-  <img src="readme-assets/celular-inicio.webp" alt="Tela inicial no celular" width="250">
-  <img src="readme-assets/celular-projetos.webp" alt="Carrossel de projetos no celular" width="250">
-  <img src="readme-assets/celular-experiencia.webp" alt="Experiência no celular" width="250">
+  <img src="readme-assets/celular-inicio.webp" alt="Tela inicial no celular" width="200">
+  <img src="readme-assets/celular-sobre.webp" alt="Sobre mim no celular" width="200">
+  <img src="readme-assets/celular-projetos.webp" alt="Carrossel de projetos no celular" width="200">
+  <img src="readme-assets/celular-experiencia.webp" alt="Experiência no celular" width="200">
 </p>
 
 > As prévias são geradas com `npm run readme:previews`. Nos cartões de projeto, as imagens com o selo "Ilustração" são mocks, não telas reais.
@@ -70,19 +90,20 @@ Carrossel com contador e setas, botão para o GitHub e, nos projetos com deploy,
 
 ## 📱 Seções
 
-1. **Início:** abertura animada `<MP/>`, apresentação e botões de contato e currículo
-2. **Projetos:** carrossel com os projetos em destaque
-3. **Experiência:** linha do tempo profissional
-4. **Sobre mim:** apresentação, formação, tecnologias e certificações
-5. **Serviços:** o que posso construir ou melhorar
-6. **Blog:** publicações do LinkedIn, quando houver posts cadastrados
-7. **Contato:** canais diretos, currículo e formulário
+1. **Início:** abertura animada `<MP/>`, "Eu sou …" com títulos que se alternam, janela de código e botões Ver projetos e Falar comigo
+2. **Sobre mim:** resumo profissional, números (registros no INPI, projetos, anos de experiência, repositórios), foto animada e tecnologias
+3. **Projetos:** carrossel com os projetos em destaque e modal de detalhes
+4. **Experiência:** linha do tempo profissional
+5. **Formação:** graduação e idiomas
+6. **Certificados e registros:** registros de software no INPI e cursos, com visualizador de certificados
+7. **Serviços:** o que posso construir ou melhorar
+8. **Blog:** publicações do LinkedIn, quando houver posts cadastrados
+9. **Contato:** canais diretos, currículo e formulário
 
 ## 🛠️ Tecnologias
 
 - **React 18** e **Vite 5**
 - **CSS** próprio, sem framework
-- **Typed.js:** texto digitado na seção Sobre mim
 - **react-intersection-observer:** entrada das seções ao rolar
 - **EmailJS:** envio do formulário de contato
 - **Font Awesome:** ícones

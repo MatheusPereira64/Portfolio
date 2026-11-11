@@ -8,6 +8,7 @@
  */
 
 import { chromium } from 'playwright'
+import { TYPED_ROLES } from '../src/constants/typedRoles.js'
 import { createServer } from 'vite'
 import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
@@ -20,6 +21,14 @@ const URL = `http://localhost:${PORT}/Portfolio/`
 const WEBP_QUALITY = 0.8
 const OPENING_MS = 3400
 const CODE_TYPING_MS = 7000
+/** Espera o "Eu sou …" mostrar um título inteiro, não uma palavra pela metade. */
+const waitForFullRole = (page) =>
+  page.waitForFunction(
+    (roles) => roles.includes(document.querySelector('.hero-roles-word')?.textContent),
+    TYPED_ROLES.pt,
+    { timeout: 30000, polling: 50 }
+  )
+
 const HIDE_FLOATING = '.chatbot-toggle, .scroll-up-btn { display: none !important; }'
 
 async function save(page, converter, file) {
@@ -60,15 +69,29 @@ try {
   await desktop.goto(URL, { waitUntil: 'domcontentloaded' })
   await desktop.addStyleTag({ content: HIDE_FLOATING })
   await desktop.waitForTimeout(OPENING_MS + CODE_TYPING_MS)
+  await waitForFullRole(desktop)
   await save(desktop, converter, 'inicio.webp')
-  await openSection(desktop, 'teams')
-  await save(desktop, converter, 'projetos.webp')
-  await openSection(desktop, 'experience')
-  await save(desktop, converter, 'experiencia.webp')
-  await openSection(desktop, 'about')
-  await save(desktop, converter, 'sobre.webp')
-  await openSection(desktop, 'contact')
-  await save(desktop, converter, 'contato.webp')
+  // Mesma ordem da página.
+  for (const [id, file] of [
+    ['about', 'sobre.webp'],
+    ['teams', 'projetos.webp'],
+    ['experience', 'experiencia.webp'],
+    ['education', 'formacao.webp'],
+    ['certifications', 'certificados.webp'],
+    ['contact', 'contato.webp'],
+  ]) {
+    await openSection(desktop, id)
+    await save(desktop, converter, file)
+  }
+
+  const viewer = desktop.locator('#certifications button.cert-card-action').first()
+  await viewer.scrollIntoViewIfNeeded()
+  await desktop.waitForTimeout(800)
+  await viewer.click()
+  await desktop.waitForTimeout(600)
+  await save(desktop, converter, 'certificado-aberto.webp')
+  await desktop.locator('.cert-viewer-close').click()
+  await desktop.waitForTimeout(300)
 
   await desktop.locator('.navbar .max-width .nav-circle').nth(1).click()
   await desktop.waitForTimeout(500)
@@ -91,7 +114,10 @@ try {
   await phone.goto(URL, { waitUntil: 'domcontentloaded' })
   await phone.addStyleTag({ content: HIDE_FLOATING })
   await phone.waitForTimeout(OPENING_MS + CODE_TYPING_MS)
+  await waitForFullRole(phone)
   await save(phone, converter, 'celular-inicio.webp')
+  await openSection(phone, 'about')
+  await save(phone, converter, 'celular-sobre.webp')
   await openSection(phone, 'teams')
   await save(phone, converter, 'celular-projetos.webp')
   await openSection(phone, 'experience')
