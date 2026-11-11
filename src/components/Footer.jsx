@@ -27,6 +27,9 @@ const Footer = () => {
       ? `© ${year} Matheus Pereira. Todos los derechos reservados.`
       : `© ${year} Matheus Pereira. All rights reserved.`
 
+  const phoneLabel = { pt: 'Telefone', en: 'Phone', es: 'Teléfono' }[language] || 'Phone'
+  const locationLabel = { pt: 'Localização', en: 'Location', es: 'Ubicación' }[language] || 'Location'
+
   const location = language === 'pt'
     ? 'Manaus, Amazonas - Brasil'
     : language === 'es'
@@ -77,7 +80,7 @@ const Footer = () => {
             <h3>{nav.contact}</h3>
             <div className="contact-info">
               <div className="contact-item">
-                <Icon name="phone" title="Telefone" />
+                <Icon name="phone" title={phoneLabel} />
                 <span>+55 (92) 99213-8870</span>
               </div>
               <div className="contact-item">
@@ -85,7 +88,7 @@ const Footer = () => {
                 <span>matheuspereira6464@gmail.com</span>
               </div>
               <div className="contact-item">
-                <Icon name="map-marker-alt" title="Localização" />
+                <Icon name="map-marker-alt" title={locationLabel} />
                 <span>{location}</span>
               </div>
             </div>

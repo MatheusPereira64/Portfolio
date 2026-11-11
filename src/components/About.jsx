@@ -7,11 +7,10 @@ import Reveal from './Reveal'
 import Skills from './Skills'
 import './About.css'
 
-/** Primeiro emprego (Via Certa) em jan/2023: base dos anos de experiência. */
-const CAREER_START_YEAR = 2023
-
-/** Marcos da trajetória, na ordem em que aconteceram. Rótulos vêm das traduções. */
-const MILESTONE_YEARS = ['2022', '2023', '2025', null]
+/** Anos de experiência declarados por Matheus (o mesmo número do texto da bio). */
+const YEARS_OF_EXPERIENCE = '5+'
+/** Repositórios no GitHub, públicos e privados, informados por Matheus. */
+const GITHUB_REPOSITORIES = '20+'
 
 /** Transforma **trecho** em <strong>, para destacar fatos na bio sem HTML nas traduções. */
 const withEmphasis = (text) =>
@@ -26,7 +25,8 @@ const About = () => {
   const stats = [
     { value: countInpiRegistrations(), label: t.stats.inpi },
     { value: PROJECTS.length, label: t.stats.projects },
-    { value: `${new Date().getFullYear() - CAREER_START_YEAR}+`, label: t.stats.years },
+    { value: YEARS_OF_EXPERIENCE, label: t.stats.years },
+    { value: GITHUB_REPOSITORIES, label: t.stats.repos },
   ]
 
   return (
@@ -50,19 +50,6 @@ const About = () => {
                   <dd>{stat.value}</dd>
                 </div>
               ))}
-            </Reveal>
-
-            <Reveal as="ol" className="about-path" index={4} aria-label={t.timelineLabel}>
-              {t.timeline.map((label, index) => {
-                const isNow = MILESTONE_YEARS[index] === null
-                return (
-                  <li key={label} className={isNow ? 'is-now' : undefined}>
-                    <span className="about-path-year">{MILESTONE_YEARS[index] ?? t.today}</span>
-                    <span className="about-path-dot" aria-hidden="true" />
-                    <span className="about-path-label">{label}</span>
-                  </li>
-                )
-              })}
             </Reveal>
 
             <a

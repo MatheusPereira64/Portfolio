@@ -178,13 +178,13 @@ const Contact = () => {
             <div className="contact-cv">
               <p>{t.cvHeading}</p>
               <div>
-                <a className="contact-cv-link" href={getCvHref('pt')} download={getCvFilename('pt')} lang="pt-BR">
+                <a className="contact-cv-link" href={getCvHref('pt')} download={getCvFilename('pt')} hrefLang="pt-BR">
                   <Icon name="download" />
                   {t.cvPortuguese}
                 </a>
-                <a className="contact-cv-link" href={getCvHref('en')} download={getCvFilename('en')} lang="en">
+                <a className="contact-cv-link" href={getCvHref('en')} download={getCvFilename('en')} hrefLang="en">
                   <Icon name="download" />
-                  English
+                  {t.cvEnglish}
                 </a>
               </div>
             </div>

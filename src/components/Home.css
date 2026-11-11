@@ -48,6 +48,36 @@
   background-clip: text;
 }
 
+.home .hero-roles {
+  margin-top: 6px;
+  min-height: 1.4em;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.home .hero-roles-word {
+  color: #ffe3e8;
+  font-weight: 700;
+}
+
+.home .hero-roles-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: #fff;
+  vertical-align: -0.12em;
+  animation: hero-caret 1s steps(1) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
 .home .home-content .text-3 {
   font-size: 40px;
   margin: 5px 0;
@@ -114,7 +144,37 @@
     font-size: 70px;
   }
 
-  .home .home-content .text-3 {
+  .home .hero-roles {
+  margin-top: 6px;
+  min-height: 1.4em;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.home .hero-roles-word {
+  color: #ffe3e8;
+  font-weight: 700;
+}
+
+.home .hero-roles-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: #fff;
+  vertical-align: -0.12em;
+  animation: hero-caret 1s steps(1) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.home .home-content .text-3 {
     font-size: 35px;
   }
 
@@ -129,7 +189,37 @@
     font-size: 60px;
   }
 
-  .home .home-content .text-3 {
+  .home .hero-roles {
+  margin-top: 6px;
+  min-height: 1.4em;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.home .hero-roles-word {
+  color: #ffe3e8;
+  font-weight: 700;
+}
+
+.home .hero-roles-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: #fff;
+  vertical-align: -0.12em;
+  animation: hero-caret 1s steps(1) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.home .home-content .text-3 {
     font-size: 32px;
   }
 
@@ -184,6 +274,10 @@ html.tab-hidden .hero-particles-layer {
 }
 
 @media (max-width: 500px) {
+  .home .hero-roles {
+    font-size: 22px;
+  }
+
   .home {
     padding-top: 96px;
   }
@@ -193,7 +287,37 @@ html.tab-hidden .hero-particles-layer {
     word-break: break-word;
   }
 
-  .home .home-content .text-3 {
+  .home .hero-roles {
+  margin-top: 6px;
+  min-height: 1.4em;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.home .hero-roles-word {
+  color: #ffe3e8;
+  font-weight: 700;
+}
+
+.home .hero-roles-caret {
+  display: inline-block;
+  width: 3px;
+  height: 1.05em;
+  margin-left: 3px;
+  background: #fff;
+  vertical-align: -0.12em;
+  animation: hero-caret 1s steps(1) infinite;
+}
+
+@keyframes hero-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.home .home-content .text-3 {
     font-size: clamp(20px, 6.5vw, 27px);
   }
 

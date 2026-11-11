@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer'
 import { useLanguage } from '../context/LanguageContext'
 import { goToSection } from '../utils/routes'
 import CodeWindow from './CodeWindow'
+import HeroRoles from './HeroRoles'
 import './Home.css'
 
 const DOTS_A = [
@@ -69,6 +70,7 @@ const Home = ({ typingDelay = 0.3 }) => {
           <div className="home-content">
             <p className="text-1">{t.home.greeting}</p>
             <h1 className="text-2">{t.home.name}</h1>
+            <HeroRoles prefix={t.home.rolePrefix} language={language} startDelay={typingDelay} />
             <CodeWindow delay={typingDelay} />
             <div className="hero-actions">
               <a href="#teams" onClick={(event) => goToSection(event, 'teams')}>

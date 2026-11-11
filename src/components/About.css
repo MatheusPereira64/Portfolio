@@ -42,7 +42,7 @@
 
 .about-headline {
   margin-top: 14px;
-  font-size: clamp(34px, 4.4vw, 54px);
+  font-size: clamp(30px, 3.4vw, 44px);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.02em;
@@ -107,67 +107,6 @@
   margin-top: 8px;
   color: var(--about-muted);
   font-size: 14px;
-}
-
-/* ---------- Trajetória ---------- */
-
-.about-path {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 40px;
-  list-style: none;
-}
-
-.about-path li {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-right: 12px;
-}
-
-/* Linha que liga um marco ao próximo, passando pelos pontos. */
-.about-path li:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: calc(1.4em + 10px + 5px);
-  left: 18px;
-  right: 6px;
-  height: 1px;
-  background: var(--about-line);
-}
-
-.about-path-year {
-  color: var(--about-ink);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-  font-variant-numeric: tabular-nums;
-}
-
-.about-path-dot {
-  width: 11px;
-  height: 11px;
-  border: 2px solid var(--about-muted);
-  border-radius: 50%;
-  background: transparent;
-}
-
-.about-path-label {
-  color: var(--about-muted);
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.about-path li.is-now .about-path-year,
-.about-path li.is-now .about-path-label {
-  color: var(--about-accent);
-}
-
-.about-path li.is-now .about-path-dot {
-  border-color: var(--about-accent);
-  background: var(--about-accent);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--about-accent) 22%, transparent);
 }
 
 /* ---------- Botão ---------- */
@@ -241,27 +180,5 @@
 
   .about-stat dd {
     font-size: 34px;
-  }
-
-  .about-path {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 18px;
-  }
-
-  /* No celular a linha do tempo fica vertical: ano, ponto e texto na mesma linha. */
-  .about-path li {
-    display: grid;
-    grid-template-columns: 56px 11px minmax(0, 1fr);
-    align-items: center;
-    gap: 14px;
-  }
-
-  .about-path li:not(:last-child)::after {
-    top: 22px;
-    bottom: -22px;
-    left: calc(56px + 14px + 5px);
-    right: auto;
-    width: 1px;
-    height: auto;
   }
 }
