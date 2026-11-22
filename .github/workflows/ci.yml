@@ -40,4 +40,12 @@ jobs:
       # Teste rápido no build: página, idiomas, modais, formulário e chatbot sob demanda.
       - run: npx playwright install --with-deps chromium
 
-      - run: node --test tests/smoke.test.mjs
+      - name: Teste rápido
+        run: |
+          set -o pipefail
+          node --test tests/smoke.test.mjs 2>&1 | tee smoke-output.txt
+
+      # Os logs do Actions pedem login; as anotações não. Publica as linhas da falha como anotação.
+      - name: Resumo da falha
+        if: failure()
+        run: grep -E 'not ok|Error|error|último valor|expected|actual|erros no console' smoke-output.txt | head -30 | sed 's/^/::error::/'

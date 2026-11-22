@@ -26,6 +26,20 @@ after(async () => {
   await new Promise((resolve) => server?.httpServer.close(resolve))
 })
 
+/** Repete a leitura até a condição valer (o React atualiza depois do clique; o CI é mais lento). */
+async function eventually(read, check, label, timeout = 8000) {
+  const start = Date.now()
+  let value
+  while (Date.now() - start < timeout) {
+    value = await read()
+    if (check(value)) return value
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+  assert.fail(`${label}: último valor ${JSON.stringify(value)}`)
+}
+
+const heroButton = (page) => page.locator('.hero-actions a').first().innerText()
+
 /** Página nova, sem animações, com erros de console coletados. */
 async function openPage(url = ROOT, locale = 'pt-BR') {
   const context = await browser.newContext({ locale, reducedMotion: 'reduce', viewport: { width: 1280, height: 800 } })
@@ -42,17 +56,17 @@ async function openPage(url = ROOT, locale = 'pt-BR') {
 test('a página abre em português, sem erros no console', async () => {
   const { page, errors, close } = await openPage()
   assert.equal(await page.locator('h1').first().isVisible(), true)
-  assert.equal(await page.locator('.hero-actions a').first().innerText(), 'Ver projetos')
+  await eventually(() => heroButton(page), (text) => text === 'Ver projetos', 'botão do início')
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'pt-BR')
-  assert.deepEqual(errors, [])
+  assert.deepEqual(errors, [], `erros no console: ${errors.join(' | ')}`)
   await close()
 })
 
 test('/en/ abre o site em inglês e volta para a raiz', async () => {
   const { page, close } = await openPage(`${ROOT}en/`)
-  assert.equal(new URL(page.url()).pathname, '/Portfolio/')
-  assert.equal(await page.locator('.hero-actions a').first().innerText(), 'View projects')
-  assert.match(await page.title(), /Full Stack Software Engineer/)
+  await eventually(() => new URL(page.url()).pathname, (path) => path === '/Portfolio/', 'endereço')
+  await eventually(() => heroButton(page), (text) => text === 'View projects', 'botão em inglês')
+  await eventually(() => page.title(), (title) => /Full Stack Software Engineer/.test(title), 'título em inglês')
   await close()
 })
 
@@ -69,9 +83,9 @@ test('trocar o idioma muda textos e título da aba', async () => {
   const { page, close } = await openPage()
   await page.locator('.nav-circle-lang').click()
   await page.locator('.language-option', { hasText: 'Español' }).click()
-  assert.equal(await page.locator('.hero-actions a').first().innerText(), 'Ver proyectos')
-  assert.match(await page.title(), /Ingeniero de Software/)
-  assert.equal(await page.evaluate(() => document.documentElement.lang), 'es')
+  await eventually(() => heroButton(page), (text) => text === 'Ver proyectos', 'botão em espanhol')
+  await eventually(() => page.title(), (title) => /Ingeniero de Software/.test(title), 'título em espanhol')
+  await eventually(() => page.evaluate(() => document.documentElement.lang), (lang) => lang === 'es', 'lang')
   await close()
 })
 
@@ -83,7 +97,7 @@ test('modal de projeto abre e fecha com Esc, devolvendo o foco', async () => {
   await page.locator('dialog.project-modal[open]').waitFor()
   await page.keyboard.press('Escape')
   await page.locator('dialog.project-modal').waitFor({ state: 'detached' })
-  assert.equal(await opener.evaluate((element) => element === document.activeElement), true)
+  await eventually(() => opener.evaluate((element) => element === document.activeElement), Boolean, 'foco de volta')
   await close()
 })
 
@@ -94,7 +108,7 @@ test('visualizador de certificado abre e fecha pelo X', async () => {
   await opener.click()
   const viewer = page.locator('dialog.cert-viewer[open]')
   await viewer.waitFor()
-  assert.ok((await viewer.locator('img').evaluate((img) => img.naturalWidth)) > 0)
+  await eventually(() => viewer.locator('img').evaluate((img) => img.naturalWidth), (width) => width > 0, 'imagem do certificado')
   await page.locator('.cert-viewer-close').click()
   await viewer.waitFor({ state: 'detached' })
   await close()
@@ -105,7 +119,7 @@ test('formulário vazio não envia e marca os campos', async () => {
   const submit = page.locator('.contact-form button[type="submit"]')
   await submit.scrollIntoViewIfNeeded()
   await submit.click()
-  assert.ok((await page.locator('.contact-form [aria-invalid="true"]').count()) >= 1)
+  await eventually(() => page.locator('.contact-form [aria-invalid="true"]').count(), (count) => count >= 1, 'campos marcados')
   await close()
 })
 
