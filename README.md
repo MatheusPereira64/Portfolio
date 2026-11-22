@@ -149,6 +149,7 @@ Sem EmailJS, o formulário abre o app de email do visitante com a mensagem pront
 | `npm run og:image` | Regenera a imagem de prévia do link |
 | `npm run projects:images` | Regenera as imagens dos cartões de projeto |
 | `npm run readme:previews` | Regenera as prévias deste README |
+| `npm run test:e2e` | Builda e roda o teste rápido no navegador (página, idiomas, modais, formulário, chatbot) |
 
 ## 📁 Estrutura
 

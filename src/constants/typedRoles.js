@@ -7,7 +7,7 @@ export const TYPED_ROLES = {
     'UI Developer',
     'React Dev',
     'Vue Dev',
-    'Angular Dev',
+    'Dev Next.js',
     'Dev Python',
   ],
   en: [
@@ -17,7 +17,7 @@ export const TYPED_ROLES = {
     'UI Developer',
     'React Dev',
     'Vue Dev',
-    'Angular Dev',
+    'Next.js Dev',
     'Python Dev',
   ],
   es: [
@@ -27,7 +27,7 @@ export const TYPED_ROLES = {
     'UI Developer',
     'React Dev',
     'Vue Dev',
-    'Angular Dev',
+    'Dev Next.js',
     'Dev Python',
   ],
 }

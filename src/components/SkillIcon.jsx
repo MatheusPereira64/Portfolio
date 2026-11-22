@@ -23,6 +23,7 @@ const ICONS = {
   redis: 'devicon-redis-plain colored',
   unity: 'devicon-unity-plain colored',
   express: 'devicon-express-original',
+  nextjs: 'devicon-nextjs-plain',
 }
 
 function normalizeSkillName(name) {

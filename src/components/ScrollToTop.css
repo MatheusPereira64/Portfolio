@@ -6,11 +6,12 @@
   right: 30px;
   bottom: 10px;
   text-align: center;
-  line-height: 50px;
+  line-height: 46px;
   color: #fff;
   z-index: 9999;
   font-size: 20px;
   border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
@@ -36,7 +37,7 @@
     height: 42px;
     width: 42px;
     font-size: 20px;
-    line-height: 42px;
+    line-height: 38px;
   }
 
   .scroll-up-btn.show {

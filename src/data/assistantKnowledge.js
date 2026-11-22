@@ -297,12 +297,10 @@ const knowledge = {
   },
 }
 
+export { getWhatsAppUrl } from '../constants/siteProfile'
+
 export function getKnowledge(language) {
   return knowledge[language] || knowledge.en
-}
-
-export function getWhatsAppUrl() {
-  return `https://wa.me/${SITE_PROFILE.phoneDigits}`
 }
 
 /** Text block injected into Gemini system prompt */

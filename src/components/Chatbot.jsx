@@ -29,15 +29,14 @@ const RestartIcon = () => (
   </svg>
 )
 
-const Chatbot = () => {
-  const [isOpen, setIsOpen] = useState(false)
+/** Painel do assistente; o botão e o estado aberto/fechado ficam no ChatbotLauncher. */
+const Chatbot = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([])
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [quickReplies, setQuickReplies] = useState([])
   const logRef = useRef(null)
   const inputRef = useRef(null)
-  const toggleRef = useRef(null)
   const { language, translations } = useLanguage()
   const copy = translations[language].nav
 
@@ -76,14 +75,11 @@ const Chatbot = () => {
     const touch = window.matchMedia('(pointer: coarse)').matches
     ;(touch ? logRef.current : inputRef.current)?.focus()
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setIsOpen(false)
-        toggleRef.current?.focus()
-      }
+      if (event.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen])
+  }, [isOpen, onClose])
 
   // Resposta longa: mostra o começo dela, não o fim.
   useEffect(() => {
@@ -151,7 +147,7 @@ const Chatbot = () => {
   // Em tela estreita o painel cobre a página: fecha para mostrar o destino.
   const runAction = (action) => {
     handleChatAction(action)
-    if (window.matchMedia(NARROW_SCREEN).matches) setIsOpen(false)
+    if (window.matchMedia(NARROW_SCREEN).matches) onClose(false)
   }
 
   const renderLink = (link, linkIndex) => {
@@ -216,17 +212,6 @@ const Chatbot = () => {
 
   return (
     <>
-      <button
-        type="button"
-        ref={toggleRef}
-        className={`chatbot-toggle ${isOpen ? 'open' : ''}`}
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label={isOpen ? copy.chatClose : copy.chatOpen}
-        aria-expanded={isOpen}
-        aria-controls="chatbot-panel"
-      >
-        <Icon name={isOpen ? 'times' : 'comments'} />
-      </button>
       {isOpen && (
         <div className="chatbot-container" id="chatbot-panel" role="dialog" aria-label={personaName}>
           <div className="chatbot-header">
@@ -256,10 +241,7 @@ const Chatbot = () => {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setIsOpen(false)
-                  toggleRef.current?.focus()
-                }}
+                onClick={() => onClose()}
                 aria-label={copy.chatClose}
                 title={copy.chatClose}
               >

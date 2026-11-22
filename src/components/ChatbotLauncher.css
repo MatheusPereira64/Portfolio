@@ -1,0 +1,47 @@
+/* O botão fica fora do pacote do chatbot: carrega com a página, o painel só ao abrir. */
+.chatbot-toggle {
+  position: fixed;
+  bottom: max(30px, env(safe-area-inset-bottom, 0px));
+  left: max(30px, env(safe-area-inset-left, 0px));
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dc143c 0%, #8b0000 100%);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(220, 20, 60, 0.4);
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 26px rgba(220, 20, 60, 0.55);
+}
+
+.chatbot-toggle.open {
+  background: #333;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 480px) {
+  .chatbot-toggle {
+    bottom: max(20px, env(safe-area-inset-bottom, 0px));
+    left: max(16px, env(safe-area-inset-left, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-toggle {
+    transition: none;
+  }
+
+  .chatbot-toggle:hover {
+    transform: none;
+  }
+}

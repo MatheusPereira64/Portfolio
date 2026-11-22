@@ -4,7 +4,7 @@ export const SKILL_GROUPS = [
   {
     id: 'frontend',
     label: { pt: 'Frontend', en: 'Frontend', es: 'Frontend' },
-    items: ['JavaScript', 'TypeScript', 'React', 'Vue.js', 'HTML/CSS'],
+    items: ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue.js', 'HTML/CSS'],
   },
   {
     id: 'backend',

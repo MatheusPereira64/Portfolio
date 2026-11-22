@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { SEO } from '../constants/seo'
 
 export const LanguageContext = createContext(null)
 
@@ -36,9 +37,14 @@ export function detectLanguage() {
   return 'en'
 }
 
+/** Idioma, título e descrição da aba acompanham o idioma escolhido. */
 function applyDocumentLanguage(language) {
   if (typeof document === 'undefined') return
-  document.documentElement.lang = language === 'pt' ? 'pt-BR' : language
+  const page = SEO[language] || SEO.pt
+  document.documentElement.lang = page.htmlLang
+  // Páginas com título próprio (estudo de caso) marcam data-page-title e cuidam dele.
+  if (!document.documentElement.dataset.pageTitle) document.title = page.title
+  document.querySelector('meta[name="description"]')?.setAttribute('content', page.description)
 }
 
 export const LanguageProvider = ({ children }) => {

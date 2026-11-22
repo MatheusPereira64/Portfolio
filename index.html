@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <!-- Importante: este index só é válido com Vite (`npm run dev`). Abrir este ficheiro com Live Server ou file:// faz o browser pedir main.jsx e falha com MIME "text/jsx". Para ver o build: `npm run preview` ou o site em GitHub Pages (pasta docs/). -->
     <meta charset="UTF-8" />
@@ -18,6 +18,13 @@
             if (redirect !== location.href) history.replaceState(null, '', redirect);
           }
         } catch (e) {}
+        // /Portfolio/en/ e /Portfolio/es/ existem para a prévia de link: abrem o site no idioma e voltam à raiz.
+        var pathLang = (location.pathname.match(/^\/Portfolio\/(en|es)\/?(?:index\.html)?$/i) || [])[1];
+        if (pathLang) {
+          pathLang = pathLang.toLowerCase();
+          try { localStorage.setItem('selectedLanguage', pathLang); } catch (e) {}
+          history.replaceState(null, '', '/Portfolio/' + location.search + location.hash);
+        }
         var saved = null;
         try { saved = localStorage.getItem('selectedLanguage'); } catch (e) {}
         var lang = saved;
@@ -30,60 +37,45 @@
       })();
     </script>
     
-    <!-- Primary Meta Tags -->
-    <title>Matheus Pereira</title>
-    <meta name="title" content="Matheus Pereira - Full Stack Software Engineer | Portfolio" />
-    <meta name="description" content="Full Stack Software Engineer specialized in JavaScript, React and Node.js. Portfolio with projects, skills and professional experience." />
-    <meta name="keywords" content="full stack software engineer, react, node.js, javascript, portfolio, web developer, frontend, backend" />
+    <!-- seo:start -->
+    <!-- Gerado pelo vite.config.js a partir de src/constants/seo.js (um bloco por idioma). -->
+    <!-- seo:end -->
     <meta name="author" content="Matheus Pereira de Souza" />
     <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Matheus Pereira | Portfolio" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://matheuspereira64.github.io/Portfolio/" />
-    <meta property="og:title" content="Matheus Pereira - Full Stack Software Engineer | Portfolio" />
-    <meta property="og:description" content="Full Stack Software Engineer specialized in JavaScript, React and Node.js. Portfolio with projects, skills and professional experience." />
-    <meta property="og:image" content="https://matheuspereira64.github.io/Portfolio/og-image.jpg" />
-    <meta property="og:image:secure_url" content="https://matheuspereira64.github.io/Portfolio/og-image.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Matheus Pereira, Full Stack Software Engineer" />
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://matheuspereira64.github.io/Portfolio/" />
-    <meta name="twitter:title" content="Matheus Pereira - Full Stack Software Engineer | Portfolio" />
-    <meta name="twitter:description" content="Full Stack Software Engineer specialized in JavaScript, React and Node.js. Portfolio with projects, skills and professional experience." />
-    <meta name="twitter:image" content="https://matheuspereira64.github.io/Portfolio/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Matheus Pereira, Full Stack Software Engineer" />
-    
-    <!-- Schema.org structured data -->
+
+    <!-- Schema.org: dados estruturados para buscadores -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Matheus Pereira de Souza",
+      "alternateName": "Matheus Pereira",
       "jobTitle": "Full Stack Software Engineer",
       "url": "https://matheuspereira64.github.io/Portfolio/",
-      "email": "matheuspereira6464@gmail.com",
+      "image": "https://matheuspereira64.github.io/Portfolio/og-image.jpg",
+      "email": "mailto:matheuspereira6464@gmail.com",
       "telephone": "+55-92-99213-8870",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Manaus",
-        "addressRegion": "Amazonas",
+        "addressRegion": "AM",
         "addressCountry": "BR"
       },
-      "sameAs": [
-        "https://www.linkedin.com/in/matheus-pereira64/"
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "FAMETRO"
+      },
+      "knowsLanguage": ["pt-BR", "en"],
+      "knowsAbout": [
+        "React", "Next.js", "TypeScript", "JavaScript", "Vue.js", "Node.js", "Python",
+        "REST APIs", "IoT", "Industry 4.0", "Docker", "CI/CD", "Artificial Intelligence"
       ],
-      "knowsAbout": ["JavaScript", "React", "Node.js", "Full Stack Development", "Web Development"]
+      "sameAs": [
+        "https://www.linkedin.com/in/matheus-pereira64/",
+        "https://github.com/MatheusPereira64"
+      ]
     }
     </script>
-    
   </head>
   <body>
     <div id="root"></div>

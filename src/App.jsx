@@ -11,7 +11,7 @@ import Blog from './components/Blog'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import Chatbot from './components/Chatbot'
+import ChatbotLauncher from './components/ChatbotLauncher'
 import ProjectCaseStudy from './components/ProjectCaseStudy'
 import { LanguageProvider, useLanguage } from './context/LanguageContext'
 import { ThemeProvider } from './context/ThemeContext'
@@ -100,7 +100,7 @@ function AppShell() {
       </main>
       <Footer />
       <ScrollToTop />
-      <Chatbot />
+      <ChatbotLauncher />
     </div>
   )
 }

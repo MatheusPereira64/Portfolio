@@ -21,6 +21,10 @@ export const SITE_PROFILE = {
   plausibleDomain: 'matheuspereira64.github.io',
 }
 
+export function getWhatsAppUrl() {
+  return `https://wa.me/${SITE_PROFILE.phoneDigits}`
+}
+
 export const CV_FILES = {
   en: 'CV - Matheus Pereira - 2026 - English.pdf',
   pt: 'CV PT-BR - Matheus Pereira - 2026 .pdf',

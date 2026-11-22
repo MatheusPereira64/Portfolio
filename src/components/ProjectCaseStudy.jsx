@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLanguage } from '../context/LanguageContext'
+import { SEO } from '../constants/seo'
 import {
   getLocalizedField,
   getProjectCertificateHref,
@@ -16,12 +17,15 @@ const ProjectCaseStudy = ({ project }) => {
   const t = translations[language]
   const copy = t.projects || {}
 
+  // Enquanto o estudo de caso está aberto, o título da aba é dele (o LanguageContext respeita a marca).
   useEffect(() => {
-    const previous = document.title
+    const root = document.documentElement
     const title = project ? getLocalizedField(project.title, language) : copy.notFound
+    root.dataset.pageTitle = 'case-study'
     document.title = `${title || 'Matheus Pereira'} | Matheus Pereira`
     return () => {
-      document.title = previous
+      delete root.dataset.pageTitle
+      document.title = (SEO[language] || SEO.pt).title
     }
   }, [project, language, copy.notFound])
 
